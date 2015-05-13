@@ -1278,9 +1278,67 @@ The content of the announcement is actually what is going to be set as the
 message content when published to a room and obeys the same rules that were
 described in the <em>Messages</em> section regarding inline and remote content.</p>
 <h2>Files</h2>
-<p><em>TODO</em></p>
+<p>Objects of the <strong>Frankly API</strong> can have URL properties set to reference
+remote resources like images. All these URLs must be within the
+<code>https://app.franklychat.com</code> domain, which means an application must
+upload these resources to Frankly servers.  </p>
+<p>Uploading a file happens in two steps, first the application needs to
+request a new file URL to the <strong>Frankly API</strong>, then it can use that URL to
+upload a resource to Frankly servers.<br />
+Lukily the frankly module abstracts this nicely in a single operation, here's
+an example of how to set an image for a chat room:</p>
+<div class="codehilite"><pre><span class="kn">from</span> <span class="nn">frankly</span> <span class="kn">import</span> <span class="n">FranklyClient</span>
+
+<span class="o">...</span>
+
+<span class="nb">file</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">upload_file_from_path</span><span class="p">(</span>
+    <span class="s">&#39;./path/to/image.png&#39;</span><span class="p">,</span>
+    <span class="n">category</span> <span class="o">=</span> <span class="s">&#39;roomavatar&#39;</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">room</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">update_room</span><span class="p">(</span>
+    <span class="n">room</span><span class="o">.</span><span class="n">id</span><span class="p">,</span>
+    <span class="n">avatar_image_url</span> <span class="o">=</span> <span class="nb">file</span><span class="o">.</span><span class="n">url</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+
+
+<p>The object returned by a call to <code>upload_file_from_path</code> and other upload
+methods is created in the first step described above.<br />
+The <code>category</code> parameter shown here is a hint given the the <strong>Frankly API</strong>
+to know what formatting rules should be applied to the resource. This is
+useful to provide a better integration with Frankly and better user experience
+as files will be optimized for different situations based on their category.</p>
+<p>Here are the file categories currently available:</p>
+<ul>
+<li><code>chat</code>           the default category when none is specified.</li>
+<li><code>useravatar</code>     for being displayed in the profile of a user.</li>
+<li><code>roomavatar</code>     for being displayed in the profile of a chat room.</li>
+<li><code>featuredavatar</code> for bigger avatars can be shown to emphasize that room.</li>
+<li><code>sticker</code>        for being used as a sticker.</li>
+<li><code>stickerpack</code>    for being used as an avatar of a sticker pack.</li>
+</ul>
 <h2>Errors</h2>
-<p><em>TODO</em></p>
+<p>When the application is misusing the <strong>Frankly API</strong> or when things go wrong
+at a different level (network going down, ...), calls to methods of a
+<code>FranklyClient</code> instance may not return and instead would raise an exception.</p>
+<p>All exceptions raised by calls to the methods will be instances of <code>FranklyError</code>.</p>
+<p>The errors give some context about what went wrong, here's a quick example
+showing how to handle those situations:</p>
+<div class="codehilite"><pre><span class="kn">from</span> <span class="nn">frankly</span> <span class="kn">import</span> <span class="n">FranklyClient</span>
+<span class="kn">from</span> <span class="nn">frankly</span> <span class="kn">import</span> <span class="n">FranklyError</span>
+
+<span class="o">...</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">client</span> <span class="o">=</span> <span class="n">FranklyClient</span><span class="p">()</span>
+    <span class="n">client</span><span class="o">.</span><span class="n">authenticate</span><span class="p">(</span><span class="n">app_key</span><span class="p">,</span> <span class="n">app_secret</span><span class="p">)</span>
+
+    <span class="o">...</span>
+
+<span class="k">except</span> <span class="n">FranklyError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+</pre></div>
   
 
   </header>
