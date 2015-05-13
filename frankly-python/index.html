@@ -1052,7 +1052,7 @@ table {
     <li class="mono"><a href="#frankly.FranklyClient.authenticate">authenticate</a></li>
     <li class="mono"><a href="#frankly.FranklyClient.create">create</a></li>
     <li class="mono"><a href="#frankly.FranklyClient.create_announcement">create_announcement</a></li>
-    <li class="mono"><a href="#frankly.FranklyClient.create_file_url">create_file_url</a></li>
+    <li class="mono"><a href="#frankly.FranklyClient.create_file">create_file</a></li>
     <li class="mono"><a href="#frankly.FranklyClient.create_room">create_room</a></li>
     <li class="mono"><a href="#frankly.FranklyClient.create_room_message">create_room_message</a></li>
     <li class="mono"><a href="#frankly.FranklyClient.delete">delete</a></li>
@@ -1210,7 +1210,7 @@ Naturally <code>FranklyClient</code> instances can publish and fetch messages to
 <span class="n">message2</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">create_message</span><span class="p">(</span>
     <span class="n">room</span><span class="o">.</span><span class="n">id</span><span class="p">,</span>
     <span class="n">contents</span> <span class="o">=</span> <span class="p">[{</span>
-      <span class="s">&#39;type&#39;</span><span class="p">:</span> <span class="s">&#39;image/png&#39;</span><span class="p">,</span>
+      <span class="s">&#39;type&#39;</span><span class="p">:</span> <span class="s">&#39;image/*&#39;</span><span class="p">,</span>
       <span class="s">&#39;url&#39;</span> <span class="p">:</span> <span class="s">&#39;https://app.franklychat.com/files/...&#39;</span><span class="p">,</span>
     <span class="p">}]</span>
 <span class="p">)</span>
@@ -1377,7 +1377,7 @@ showing how to handle those situations:</p>
             
   <div class="item">
     <div class="name def" id="frankly.FranklyClient.__init__">
-    <p>def <span class="ident">__init__</span>(</p><p>self, address=u&#39;https://app.franklychat.com&#39;)</p>
+    <p>def <span class="ident">__init__</span>(</p><p>self, address=u&#39;https://app.franklychat.com&#39;, connect_timeout=5, request_timeout=5)</p>
     </div>
     
 
@@ -1432,8 +1432,8 @@ showing how to handle those situations:</p>
   
             
   <div class="item">
-    <div class="name def" id="frankly.FranklyClient.create_file_url">
-    <p>def <span class="ident">create_file_url</span>(</p><p>self, **params)</p>
+    <div class="name def" id="frankly.FranklyClient.create_file">
+    <p>def <span class="ident">create_file</span>(</p><p>self, **params)</p>
     </div>
     
 
