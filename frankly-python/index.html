@@ -856,6 +856,71 @@ table {
 
   </style>
 
+  <style type="text/css">
+  .codehilite .hll { background-color: #ffffcc }
+.codehilite  { background: #f8f8f8; }
+.codehilite .c { color: #408080; font-style: italic } /* Comment */
+.codehilite .err { border: 1px solid #FF0000 } /* Error */
+.codehilite .k { color: #008000; font-weight: bold } /* Keyword */
+.codehilite .o { color: #666666 } /* Operator */
+.codehilite .cm { color: #408080; font-style: italic } /* Comment.Multiline */
+.codehilite .cp { color: #BC7A00 } /* Comment.Preproc */
+.codehilite .c1 { color: #408080; font-style: italic } /* Comment.Single */
+.codehilite .cs { color: #408080; font-style: italic } /* Comment.Special */
+.codehilite .gd { color: #A00000 } /* Generic.Deleted */
+.codehilite .ge { font-style: italic } /* Generic.Emph */
+.codehilite .gr { color: #FF0000 } /* Generic.Error */
+.codehilite .gh { color: #000080; font-weight: bold } /* Generic.Heading */
+.codehilite .gi { color: #00A000 } /* Generic.Inserted */
+.codehilite .go { color: #888888 } /* Generic.Output */
+.codehilite .gp { color: #000080; font-weight: bold } /* Generic.Prompt */
+.codehilite .gs { font-weight: bold } /* Generic.Strong */
+.codehilite .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+.codehilite .gt { color: #0044DD } /* Generic.Traceback */
+.codehilite .kc { color: #008000; font-weight: bold } /* Keyword.Constant */
+.codehilite .kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
+.codehilite .kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
+.codehilite .kp { color: #008000 } /* Keyword.Pseudo */
+.codehilite .kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
+.codehilite .kt { color: #B00040 } /* Keyword.Type */
+.codehilite .m { color: #666666 } /* Literal.Number */
+.codehilite .s { color: #BA2121 } /* Literal.String */
+.codehilite .na { color: #7D9029 } /* Name.Attribute */
+.codehilite .nb { color: #008000 } /* Name.Builtin */
+.codehilite .nc { color: #0000FF; font-weight: bold } /* Name.Class */
+.codehilite .no { color: #880000 } /* Name.Constant */
+.codehilite .nd { color: #AA22FF } /* Name.Decorator */
+.codehilite .ni { color: #999999; font-weight: bold } /* Name.Entity */
+.codehilite .ne { color: #D2413A; font-weight: bold } /* Name.Exception */
+.codehilite .nf { color: #0000FF } /* Name.Function */
+.codehilite .nl { color: #A0A000 } /* Name.Label */
+.codehilite .nn { color: #0000FF; font-weight: bold } /* Name.Namespace */
+.codehilite .nt { color: #008000; font-weight: bold } /* Name.Tag */
+.codehilite .nv { color: #19177C } /* Name.Variable */
+.codehilite .ow { color: #AA22FF; font-weight: bold } /* Operator.Word */
+.codehilite .w { color: #bbbbbb } /* Text.Whitespace */
+.codehilite .mb { color: #666666 } /* Literal.Number.Bin */
+.codehilite .mf { color: #666666 } /* Literal.Number.Float */
+.codehilite .mh { color: #666666 } /* Literal.Number.Hex */
+.codehilite .mi { color: #666666 } /* Literal.Number.Integer */
+.codehilite .mo { color: #666666 } /* Literal.Number.Oct */
+.codehilite .sb { color: #BA2121 } /* Literal.String.Backtick */
+.codehilite .sc { color: #BA2121 } /* Literal.String.Char */
+.codehilite .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
+.codehilite .s2 { color: #BA2121 } /* Literal.String.Double */
+.codehilite .se { color: #BB6622; font-weight: bold } /* Literal.String.Escape */
+.codehilite .sh { color: #BA2121 } /* Literal.String.Heredoc */
+.codehilite .si { color: #BB6688; font-weight: bold } /* Literal.String.Interpol */
+.codehilite .sx { color: #008000 } /* Literal.String.Other */
+.codehilite .sr { color: #BB6688 } /* Literal.String.Regex */
+.codehilite .s1 { color: #BA2121 } /* Literal.String.Single */
+.codehilite .ss { color: #19177C } /* Literal.String.Symbol */
+.codehilite .bp { color: #008000 } /* Name.Builtin.Pseudo */
+.codehilite .vc { color: #19177C } /* Name.Variable.Class */
+.codehilite .vg { color: #19177C } /* Name.Variable.Global */
+.codehilite .vi { color: #19177C } /* Name.Variable.Instance */
+.codehilite .il { color: #666666 } /* Literal.Number.Integer.Long */
+  </style>
 
   <style type="text/css">
   
@@ -1060,10 +1125,12 @@ Those objects expose methods to the application which map to remote procedure
 calls (RPC) on the <strong>Frankly</strong> servers, they also negotiate and maintain the
 state required by the API's security policies.</p>
 <p>Here's how <code>FranklyClient</code> instances are created:</p>
-<pre><code>from frankly import FranklyClient
+<div class="codehilite"><pre><span class="kn">from</span> <span class="nn">frankly</span> <span class="kn">import</span> <span class="n">FranklyClient</span>
 
-client = FranklyClient()
-</code></pre>
+<span class="n">client</span> <span class="o">=</span> <span class="n">FranklyClient</span><span class="p">()</span>
+</pre></div>
+
+
 <h2>Authentication</h2>
 <p>Before performing any operation (calling any method) the client instance needs
 to authenticate against Frankly API.
@@ -1072,14 +1139,16 @@ only allow <em>admin</em> authentication.</p>
 <p>When authenticating as an <em>admin</em> user the client needs to be given the <code>app_key</code>
 and <code>app_secret</code> values obtained from the <a href="https://console.franklychat.com/"><strong>Frankly Console</strong></a>.</p>
 <p>Here's how to perform authentication:</p>
-<pre><code>from frankly import FranklyClient
+<div class="codehilite"><pre><span class="kn">from</span> <span class="nn">frankly</span> <span class="kn">import</span> <span class="n">FranklyClient</span>
 
-app_key    = 'app_key from Frankly Console'
-app_secret = 'app_secret from Frankly Console'
+<span class="n">app_key</span>    <span class="o">=</span> <span class="s">&#39;app_key from Frankly Console&#39;</span>
+<span class="n">app_secret</span> <span class="o">=</span> <span class="s">&#39;app_secret from Frankly Console&#39;</span>
 
-client = FranklyClient()
-client.authenticate(app_key, app_secret)
-</code></pre>
+<span class="n">client</span> <span class="o">=</span> <span class="n">FranklyClient</span><span class="p">()</span>
+<span class="n">client</span><span class="o">.</span><span class="n">authenticate</span><span class="p">(</span><span class="n">app_key</span><span class="p">,</span> <span class="n">app_secret</span><span class="p">)</span>
+</pre></div>
+
+
 <p>If the call to <code>authenticate</code> returns then authentication was successful and
 the application can move on and use this instance of <code>FranklyClient</code> to perform
 other operations.</p>
@@ -1092,16 +1161,18 @@ seen as a collection of messages, with some associated meta-data like the title,
 description or avatar image to be displayed when the end users access the mobile
 or web app embedding a <strong>Frankly SDK</strong>.</p>
 <p>This code snippet shows how to create chat rooms:</p>
-<pre><code>from frankly import FranklyClient
+<div class="codehilite"><pre><span class="kn">from</span> <span class="nn">frankly</span> <span class="kn">import</span> <span class="n">FranklyClient</span>
 
-...
+<span class="o">...</span>
 
-room = client.create_room(
-    title       = 'Hi',
-    description = 'My First Chat Room',
-    status      = 'active',
-)
-</code></pre>
+<span class="n">room</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">create_room</span><span class="p">(</span>
+    <span class="n">title</span>       <span class="o">=</span> <span class="s">&#39;Hi&#39;</span><span class="p">,</span>
+    <span class="n">description</span> <span class="o">=</span> <span class="s">&#39;My First Chat Room&#39;</span><span class="p">,</span>
+    <span class="n">status</span>      <span class="o">=</span> <span class="s">&#39;active&#39;</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+
+
 <p>As we can see here, when creating a room the application must specify a <em>status</em>
 property which can be one of the following:</p>
 <ul>
@@ -1124,26 +1195,28 @@ mobile or web app UI, it is useful for testing purposes.</p>
 <p>Frankly being a chat platform it allows applications to send and receive messages.
 Naturally <code>FranklyClient</code> instances can publish and fetch messages to chat rooms.</p>
 <p>This code snippet shows hot to create messages:</p>
-<pre><code>from frankly import FranklyClient
+<div class="codehilite"><pre><span class="kn">from</span> <span class="nn">frankly</span> <span class="kn">import</span> <span class="n">FranklyClient</span>
 
-...
+<span class="o">...</span>
 
-message1 = client.create_message(
-    room.id,
-    contents = [{
-      'type' : 'text/plain',
-      'value': 'Hello World!',
-    }],
-)
+<span class="n">message1</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">create_message</span><span class="p">(</span>
+    <span class="n">room</span><span class="o">.</span><span class="n">id</span><span class="p">,</span>
+    <span class="n">contents</span> <span class="o">=</span> <span class="p">[{</span>
+      <span class="s">&#39;type&#39;</span> <span class="p">:</span> <span class="s">&#39;text/plain&#39;</span><span class="p">,</span>
+      <span class="s">&#39;value&#39;</span><span class="p">:</span> <span class="s">&#39;Hello World!&#39;</span><span class="p">,</span>
+    <span class="p">}],</span>
+<span class="p">)</span>
 
-message2 = client.create_message(
-    room.id,
-    contents = [{
-      'type': 'image/*',
-      'url' : 'https://app.franklychat.com/files/...',
-    }]
-)
-</code></pre>
+<span class="n">message2</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">create_message</span><span class="p">(</span>
+    <span class="n">room</span><span class="o">.</span><span class="n">id</span><span class="p">,</span>
+    <span class="n">contents</span> <span class="o">=</span> <span class="p">[{</span>
+      <span class="s">&#39;type&#39;</span><span class="p">:</span> <span class="s">&#39;image/*&#39;</span><span class="p">,</span>
+      <span class="s">&#39;url&#39;</span> <span class="p">:</span> <span class="s">&#39;https://app.franklychat.com/files/...&#39;</span><span class="p">,</span>
+    <span class="p">}]</span>
+<span class="p">)</span>
+</pre></div>
+
+
 <p>Let's explain quickly what's happening here: messages published to chat rooms
 actually support multiple parts, they may contain few text entries, or a text
 and an image, etc... So the <em>contents</em> property is actually a list of objects.
@@ -1181,22 +1254,24 @@ stick at the top of the chat room UI to give some context to end users about
 what is currently ongoing.</p>
 <p>Here's how an app using the frankly module would create and then publish
 announcements:</p>
-<pre><code>from frankly import FranklyClient
+<div class="codehilite"><pre><span class="kn">from</span> <span class="nn">frankly</span> <span class="kn">import</span> <span class="n">FranklyClient</span>
 
-...
+<span class="o">...</span>
 
-anno = client.create_announcement(
-    contents = [{
-      'type' : 'text/plain',
-      'value': 'Hi everybody!!!',
-    }],
-)
+<span class="n">anno</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">create_announcement</span><span class="p">(</span>
+    <span class="n">contents</span> <span class="o">=</span> <span class="p">[{</span>
+      <span class="s">&#39;type&#39;</span> <span class="p">:</span> <span class="s">&#39;text/plain&#39;</span><span class="p">,</span>
+      <span class="s">&#39;value&#39;</span><span class="p">:</span> <span class="s">&#39;Hi everybody!!!&#39;</span><span class="p">,</span>
+    <span class="p">}],</span>
+<span class="p">)</span>
 
-client.publish_announcement(
-    anno.id,
-    room.id,
-)
-</code></pre>
+<span class="n">client</span><span class="o">.</span><span class="n">publish_announcement</span><span class="p">(</span>
+    <span class="n">anno</span><span class="o">.</span><span class="n">id</span><span class="p">,</span>
+    <span class="n">room</span><span class="o">.</span><span class="n">id</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+
+
 <p>As we can see here, the announcement is created with the same structure than
 a regular message.<br />
 The content of the announcement is actually what is going to be set as the
@@ -1212,20 +1287,22 @@ request a new file URL to the <strong>Frankly API</strong>, then it can use that
 upload a resource to Frankly servers.<br />
 Lukily the frankly module abstracts this nicely in a single operation, here's
 an example of how to set an image for a chat room:</p>
-<pre><code>from frankly import FranklyClient
+<div class="codehilite"><pre><span class="kn">from</span> <span class="nn">frankly</span> <span class="kn">import</span> <span class="n">FranklyClient</span>
 
-...
+<span class="o">...</span>
 
-file = client.upload_file_from_path(
-    './path/to/image.png',
-    category = 'roomavatar',
-)
+<span class="nb">file</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">upload_file_from_path</span><span class="p">(</span>
+    <span class="s">&#39;./path/to/image.png&#39;</span><span class="p">,</span>
+    <span class="n">category</span> <span class="o">=</span> <span class="s">&#39;roomavatar&#39;</span><span class="p">,</span>
+<span class="p">)</span>
 
-room = client.update_room(
-    room.id,
-    avatar_image_url = file.url,
-)
-</code></pre>
+<span class="n">room</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">update_room</span><span class="p">(</span>
+    <span class="n">room</span><span class="o">.</span><span class="n">id</span><span class="p">,</span>
+    <span class="n">avatar_image_url</span> <span class="o">=</span> <span class="nb">file</span><span class="o">.</span><span class="n">url</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+
+
 <p>The object returned by a call to <code>upload_file_from_path</code> and other upload
 methods is created in the first step described above.<br />
 The <code>category</code> parameter shown here is a hint given the the <strong>Frankly API</strong>
@@ -1248,20 +1325,20 @@ at a different level (network going down, ...), calls to methods of a
 <p>All exceptions raised by calls to the methods will be instances of <code>FranklyError</code>.</p>
 <p>The errors give some context about what went wrong, here's a quick example
 showing how to handle those situations:</p>
-<pre><code>from frankly import FranklyClient
-from frankly import FranklyError
+<div class="codehilite"><pre><span class="kn">from</span> <span class="nn">frankly</span> <span class="kn">import</span> <span class="n">FranklyClient</span>
+<span class="kn">from</span> <span class="nn">frankly</span> <span class="kn">import</span> <span class="n">FranklyError</span>
 
-...
+<span class="o">...</span>
 
-try:
-    client = FranklyClient()
-    client.authenticate(app_key, app_secret)
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">client</span> <span class="o">=</span> <span class="n">FranklyClient</span><span class="p">()</span>
+    <span class="n">client</span><span class="o">.</span><span class="n">authenticate</span><span class="p">(</span><span class="n">app_key</span><span class="p">,</span> <span class="n">app_secret</span><span class="p">)</span>
 
-    ...
+    <span class="o">...</span>
 
-except FranklyError as e:
-    print(e)
-</code></pre>
+<span class="k">except</span> <span class="n">FranklyError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+</pre></div>
   
 
   </header>
