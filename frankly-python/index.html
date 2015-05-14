@@ -2695,13 +2695,13 @@ only after sucessfuly authenticating.</p></div>
           <h3>Ancestors (in MRO)</h3>
           <ul class="class_list">
           <li><a href="#frankly.FranklyClient">FranklyClient</a></li>
-          <li><a href="/builtins.object.ext">builtins.object</a></li>
+          <li><a href="/__builtin__.object.ext">__builtin__.object</a></li>
           </ul>
-          <h3>Static methods</h3>
+          <h3>Methods</h3>
             
   <div class="item">
     <div class="name def" id="frankly.FranklyClient.__init__">
-    <p>def <span class="ident">__init__</span>(</p><p>self, address=&#39;https://app.franklychat.com&#39;, connect_timeout=5, request_timeout=5)</p>
+    <p>def <span class="ident">__init__</span>(</p><p>self, address=u&#39;https://app.franklychat.com&#39;, connect_timeout=5, request_timeout=5)</p>
     </div>
     
 
@@ -3609,9 +3609,9 @@ any call to methods of the <a href="#frankly.FranklyClient"><code>FranklyClient<
           <h3>Ancestors (in MRO)</h3>
           <ul class="class_list">
           <li><a href="#frankly.FranklyError">FranklyError</a></li>
-          <li><a href="/builtins.Exception.ext">builtins.Exception</a></li>
-          <li><a href="/builtins.BaseException.ext">builtins.BaseException</a></li>
-          <li><a href="/builtins.object.ext">builtins.object</a></li>
+          <li><a href="/exceptions.Exception.ext">exceptions.Exception</a></li>
+          <li><a href="/exceptions.BaseException.ext">exceptions.BaseException</a></li>
+          <li><a href="/__builtin__.object.ext">__builtin__.object</a></li>
           </ul>
           <h3>Class variables</h3>
             <div class="item">
@@ -3624,35 +3624,6 @@ any call to methods of the <a href="#frankly.FranklyClient"><code>FranklyClient<
 </div>
 
             </div>
-          <h3>Static methods</h3>
-            
-  <div class="item">
-    <div class="name def" id="frankly.FranklyError.__init__">
-    <p>def <span class="ident">__init__</span>(</p><p>self, operation, path, status, message)</p>
-    </div>
-    
-
-    
-  
-    <div class="desc"><p>Creates a new instance of this class.</p></div>
-  <div class="source_cont">
-  <p class="source_link"><a href="javascript:void(0);" onclick="toggle('source-frankly.FranklyError.__init__', this);">Show source &equiv;</a></p>
-  <div id="source-frankly.FranklyError.__init__" class="source">
-    <div class="codehilite"><pre><span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">operation</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">status</span><span class="p">,</span> <span class="n">message</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Creates a new instance of this class.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">_operation</span> <span class="o">=</span> <span class="n">operation</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">_path</span>      <span class="o">=</span> <span class="n">path</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">_status</span>    <span class="o">=</span> <span class="n">status</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">_message</span>   <span class="o">=</span> <span class="n">message</span>
-</pre></div>
-
-  </div>
-</div>
-
-  </div>
-  
           <h3>Instance variables</h3>
             <div class="item">
             <p id="frankly.FranklyError.message" class="name">var <span class="ident">message</span></p>
@@ -3701,6 +3672,35 @@ representing the resource the operation was executed on.</p></div>
 </div>
 
             </div>
+          <h3>Methods</h3>
+            
+  <div class="item">
+    <div class="name def" id="frankly.FranklyError.__init__">
+    <p>def <span class="ident">__init__</span>(</p><p>self, operation, path, status, message)</p>
+    </div>
+    
+
+    
+  
+    <div class="desc"><p>Creates a new instance of this class.</p></div>
+  <div class="source_cont">
+  <p class="source_link"><a href="javascript:void(0);" onclick="toggle('source-frankly.FranklyError.__init__', this);">Show source &equiv;</a></p>
+  <div id="source-frankly.FranklyError.__init__" class="source">
+    <div class="codehilite"><pre><span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">operation</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">status</span><span class="p">,</span> <span class="n">message</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Creates a new instance of this class.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_operation</span> <span class="o">=</span> <span class="n">operation</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_path</span>      <span class="o">=</span> <span class="n">path</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_status</span>    <span class="o">=</span> <span class="n">status</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_message</span>   <span class="o">=</span> <span class="n">message</span>
+</pre></div>
+
+  </div>
+</div>
+
+  </div>
+  
       </div>
       </div>
 
