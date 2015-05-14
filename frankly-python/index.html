@@ -1094,6 +1094,10 @@ table {
   </ul>
 
         </li>
+        <li class="mono">
+        <span class="class_name"><a href="#frankly.FranklyObject">FranklyObject</a></span>
+        
+        </li>
       </ul>
     </li>
 
@@ -1709,6 +1713,7 @@ showing how to handle those situations:</p>
     <span class="s">&#39;generate_identity_token&#39;</span><span class="p">,</span>
     <span class="s">&#39;FranklyClient&#39;</span><span class="p">,</span>
     <span class="s">&#39;FranklyError&#39;</span><span class="p">,</span>
+    <span class="s">&#39;FranklyObject&#39;</span><span class="p">,</span>
 <span class="p">]</span>
 
 <span class="k">def</span> <span class="nf">generate_identity_token</span><span class="p">(</span><span class="n">app_key</span><span class="p">,</span> <span class="n">app_secret</span><span class="p">,</span> <span class="n">nonce</span><span class="p">,</span> <span class="n">user_id</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">role</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
@@ -1804,11 +1809,11 @@ showing how to handle those situations:</p>
 <span class="sd">        an application would need to change this value.</span>
 
 <span class="sd">        - `connect_timeout (int or float)`  </span>
-<span class="sd">        The maximum amount of time connecting to the API can take.</span>
+<span class="sd">        The maximum amount of time connecting to the API can take (in seconds).</span>
 
 <span class="sd">        - `request_timeout (int or float)`  </span>
 <span class="sd">        The maximum amount of time submitting a request and receiving a response</span>
-<span class="sd">        from the API can take.</span>
+<span class="sd">        from the API can take (in seconds).</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">address</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">address</span><span class="p">,</span> <span class="n">six</span><span class="o">.</span><span class="n">text_type</span><span class="p">)):</span>
             <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s">&quot;address must be a string&quot;</span><span class="p">)</span>
@@ -1995,15 +2000,89 @@ showing how to handle those situations:</p>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">create</span><span class="p">([</span><span class="s">&#39;rooms&#39;</span><span class="p">,</span> <span class="n">room_id</span><span class="p">,</span> <span class="s">&#39;messages&#39;</span><span class="p">],</span> <span class="n">payload</span><span class="o">=</span><span class="n">payload</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">read</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">payload</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This method exposes a generic interface for reading objects from the</span>
+<span class="sd">        Frankly API.  </span>
+<span class="sd">        Every `read_*` method is implemented on top of this one.</span>
+
+<span class="sd">        **Arguments**</span>
+
+<span class="sd">        - `path (list)`  </span>
+<span class="sd">        A list of values representing the collection to create an object in.</span>
+
+<span class="sd">        - `params (dict)`  </span>
+<span class="sd">        Parameters passed as part of the request.</span>
+
+<span class="sd">        - `payload (dict)`  </span>
+<span class="sd">        Dict-like object representing the object to create.</span>
+
+<span class="sd">        **Return**</span>
+
+<span class="sd">        The method returns the object read from the API at the specified path.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">backend</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">payload</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">read_room</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">room_id</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retrieves a room object with specified id from the app.  </span>
+
+<span class="sd">        **Arguments**</span>
+
+<span class="sd">        - `room_id (int)`  </span>
+<span class="sd">        The identifier of the room to be fetched.</span>
+
+<span class="sd">        **Return**</span>
+
+<span class="sd">        The method returns an object representing the room with the specified id</span>
+<span class="sd">        in the app.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">read</span><span class="p">([</span><span class="s">&#39;rooms&#39;</span><span class="p">,</span> <span class="n">room_id</span><span class="p">])</span>
 
     <span class="k">def</span> <span class="nf">read_room_list</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retrieves the list of all available rooms from the app.</span>
+
+<span class="sd">        **Return**</span>
+
+<span class="sd">        The method returns a list of room objects order by id, which may be</span>
+<span class="sd">        empty if there are no rooms in the app.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">read</span><span class="p">([</span><span class="s">&#39;rooms&#39;</span><span class="p">])</span>
 
     <span class="k">def</span> <span class="nf">read_room_message_list</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">room_id</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retrives messages in a room.  </span>
+<span class="sd">        The keyword arguments are used to specify which message range the client</span>
+<span class="sd">        wish to receive.</span>
+
+<span class="sd">        **Arguments**</span>
+
+<span class="sd">        - `offset (int)`  </span>
+<span class="sd">        The id of the message to consider as starting offset for the query.  </span>
+<span class="sd">        If the offset is not specified the server will use the id of the most</span>
+<span class="sd">        recent message.</span>
+
+<span class="sd">        - `limit (int)`  </span>
+<span class="sd">        How many messages at most will be received by the call. The server may</span>
+<span class="sd">        choose to send a lower count if that value exceeds the maximum allowed</span>
+<span class="sd">        or if there are less than the requested number of messages available.  </span>
+<span class="sd">        If the limit is not set the server will use a default limit instead,</span>
+<span class="sd">        which means there are no way to retrieve the entire list of messages in</span>
+<span class="sd">        a room (because that could potentially be few million entries).</span>
+
+<span class="sd">        - `contextual (bool)`  </span>
+<span class="sd">        When set to true only contextual messages will be returned in the result</span>
+<span class="sd">        list.  </span>
+<span class="sd">        When set to false only non-contextual messages will be returned in the</span>
+<span class="sd">        result list.</span>
+<span class="sd">        This argument may be omitted or set to `None`, in that case any kind of</span>
+<span class="sd">        messages will be returned in the result list.</span>
+
+<span class="sd">        **Return**</span>
+
+<span class="sd">        The method returns a list of message objects, which may be empty if no</span>
+<span class="sd">        messages were satisfying the query.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">read</span><span class="p">([</span><span class="s">&#39;rooms&#39;</span><span class="p">,</span> <span class="n">room_id</span><span class="p">,</span> <span class="s">&#39;messages&#39;</span><span class="p">],</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">read_announcement</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">announcement_id</span><span class="p">):</span>
@@ -2121,6 +2200,42 @@ showing how to handle those situations:</p>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_message</span>
 
+<span class="k">class</span> <span class="nc">FranklyObject</span><span class="p">(</span><span class="nb">dict</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This class provides the implementation of a dict-like type where properties</span>
+<span class="sd">    are also available through an object notation.</span>
+
+<span class="sd">    Instances of this type also expose an iterator iterface which produces tuples</span>
+<span class="sd">    of key/value pairs.</span>
+
+<span class="sd">    Every method calls on `frankly.FranklyClient` objects return instances of this</span>
+<span class="sd">    class or a list of instances of this class.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">six</span><span class="o">.</span><span class="n">iteritems</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__delattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">del</span> <span class="bp">self</span><span class="p">[</span><span class="n">name</span><span class="p">]</span>
+        <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__getattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="p">[</span><span class="n">name</span><span class="p">]</span>
+        <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__setattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+
+    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cls</span><span class="o">=</span><span class="n">JsonEncoder</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cls</span><span class="o">=</span><span class="n">JsonEncoder</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
 <span class="c"># Backend</span>
 <span class="c"># =======</span>
 <span class="c">#</span>
@@ -2235,7 +2350,7 @@ showing how to handle those situations:</p>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">http</span><span class="o">.</span><span class="n">post</span><span class="p">(</span>
             <span class="n">url</span>     <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">make_url</span><span class="p">(</span><span class="n">path</span><span class="p">),</span>
             <span class="n">params</span>  <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">make_params</span><span class="p">(</span><span class="n">params</span><span class="p">),</span>
-            <span class="n">data</span>    <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">payload</span><span class="p">,</span> <span class="n">cls</span><span class="o">=</span><span class="n">JsonEncoder</span><span class="p">),</span>
+            <span class="n">data</span>    <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">payload</span><span class="p">,</span> <span class="n">cls</span><span class="o">=</span><span class="n">JsonEncoder</span><span class="p">,</span> <span class="n">separators</span><span class="o">=</span><span class="bp">None</span><span class="p">),</span>
             <span class="n">timeout</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">connect_timeout</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">request_timeout</span><span class="p">),</span>
         <span class="p">)</span>
 
@@ -2252,7 +2367,7 @@ showing how to handle those situations:</p>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">http</span><span class="o">.</span><span class="n">put</span><span class="p">(</span>
             <span class="n">url</span>     <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">make_url</span><span class="p">(</span><span class="n">path</span><span class="p">),</span>
             <span class="n">params</span>  <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">make_params</span><span class="p">(</span><span class="n">params</span><span class="p">),</span>
-            <span class="n">data</span>    <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">payload</span><span class="p">,</span> <span class="n">cls</span><span class="o">=</span><span class="n">JsonEncoder</span><span class="p">),</span>
+            <span class="n">data</span>    <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">payload</span><span class="p">,</span> <span class="n">cls</span><span class="o">=</span><span class="n">JsonEncoder</span><span class="p">,</span> <span class="n">separators</span><span class="o">=</span><span class="bp">None</span><span class="p">),</span>
             <span class="n">timeout</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">connect_timeout</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">request_timeout</span><span class="p">),</span>
         <span class="p">)</span>
 
@@ -2319,7 +2434,7 @@ showing how to handle those situations:</p>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="n">kwargs</span><span class="p">[</span><span class="s">&#39;strict&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">False</span>
-        <span class="n">kwargs</span><span class="p">[</span><span class="s">&#39;object_pairs_hook&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ObjectDict</span>
+        <span class="n">kwargs</span><span class="p">[</span><span class="s">&#39;object_pairs_hook&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">FranklyObject</span>
         <span class="n">BaseJsonDecoder</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">decode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">s</span><span class="p">):</span>
@@ -2330,7 +2445,8 @@ showing how to handle those situations:</p>
 <span class="k">class</span> <span class="nc">JsonEncoder</span><span class="p">(</span><span class="n">BaseJsonEncoder</span><span class="p">):</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="n">kwargs</span><span class="p">[</span><span class="s">&#39;separators&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="s">&#39;,&#39;</span><span class="p">,</span> <span class="s">&#39;:&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;separators&#39;</span><span class="p">)</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">kwargs</span><span class="p">[</span><span class="s">&#39;separators&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="s">&#39;,&#39;</span><span class="p">,</span> <span class="s">&#39;:&#39;</span><span class="p">)</span>
         <span class="n">BaseJsonEncoder</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">default</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">):</span>
@@ -2341,29 +2457,6 @@ showing how to handle those situations:</p>
             <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="n">BaseJsonEncoder</span><span class="o">.</span><span class="n">default</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">)</span>
-
-<span class="k">class</span> <span class="nc">ObjectDict</span><span class="p">(</span><span class="nb">dict</span><span class="p">):</span>
-
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">items</span><span class="p">):</span>
-        <span class="nb">dict</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">items</span><span class="p">)</span>
-
-    <span class="k">def</span> <span class="nf">__delattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
-        <span class="k">try</span><span class="p">:</span>
-            <span class="k">del</span> <span class="bp">self</span><span class="p">[</span><span class="n">name</span><span class="p">]</span>
-        <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
-
-    <span class="k">def</span> <span class="nf">__getattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
-        <span class="k">try</span><span class="p">:</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="p">[</span><span class="n">name</span><span class="p">]</span>
-        <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
-
-    <span class="k">def</span> <span class="nf">__setattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
-        <span class="bp">self</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
-
-    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">cls</span><span class="o">=</span><span class="n">JsonEncoder</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">json_parse_dates</span><span class="p">(</span><span class="n">obj</span><span class="p">):</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">six</span><span class="o">.</span><span class="n">text_type</span><span class="p">):</span>
@@ -2584,11 +2677,11 @@ only after sucessfuly authenticating.</p></div>
 <span class="sd">        an application would need to change this value.</span>
 
 <span class="sd">        - `connect_timeout (int or float)`  </span>
-<span class="sd">        The maximum amount of time connecting to the API can take.</span>
+<span class="sd">        The maximum amount of time connecting to the API can take (in seconds).</span>
 
 <span class="sd">        - `request_timeout (int or float)`  </span>
 <span class="sd">        The maximum amount of time submitting a request and receiving a response</span>
-<span class="sd">        from the API can take.</span>
+<span class="sd">        from the API can take (in seconds).</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">address</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">address</span><span class="p">,</span> <span class="n">six</span><span class="o">.</span><span class="n">text_type</span><span class="p">)):</span>
             <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s">&quot;address must be a string&quot;</span><span class="p">)</span>
@@ -2775,15 +2868,89 @@ only after sucessfuly authenticating.</p></div>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">create</span><span class="p">([</span><span class="s">&#39;rooms&#39;</span><span class="p">,</span> <span class="n">room_id</span><span class="p">,</span> <span class="s">&#39;messages&#39;</span><span class="p">],</span> <span class="n">payload</span><span class="o">=</span><span class="n">payload</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">read</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">payload</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This method exposes a generic interface for reading objects from the</span>
+<span class="sd">        Frankly API.  </span>
+<span class="sd">        Every `read_*` method is implemented on top of this one.</span>
+
+<span class="sd">        **Arguments**</span>
+
+<span class="sd">        - `path (list)`  </span>
+<span class="sd">        A list of values representing the collection to create an object in.</span>
+
+<span class="sd">        - `params (dict)`  </span>
+<span class="sd">        Parameters passed as part of the request.</span>
+
+<span class="sd">        - `payload (dict)`  </span>
+<span class="sd">        Dict-like object representing the object to create.</span>
+
+<span class="sd">        **Return**</span>
+
+<span class="sd">        The method returns the object read from the API at the specified path.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">backend</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">payload</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">read_room</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">room_id</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retrieves a room object with specified id from the app.  </span>
+
+<span class="sd">        **Arguments**</span>
+
+<span class="sd">        - `room_id (int)`  </span>
+<span class="sd">        The identifier of the room to be fetched.</span>
+
+<span class="sd">        **Return**</span>
+
+<span class="sd">        The method returns an object representing the room with the specified id</span>
+<span class="sd">        in the app.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">read</span><span class="p">([</span><span class="s">&#39;rooms&#39;</span><span class="p">,</span> <span class="n">room_id</span><span class="p">])</span>
 
     <span class="k">def</span> <span class="nf">read_room_list</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retrieves the list of all available rooms from the app.</span>
+
+<span class="sd">        **Return**</span>
+
+<span class="sd">        The method returns a list of room objects order by id, which may be</span>
+<span class="sd">        empty if there are no rooms in the app.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">read</span><span class="p">([</span><span class="s">&#39;rooms&#39;</span><span class="p">])</span>
 
     <span class="k">def</span> <span class="nf">read_room_message_list</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">room_id</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retrives messages in a room.  </span>
+<span class="sd">        The keyword arguments are used to specify which message range the client</span>
+<span class="sd">        wish to receive.</span>
+
+<span class="sd">        **Arguments**</span>
+
+<span class="sd">        - `offset (int)`  </span>
+<span class="sd">        The id of the message to consider as starting offset for the query.  </span>
+<span class="sd">        If the offset is not specified the server will use the id of the most</span>
+<span class="sd">        recent message.</span>
+
+<span class="sd">        - `limit (int)`  </span>
+<span class="sd">        How many messages at most will be received by the call. The server may</span>
+<span class="sd">        choose to send a lower count if that value exceeds the maximum allowed</span>
+<span class="sd">        or if there are less than the requested number of messages available.  </span>
+<span class="sd">        If the limit is not set the server will use a default limit instead,</span>
+<span class="sd">        which means there are no way to retrieve the entire list of messages in</span>
+<span class="sd">        a room (because that could potentially be few million entries).</span>
+
+<span class="sd">        - `contextual (bool)`  </span>
+<span class="sd">        When set to true only contextual messages will be returned in the result</span>
+<span class="sd">        list.  </span>
+<span class="sd">        When set to false only non-contextual messages will be returned in the</span>
+<span class="sd">        result list.</span>
+<span class="sd">        This argument may be omitted or set to `None`, in that case any kind of</span>
+<span class="sd">        messages will be returned in the result list.</span>
+
+<span class="sd">        **Return**</span>
+
+<span class="sd">        The method returns a list of message objects, which may be empty if no</span>
+<span class="sd">        messages were satisfying the query.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">read</span><span class="p">([</span><span class="s">&#39;rooms&#39;</span><span class="p">,</span> <span class="n">room_id</span><span class="p">,</span> <span class="s">&#39;messages&#39;</span><span class="p">],</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">read_announcement</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">announcement_id</span><span class="p">):</span>
@@ -2858,7 +3025,7 @@ only after sucessfuly authenticating.</p></div>
           <h3>Ancestors (in MRO)</h3>
           <ul class="class_list">
           <li><a href="#frankly.FranklyClient">FranklyClient</a></li>
-          <li><a href="/__builtin__.object.ext">__builtin__.object</a></li>
+          <li>__builtin__.object</li>
           </ul>
           <h3>Methods</h3>
             
@@ -2880,12 +3047,12 @@ an application would need to change this value.</p>
 </li>
 <li>
 <p><code>connect_timeout (int or float)</code><br />
-The maximum amount of time connecting to the API can take.</p>
+The maximum amount of time connecting to the API can take (in seconds).</p>
 </li>
 <li>
 <p><code>request_timeout (int or float)</code><br />
 The maximum amount of time submitting a request and receiving a response
-from the API can take.</p>
+from the API can take (in seconds).</p>
 </li>
 </ul></div>
   <div class="source_cont">
@@ -2899,10 +3066,10 @@ from the API can take.</p>
 <span class="sd">    The URL at which Frankly servers can be reached, it&#39;s very unlikely that</span>
 <span class="sd">    an application would need to change this value.</span>
 <span class="sd">    - `connect_timeout (int or float)`  </span>
-<span class="sd">    The maximum amount of time connecting to the API can take.</span>
+<span class="sd">    The maximum amount of time connecting to the API can take (in seconds).</span>
 <span class="sd">    - `request_timeout (int or float)`  </span>
 <span class="sd">    The maximum amount of time submitting a request and receiving a response</span>
-<span class="sd">    from the API can take.</span>
+<span class="sd">    from the API can take (in seconds).</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">address</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">address</span><span class="p">,</span> <span class="n">six</span><span class="o">.</span><span class="n">text_type</span><span class="p">)):</span>
         <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s">&quot;address must be a string&quot;</span><span class="p">)</span>
@@ -3396,10 +3563,44 @@ for more details about content objects.</li>
 
     
   
+    <div class="desc"><p>This method exposes a generic interface for reading objects from the
+Frankly API.<br />
+Every <code>read_*</code> method is implemented on top of this one.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li>
+<p><code>path (list)</code><br />
+A list of values representing the collection to create an object in.</p>
+</li>
+<li>
+<p><code>params (dict)</code><br />
+Parameters passed as part of the request.</p>
+</li>
+<li>
+<p><code>payload (dict)</code><br />
+Dict-like object representing the object to create.</p>
+</li>
+</ul>
+<p><strong>Return</strong></p>
+<p>The method returns the object read from the API at the specified path.</p></div>
   <div class="source_cont">
   <p class="source_link"><a href="javascript:void(0);" onclick="toggle('source-frankly.FranklyClient.read', this);">Show source &equiv;</a></p>
   <div id="source-frankly.FranklyClient.read" class="source">
     <div class="codehilite"><pre><span class="k">def</span> <span class="nf">read</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">payload</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This method exposes a generic interface for reading objects from the</span>
+<span class="sd">    Frankly API.  </span>
+<span class="sd">    Every `read_*` method is implemented on top of this one.</span>
+<span class="sd">    **Arguments**</span>
+<span class="sd">    - `path (list)`  </span>
+<span class="sd">    A list of values representing the collection to create an object in.</span>
+<span class="sd">    - `params (dict)`  </span>
+<span class="sd">    Parameters passed as part of the request.</span>
+<span class="sd">    - `payload (dict)`  </span>
+<span class="sd">    Dict-like object representing the object to create.</span>
+<span class="sd">    **Return**</span>
+<span class="sd">    The method returns the object read from the API at the specified path.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">backend</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">payload</span><span class="p">)</span>
 </pre></div>
 
@@ -3480,10 +3681,28 @@ for more details about content objects.</li>
 
     
   
+    <div class="desc"><p>Retrieves a room object with specified id from the app.  </p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><code>room_id (int)</code><br />
+The identifier of the room to be fetched.</li>
+</ul>
+<p><strong>Return</strong></p>
+<p>The method returns an object representing the room with the specified id
+in the app.</p></div>
   <div class="source_cont">
   <p class="source_link"><a href="javascript:void(0);" onclick="toggle('source-frankly.FranklyClient.read_room', this);">Show source &equiv;</a></p>
   <div id="source-frankly.FranklyClient.read_room" class="source">
     <div class="codehilite"><pre><span class="k">def</span> <span class="nf">read_room</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">room_id</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Retrieves a room object with specified id from the app.  </span>
+<span class="sd">    **Arguments**</span>
+<span class="sd">    - `room_id (int)`  </span>
+<span class="sd">    The identifier of the room to be fetched.</span>
+<span class="sd">    **Return**</span>
+<span class="sd">    The method returns an object representing the room with the specified id</span>
+<span class="sd">    in the app.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">read</span><span class="p">([</span><span class="s">&#39;rooms&#39;</span><span class="p">,</span> <span class="n">room_id</span><span class="p">])</span>
 </pre></div>
 
@@ -3501,10 +3720,20 @@ for more details about content objects.</li>
 
     
   
+    <div class="desc"><p>Retrieves the list of all available rooms from the app.</p>
+<p><strong>Return</strong></p>
+<p>The method returns a list of room objects order by id, which may be
+empty if there are no rooms in the app.</p></div>
   <div class="source_cont">
   <p class="source_link"><a href="javascript:void(0);" onclick="toggle('source-frankly.FranklyClient.read_room_list', this);">Show source &equiv;</a></p>
   <div id="source-frankly.FranklyClient.read_room_list" class="source">
     <div class="codehilite"><pre><span class="k">def</span> <span class="nf">read_room_list</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Retrieves the list of all available rooms from the app.</span>
+<span class="sd">    **Return**</span>
+<span class="sd">    The method returns a list of room objects order by id, which may be</span>
+<span class="sd">    empty if there are no rooms in the app.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">read</span><span class="p">([</span><span class="s">&#39;rooms&#39;</span><span class="p">])</span>
 </pre></div>
 
@@ -3522,10 +3751,70 @@ for more details about content objects.</li>
 
     
   
+    <div class="desc"><p>Retrives messages in a room.<br />
+The keyword arguments are used to specify which message range the client
+wish to receive.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li>
+<p><code>offset (int)</code><br />
+The id of the message to consider as starting offset for the query.<br />
+If the offset is not specified the server will use the id of the most
+recent message.</p>
+</li>
+<li>
+<p><code>limit (int)</code><br />
+How many messages at most will be received by the call. The server may
+choose to send a lower count if that value exceeds the maximum allowed
+or if there are less than the requested number of messages available.<br />
+If the limit is not set the server will use a default limit instead,
+which means there are no way to retrieve the entire list of messages in
+a room (because that could potentially be few million entries).</p>
+</li>
+<li>
+<p><code>contextual (bool)</code><br />
+When set to true only contextual messages will be returned in the result
+list.<br />
+When set to false only non-contextual messages will be returned in the
+result list.
+This argument may be omitted or set to <code>None</code>, in that case any kind of
+messages will be returned in the result list.</p>
+</li>
+</ul>
+<p><strong>Return</strong></p>
+<p>The method returns a list of message objects, which may be empty if no
+messages were satisfying the query.</p></div>
   <div class="source_cont">
   <p class="source_link"><a href="javascript:void(0);" onclick="toggle('source-frankly.FranklyClient.read_room_message_list', this);">Show source &equiv;</a></p>
   <div id="source-frankly.FranklyClient.read_room_message_list" class="source">
     <div class="codehilite"><pre><span class="k">def</span> <span class="nf">read_room_message_list</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">room_id</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Retrives messages in a room.  </span>
+<span class="sd">    The keyword arguments are used to specify which message range the client</span>
+<span class="sd">    wish to receive.</span>
+<span class="sd">    **Arguments**</span>
+<span class="sd">    - `offset (int)`  </span>
+<span class="sd">    The id of the message to consider as starting offset for the query.  </span>
+<span class="sd">    If the offset is not specified the server will use the id of the most</span>
+<span class="sd">    recent message.</span>
+<span class="sd">    - `limit (int)`  </span>
+<span class="sd">    How many messages at most will be received by the call. The server may</span>
+<span class="sd">    choose to send a lower count if that value exceeds the maximum allowed</span>
+<span class="sd">    or if there are less than the requested number of messages available.  </span>
+<span class="sd">    If the limit is not set the server will use a default limit instead,</span>
+<span class="sd">    which means there are no way to retrieve the entire list of messages in</span>
+<span class="sd">    a room (because that could potentially be few million entries).</span>
+<span class="sd">    - `contextual (bool)`  </span>
+<span class="sd">    When set to true only contextual messages will be returned in the result</span>
+<span class="sd">    list.  </span>
+<span class="sd">    When set to false only non-contextual messages will be returned in the</span>
+<span class="sd">    result list.</span>
+<span class="sd">    This argument may be omitted or set to `None`, in that case any kind of</span>
+<span class="sd">    messages will be returned in the result list.</span>
+<span class="sd">    **Return**</span>
+<span class="sd">    The method returns a list of message objects, which may be empty if no</span>
+<span class="sd">    messages were satisfying the query.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">read</span><span class="p">([</span><span class="s">&#39;rooms&#39;</span><span class="p">,</span> <span class="n">room_id</span><span class="p">,</span> <span class="s">&#39;messages&#39;</span><span class="p">],</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">)</span>
 </pre></div>
 
@@ -3772,9 +4061,9 @@ any call to methods of the <a href="#frankly.FranklyClient"><code>FranklyClient<
           <h3>Ancestors (in MRO)</h3>
           <ul class="class_list">
           <li><a href="#frankly.FranklyError">FranklyError</a></li>
-          <li><a href="/exceptions.Exception.ext">exceptions.Exception</a></li>
-          <li><a href="/exceptions.BaseException.ext">exceptions.BaseException</a></li>
-          <li><a href="/__builtin__.object.ext">__builtin__.object</a></li>
+          <li>exceptions.Exception</li>
+          <li>exceptions.BaseException</li>
+          <li>__builtin__.object</li>
           </ul>
           <h3>Class variables</h3>
             <div class="item">
@@ -3864,6 +4153,70 @@ representing the resource the operation was executed on.</p></div>
 
   </div>
   
+      </div>
+      </div>
+      
+      <div class="item">
+      <p id="frankly.FranklyObject" class="name">class <span class="ident">FranklyObject</span></p>
+      
+  
+    <div class="desc"><p>This class provides the implementation of a dict-like type where properties
+are also available through an object notation.</p>
+<p>Instances of this type also expose an iterator iterface which produces tuples
+of key/value pairs.</p>
+<p>Every method calls on <a href="#frankly.FranklyClient"><code>FranklyClient</code></a> objects return instances of this
+class or a list of instances of this class.</p></div>
+  <div class="source_cont">
+  <p class="source_link"><a href="javascript:void(0);" onclick="toggle('source-frankly.FranklyObject', this);">Show source &equiv;</a></p>
+  <div id="source-frankly.FranklyObject" class="source">
+    <div class="codehilite"><pre><span class="k">class</span> <span class="nc">FranklyObject</span><span class="p">(</span><span class="nb">dict</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This class provides the implementation of a dict-like type where properties</span>
+<span class="sd">    are also available through an object notation.</span>
+
+<span class="sd">    Instances of this type also expose an iterator iterface which produces tuples</span>
+<span class="sd">    of key/value pairs.</span>
+
+<span class="sd">    Every method calls on `frankly.FranklyClient` objects return instances of this</span>
+<span class="sd">    class or a list of instances of this class.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">six</span><span class="o">.</span><span class="n">iteritems</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__delattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">del</span> <span class="bp">self</span><span class="p">[</span><span class="n">name</span><span class="p">]</span>
+        <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__getattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="p">[</span><span class="n">name</span><span class="p">]</span>
+        <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__setattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+
+    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cls</span><span class="o">=</span><span class="n">JsonEncoder</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cls</span><span class="o">=</span><span class="n">JsonEncoder</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+
+  </div>
+</div>
+
+
+      <div class="class">
+          <h3>Ancestors (in MRO)</h3>
+          <ul class="class_list">
+          <li><a href="#frankly.FranklyObject">FranklyObject</a></li>
+          <li>__builtin__.dict</li>
+          <li>__builtin__.object</li>
+          </ul>
       </div>
       </div>
 
