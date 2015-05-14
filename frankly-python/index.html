@@ -1041,6 +1041,13 @@ table {
     <h1>Index</h1>
     <ul id="index">
 
+    <li class="set"><h3><a href="#header-functions">Functions</a></h3>
+      
+  <ul>
+    <li class="mono"><a href="#frankly.generate_identity_token">generate_identity_token</a></li>
+  </ul>
+
+    </li>
 
     <li class="set"><h3><a href="#header-classes">Classes</a></h3>
       <ul>
@@ -1699,9 +1706,65 @@ showing how to handle those situations:</p>
 <span class="kn">import</span> <span class="nn">time</span>
 
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s">&#39;generate_identity_token&#39;</span><span class="p">,</span>
     <span class="s">&#39;FranklyClient&#39;</span><span class="p">,</span>
     <span class="s">&#39;FranklyError&#39;</span><span class="p">,</span>
 <span class="p">]</span>
+
+<span class="k">def</span> <span class="nf">generate_identity_token</span><span class="p">(</span><span class="n">app_key</span><span class="p">,</span> <span class="n">app_secret</span><span class="p">,</span> <span class="n">nonce</span><span class="p">,</span> <span class="n">user_id</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">role</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This function generates an identity token suitable for a signle</span>
+<span class="sd">    authentication attempt of a client against the Frankly API or SDK.</span>
+
+<span class="sd">    **Arguments**</span>
+
+<span class="sd">    - `app_key (str)`  </span>
+<span class="sd">    The key that specifies which app this client is authenticating for, this</span>
+<span class="sd">    value is provided by the Frankly Console.</span>
+
+<span class="sd">    - `app_secret (str)`  </span>
+<span class="sd">    The secret value associated the the key allowing the client to securely</span>
+<span class="sd">    authenticate against the Frankly API.</span>
+
+<span class="sd">    - `nonce (str)`  </span>
+<span class="sd">    The nonce value got from Frankly SDK or API whether the identity generation</span>
+<span class="sd">    comes from an client device or app backend.</span>
+
+<span class="sd">    - `user_id (object)`  </span>
+<span class="sd">    This argument must be set to make the SDK operate on behalf of a specific</span>
+<span class="sd">    user of the app.  </span>
+<span class="sd">    For backend services willing to interact with the API directly this may be</span>
+<span class="sd">    omitted.</span>
+
+<span class="sd">    - `role (str)`  </span>
+<span class="sd">    For backend services using the Frankly API this can be set to `&#39;admin&#39;` to</span>
+<span class="sd">    generate a token allowing the client to get admin priviledges and perform</span>
+<span class="sd">    operations that regular users are forbidden to.</span>
+
+<span class="sd">    **Return**</span>
+
+<span class="sd">    The function returns the generated identity token as a string.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">now</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">())</span>
+    <span class="n">tok</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s">&#39;aak&#39;</span><span class="p">:</span> <span class="n">app_key</span><span class="p">,</span>
+        <span class="s">&#39;iat&#39;</span><span class="p">:</span> <span class="n">now</span><span class="p">,</span>
+        <span class="s">&#39;exp&#39;</span><span class="p">:</span> <span class="n">now</span> <span class="o">+</span> <span class="mi">864000</span><span class="p">,</span>
+        <span class="s">&#39;nce&#39;</span><span class="p">:</span> <span class="n">nonce</span><span class="p">,</span>
+    <span class="p">}</span>
+
+    <span class="k">if</span> <span class="n">user_id</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">tok</span><span class="p">[</span><span class="s">&#39;uid&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">user_id</span>
+
+    <span class="k">if</span> <span class="n">role</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">tok</span><span class="p">[</span><span class="s">&#39;role&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">role</span>
+
+    <span class="n">idt</span> <span class="o">=</span> <span class="n">jwt</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">tok</span><span class="p">,</span> <span class="n">app_secret</span><span class="p">,</span> <span class="n">algorithm</span><span class="o">=</span><span class="s">&#39;HS256&#39;</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span>
+        <span class="s">&#39;typ&#39;</span><span class="p">:</span> <span class="s">&#39;JWS&#39;</span><span class="p">,</span>
+        <span class="s">&#39;cty&#39;</span><span class="p">:</span> <span class="s">&#39;frankly-it;v1&#39;</span><span class="p">,</span>
+    <span class="p">})</span>
+
+    <span class="k">return</span> <span class="n">six</span><span class="o">.</span><span class="n">text_type</span><span class="p">(</span><span class="n">idt</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s">&#39;utf-8&#39;</span><span class="p">)</span>
 
 <span class="k">class</span> <span class="nc">FranklyClient</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
@@ -1747,13 +1810,13 @@ showing how to handle those situations:</p>
 <span class="sd">        The maximum amount of time submitting a request and receiving a response</span>
 <span class="sd">        from the API can take.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">address</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="ow">or</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">address</span><span class="p">,</span> <span class="n">six</span><span class="o">.</span><span class="n">text_type</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">address</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">address</span><span class="p">,</span> <span class="n">six</span><span class="o">.</span><span class="n">text_type</span><span class="p">)):</span>
             <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s">&quot;address must be a string&quot;</span><span class="p">)</span>
 
-        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">connect_timeout</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span> <span class="ow">or</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">connect_timeout</span><span class="p">,</span> <span class="nb">float</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">connect_timeout</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">connect_timeout</span><span class="p">,</span> <span class="nb">float</span><span class="p">)):</span>
             <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s">&quot;connect timeout must be a int or float&quot;</span><span class="p">)</span>
 
-        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">request_timeout</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span> <span class="ow">or</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">request_timeout</span><span class="p">,</span> <span class="nb">float</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">request_timeout</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">request_timeout</span><span class="p">,</span> <span class="nb">float</span><span class="p">)):</span>
             <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s">&quot;request timeout must be a int or float&quot;</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">connect_timeout</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
@@ -1792,7 +1855,7 @@ showing how to handle those situations:</p>
 <span class="sd">        value is provided by the Frankly Console.</span>
 
 <span class="sd">        - `app_secret (str)`  </span>
-<span class="sd">        The secret value associated the the key allowing the client to securly</span>
+<span class="sd">        The secret value associated the the key allowing the client to securely</span>
 <span class="sd">        authenticate against the Frankly API.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">backend</span><span class="o">.</span><span class="n">authenticate</span><span class="p">(</span><span class="n">app_key</span><span class="p">,</span> <span class="n">app_secret</span><span class="p">)</span>
@@ -2152,26 +2215,17 @@ showing how to handle those situations:</p>
 
     <span class="k">def</span> <span class="nf">authenticate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">app_key</span><span class="p">,</span> <span class="n">app_secret</span><span class="p">):</span>
         <span class="n">nce</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">read</span><span class="p">([</span><span class="s">&#39;auth&#39;</span><span class="p">,</span> <span class="s">&#39;nonce&#39;</span><span class="p">])</span>
-        <span class="n">now</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">())</span>
-        <span class="n">idt</span> <span class="o">=</span> <span class="n">jwt</span><span class="o">.</span><span class="n">encode</span><span class="p">({</span>
-            <span class="s">&#39;aak&#39;</span><span class="p">:</span> <span class="n">app_key</span><span class="p">,</span>
-            <span class="s">&#39;iat&#39;</span><span class="p">:</span> <span class="n">now</span><span class="p">,</span>
-            <span class="s">&#39;exp&#39;</span><span class="p">:</span> <span class="n">now</span> <span class="o">+</span> <span class="mi">864000</span><span class="p">,</span>
-            <span class="s">&#39;nce&#39;</span><span class="p">:</span> <span class="n">nce</span><span class="p">,</span>
-            <span class="s">&#39;role&#39;</span><span class="p">:</span> <span class="s">&#39;admin&#39;</span><span class="p">,</span>
-        <span class="p">},</span> <span class="n">app_secret</span><span class="p">,</span> <span class="n">algorithm</span><span class="o">=</span><span class="s">&#39;HS256&#39;</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span>
-            <span class="s">&#39;typ&#39;</span><span class="p">:</span> <span class="s">&#39;JWS&#39;</span><span class="p">,</span>
-            <span class="s">&#39;cty&#39;</span><span class="p">:</span> <span class="s">&#39;frankly-it;v1&#39;</span><span class="p">,</span>
-        <span class="p">})</span>
-
-        <span class="bp">self</span><span class="o">.</span><span class="n">read</span><span class="p">([</span><span class="s">&#39;auth&#39;</span><span class="p">],</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span>
-            <span class="s">&#39;identity_token&#39;</span><span class="p">:</span> <span class="n">six</span><span class="o">.</span><span class="n">text_type</span><span class="p">(</span><span class="n">idt</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s">&#39;utf-8&#39;</span><span class="p">),</span>
+        <span class="n">idt</span> <span class="o">=</span> <span class="n">generate_identity_token</span><span class="p">(</span><span class="n">app_key</span><span class="p">,</span> <span class="n">app_secret</span><span class="p">,</span> <span class="n">nce</span><span class="p">,</span> <span class="n">role</span><span class="o">=</span><span class="s">&#39;admin&#39;</span><span class="p">)</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">read</span><span class="p">([</span><span class="s">&#39;auth&#39;</span><span class="p">],</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+            <span class="s">&#39;identity_token&#39;</span><span class="p">:</span> <span class="n">idt</span><span class="p">,</span>
         <span class="p">})</span>
 
         <span class="n">xsrf</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">http</span><span class="o">.</span><span class="n">cookies</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;xsrf&#39;</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">xsrf</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">http</span><span class="o">.</span><span class="n">headers</span><span class="p">[</span><span class="s">&#39;Frankly-XSRF&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">xsrf</span>
+
+        <span class="k">return</span> <span class="n">res</span>
 
     <span class="k">def</span> <span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">http</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
@@ -2354,6 +2408,115 @@ showing how to handle those situations:</p>
 
   <section id="section-items">
 
+    <h2 class="section-title" id="header-functions">Functions</h2>
+      
+  <div class="item">
+    <div class="name def" id="frankly.generate_identity_token">
+    <p>def <span class="ident">generate_identity_token</span>(</p><p>app_key, app_secret, nonce, user_id=None, role=None)</p>
+    </div>
+    
+
+    
+  
+    <div class="desc"><p>This function generates an identity token suitable for a signle
+authentication attempt of a client against the Frankly API or SDK.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li>
+<p><code>app_key (str)</code><br />
+The key that specifies which app this client is authenticating for, this
+value is provided by the Frankly Console.</p>
+</li>
+<li>
+<p><code>app_secret (str)</code><br />
+The secret value associated the the key allowing the client to securely
+authenticate against the Frankly API.</p>
+</li>
+<li>
+<p><code>nonce (str)</code><br />
+The nonce value got from Frankly SDK or API whether the identity generation
+comes from an client device or app backend.</p>
+</li>
+<li>
+<p><code>user_id (object)</code><br />
+This argument must be set to make the SDK operate on behalf of a specific
+user of the app.<br />
+For backend services willing to interact with the API directly this may be
+omitted.</p>
+</li>
+<li>
+<p><code>role (str)</code><br />
+For backend services using the Frankly API this can be set to <code>'admin'</code> to
+generate a token allowing the client to get admin priviledges and perform
+operations that regular users are forbidden to.</p>
+</li>
+</ul>
+<p><strong>Return</strong></p>
+<p>The function returns the generated identity token as a string.</p></div>
+  <div class="source_cont">
+  <p class="source_link"><a href="javascript:void(0);" onclick="toggle('source-frankly.generate_identity_token', this);">Show source &equiv;</a></p>
+  <div id="source-frankly.generate_identity_token" class="source">
+    <div class="codehilite"><pre><span class="k">def</span> <span class="nf">generate_identity_token</span><span class="p">(</span><span class="n">app_key</span><span class="p">,</span> <span class="n">app_secret</span><span class="p">,</span> <span class="n">nonce</span><span class="p">,</span> <span class="n">user_id</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">role</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This function generates an identity token suitable for a signle</span>
+<span class="sd">    authentication attempt of a client against the Frankly API or SDK.</span>
+
+<span class="sd">    **Arguments**</span>
+
+<span class="sd">    - `app_key (str)`  </span>
+<span class="sd">    The key that specifies which app this client is authenticating for, this</span>
+<span class="sd">    value is provided by the Frankly Console.</span>
+
+<span class="sd">    - `app_secret (str)`  </span>
+<span class="sd">    The secret value associated the the key allowing the client to securely</span>
+<span class="sd">    authenticate against the Frankly API.</span>
+
+<span class="sd">    - `nonce (str)`  </span>
+<span class="sd">    The nonce value got from Frankly SDK or API whether the identity generation</span>
+<span class="sd">    comes from an client device or app backend.</span>
+
+<span class="sd">    - `user_id (object)`  </span>
+<span class="sd">    This argument must be set to make the SDK operate on behalf of a specific</span>
+<span class="sd">    user of the app.  </span>
+<span class="sd">    For backend services willing to interact with the API directly this may be</span>
+<span class="sd">    omitted.</span>
+
+<span class="sd">    - `role (str)`  </span>
+<span class="sd">    For backend services using the Frankly API this can be set to `&#39;admin&#39;` to</span>
+<span class="sd">    generate a token allowing the client to get admin priviledges and perform</span>
+<span class="sd">    operations that regular users are forbidden to.</span>
+
+<span class="sd">    **Return**</span>
+
+<span class="sd">    The function returns the generated identity token as a string.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">now</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">())</span>
+    <span class="n">tok</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s">&#39;aak&#39;</span><span class="p">:</span> <span class="n">app_key</span><span class="p">,</span>
+        <span class="s">&#39;iat&#39;</span><span class="p">:</span> <span class="n">now</span><span class="p">,</span>
+        <span class="s">&#39;exp&#39;</span><span class="p">:</span> <span class="n">now</span> <span class="o">+</span> <span class="mi">864000</span><span class="p">,</span>
+        <span class="s">&#39;nce&#39;</span><span class="p">:</span> <span class="n">nonce</span><span class="p">,</span>
+    <span class="p">}</span>
+
+    <span class="k">if</span> <span class="n">user_id</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">tok</span><span class="p">[</span><span class="s">&#39;uid&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">user_id</span>
+
+    <span class="k">if</span> <span class="n">role</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">tok</span><span class="p">[</span><span class="s">&#39;role&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">role</span>
+
+    <span class="n">idt</span> <span class="o">=</span> <span class="n">jwt</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">tok</span><span class="p">,</span> <span class="n">app_secret</span><span class="p">,</span> <span class="n">algorithm</span><span class="o">=</span><span class="s">&#39;HS256&#39;</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span>
+        <span class="s">&#39;typ&#39;</span><span class="p">:</span> <span class="s">&#39;JWS&#39;</span><span class="p">,</span>
+        <span class="s">&#39;cty&#39;</span><span class="p">:</span> <span class="s">&#39;frankly-it;v1&#39;</span><span class="p">,</span>
+    <span class="p">})</span>
+
+    <span class="k">return</span> <span class="n">six</span><span class="o">.</span><span class="n">text_type</span><span class="p">(</span><span class="n">idt</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s">&#39;utf-8&#39;</span><span class="p">)</span>
+</pre></div>
+
+  </div>
+</div>
+
+  </div>
+  
 
     <h2 class="section-title" id="header-classes">Classes</h2>
       
@@ -2427,13 +2590,13 @@ only after sucessfuly authenticating.</p></div>
 <span class="sd">        The maximum amount of time submitting a request and receiving a response</span>
 <span class="sd">        from the API can take.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">address</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="ow">or</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">address</span><span class="p">,</span> <span class="n">six</span><span class="o">.</span><span class="n">text_type</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">address</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">address</span><span class="p">,</span> <span class="n">six</span><span class="o">.</span><span class="n">text_type</span><span class="p">)):</span>
             <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s">&quot;address must be a string&quot;</span><span class="p">)</span>
 
-        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">connect_timeout</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span> <span class="ow">or</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">connect_timeout</span><span class="p">,</span> <span class="nb">float</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">connect_timeout</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">connect_timeout</span><span class="p">,</span> <span class="nb">float</span><span class="p">)):</span>
             <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s">&quot;connect timeout must be a int or float&quot;</span><span class="p">)</span>
 
-        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">request_timeout</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span> <span class="ow">or</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">request_timeout</span><span class="p">,</span> <span class="nb">float</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">request_timeout</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">request_timeout</span><span class="p">,</span> <span class="nb">float</span><span class="p">)):</span>
             <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s">&quot;request timeout must be a int or float&quot;</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">connect_timeout</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
@@ -2472,7 +2635,7 @@ only after sucessfuly authenticating.</p></div>
 <span class="sd">        value is provided by the Frankly Console.</span>
 
 <span class="sd">        - `app_secret (str)`  </span>
-<span class="sd">        The secret value associated the the key allowing the client to securly</span>
+<span class="sd">        The secret value associated the the key allowing the client to securely</span>
 <span class="sd">        authenticate against the Frankly API.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">backend</span><span class="o">.</span><span class="n">authenticate</span><span class="p">(</span><span class="n">app_key</span><span class="p">,</span> <span class="n">app_secret</span><span class="p">)</span>
@@ -2741,11 +2904,11 @@ from the API can take.</p>
 <span class="sd">    The maximum amount of time submitting a request and receiving a response</span>
 <span class="sd">    from the API can take.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">address</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="ow">or</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">address</span><span class="p">,</span> <span class="n">six</span><span class="o">.</span><span class="n">text_type</span><span class="p">):</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">address</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">address</span><span class="p">,</span> <span class="n">six</span><span class="o">.</span><span class="n">text_type</span><span class="p">)):</span>
         <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s">&quot;address must be a string&quot;</span><span class="p">)</span>
-    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">connect_timeout</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span> <span class="ow">or</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">connect_timeout</span><span class="p">,</span> <span class="nb">float</span><span class="p">):</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">connect_timeout</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">connect_timeout</span><span class="p">,</span> <span class="nb">float</span><span class="p">)):</span>
         <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s">&quot;connect timeout must be a int or float&quot;</span><span class="p">)</span>
-    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">request_timeout</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span> <span class="ow">or</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">request_timeout</span><span class="p">,</span> <span class="nb">float</span><span class="p">):</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">request_timeout</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">request_timeout</span><span class="p">,</span> <span class="nb">float</span><span class="p">)):</span>
         <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s">&quot;request timeout must be a int or float&quot;</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">connect_timeout</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&quot;connect timeout must be a positive value&quot;</span><span class="p">)</span>
@@ -2788,7 +2951,7 @@ value is provided by the Frankly Console.</p>
 </li>
 <li>
 <p><code>app_secret (str)</code><br />
-The secret value associated the the key allowing the client to securly
+The secret value associated the the key allowing the client to securely
 authenticate against the Frankly API.</p>
 </li>
 </ul></div>
@@ -2805,7 +2968,7 @@ authenticate against the Frankly API.</p>
 <span class="sd">    The key that specifies which app this client is authenticating for, this</span>
 <span class="sd">    value is provided by the Frankly Console.</span>
 <span class="sd">    - `app_secret (str)`  </span>
-<span class="sd">    The secret value associated the the key allowing the client to securly</span>
+<span class="sd">    The secret value associated the the key allowing the client to securely</span>
 <span class="sd">    authenticate against the Frankly API.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">backend</span><span class="o">.</span><span class="n">authenticate</span><span class="p">(</span><span class="n">app_key</span><span class="p">,</span> <span class="n">app_secret</span><span class="p">)</span>
