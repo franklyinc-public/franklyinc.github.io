@@ -569,14 +569,15 @@ table {
     line-height: 1.6em;
   }
   #content {
-    width: 70%;
-    max-width: 850px;
+    width: 80%;
+    max-width: 900px;
     float: left;
     padding: 30px 60px;
     border-left: 1px solid #ddd;
   }
   #sidebar {
-    width: 25%;
+    width: 15%;
+    min-width: 400px;
     float: left;
     padding: 30px;
     overflow: hidden;
@@ -667,7 +668,7 @@ table {
   }
 
   .codehilite {
-    margin: 0 30px 10px 30px;
+    margin: 0 60px 10px 30px;
   }
 
     .codehilite pre {
@@ -1262,7 +1263,7 @@ announcements:</p>
 <span class="n">anno</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">create_announcement</span><span class="p">(</span>
     <span class="n">contents</span> <span class="o">=</span> <span class="p">[{</span>
       <span class="s">&#39;type&#39;</span> <span class="p">:</span> <span class="s">&#39;text/plain&#39;</span><span class="p">,</span>
-      <span class="s">&#39;value&#39;</span><span class="p">:</span> <span class="s">&#39;Hi everybody!!!&#39;</span><span class="p">,</span>
+      <span class="s">&#39;value&#39;</span><span class="p">:</span> <span class="s">&#39;Welcome!&#39;</span><span class="p">,</span>
     <span class="p">}],</span>
 <span class="p">)</span>
 
@@ -1312,12 +1313,31 @@ useful to provide a better integration with Frankly and better user experience
 as files will be optimized for different situations based on their category.</p>
 <p>Here are the file categories currently available:</p>
 <ul>
-<li><code>chat</code>           the default category when none is specified.</li>
-<li><code>useravatar</code>     for being displayed in the profile of a user.</li>
-<li><code>roomavatar</code>     for being displayed in the profile of a chat room.</li>
-<li><code>featuredavatar</code> for bigger avatars can be shown to emphasize that room.</li>
-<li><code>sticker</code>        for being used as a sticker.</li>
-<li><code>stickerpack</code>    for being used as an avatar of a sticker pack.</li>
+<li>
+<p><code>chat</code><br />
+The default category which is usually applied to images sent by end users.</p>
+</li>
+<li>
+<p><code>useravatar</code><br />
+This category optimizes files intended to be displayed as part of a user
+profile.</p>
+</li>
+<li>
+<p><code>roomavatar</code><br />
+This category optimizes files intended to be displayed on room lists.</p>
+</li>
+<li>
+<p><code>featuredavatar</code><br />
+Used for files intended to be displayed to represent featued rooms.</p>
+</li>
+<li>
+<p><code>sticker</code><br />
+This category optimizes files that are used for sticker messages.</p>
+</li>
+<li>
+<p><code>stickerpack</code><br />
+for being used as an avatar of a sticker pack.</p>
+</li>
 </ul>
 <h2>Errors</h2>
 <p>When the application is misusing the <strong>Frankly API</strong> or when things go wrong
@@ -1551,7 +1571,7 @@ showing how to handle those situations:</p>
 <span class="sd">    anno = client.create_announcement(</span>
 <span class="sd">        contents = [{</span>
 <span class="sd">          &#39;type&#39; : &#39;text/plain&#39;,</span>
-<span class="sd">          &#39;value&#39;: &#39;Hi everybody!!!&#39;,</span>
+<span class="sd">          &#39;value&#39;: &#39;Welcome!&#39;,</span>
 <span class="sd">        }],</span>
 <span class="sd">    )</span>
 
@@ -1603,12 +1623,24 @@ showing how to handle those situations:</p>
 
 <span class="sd">Here are the file categories currently available:</span>
 
-<span class="sd">- `chat`           the default category when none is specified.</span>
-<span class="sd">- `useravatar`     for being displayed in the profile of a user.</span>
-<span class="sd">- `roomavatar`     for being displayed in the profile of a chat room.</span>
-<span class="sd">- `featuredavatar` for bigger avatars can be shown to emphasize that room.</span>
-<span class="sd">- `sticker`        for being used as a sticker.</span>
-<span class="sd">- `stickerpack`    for being used as an avatar of a sticker pack.</span>
+<span class="sd">- `chat`  </span>
+<span class="sd">The default category which is usually applied to images sent by end users.</span>
+
+<span class="sd">- `useravatar`  </span>
+<span class="sd">This category optimizes files intended to be displayed as part of a user</span>
+<span class="sd">profile.</span>
+
+<span class="sd">- `roomavatar`  </span>
+<span class="sd">This category optimizes files intended to be displayed on room lists.</span>
+
+<span class="sd">- `featuredavatar`  </span>
+<span class="sd">Used for files intended to be displayed to represent featued rooms.</span>
+
+<span class="sd">- `sticker`  </span>
+<span class="sd">This category optimizes files that are used for sticker messages.</span>
+
+<span class="sd">- `stickerpack`  </span>
+<span class="sd">for being used as an avatar of a sticker pack.</span>
 
 <span class="sd">Errors</span>
 <span class="sd">------</span>
@@ -2663,13 +2695,13 @@ only after sucessfuly authenticating.</p></div>
           <h3>Ancestors (in MRO)</h3>
           <ul class="class_list">
           <li><a href="#frankly.FranklyClient">FranklyClient</a></li>
-          <li><a href="/__builtin__.object.ext">__builtin__.object</a></li>
+          <li><a href="/builtins.object.ext">builtins.object</a></li>
           </ul>
-          <h3>Methods</h3>
+          <h3>Static methods</h3>
             
   <div class="item">
     <div class="name def" id="frankly.FranklyClient.__init__">
-    <p>def <span class="ident">__init__</span>(</p><p>self, address=u&#39;https://app.franklychat.com&#39;, connect_timeout=5, request_timeout=5)</p>
+    <p>def <span class="ident">__init__</span>(</p><p>self, address=&#39;https://app.franklychat.com&#39;, connect_timeout=5, request_timeout=5)</p>
     </div>
     
 
@@ -3577,9 +3609,9 @@ any call to methods of the <a href="#frankly.FranklyClient"><code>FranklyClient<
           <h3>Ancestors (in MRO)</h3>
           <ul class="class_list">
           <li><a href="#frankly.FranklyError">FranklyError</a></li>
-          <li><a href="/exceptions.Exception.ext">exceptions.Exception</a></li>
-          <li><a href="/exceptions.BaseException.ext">exceptions.BaseException</a></li>
-          <li><a href="/__builtin__.object.ext">__builtin__.object</a></li>
+          <li><a href="/builtins.Exception.ext">builtins.Exception</a></li>
+          <li><a href="/builtins.BaseException.ext">builtins.BaseException</a></li>
+          <li><a href="/builtins.object.ext">builtins.object</a></li>
           </ul>
           <h3>Class variables</h3>
             <div class="item">
@@ -3592,6 +3624,35 @@ any call to methods of the <a href="#frankly.FranklyClient"><code>FranklyClient<
 </div>
 
             </div>
+          <h3>Static methods</h3>
+            
+  <div class="item">
+    <div class="name def" id="frankly.FranklyError.__init__">
+    <p>def <span class="ident">__init__</span>(</p><p>self, operation, path, status, message)</p>
+    </div>
+    
+
+    
+  
+    <div class="desc"><p>Creates a new instance of this class.</p></div>
+  <div class="source_cont">
+  <p class="source_link"><a href="javascript:void(0);" onclick="toggle('source-frankly.FranklyError.__init__', this);">Show source &equiv;</a></p>
+  <div id="source-frankly.FranklyError.__init__" class="source">
+    <div class="codehilite"><pre><span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">operation</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">status</span><span class="p">,</span> <span class="n">message</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Creates a new instance of this class.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_operation</span> <span class="o">=</span> <span class="n">operation</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_path</span>      <span class="o">=</span> <span class="n">path</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_status</span>    <span class="o">=</span> <span class="n">status</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_message</span>   <span class="o">=</span> <span class="n">message</span>
+</pre></div>
+
+  </div>
+</div>
+
+  </div>
+  
           <h3>Instance variables</h3>
             <div class="item">
             <p id="frankly.FranklyError.message" class="name">var <span class="ident">message</span></p>
@@ -3640,35 +3701,6 @@ representing the resource the operation was executed on.</p></div>
 </div>
 
             </div>
-          <h3>Methods</h3>
-            
-  <div class="item">
-    <div class="name def" id="frankly.FranklyError.__init__">
-    <p>def <span class="ident">__init__</span>(</p><p>self, operation, path, status, message)</p>
-    </div>
-    
-
-    
-  
-    <div class="desc"><p>Creates a new instance of this class.</p></div>
-  <div class="source_cont">
-  <p class="source_link"><a href="javascript:void(0);" onclick="toggle('source-frankly.FranklyError.__init__', this);">Show source &equiv;</a></p>
-  <div id="source-frankly.FranklyError.__init__" class="source">
-    <div class="codehilite"><pre><span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">operation</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">status</span><span class="p">,</span> <span class="n">message</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Creates a new instance of this class.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">_operation</span> <span class="o">=</span> <span class="n">operation</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">_path</span>      <span class="o">=</span> <span class="n">path</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">_status</span>    <span class="o">=</span> <span class="n">status</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">_message</span>   <span class="o">=</span> <span class="n">message</span>
-</pre></div>
-
-  </div>
-</div>
-
-  </div>
-  
       </div>
       </div>
 
