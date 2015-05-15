@@ -1999,6 +1999,86 @@ showing how to handle those situations:</p>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">create</span><span class="p">([</span><span class="s">&#39;rooms&#39;</span><span class="p">,</span> <span class="n">room_id</span><span class="p">,</span> <span class="s">&#39;messages&#39;</span><span class="p">],</span> <span class="n">payload</span><span class="o">=</span><span class="n">payload</span><span class="p">)</span>
 
+    <span class="k">def</span> <span class="nf">delete</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">payload</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This method exposes a generic interface for deleting objects through</span>
+<span class="sd">        the Frankly API.  </span>
+<span class="sd">        Every `delete_*` method is implemented on top of this one.</span>
+
+<span class="sd">        **Arguments**</span>
+
+<span class="sd">        - `path (list)`  </span>
+<span class="sd">        A list of values representing the collection to create an object in.</span>
+
+<span class="sd">        - `params (dict)`  </span>
+<span class="sd">        Parameters passed as part of the request.</span>
+
+<span class="sd">        - `payload (dict)`  </span>
+<span class="sd">        Dict-like object representing the object to create.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">backend</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">payload</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">delete_announcement</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">announcement_id</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Deletes an announcement object with id sepecified as first argument</span>
+<span class="sd">        from the app.</span>
+
+<span class="sd">        Note that deleting an announcement doesn&#39;t remove messages from rooms</span>
+<span class="sd">        it has already been published to.</span>
+
+<span class="sd">        This operation cannot be undone!</span>
+
+<span class="sd">        **Arguments**</span>
+
+<span class="sd">        - `announcement_id (int)`  </span>
+<span class="sd">        The identifier of the announcement to fetch.</span>
+
+<span class="sd">        **Return**</span>
+
+<span class="sd">        The method returns an object representing the announcement wit the</span>
+<span class="sd">        specified id in the app.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">delete</span><span class="p">([</span><span class="s">&#39;announcements&#39;</span><span class="p">,</span> <span class="n">announcement_id</span><span class="p">])</span>
+
+    <span class="k">def</span> <span class="nf">delete_room</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">room_id</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Deletes a room object with id specified as first argument from the app.</span>
+
+<span class="sd">        Note that this will cause all messages sent to this room to be deleted</span>
+<span class="sd">        as well, a safer approach could be to change the room status to</span>
+<span class="sd">        `&#39;unpublished&#39;` to hide it without erasing data.</span>
+
+<span class="sd">        This operation cannot be undone!</span>
+
+<span class="sd">        **Arguments**</span>
+
+<span class="sd">        - `room_id (int)`  </span>
+<span class="sd">        The identifier of the room to fetch.</span>
+
+<span class="sd">        **Return**</span>
+
+<span class="sd">        The method returns an object representing the room with the specified id</span>
+<span class="sd">        in the app.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">delete</span><span class="p">([</span><span class="s">&#39;rooms&#39;</span><span class="p">,</span> <span class="n">room_id</span><span class="p">])</span>
+
+    <span class="k">def</span> <span class="nf">publish_announcement</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">announcement_id</span><span class="p">,</span> <span class="n">to_room_id</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Calling this method causes the announcement with id specified as first</span>
+<span class="sd">        argument to the room with id specified as second argument.  </span>
+<span class="sd">        A message will be created and sent in real-time to all mobile or web</span>
+<span class="sd">        clients currently listening for incoming messages on that room.</span>
+
+<span class="sd">        **Arguments**</span>
+
+<span class="sd">        - `announcement_id (int)`  </span>
+<span class="sd">        The identifier of the announcement to publish.</span>
+
+<span class="sd">        - `room_id (int)`  </span>
+<span class="sd">        The identifier of the room to publish the announcement to.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">update</span><span class="p">([</span><span class="s">&#39;announcements&#39;</span><span class="p">,</span> <span class="n">announcement_id</span><span class="p">,</span> <span class="s">&#39;rooms&#39;</span><span class="p">,</span> <span class="n">to_room_id</span><span class="p">])</span>
+
     <span class="k">def</span> <span class="nf">read</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">payload</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        This method exposes a generic interface for reading objects from the</span>
@@ -2022,14 +2102,59 @@ showing how to handle those situations:</p>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">backend</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">payload</span><span class="p">)</span>
 
+    <span class="k">def</span> <span class="nf">read_announcement</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">announcement_id</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retrieves an announcement object with id sepecified as first argument</span>
+<span class="sd">        from the app.</span>
+
+<span class="sd">        **Arguments**</span>
+
+<span class="sd">        - `announcement_id (int)`  </span>
+<span class="sd">        The identifier of the announcement to fetch.</span>
+
+<span class="sd">        **Return**</span>
+
+<span class="sd">        The method returns an object representing the announcement wit the</span>
+<span class="sd">        specified id in the app.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">read</span><span class="p">([</span><span class="s">&#39;announcements&#39;</span><span class="p">,</span> <span class="n">announcement_id</span><span class="p">])</span>
+
+    <span class="k">def</span> <span class="nf">read_announcement_list</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retrieves a list of announcements available in the app.</span>
+
+<span class="sd">        **Return**</span>
+
+<span class="sd">        The method returns a list of annoucement objects ordered by id, which</span>
+<span class="sd">        may be empty if there are no announcements in the app.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">read</span><span class="p">([</span><span class="s">&#39;announcements&#39;</span><span class="p">])</span>
+
+    <span class="k">def</span> <span class="nf">read_announcement_room_list</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">announcement_id</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retrieves the list of rooms that an annoucement has been published to.</span>
+
+<span class="sd">        **Arguments**</span>
+
+<span class="sd">        - `announcement_id (int)`  </span>
+<span class="sd">        The identifier of the announcement to get the list of rooms for.</span>
+
+<span class="sd">        **Return**</span>
+
+<span class="sd">        The method returns a list of annoucement objects ordered by id, which</span>
+<span class="sd">        may be empty if there are no announcements in the app or none have been</span>
+<span class="sd">        published yet.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">read</span><span class="p">([</span><span class="s">&#39;announcements&#39;</span><span class="p">,</span> <span class="n">announcement_id</span><span class="p">,</span> <span class="s">&#39;rooms&#39;</span><span class="p">])</span>
+
     <span class="k">def</span> <span class="nf">read_room</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">room_id</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Retrieves a room object with specified id from the app.  </span>
+<span class="sd">        Retrieves a room object with id specified as first argument from the app.</span>
 
 <span class="sd">        **Arguments**</span>
 
 <span class="sd">        - `room_id (int)`  </span>
-<span class="sd">        The identifier of the room to be fetched.</span>
+<span class="sd">        The identifier of the room to fetch.</span>
 
 <span class="sd">        **Return**</span>
 
@@ -2044,14 +2169,14 @@ showing how to handle those situations:</p>
 
 <span class="sd">        **Return**</span>
 
-<span class="sd">        The method returns a list of room objects order by id, which may be</span>
+<span class="sd">        The method returns a list of room objects ordered by id, which may be</span>
 <span class="sd">        empty if there are no rooms in the app.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">read</span><span class="p">([</span><span class="s">&#39;rooms&#39;</span><span class="p">])</span>
 
     <span class="k">def</span> <span class="nf">read_room_message_list</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">room_id</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Retrives messages in a room.  </span>
+<span class="sd">        Retrieves messages in a room.  </span>
 <span class="sd">        The keyword arguments are used to specify which message range the client</span>
 <span class="sd">        wish to receive.</span>
 
@@ -2085,23 +2210,93 @@ showing how to handle those situations:</p>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">read</span><span class="p">([</span><span class="s">&#39;rooms&#39;</span><span class="p">,</span> <span class="n">room_id</span><span class="p">,</span> <span class="s">&#39;messages&#39;</span><span class="p">],</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">read_announcement</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">announcement_id</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">read</span><span class="p">([</span><span class="s">&#39;announcements&#39;</span><span class="p">,</span> <span class="n">announcement_id</span><span class="p">])</span>
-
-    <span class="k">def</span> <span class="nf">read_announcement_list</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">read</span><span class="p">([</span><span class="s">&#39;announcements&#39;</span><span class="p">])</span>
-
-    <span class="k">def</span> <span class="nf">read_announcement_room_list</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">announcement_id</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">read</span><span class="p">([</span><span class="s">&#39;announcements&#39;</span><span class="p">,</span> <span class="n">announcement_id</span><span class="p">,</span> <span class="s">&#39;rooms&#39;</span><span class="p">])</span>
-
     <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">payload</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This method exposes a generic interface for updating objects of the</span>
+<span class="sd">        Frankly API.  </span>
+<span class="sd">        Every `update_*` method is implemented on top of this one.</span>
+
+<span class="sd">        **Arguments**</span>
+
+<span class="sd">        - `path (list)`  </span>
+<span class="sd">        A list of values representing the collection to create an object in.</span>
+
+<span class="sd">        - `params (dict)`  </span>
+<span class="sd">        Parameters passed as part of the request.</span>
+
+<span class="sd">        - `payload (dict)`  </span>
+<span class="sd">        Dict-like object representing the object to create.</span>
+
+<span class="sd">        **Return**</span>
+
+<span class="sd">        The method returns the object updated on the API at the specified path.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">backend</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">payload</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">update_room</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">room_id</span><span class="p">,</span> <span class="o">**</span><span class="n">payload</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Updates an existing room object in the app and return that object.  </span>
+<span class="sd">        The properties of that new room are given as keyword arguments to the</span>
+<span class="sd">        method.</span>
+
+<span class="sd">        **Arguments**</span>
+
+<span class="sd">        - `room_id (int)`  </span>
+<span class="sd">        The identifier of the room to fetch.</span>
+
+<span class="sd">        - `title (str)`  </span>
+<span class="sd">        The title associated to this room.</span>
+
+<span class="sd">        - `status (str)`  </span>
+<span class="sd">        One of `&#39;unpublished&#39;`, `&#39;active&#39;` or `&#39;inactive&#39;`.</span>
+
+<span class="sd">        - `description (str)`  </span>
+<span class="sd">        A description of what this chat room is intended for, it is usually a</span>
+<span class="sd">        short description of topics that are discussed by participants.</span>
+
+<span class="sd">        - `avatar_image_url (str)`  </span>
+<span class="sd">        The URL of an image to use when the room is displayed in one of the</span>
+<span class="sd">        mobile or web apps embedding a Frankly SDK.</span>
+
+<span class="sd">        - `featured_image_url (str)`  </span>
+<span class="sd">        The URL of an image to use when the room is featured in one of the</span>
+<span class="sd">        mobile or web apps embedding a Frankly SDK.</span>
+
+<span class="sd">        - `featured (bool)`  </span>
+<span class="sd">        Whether the room should be featured in the mobile or web apps embedding</span>
+<span class="sd">        a Frankly SDK.</span>
+
+<span class="sd">        **Return**</span>
+
+<span class="sd">        The method returns an object representing the newly created room.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">update</span><span class="p">([</span><span class="s">&#39;rooms&#39;</span><span class="p">,</span> <span class="n">room_id</span><span class="p">],</span> <span class="n">payload</span><span class="o">=</span><span class="n">payload</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">update_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">file_obj</span><span class="p">,</span> <span class="n">file_size</span><span class="p">,</span> <span class="n">mime_type</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">upload</span><span class="p">(</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Updates the content of a file object hosted on Frankly servers.</span>
+
+<span class="sd">        **Arguments**</span>
+
+<span class="sd">        - `url (str)`  </span>
+<span class="sd">        The URL at which the file is hosted on Frankly servers. This can be</span>
+<span class="sd">        obtained from the `url` field of an object returned by</span>
+<span class="sd">        `frankly.FranklyClient.create_file` for example.</span>
+
+<span class="sd">        - `file_obj (object)`  </span>
+<span class="sd">        A file-like object (as returned by `open` for example) providing the new</span>
+<span class="sd">        content of the file.</span>
+
+<span class="sd">        - `file_size (int)`  </span>
+<span class="sd">        The size of the new file content (in bytes).</span>
+
+<span class="sd">        - `mime_type (str)`  </span>
+<span class="sd">        The mime type of the new file content.</span>
+
+<span class="sd">        - `encoding (str)`  </span>
+<span class="sd">        The encoding of the new file content (`&#39;gzip&#39;` for example).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">upload</span><span class="p">(</span>
             <span class="n">url</span><span class="p">,</span>
             <span class="n">payload</span>          <span class="o">=</span> <span class="n">file_obj</span><span class="p">,</span>
             <span class="n">content_length</span>   <span class="o">=</span> <span class="n">file_size</span><span class="p">,</span>
@@ -2110,28 +2305,98 @@ showing how to handle those situations:</p>
         <span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">update_file_from_path</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">file_path</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This method is a convenience wrapper for calling `frankly.FranklyClient.update_file`</span>
+<span class="sd">        with a content provided by a local file.</span>
+
+<span class="sd">        **Arguments**</span>
+
+<span class="sd">        - `url (str)`  </span>
+<span class="sd">        The URL at which the file is hosted on Frankly servers. This can be</span>
+<span class="sd">        obtained from the `url` field of an object returned by</span>
+<span class="sd">        `frankly.FranklyClient.create_file` for example.</span>
+
+<span class="sd">        - `file_path (str)`  </span>
+<span class="sd">        A path to a local file providing the new file content.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">file_size</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">getsize</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span>
         <span class="n">mime_type</span><span class="p">,</span> <span class="n">encoding</span> <span class="o">=</span> <span class="n">mimetypes</span><span class="o">.</span><span class="n">guess_type</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span>
 
         <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="s">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file_obj</span><span class="p">:</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">update_file</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">file_obj</span><span class="p">,</span> <span class="n">file_size</span><span class="p">,</span> <span class="n">mime_type</span><span class="p">,</span> <span class="n">encoding</span><span class="p">)</span>
-
-    <span class="k">def</span> <span class="nf">delete</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">payload</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">backend</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">payload</span><span class="p">)</span>
-
-    <span class="k">def</span> <span class="nf">delete_room</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">room_id</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">delete</span><span class="p">([</span><span class="s">&#39;rooms&#39;</span><span class="p">,</span> <span class="n">room_id</span><span class="p">])</span>
-
-    <span class="k">def</span> <span class="nf">delete_announcement</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">announcement_id</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">delete</span><span class="p">([</span><span class="s">&#39;announcements&#39;</span><span class="p">,</span> <span class="n">announcement_id</span><span class="p">])</span>
-
-    <span class="k">def</span> <span class="nf">publish_announcement</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">announcement_id</span><span class="p">,</span> <span class="n">to_room_id</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">update</span><span class="p">([</span><span class="s">&#39;announcements&#39;</span><span class="p">,</span> <span class="n">announcement_id</span><span class="p">,</span> <span class="s">&#39;rooms&#39;</span><span class="p">,</span> <span class="n">to_room_id</span><span class="p">])</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">update_file</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">file_obj</span><span class="p">,</span> <span class="n">file_size</span><span class="p">,</span> <span class="n">mime_type</span><span class="p">,</span> <span class="n">encoding</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">upload</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">payload</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">content_length</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">content_type</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">content_encoding</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">backend</span><span class="o">.</span><span class="n">upload</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">payload</span><span class="p">,</span> <span class="n">content_length</span><span class="p">,</span> <span class="n">content_type</span><span class="p">,</span> <span class="n">content_encoding</span><span class="p">)</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This method exposes a generic interface for uploading file contents to</span>
+<span class="sd">        the Frankly API.  </span>
+<span class="sd">        Every `upload_*` method is implemented on top of this one.</span>
+
+<span class="sd">        **Arguments**</span>
+
+<span class="sd">        - `url (str)`  </span>
+<span class="sd">        The URL at which the file is hosted on Frankly servers. This can be</span>
+<span class="sd">        obtained from the `url` field of an object returned by</span>
+<span class="sd">        `frankly.FranklyClient.create_file` for example.</span>
+
+<span class="sd">        - `params (dict)`  </span>
+<span class="sd">        Parameters passed as part of the request.</span>
+
+<span class="sd">        - `payload (dict)`  </span>
+<span class="sd">        A file-like object or a memory buffer providing the new content of the</span>
+<span class="sd">        file.</span>
+
+<span class="sd">        - `content_length (str)`  </span>
+<span class="sd">        The size of the new file content (in bytes).</span>
+
+<span class="sd">        - `content_type (str)`  </span>
+<span class="sd">        The mime type of the new file content.</span>
+
+<span class="sd">        - `content_encoding (str)`  </span>
+<span class="sd">        The encoding of the new file content (`&#39;gzip&#39;` for example).</span>
+
+<span class="sd">        **Return**</span>
+
+<span class="sd">        The method returns the object updated on the API at the specified path.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">backend</span><span class="o">.</span><span class="n">upload</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">payload</span><span class="p">,</span> <span class="n">content_length</span><span class="p">,</span> <span class="n">content_type</span><span class="p">,</span> <span class="n">content_encoding</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">upload_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file_obj</span><span class="p">,</span> <span class="n">file_size</span><span class="p">,</span> <span class="n">mime_type</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This method is convenience wrapper for creating a new file object on the</span>
+<span class="sd">        Frankly API and setting its content.</span>
+
+<span class="sd">        **Arguments**</span>
+
+<span class="sd">        - `url (str)`  </span>
+<span class="sd">        The URL at which the file is hosted on Frankly servers. This can be</span>
+<span class="sd">        obtained from the `url` field of an object returned by</span>
+<span class="sd">        `frankly.FranklyClient.create_file` for example.</span>
+
+<span class="sd">        - `file_obj (object)`  </span>
+<span class="sd">        A file-like object (as returned by `open` for example) providing the new</span>
+<span class="sd">        content of the file.</span>
+
+<span class="sd">        - `file_size (int)`  </span>
+<span class="sd">        The size of the new file content (in bytes).</span>
+
+<span class="sd">        - `mime_type (str)`  </span>
+<span class="sd">        The mime type of the new file content.</span>
+
+<span class="sd">        - `encoding (str)`  </span>
+<span class="sd">        The encoding of the new file content (`&#39;gzip&#39;` for example).</span>
+
+<span class="sd">        - `category (str)`  </span>
+<span class="sd">        One of the file categories supported by the API (see the *File* section</span>
+<span class="sd">        of the documentation).</span>
+
+<span class="sd">        - `type (str)`  </span>
+<span class="sd">        One of the file types supported by the API (see the *File* section of</span>
+<span class="sd">        the documentation).</span>
+
+<span class="sd">        **Return**</span>
+
+<span class="sd">        The method returns an object representing the newly created file.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">params</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;category&#39;</span><span class="p">)</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
             <span class="n">params</span><span class="p">[</span><span class="s">&#39;category&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;chat&#39;</span>
         <span class="n">f</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">create_file</span><span class="p">(</span><span class="o">**</span><span class="n">params</span><span class="p">)</span>
@@ -2139,6 +2404,27 @@ showing how to handle those situations:</p>
         <span class="k">return</span> <span class="n">f</span>
 
     <span class="k">def</span> <span class="nf">upload_file_from_path</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file_path</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This method is convenience wrapper for creating a new file object on the</span>
+<span class="sd">        Frankly API and uploading the content from a local file.</span>
+
+<span class="sd">        **Arguments**</span>
+
+<span class="sd">        - `file_path (str)`  </span>
+<span class="sd">        A path to a local file providing the new file content.</span>
+
+<span class="sd">        - `category (str)`  </span>
+<span class="sd">        One of the file categories supported by the API (see the *File* section</span>
+<span class="sd">        of the documentation).</span>
+
+<span class="sd">        - `type (str)`  </span>
+<span class="sd">        One of the file types supported by the API (see the *File* section of</span>
+<span class="sd">        the documentation).</span>
+
+<span class="sd">        **Return**</span>
+
+<span class="sd">        The method returns an object representing the newly created file.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">file_size</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">getsize</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span>
         <span class="n">mime_type</span><span class="p">,</span> <span class="n">encoding</span> <span class="o">=</span> <span class="n">mimetypes</span><span class="o">.</span><span class="n">guess_type</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span>
 
@@ -2867,6 +3153,86 @@ only after sucessfuly authenticating.</p></div>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">create</span><span class="p">([</span><span class="s">&#39;rooms&#39;</span><span class="p">,</span> <span class="n">room_id</span><span class="p">,</span> <span class="s">&#39;messages&#39;</span><span class="p">],</span> <span class="n">payload</span><span class="o">=</span><span class="n">payload</span><span class="p">)</span>
 
+    <span class="k">def</span> <span class="nf">delete</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">payload</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This method exposes a generic interface for deleting objects through</span>
+<span class="sd">        the Frankly API.  </span>
+<span class="sd">        Every `delete_*` method is implemented on top of this one.</span>
+
+<span class="sd">        **Arguments**</span>
+
+<span class="sd">        - `path (list)`  </span>
+<span class="sd">        A list of values representing the collection to create an object in.</span>
+
+<span class="sd">        - `params (dict)`  </span>
+<span class="sd">        Parameters passed as part of the request.</span>
+
+<span class="sd">        - `payload (dict)`  </span>
+<span class="sd">        Dict-like object representing the object to create.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">backend</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">payload</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">delete_announcement</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">announcement_id</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Deletes an announcement object with id sepecified as first argument</span>
+<span class="sd">        from the app.</span>
+
+<span class="sd">        Note that deleting an announcement doesn&#39;t remove messages from rooms</span>
+<span class="sd">        it has already been published to.</span>
+
+<span class="sd">        This operation cannot be undone!</span>
+
+<span class="sd">        **Arguments**</span>
+
+<span class="sd">        - `announcement_id (int)`  </span>
+<span class="sd">        The identifier of the announcement to fetch.</span>
+
+<span class="sd">        **Return**</span>
+
+<span class="sd">        The method returns an object representing the announcement wit the</span>
+<span class="sd">        specified id in the app.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">delete</span><span class="p">([</span><span class="s">&#39;announcements&#39;</span><span class="p">,</span> <span class="n">announcement_id</span><span class="p">])</span>
+
+    <span class="k">def</span> <span class="nf">delete_room</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">room_id</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Deletes a room object with id specified as first argument from the app.</span>
+
+<span class="sd">        Note that this will cause all messages sent to this room to be deleted</span>
+<span class="sd">        as well, a safer approach could be to change the room status to</span>
+<span class="sd">        `&#39;unpublished&#39;` to hide it without erasing data.</span>
+
+<span class="sd">        This operation cannot be undone!</span>
+
+<span class="sd">        **Arguments**</span>
+
+<span class="sd">        - `room_id (int)`  </span>
+<span class="sd">        The identifier of the room to fetch.</span>
+
+<span class="sd">        **Return**</span>
+
+<span class="sd">        The method returns an object representing the room with the specified id</span>
+<span class="sd">        in the app.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">delete</span><span class="p">([</span><span class="s">&#39;rooms&#39;</span><span class="p">,</span> <span class="n">room_id</span><span class="p">])</span>
+
+    <span class="k">def</span> <span class="nf">publish_announcement</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">announcement_id</span><span class="p">,</span> <span class="n">to_room_id</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Calling this method causes the announcement with id specified as first</span>
+<span class="sd">        argument to the room with id specified as second argument.  </span>
+<span class="sd">        A message will be created and sent in real-time to all mobile or web</span>
+<span class="sd">        clients currently listening for incoming messages on that room.</span>
+
+<span class="sd">        **Arguments**</span>
+
+<span class="sd">        - `announcement_id (int)`  </span>
+<span class="sd">        The identifier of the announcement to publish.</span>
+
+<span class="sd">        - `room_id (int)`  </span>
+<span class="sd">        The identifier of the room to publish the announcement to.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">update</span><span class="p">([</span><span class="s">&#39;announcements&#39;</span><span class="p">,</span> <span class="n">announcement_id</span><span class="p">,</span> <span class="s">&#39;rooms&#39;</span><span class="p">,</span> <span class="n">to_room_id</span><span class="p">])</span>
+
     <span class="k">def</span> <span class="nf">read</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">payload</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        This method exposes a generic interface for reading objects from the</span>
@@ -2890,14 +3256,59 @@ only after sucessfuly authenticating.</p></div>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">backend</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">payload</span><span class="p">)</span>
 
+    <span class="k">def</span> <span class="nf">read_announcement</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">announcement_id</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retrieves an announcement object with id sepecified as first argument</span>
+<span class="sd">        from the app.</span>
+
+<span class="sd">        **Arguments**</span>
+
+<span class="sd">        - `announcement_id (int)`  </span>
+<span class="sd">        The identifier of the announcement to fetch.</span>
+
+<span class="sd">        **Return**</span>
+
+<span class="sd">        The method returns an object representing the announcement wit the</span>
+<span class="sd">        specified id in the app.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">read</span><span class="p">([</span><span class="s">&#39;announcements&#39;</span><span class="p">,</span> <span class="n">announcement_id</span><span class="p">])</span>
+
+    <span class="k">def</span> <span class="nf">read_announcement_list</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retrieves a list of announcements available in the app.</span>
+
+<span class="sd">        **Return**</span>
+
+<span class="sd">        The method returns a list of annoucement objects ordered by id, which</span>
+<span class="sd">        may be empty if there are no announcements in the app.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">read</span><span class="p">([</span><span class="s">&#39;announcements&#39;</span><span class="p">])</span>
+
+    <span class="k">def</span> <span class="nf">read_announcement_room_list</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">announcement_id</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retrieves the list of rooms that an annoucement has been published to.</span>
+
+<span class="sd">        **Arguments**</span>
+
+<span class="sd">        - `announcement_id (int)`  </span>
+<span class="sd">        The identifier of the announcement to get the list of rooms for.</span>
+
+<span class="sd">        **Return**</span>
+
+<span class="sd">        The method returns a list of annoucement objects ordered by id, which</span>
+<span class="sd">        may be empty if there are no announcements in the app or none have been</span>
+<span class="sd">        published yet.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">read</span><span class="p">([</span><span class="s">&#39;announcements&#39;</span><span class="p">,</span> <span class="n">announcement_id</span><span class="p">,</span> <span class="s">&#39;rooms&#39;</span><span class="p">])</span>
+
     <span class="k">def</span> <span class="nf">read_room</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">room_id</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Retrieves a room object with specified id from the app.  </span>
+<span class="sd">        Retrieves a room object with id specified as first argument from the app.</span>
 
 <span class="sd">        **Arguments**</span>
 
 <span class="sd">        - `room_id (int)`  </span>
-<span class="sd">        The identifier of the room to be fetched.</span>
+<span class="sd">        The identifier of the room to fetch.</span>
 
 <span class="sd">        **Return**</span>
 
@@ -2912,14 +3323,14 @@ only after sucessfuly authenticating.</p></div>
 
 <span class="sd">        **Return**</span>
 
-<span class="sd">        The method returns a list of room objects order by id, which may be</span>
+<span class="sd">        The method returns a list of room objects ordered by id, which may be</span>
 <span class="sd">        empty if there are no rooms in the app.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">read</span><span class="p">([</span><span class="s">&#39;rooms&#39;</span><span class="p">])</span>
 
     <span class="k">def</span> <span class="nf">read_room_message_list</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">room_id</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Retrives messages in a room.  </span>
+<span class="sd">        Retrieves messages in a room.  </span>
 <span class="sd">        The keyword arguments are used to specify which message range the client</span>
 <span class="sd">        wish to receive.</span>
 
@@ -2953,23 +3364,93 @@ only after sucessfuly authenticating.</p></div>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">read</span><span class="p">([</span><span class="s">&#39;rooms&#39;</span><span class="p">,</span> <span class="n">room_id</span><span class="p">,</span> <span class="s">&#39;messages&#39;</span><span class="p">],</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">read_announcement</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">announcement_id</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">read</span><span class="p">([</span><span class="s">&#39;announcements&#39;</span><span class="p">,</span> <span class="n">announcement_id</span><span class="p">])</span>
-
-    <span class="k">def</span> <span class="nf">read_announcement_list</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">read</span><span class="p">([</span><span class="s">&#39;announcements&#39;</span><span class="p">])</span>
-
-    <span class="k">def</span> <span class="nf">read_announcement_room_list</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">announcement_id</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">read</span><span class="p">([</span><span class="s">&#39;announcements&#39;</span><span class="p">,</span> <span class="n">announcement_id</span><span class="p">,</span> <span class="s">&#39;rooms&#39;</span><span class="p">])</span>
-
     <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">payload</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This method exposes a generic interface for updating objects of the</span>
+<span class="sd">        Frankly API.  </span>
+<span class="sd">        Every `update_*` method is implemented on top of this one.</span>
+
+<span class="sd">        **Arguments**</span>
+
+<span class="sd">        - `path (list)`  </span>
+<span class="sd">        A list of values representing the collection to create an object in.</span>
+
+<span class="sd">        - `params (dict)`  </span>
+<span class="sd">        Parameters passed as part of the request.</span>
+
+<span class="sd">        - `payload (dict)`  </span>
+<span class="sd">        Dict-like object representing the object to create.</span>
+
+<span class="sd">        **Return**</span>
+
+<span class="sd">        The method returns the object updated on the API at the specified path.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">backend</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">payload</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">update_room</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">room_id</span><span class="p">,</span> <span class="o">**</span><span class="n">payload</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Updates an existing room object in the app and return that object.  </span>
+<span class="sd">        The properties of that new room are given as keyword arguments to the</span>
+<span class="sd">        method.</span>
+
+<span class="sd">        **Arguments**</span>
+
+<span class="sd">        - `room_id (int)`  </span>
+<span class="sd">        The identifier of the room to fetch.</span>
+
+<span class="sd">        - `title (str)`  </span>
+<span class="sd">        The title associated to this room.</span>
+
+<span class="sd">        - `status (str)`  </span>
+<span class="sd">        One of `&#39;unpublished&#39;`, `&#39;active&#39;` or `&#39;inactive&#39;`.</span>
+
+<span class="sd">        - `description (str)`  </span>
+<span class="sd">        A description of what this chat room is intended for, it is usually a</span>
+<span class="sd">        short description of topics that are discussed by participants.</span>
+
+<span class="sd">        - `avatar_image_url (str)`  </span>
+<span class="sd">        The URL of an image to use when the room is displayed in one of the</span>
+<span class="sd">        mobile or web apps embedding a Frankly SDK.</span>
+
+<span class="sd">        - `featured_image_url (str)`  </span>
+<span class="sd">        The URL of an image to use when the room is featured in one of the</span>
+<span class="sd">        mobile or web apps embedding a Frankly SDK.</span>
+
+<span class="sd">        - `featured (bool)`  </span>
+<span class="sd">        Whether the room should be featured in the mobile or web apps embedding</span>
+<span class="sd">        a Frankly SDK.</span>
+
+<span class="sd">        **Return**</span>
+
+<span class="sd">        The method returns an object representing the newly created room.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">update</span><span class="p">([</span><span class="s">&#39;rooms&#39;</span><span class="p">,</span> <span class="n">room_id</span><span class="p">],</span> <span class="n">payload</span><span class="o">=</span><span class="n">payload</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">update_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">file_obj</span><span class="p">,</span> <span class="n">file_size</span><span class="p">,</span> <span class="n">mime_type</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">upload</span><span class="p">(</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Updates the content of a file object hosted on Frankly servers.</span>
+
+<span class="sd">        **Arguments**</span>
+
+<span class="sd">        - `url (str)`  </span>
+<span class="sd">        The URL at which the file is hosted on Frankly servers. This can be</span>
+<span class="sd">        obtained from the `url` field of an object returned by</span>
+<span class="sd">        `frankly.FranklyClient.create_file` for example.</span>
+
+<span class="sd">        - `file_obj (object)`  </span>
+<span class="sd">        A file-like object (as returned by `open` for example) providing the new</span>
+<span class="sd">        content of the file.</span>
+
+<span class="sd">        - `file_size (int)`  </span>
+<span class="sd">        The size of the new file content (in bytes).</span>
+
+<span class="sd">        - `mime_type (str)`  </span>
+<span class="sd">        The mime type of the new file content.</span>
+
+<span class="sd">        - `encoding (str)`  </span>
+<span class="sd">        The encoding of the new file content (`&#39;gzip&#39;` for example).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">upload</span><span class="p">(</span>
             <span class="n">url</span><span class="p">,</span>
             <span class="n">payload</span>          <span class="o">=</span> <span class="n">file_obj</span><span class="p">,</span>
             <span class="n">content_length</span>   <span class="o">=</span> <span class="n">file_size</span><span class="p">,</span>
@@ -2978,28 +3459,98 @@ only after sucessfuly authenticating.</p></div>
         <span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">update_file_from_path</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">file_path</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This method is a convenience wrapper for calling `frankly.FranklyClient.update_file`</span>
+<span class="sd">        with a content provided by a local file.</span>
+
+<span class="sd">        **Arguments**</span>
+
+<span class="sd">        - `url (str)`  </span>
+<span class="sd">        The URL at which the file is hosted on Frankly servers. This can be</span>
+<span class="sd">        obtained from the `url` field of an object returned by</span>
+<span class="sd">        `frankly.FranklyClient.create_file` for example.</span>
+
+<span class="sd">        - `file_path (str)`  </span>
+<span class="sd">        A path to a local file providing the new file content.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">file_size</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">getsize</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span>
         <span class="n">mime_type</span><span class="p">,</span> <span class="n">encoding</span> <span class="o">=</span> <span class="n">mimetypes</span><span class="o">.</span><span class="n">guess_type</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span>
 
         <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="s">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file_obj</span><span class="p">:</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">update_file</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">file_obj</span><span class="p">,</span> <span class="n">file_size</span><span class="p">,</span> <span class="n">mime_type</span><span class="p">,</span> <span class="n">encoding</span><span class="p">)</span>
-
-    <span class="k">def</span> <span class="nf">delete</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">payload</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">backend</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">payload</span><span class="p">)</span>
-
-    <span class="k">def</span> <span class="nf">delete_room</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">room_id</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">delete</span><span class="p">([</span><span class="s">&#39;rooms&#39;</span><span class="p">,</span> <span class="n">room_id</span><span class="p">])</span>
-
-    <span class="k">def</span> <span class="nf">delete_announcement</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">announcement_id</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">delete</span><span class="p">([</span><span class="s">&#39;announcements&#39;</span><span class="p">,</span> <span class="n">announcement_id</span><span class="p">])</span>
-
-    <span class="k">def</span> <span class="nf">publish_announcement</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">announcement_id</span><span class="p">,</span> <span class="n">to_room_id</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">update</span><span class="p">([</span><span class="s">&#39;announcements&#39;</span><span class="p">,</span> <span class="n">announcement_id</span><span class="p">,</span> <span class="s">&#39;rooms&#39;</span><span class="p">,</span> <span class="n">to_room_id</span><span class="p">])</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">update_file</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">file_obj</span><span class="p">,</span> <span class="n">file_size</span><span class="p">,</span> <span class="n">mime_type</span><span class="p">,</span> <span class="n">encoding</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">upload</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">payload</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">content_length</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">content_type</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">content_encoding</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">backend</span><span class="o">.</span><span class="n">upload</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">payload</span><span class="p">,</span> <span class="n">content_length</span><span class="p">,</span> <span class="n">content_type</span><span class="p">,</span> <span class="n">content_encoding</span><span class="p">)</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This method exposes a generic interface for uploading file contents to</span>
+<span class="sd">        the Frankly API.  </span>
+<span class="sd">        Every `upload_*` method is implemented on top of this one.</span>
+
+<span class="sd">        **Arguments**</span>
+
+<span class="sd">        - `url (str)`  </span>
+<span class="sd">        The URL at which the file is hosted on Frankly servers. This can be</span>
+<span class="sd">        obtained from the `url` field of an object returned by</span>
+<span class="sd">        `frankly.FranklyClient.create_file` for example.</span>
+
+<span class="sd">        - `params (dict)`  </span>
+<span class="sd">        Parameters passed as part of the request.</span>
+
+<span class="sd">        - `payload (dict)`  </span>
+<span class="sd">        A file-like object or a memory buffer providing the new content of the</span>
+<span class="sd">        file.</span>
+
+<span class="sd">        - `content_length (str)`  </span>
+<span class="sd">        The size of the new file content (in bytes).</span>
+
+<span class="sd">        - `content_type (str)`  </span>
+<span class="sd">        The mime type of the new file content.</span>
+
+<span class="sd">        - `content_encoding (str)`  </span>
+<span class="sd">        The encoding of the new file content (`&#39;gzip&#39;` for example).</span>
+
+<span class="sd">        **Return**</span>
+
+<span class="sd">        The method returns the object updated on the API at the specified path.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">backend</span><span class="o">.</span><span class="n">upload</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">payload</span><span class="p">,</span> <span class="n">content_length</span><span class="p">,</span> <span class="n">content_type</span><span class="p">,</span> <span class="n">content_encoding</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">upload_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file_obj</span><span class="p">,</span> <span class="n">file_size</span><span class="p">,</span> <span class="n">mime_type</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This method is convenience wrapper for creating a new file object on the</span>
+<span class="sd">        Frankly API and setting its content.</span>
+
+<span class="sd">        **Arguments**</span>
+
+<span class="sd">        - `url (str)`  </span>
+<span class="sd">        The URL at which the file is hosted on Frankly servers. This can be</span>
+<span class="sd">        obtained from the `url` field of an object returned by</span>
+<span class="sd">        `frankly.FranklyClient.create_file` for example.</span>
+
+<span class="sd">        - `file_obj (object)`  </span>
+<span class="sd">        A file-like object (as returned by `open` for example) providing the new</span>
+<span class="sd">        content of the file.</span>
+
+<span class="sd">        - `file_size (int)`  </span>
+<span class="sd">        The size of the new file content (in bytes).</span>
+
+<span class="sd">        - `mime_type (str)`  </span>
+<span class="sd">        The mime type of the new file content.</span>
+
+<span class="sd">        - `encoding (str)`  </span>
+<span class="sd">        The encoding of the new file content (`&#39;gzip&#39;` for example).</span>
+
+<span class="sd">        - `category (str)`  </span>
+<span class="sd">        One of the file categories supported by the API (see the *File* section</span>
+<span class="sd">        of the documentation).</span>
+
+<span class="sd">        - `type (str)`  </span>
+<span class="sd">        One of the file types supported by the API (see the *File* section of</span>
+<span class="sd">        the documentation).</span>
+
+<span class="sd">        **Return**</span>
+
+<span class="sd">        The method returns an object representing the newly created file.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">params</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;category&#39;</span><span class="p">)</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
             <span class="n">params</span><span class="p">[</span><span class="s">&#39;category&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;chat&#39;</span>
         <span class="n">f</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">create_file</span><span class="p">(</span><span class="o">**</span><span class="n">params</span><span class="p">)</span>
@@ -3007,6 +3558,27 @@ only after sucessfuly authenticating.</p></div>
         <span class="k">return</span> <span class="n">f</span>
 
     <span class="k">def</span> <span class="nf">upload_file_from_path</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file_path</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This method is convenience wrapper for creating a new file object on the</span>
+<span class="sd">        Frankly API and uploading the content from a local file.</span>
+
+<span class="sd">        **Arguments**</span>
+
+<span class="sd">        - `file_path (str)`  </span>
+<span class="sd">        A path to a local file providing the new file content.</span>
+
+<span class="sd">        - `category (str)`  </span>
+<span class="sd">        One of the file categories supported by the API (see the *File* section</span>
+<span class="sd">        of the documentation).</span>
+
+<span class="sd">        - `type (str)`  </span>
+<span class="sd">        One of the file types supported by the API (see the *File* section of</span>
+<span class="sd">        the documentation).</span>
+
+<span class="sd">        **Return**</span>
+
+<span class="sd">        The method returns an object representing the newly created file.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">file_size</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">getsize</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span>
         <span class="n">mime_type</span><span class="p">,</span> <span class="n">encoding</span> <span class="o">=</span> <span class="n">mimetypes</span><span class="o">.</span><span class="n">guess_type</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span>
 
@@ -3479,10 +4051,40 @@ for more details about content objects.</li>
 
     
   
+    <div class="desc"><p>This method exposes a generic interface for deleting objects through
+the Frankly API.<br />
+Every <code>delete_*</code> method is implemented on top of this one.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li>
+<p><code>path (list)</code><br />
+A list of values representing the collection to create an object in.</p>
+</li>
+<li>
+<p><code>params (dict)</code><br />
+Parameters passed as part of the request.</p>
+</li>
+<li>
+<p><code>payload (dict)</code><br />
+Dict-like object representing the object to create.</p>
+</li>
+</ul></div>
   <div class="source_cont">
   <p class="source_link"><a href="javascript:void(0);" onclick="toggle('source-frankly.FranklyClient.delete', this);">Show source &equiv;</a></p>
   <div id="source-frankly.FranklyClient.delete" class="source">
     <div class="codehilite"><pre><span class="k">def</span> <span class="nf">delete</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">payload</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This method exposes a generic interface for deleting objects through</span>
+<span class="sd">    the Frankly API.  </span>
+<span class="sd">    Every `delete_*` method is implemented on top of this one.</span>
+<span class="sd">    **Arguments**</span>
+<span class="sd">    - `path (list)`  </span>
+<span class="sd">    A list of values representing the collection to create an object in.</span>
+<span class="sd">    - `params (dict)`  </span>
+<span class="sd">    Parameters passed as part of the request.</span>
+<span class="sd">    - `payload (dict)`  </span>
+<span class="sd">    Dict-like object representing the object to create.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">backend</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">payload</span><span class="p">)</span>
 </pre></div>
 
@@ -3500,10 +4102,36 @@ for more details about content objects.</li>
 
     
   
+    <div class="desc"><p>Deletes an announcement object with id sepecified as first argument
+from the app.</p>
+<p>Note that deleting an announcement doesn't remove messages from rooms
+it has already been published to.</p>
+<p>This operation cannot be undone!</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><code>announcement_id (int)</code><br />
+The identifier of the announcement to fetch.</li>
+</ul>
+<p><strong>Return</strong></p>
+<p>The method returns an object representing the announcement wit the
+specified id in the app.</p></div>
   <div class="source_cont">
   <p class="source_link"><a href="javascript:void(0);" onclick="toggle('source-frankly.FranklyClient.delete_announcement', this);">Show source &equiv;</a></p>
   <div id="source-frankly.FranklyClient.delete_announcement" class="source">
     <div class="codehilite"><pre><span class="k">def</span> <span class="nf">delete_announcement</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">announcement_id</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Deletes an announcement object with id sepecified as first argument</span>
+<span class="sd">    from the app.</span>
+<span class="sd">    Note that deleting an announcement doesn&#39;t remove messages from rooms</span>
+<span class="sd">    it has already been published to.</span>
+<span class="sd">    This operation cannot be undone!</span>
+<span class="sd">    **Arguments**</span>
+<span class="sd">    - `announcement_id (int)`  </span>
+<span class="sd">    The identifier of the announcement to fetch.</span>
+<span class="sd">    **Return**</span>
+<span class="sd">    The method returns an object representing the announcement wit the</span>
+<span class="sd">    specified id in the app.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">delete</span><span class="p">([</span><span class="s">&#39;announcements&#39;</span><span class="p">,</span> <span class="n">announcement_id</span><span class="p">])</span>
 </pre></div>
 
@@ -3521,10 +4149,36 @@ for more details about content objects.</li>
 
     
   
+    <div class="desc"><p>Deletes a room object with id specified as first argument from the app.</p>
+<p>Note that this will cause all messages sent to this room to be deleted
+as well, a safer approach could be to change the room status to
+<code>'unpublished'</code> to hide it without erasing data.</p>
+<p>This operation cannot be undone!</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><code>room_id (int)</code><br />
+The identifier of the room to fetch.</li>
+</ul>
+<p><strong>Return</strong></p>
+<p>The method returns an object representing the room with the specified id
+in the app.</p></div>
   <div class="source_cont">
   <p class="source_link"><a href="javascript:void(0);" onclick="toggle('source-frankly.FranklyClient.delete_room', this);">Show source &equiv;</a></p>
   <div id="source-frankly.FranklyClient.delete_room" class="source">
     <div class="codehilite"><pre><span class="k">def</span> <span class="nf">delete_room</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">room_id</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Deletes a room object with id specified as first argument from the app.</span>
+<span class="sd">    Note that this will cause all messages sent to this room to be deleted</span>
+<span class="sd">    as well, a safer approach could be to change the room status to</span>
+<span class="sd">    `&#39;unpublished&#39;` to hide it without erasing data.</span>
+<span class="sd">    This operation cannot be undone!</span>
+<span class="sd">    **Arguments**</span>
+<span class="sd">    - `room_id (int)`  </span>
+<span class="sd">    The identifier of the room to fetch.</span>
+<span class="sd">    **Return**</span>
+<span class="sd">    The method returns an object representing the room with the specified id</span>
+<span class="sd">    in the app.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">delete</span><span class="p">([</span><span class="s">&#39;rooms&#39;</span><span class="p">,</span> <span class="n">room_id</span><span class="p">])</span>
 </pre></div>
 
@@ -3542,10 +4196,36 @@ for more details about content objects.</li>
 
     
   
+    <div class="desc"><p>Calling this method causes the announcement with id specified as first
+argument to the room with id specified as second argument.<br />
+A message will be created and sent in real-time to all mobile or web
+clients currently listening for incoming messages on that room.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li>
+<p><code>announcement_id (int)</code><br />
+The identifier of the announcement to publish.</p>
+</li>
+<li>
+<p><code>room_id (int)</code><br />
+The identifier of the room to publish the announcement to.</p>
+</li>
+</ul></div>
   <div class="source_cont">
   <p class="source_link"><a href="javascript:void(0);" onclick="toggle('source-frankly.FranklyClient.publish_announcement', this);">Show source &equiv;</a></p>
   <div id="source-frankly.FranklyClient.publish_announcement" class="source">
     <div class="codehilite"><pre><span class="k">def</span> <span class="nf">publish_announcement</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">announcement_id</span><span class="p">,</span> <span class="n">to_room_id</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Calling this method causes the announcement with id specified as first</span>
+<span class="sd">    argument to the room with id specified as second argument.  </span>
+<span class="sd">    A message will be created and sent in real-time to all mobile or web</span>
+<span class="sd">    clients currently listening for incoming messages on that room.</span>
+<span class="sd">    **Arguments**</span>
+<span class="sd">    - `announcement_id (int)`  </span>
+<span class="sd">    The identifier of the announcement to publish.</span>
+<span class="sd">    - `room_id (int)`  </span>
+<span class="sd">    The identifier of the room to publish the announcement to.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">update</span><span class="p">([</span><span class="s">&#39;announcements&#39;</span><span class="p">,</span> <span class="n">announcement_id</span><span class="p">,</span> <span class="s">&#39;rooms&#39;</span><span class="p">,</span> <span class="n">to_room_id</span><span class="p">])</span>
 </pre></div>
 
@@ -3618,10 +4298,30 @@ Dict-like object representing the object to create.</p>
 
     
   
+    <div class="desc"><p>Retrieves an announcement object with id sepecified as first argument
+from the app.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><code>announcement_id (int)</code><br />
+The identifier of the announcement to fetch.</li>
+</ul>
+<p><strong>Return</strong></p>
+<p>The method returns an object representing the announcement wit the
+specified id in the app.</p></div>
   <div class="source_cont">
   <p class="source_link"><a href="javascript:void(0);" onclick="toggle('source-frankly.FranklyClient.read_announcement', this);">Show source &equiv;</a></p>
   <div id="source-frankly.FranklyClient.read_announcement" class="source">
     <div class="codehilite"><pre><span class="k">def</span> <span class="nf">read_announcement</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">announcement_id</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Retrieves an announcement object with id sepecified as first argument</span>
+<span class="sd">    from the app.</span>
+<span class="sd">    **Arguments**</span>
+<span class="sd">    - `announcement_id (int)`  </span>
+<span class="sd">    The identifier of the announcement to fetch.</span>
+<span class="sd">    **Return**</span>
+<span class="sd">    The method returns an object representing the announcement wit the</span>
+<span class="sd">    specified id in the app.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">read</span><span class="p">([</span><span class="s">&#39;announcements&#39;</span><span class="p">,</span> <span class="n">announcement_id</span><span class="p">])</span>
 </pre></div>
 
@@ -3639,10 +4339,20 @@ Dict-like object representing the object to create.</p>
 
     
   
+    <div class="desc"><p>Retrieves a list of announcements available in the app.</p>
+<p><strong>Return</strong></p>
+<p>The method returns a list of annoucement objects ordered by id, which
+may be empty if there are no announcements in the app.</p></div>
   <div class="source_cont">
   <p class="source_link"><a href="javascript:void(0);" onclick="toggle('source-frankly.FranklyClient.read_announcement_list', this);">Show source &equiv;</a></p>
   <div id="source-frankly.FranklyClient.read_announcement_list" class="source">
     <div class="codehilite"><pre><span class="k">def</span> <span class="nf">read_announcement_list</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Retrieves a list of announcements available in the app.</span>
+<span class="sd">    **Return**</span>
+<span class="sd">    The method returns a list of annoucement objects ordered by id, which</span>
+<span class="sd">    may be empty if there are no announcements in the app.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">read</span><span class="p">([</span><span class="s">&#39;announcements&#39;</span><span class="p">])</span>
 </pre></div>
 
@@ -3660,10 +4370,30 @@ Dict-like object representing the object to create.</p>
 
     
   
+    <div class="desc"><p>Retrieves the list of rooms that an annoucement has been published to.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><code>announcement_id (int)</code><br />
+The identifier of the announcement to get the list of rooms for.</li>
+</ul>
+<p><strong>Return</strong></p>
+<p>The method returns a list of annoucement objects ordered by id, which
+may be empty if there are no announcements in the app or none have been
+published yet.</p></div>
   <div class="source_cont">
   <p class="source_link"><a href="javascript:void(0);" onclick="toggle('source-frankly.FranklyClient.read_announcement_room_list', this);">Show source &equiv;</a></p>
   <div id="source-frankly.FranklyClient.read_announcement_room_list" class="source">
     <div class="codehilite"><pre><span class="k">def</span> <span class="nf">read_announcement_room_list</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">announcement_id</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Retrieves the list of rooms that an annoucement has been published to.</span>
+<span class="sd">    **Arguments**</span>
+<span class="sd">    - `announcement_id (int)`  </span>
+<span class="sd">    The identifier of the announcement to get the list of rooms for.</span>
+<span class="sd">    **Return**</span>
+<span class="sd">    The method returns a list of annoucement objects ordered by id, which</span>
+<span class="sd">    may be empty if there are no announcements in the app or none have been</span>
+<span class="sd">    published yet.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">read</span><span class="p">([</span><span class="s">&#39;announcements&#39;</span><span class="p">,</span> <span class="n">announcement_id</span><span class="p">,</span> <span class="s">&#39;rooms&#39;</span><span class="p">])</span>
 </pre></div>
 
@@ -3681,11 +4411,11 @@ Dict-like object representing the object to create.</p>
 
     
   
-    <div class="desc"><p>Retrieves a room object with specified id from the app.  </p>
+    <div class="desc"><p>Retrieves a room object with id specified as first argument from the app.</p>
 <p><strong>Arguments</strong></p>
 <ul>
 <li><code>room_id (int)</code><br />
-The identifier of the room to be fetched.</li>
+The identifier of the room to fetch.</li>
 </ul>
 <p><strong>Return</strong></p>
 <p>The method returns an object representing the room with the specified id
@@ -3695,10 +4425,10 @@ in the app.</p></div>
   <div id="source-frankly.FranklyClient.read_room" class="source">
     <div class="codehilite"><pre><span class="k">def</span> <span class="nf">read_room</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">room_id</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Retrieves a room object with specified id from the app.  </span>
+<span class="sd">    Retrieves a room object with id specified as first argument from the app.</span>
 <span class="sd">    **Arguments**</span>
 <span class="sd">    - `room_id (int)`  </span>
-<span class="sd">    The identifier of the room to be fetched.</span>
+<span class="sd">    The identifier of the room to fetch.</span>
 <span class="sd">    **Return**</span>
 <span class="sd">    The method returns an object representing the room with the specified id</span>
 <span class="sd">    in the app.</span>
@@ -3722,7 +4452,7 @@ in the app.</p></div>
   
     <div class="desc"><p>Retrieves the list of all available rooms from the app.</p>
 <p><strong>Return</strong></p>
-<p>The method returns a list of room objects order by id, which may be
+<p>The method returns a list of room objects ordered by id, which may be
 empty if there are no rooms in the app.</p></div>
   <div class="source_cont">
   <p class="source_link"><a href="javascript:void(0);" onclick="toggle('source-frankly.FranklyClient.read_room_list', this);">Show source &equiv;</a></p>
@@ -3731,7 +4461,7 @@ empty if there are no rooms in the app.</p></div>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Retrieves the list of all available rooms from the app.</span>
 <span class="sd">    **Return**</span>
-<span class="sd">    The method returns a list of room objects order by id, which may be</span>
+<span class="sd">    The method returns a list of room objects ordered by id, which may be</span>
 <span class="sd">    empty if there are no rooms in the app.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">read</span><span class="p">([</span><span class="s">&#39;rooms&#39;</span><span class="p">])</span>
@@ -3751,7 +4481,7 @@ empty if there are no rooms in the app.</p></div>
 
     
   
-    <div class="desc"><p>Retrives messages in a room.<br />
+    <div class="desc"><p>Retrieves messages in a room.<br />
 The keyword arguments are used to specify which message range the client
 wish to receive.</p>
 <p><strong>Arguments</strong></p>
@@ -3789,7 +4519,7 @@ messages were satisfying the query.</p></div>
   <div id="source-frankly.FranklyClient.read_room_message_list" class="source">
     <div class="codehilite"><pre><span class="k">def</span> <span class="nf">read_room_message_list</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">room_id</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Retrives messages in a room.  </span>
+<span class="sd">    Retrieves messages in a room.  </span>
 <span class="sd">    The keyword arguments are used to specify which message range the client</span>
 <span class="sd">    wish to receive.</span>
 <span class="sd">    **Arguments**</span>
@@ -3832,10 +4562,44 @@ messages were satisfying the query.</p></div>
 
     
   
+    <div class="desc"><p>This method exposes a generic interface for updating objects of the
+Frankly API.<br />
+Every <code>update_*</code> method is implemented on top of this one.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li>
+<p><code>path (list)</code><br />
+A list of values representing the collection to create an object in.</p>
+</li>
+<li>
+<p><code>params (dict)</code><br />
+Parameters passed as part of the request.</p>
+</li>
+<li>
+<p><code>payload (dict)</code><br />
+Dict-like object representing the object to create.</p>
+</li>
+</ul>
+<p><strong>Return</strong></p>
+<p>The method returns the object updated on the API at the specified path.</p></div>
   <div class="source_cont">
   <p class="source_link"><a href="javascript:void(0);" onclick="toggle('source-frankly.FranklyClient.update', this);">Show source &equiv;</a></p>
   <div id="source-frankly.FranklyClient.update" class="source">
     <div class="codehilite"><pre><span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">payload</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This method exposes a generic interface for updating objects of the</span>
+<span class="sd">    Frankly API.  </span>
+<span class="sd">    Every `update_*` method is implemented on top of this one.</span>
+<span class="sd">    **Arguments**</span>
+<span class="sd">    - `path (list)`  </span>
+<span class="sd">    A list of values representing the collection to create an object in.</span>
+<span class="sd">    - `params (dict)`  </span>
+<span class="sd">    Parameters passed as part of the request.</span>
+<span class="sd">    - `payload (dict)`  </span>
+<span class="sd">    Dict-like object representing the object to create.</span>
+<span class="sd">    **Return**</span>
+<span class="sd">    The method returns the object updated on the API at the specified path.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">backend</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">payload</span><span class="p">)</span>
 </pre></div>
 
@@ -3853,11 +4617,55 @@ messages were satisfying the query.</p></div>
 
     
   
+    <div class="desc"><p>Updates the content of a file object hosted on Frankly servers.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li>
+<p><code>url (str)</code><br />
+The URL at which the file is hosted on Frankly servers. This can be
+obtained from the <code>url</code> field of an object returned by
+<a href="#frankly.FranklyClient.create_file"><code>create_file</code></a> for example.</p>
+</li>
+<li>
+<p><code>file_obj (object)</code><br />
+A file-like object (as returned by <code>open</code> for example) providing the new
+content of the file.</p>
+</li>
+<li>
+<p><code>file_size (int)</code><br />
+The size of the new file content (in bytes).</p>
+</li>
+<li>
+<p><code>mime_type (str)</code><br />
+The mime type of the new file content.</p>
+</li>
+<li>
+<p><code>encoding (str)</code><br />
+The encoding of the new file content (<code>'gzip'</code> for example).</p>
+</li>
+</ul></div>
   <div class="source_cont">
   <p class="source_link"><a href="javascript:void(0);" onclick="toggle('source-frankly.FranklyClient.update_file', this);">Show source &equiv;</a></p>
   <div id="source-frankly.FranklyClient.update_file" class="source">
     <div class="codehilite"><pre><span class="k">def</span> <span class="nf">update_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">file_obj</span><span class="p">,</span> <span class="n">file_size</span><span class="p">,</span> <span class="n">mime_type</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
-    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">upload</span><span class="p">(</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Updates the content of a file object hosted on Frankly servers.</span>
+<span class="sd">    **Arguments**</span>
+<span class="sd">    - `url (str)`  </span>
+<span class="sd">    The URL at which the file is hosted on Frankly servers. This can be</span>
+<span class="sd">    obtained from the `url` field of an object returned by</span>
+<span class="sd">    `frankly.FranklyClient.create_file` for example.</span>
+<span class="sd">    - `file_obj (object)`  </span>
+<span class="sd">    A file-like object (as returned by `open` for example) providing the new</span>
+<span class="sd">    content of the file.</span>
+<span class="sd">    - `file_size (int)`  </span>
+<span class="sd">    The size of the new file content (in bytes).</span>
+<span class="sd">    - `mime_type (str)`  </span>
+<span class="sd">    The mime type of the new file content.</span>
+<span class="sd">    - `encoding (str)`  </span>
+<span class="sd">    The encoding of the new file content (`&#39;gzip&#39;` for example).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">upload</span><span class="p">(</span>
         <span class="n">url</span><span class="p">,</span>
         <span class="n">payload</span>          <span class="o">=</span> <span class="n">file_obj</span><span class="p">,</span>
         <span class="n">content_length</span>   <span class="o">=</span> <span class="n">file_size</span><span class="p">,</span>
@@ -3880,14 +4688,40 @@ messages were satisfying the query.</p></div>
 
     
   
+    <div class="desc"><p>This method is a convenience wrapper for calling <a href="#frankly.FranklyClient.update_file"><code>update_file</code></a>
+with a content provided by a local file.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li>
+<p><code>url (str)</code><br />
+The URL at which the file is hosted on Frankly servers. This can be
+obtained from the <code>url</code> field of an object returned by
+<a href="#frankly.FranklyClient.create_file"><code>create_file</code></a> for example.</p>
+</li>
+<li>
+<p><code>file_path (str)</code><br />
+A path to a local file providing the new file content.</p>
+</li>
+</ul></div>
   <div class="source_cont">
   <p class="source_link"><a href="javascript:void(0);" onclick="toggle('source-frankly.FranklyClient.update_file_from_path', this);">Show source &equiv;</a></p>
   <div id="source-frankly.FranklyClient.update_file_from_path" class="source">
     <div class="codehilite"><pre><span class="k">def</span> <span class="nf">update_file_from_path</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">file_path</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This method is a convenience wrapper for calling `frankly.FranklyClient.update_file`</span>
+<span class="sd">    with a content provided by a local file.</span>
+<span class="sd">    **Arguments**</span>
+<span class="sd">    - `url (str)`  </span>
+<span class="sd">    The URL at which the file is hosted on Frankly servers. This can be</span>
+<span class="sd">    obtained from the `url` field of an object returned by</span>
+<span class="sd">    `frankly.FranklyClient.create_file` for example.</span>
+<span class="sd">    - `file_path (str)`  </span>
+<span class="sd">    A path to a local file providing the new file content.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">file_size</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">getsize</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span>
     <span class="n">mime_type</span><span class="p">,</span> <span class="n">encoding</span> <span class="o">=</span> <span class="n">mimetypes</span><span class="o">.</span><span class="n">guess_type</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span>
     <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="s">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file_obj</span><span class="p">:</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">update_file</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">file_obj</span><span class="p">,</span> <span class="n">file_size</span><span class="p">,</span> <span class="n">mime_type</span><span class="p">,</span> <span class="n">encoding</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">update_file</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">file_obj</span><span class="p">,</span> <span class="n">file_size</span><span class="p">,</span> <span class="n">mime_type</span><span class="p">,</span> <span class="n">encoding</span><span class="p">)</span>
 </pre></div>
 
   </div>
@@ -3904,10 +4738,76 @@ messages were satisfying the query.</p></div>
 
     
   
+    <div class="desc"><p>Updates an existing room object in the app and return that object.<br />
+The properties of that new room are given as keyword arguments to the
+method.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li>
+<p><code>room_id (int)</code><br />
+The identifier of the room to fetch.</p>
+</li>
+<li>
+<p><code>title (str)</code><br />
+The title associated to this room.</p>
+</li>
+<li>
+<p><code>status (str)</code><br />
+One of <code>'unpublished'</code>, <code>'active'</code> or <code>'inactive'</code>.</p>
+</li>
+<li>
+<p><code>description (str)</code><br />
+A description of what this chat room is intended for, it is usually a
+short description of topics that are discussed by participants.</p>
+</li>
+<li>
+<p><code>avatar_image_url (str)</code><br />
+The URL of an image to use when the room is displayed in one of the
+mobile or web apps embedding a Frankly SDK.</p>
+</li>
+<li>
+<p><code>featured_image_url (str)</code><br />
+The URL of an image to use when the room is featured in one of the
+mobile or web apps embedding a Frankly SDK.</p>
+</li>
+<li>
+<p><code>featured (bool)</code><br />
+Whether the room should be featured in the mobile or web apps embedding
+a Frankly SDK.</p>
+</li>
+</ul>
+<p><strong>Return</strong></p>
+<p>The method returns an object representing the newly created room.</p></div>
   <div class="source_cont">
   <p class="source_link"><a href="javascript:void(0);" onclick="toggle('source-frankly.FranklyClient.update_room', this);">Show source &equiv;</a></p>
   <div id="source-frankly.FranklyClient.update_room" class="source">
     <div class="codehilite"><pre><span class="k">def</span> <span class="nf">update_room</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">room_id</span><span class="p">,</span> <span class="o">**</span><span class="n">payload</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Updates an existing room object in the app and return that object.  </span>
+<span class="sd">    The properties of that new room are given as keyword arguments to the</span>
+<span class="sd">    method.</span>
+<span class="sd">    **Arguments**</span>
+<span class="sd">    - `room_id (int)`  </span>
+<span class="sd">    The identifier of the room to fetch.</span>
+<span class="sd">    - `title (str)`  </span>
+<span class="sd">    The title associated to this room.</span>
+<span class="sd">    - `status (str)`  </span>
+<span class="sd">    One of `&#39;unpublished&#39;`, `&#39;active&#39;` or `&#39;inactive&#39;`.</span>
+<span class="sd">    - `description (str)`  </span>
+<span class="sd">    A description of what this chat room is intended for, it is usually a</span>
+<span class="sd">    short description of topics that are discussed by participants.</span>
+<span class="sd">    - `avatar_image_url (str)`  </span>
+<span class="sd">    The URL of an image to use when the room is displayed in one of the</span>
+<span class="sd">    mobile or web apps embedding a Frankly SDK.</span>
+<span class="sd">    - `featured_image_url (str)`  </span>
+<span class="sd">    The URL of an image to use when the room is featured in one of the</span>
+<span class="sd">    mobile or web apps embedding a Frankly SDK.</span>
+<span class="sd">    - `featured (bool)`  </span>
+<span class="sd">    Whether the room should be featured in the mobile or web apps embedding</span>
+<span class="sd">    a Frankly SDK.</span>
+<span class="sd">    **Return**</span>
+<span class="sd">    The method returns an object representing the newly created room.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">update</span><span class="p">([</span><span class="s">&#39;rooms&#39;</span><span class="p">,</span> <span class="n">room_id</span><span class="p">],</span> <span class="n">payload</span><span class="o">=</span><span class="n">payload</span><span class="p">)</span>
 </pre></div>
 
@@ -3925,11 +4825,69 @@ messages were satisfying the query.</p></div>
 
     
   
+    <div class="desc"><p>This method exposes a generic interface for uploading file contents to
+the Frankly API.<br />
+Every <code>upload_*</code> method is implemented on top of this one.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li>
+<p><code>url (str)</code><br />
+The URL at which the file is hosted on Frankly servers. This can be
+obtained from the <code>url</code> field of an object returned by
+<a href="#frankly.FranklyClient.create_file"><code>create_file</code></a> for example.</p>
+</li>
+<li>
+<p><code>params (dict)</code><br />
+Parameters passed as part of the request.</p>
+</li>
+<li>
+<p><code>payload (dict)</code><br />
+A file-like object or a memory buffer providing the new content of the
+file.</p>
+</li>
+<li>
+<p><code>content_length (str)</code><br />
+The size of the new file content (in bytes).</p>
+</li>
+<li>
+<p><code>content_type (str)</code><br />
+The mime type of the new file content.</p>
+</li>
+<li>
+<p><code>content_encoding (str)</code><br />
+The encoding of the new file content (<code>'gzip'</code> for example).</p>
+</li>
+</ul>
+<p><strong>Return</strong></p>
+<p>The method returns the object updated on the API at the specified path.</p></div>
   <div class="source_cont">
   <p class="source_link"><a href="javascript:void(0);" onclick="toggle('source-frankly.FranklyClient.upload', this);">Show source &equiv;</a></p>
   <div id="source-frankly.FranklyClient.upload" class="source">
     <div class="codehilite"><pre><span class="k">def</span> <span class="nf">upload</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">payload</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">content_length</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">content_type</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">content_encoding</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
-    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">backend</span><span class="o">.</span><span class="n">upload</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">payload</span><span class="p">,</span> <span class="n">content_length</span><span class="p">,</span> <span class="n">content_type</span><span class="p">,</span> <span class="n">content_encoding</span><span class="p">)</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This method exposes a generic interface for uploading file contents to</span>
+<span class="sd">    the Frankly API.  </span>
+<span class="sd">    Every `upload_*` method is implemented on top of this one.</span>
+<span class="sd">    **Arguments**</span>
+<span class="sd">    - `url (str)`  </span>
+<span class="sd">    The URL at which the file is hosted on Frankly servers. This can be</span>
+<span class="sd">    obtained from the `url` field of an object returned by</span>
+<span class="sd">    `frankly.FranklyClient.create_file` for example.</span>
+<span class="sd">    - `params (dict)`  </span>
+<span class="sd">    Parameters passed as part of the request.</span>
+<span class="sd">    - `payload (dict)`  </span>
+<span class="sd">    A file-like object or a memory buffer providing the new content of the</span>
+<span class="sd">    file.</span>
+<span class="sd">    - `content_length (str)`  </span>
+<span class="sd">    The size of the new file content (in bytes).</span>
+<span class="sd">    - `content_type (str)`  </span>
+<span class="sd">    The mime type of the new file content.</span>
+<span class="sd">    - `content_encoding (str)`  </span>
+<span class="sd">    The encoding of the new file content (`&#39;gzip&#39;` for example).</span>
+<span class="sd">    **Return**</span>
+<span class="sd">    The method returns the object updated on the API at the specified path.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">backend</span><span class="o">.</span><span class="n">upload</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">payload</span><span class="p">,</span> <span class="n">content_length</span><span class="p">,</span> <span class="n">content_type</span><span class="p">,</span> <span class="n">content_encoding</span><span class="p">)</span>
 </pre></div>
 
   </div>
@@ -3946,10 +4904,76 @@ messages were satisfying the query.</p></div>
 
     
   
+    <div class="desc"><p>This method is convenience wrapper for creating a new file object on the
+Frankly API and setting its content.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li>
+<p><code>url (str)</code><br />
+The URL at which the file is hosted on Frankly servers. This can be
+obtained from the <code>url</code> field of an object returned by
+<a href="#frankly.FranklyClient.create_file"><code>create_file</code></a> for example.</p>
+</li>
+<li>
+<p><code>file_obj (object)</code><br />
+A file-like object (as returned by <code>open</code> for example) providing the new
+content of the file.</p>
+</li>
+<li>
+<p><code>file_size (int)</code><br />
+The size of the new file content (in bytes).</p>
+</li>
+<li>
+<p><code>mime_type (str)</code><br />
+The mime type of the new file content.</p>
+</li>
+<li>
+<p><code>encoding (str)</code><br />
+The encoding of the new file content (<code>'gzip'</code> for example).</p>
+</li>
+<li>
+<p><code>category (str)</code><br />
+One of the file categories supported by the API (see the <em>File</em> section
+of the documentation).</p>
+</li>
+<li>
+<p><code>type (str)</code><br />
+One of the file types supported by the API (see the <em>File</em> section of
+the documentation).</p>
+</li>
+</ul>
+<p><strong>Return</strong></p>
+<p>The method returns an object representing the newly created file.</p></div>
   <div class="source_cont">
   <p class="source_link"><a href="javascript:void(0);" onclick="toggle('source-frankly.FranklyClient.upload_file', this);">Show source &equiv;</a></p>
   <div id="source-frankly.FranklyClient.upload_file" class="source">
     <div class="codehilite"><pre><span class="k">def</span> <span class="nf">upload_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file_obj</span><span class="p">,</span> <span class="n">file_size</span><span class="p">,</span> <span class="n">mime_type</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This method is convenience wrapper for creating a new file object on the</span>
+<span class="sd">    Frankly API and setting its content.</span>
+<span class="sd">    **Arguments**</span>
+<span class="sd">    - `url (str)`  </span>
+<span class="sd">    The URL at which the file is hosted on Frankly servers. This can be</span>
+<span class="sd">    obtained from the `url` field of an object returned by</span>
+<span class="sd">    `frankly.FranklyClient.create_file` for example.</span>
+<span class="sd">    - `file_obj (object)`  </span>
+<span class="sd">    A file-like object (as returned by `open` for example) providing the new</span>
+<span class="sd">    content of the file.</span>
+<span class="sd">    - `file_size (int)`  </span>
+<span class="sd">    The size of the new file content (in bytes).</span>
+<span class="sd">    - `mime_type (str)`  </span>
+<span class="sd">    The mime type of the new file content.</span>
+<span class="sd">    - `encoding (str)`  </span>
+<span class="sd">    The encoding of the new file content (`&#39;gzip&#39;` for example).</span>
+<span class="sd">    - `category (str)`  </span>
+<span class="sd">    One of the file categories supported by the API (see the *File* section</span>
+<span class="sd">    of the documentation).</span>
+<span class="sd">    - `type (str)`  </span>
+<span class="sd">    One of the file types supported by the API (see the *File* section of</span>
+<span class="sd">    the documentation).</span>
+<span class="sd">    **Return**</span>
+<span class="sd">    The method returns an object representing the newly created file.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">params</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;category&#39;</span><span class="p">)</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
         <span class="n">params</span><span class="p">[</span><span class="s">&#39;category&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;chat&#39;</span>
     <span class="n">f</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">create_file</span><span class="p">(</span><span class="o">**</span><span class="n">params</span><span class="p">)</span>
@@ -3971,10 +4995,46 @@ messages were satisfying the query.</p></div>
 
     
   
+    <div class="desc"><p>This method is convenience wrapper for creating a new file object on the
+Frankly API and uploading the content from a local file.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li>
+<p><code>file_path (str)</code><br />
+A path to a local file providing the new file content.</p>
+</li>
+<li>
+<p><code>category (str)</code><br />
+One of the file categories supported by the API (see the <em>File</em> section
+of the documentation).</p>
+</li>
+<li>
+<p><code>type (str)</code><br />
+One of the file types supported by the API (see the <em>File</em> section of
+the documentation).</p>
+</li>
+</ul>
+<p><strong>Return</strong></p>
+<p>The method returns an object representing the newly created file.</p></div>
   <div class="source_cont">
   <p class="source_link"><a href="javascript:void(0);" onclick="toggle('source-frankly.FranklyClient.upload_file_from_path', this);">Show source &equiv;</a></p>
   <div id="source-frankly.FranklyClient.upload_file_from_path" class="source">
     <div class="codehilite"><pre><span class="k">def</span> <span class="nf">upload_file_from_path</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file_path</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This method is convenience wrapper for creating a new file object on the</span>
+<span class="sd">    Frankly API and uploading the content from a local file.</span>
+<span class="sd">    **Arguments**</span>
+<span class="sd">    - `file_path (str)`  </span>
+<span class="sd">    A path to a local file providing the new file content.</span>
+<span class="sd">    - `category (str)`  </span>
+<span class="sd">    One of the file categories supported by the API (see the *File* section</span>
+<span class="sd">    of the documentation).</span>
+<span class="sd">    - `type (str)`  </span>
+<span class="sd">    One of the file types supported by the API (see the *File* section of</span>
+<span class="sd">    the documentation).</span>
+<span class="sd">    **Return**</span>
+<span class="sd">    The method returns an object representing the newly created file.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">file_size</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">getsize</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span>
     <span class="n">mime_type</span><span class="p">,</span> <span class="n">encoding</span> <span class="o">=</span> <span class="n">mimetypes</span><span class="o">.</span><span class="n">guess_type</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">params</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;type&#39;</span><span class="p">)</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
