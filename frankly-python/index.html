@@ -1057,7 +1057,6 @@ table {
           
   <ul>
     <li class="mono"><a href="#frankly.FranklyClient.__init__">__init__</a></li>
-    <li class="mono"><a href="#frankly.FranklyClient.authenticate">authenticate</a></li>
     <li class="mono"><a href="#frankly.FranklyClient.close">close</a></li>
     <li class="mono"><a href="#frankly.FranklyClient.create">create</a></li>
     <li class="mono"><a href="#frankly.FranklyClient.create_announcement">create_announcement</a></li>
@@ -1067,6 +1066,7 @@ table {
     <li class="mono"><a href="#frankly.FranklyClient.delete">delete</a></li>
     <li class="mono"><a href="#frankly.FranklyClient.delete_announcement">delete_announcement</a></li>
     <li class="mono"><a href="#frankly.FranklyClient.delete_room">delete_room</a></li>
+    <li class="mono"><a href="#frankly.FranklyClient.open">open</a></li>
     <li class="mono"><a href="#frankly.FranklyClient.publish_announcement">publish_announcement</a></li>
     <li class="mono"><a href="#frankly.FranklyClient.read">read</a></li>
     <li class="mono"><a href="#frankly.FranklyClient.read_announcement">read_announcement</a></li>
@@ -1158,12 +1158,12 @@ and <code>app_secret</code> values obtained from the <a href="https://console.fr
 <span class="n">app_secret</span> <span class="o">=</span> <span class="s">&#39;app_secret from Frankly Console&#39;</span>
 
 <span class="n">client</span> <span class="o">=</span> <span class="n">FranklyClient</span><span class="p">()</span>
-<span class="n">client</span><span class="o">.</span><span class="n">authenticate</span><span class="p">(</span><span class="n">app_key</span><span class="p">,</span> <span class="n">app_secret</span><span class="p">)</span>
+<span class="n">client</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">app_key</span><span class="p">,</span> <span class="n">app_secret</span><span class="p">)</span>
 </pre></div>
 
 
-<p>If the call to <code>authenticate</code> returns then authentication was successful and
-the application can move on and use this instance of <code>FranklyClient</code> to perform
+<p>If the call to <code>open</code> returns then authentication was successful and the
+application can move on and use this instance of <code>FranklyClient</code> to perform
 other operations.</p>
 <p><em>Publishing the <code>app_secret</code> value to the public can have security implications
 and could be used by an attacker to alter the content of an application.</em></p>
@@ -1364,7 +1364,7 @@ showing how to handle those situations:</p>
 
 <span class="k">try</span><span class="p">:</span>
     <span class="n">client</span> <span class="o">=</span> <span class="n">FranklyClient</span><span class="p">()</span>
-    <span class="n">client</span><span class="o">.</span><span class="n">authenticate</span><span class="p">(</span><span class="n">app_key</span><span class="p">,</span> <span class="n">app_secret</span><span class="p">)</span>
+    <span class="n">client</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">app_key</span><span class="p">,</span> <span class="n">app_secret</span><span class="p">)</span>
 
     <span class="o">...</span>
 
@@ -1463,10 +1463,10 @@ showing how to handle those situations:</p>
 <span class="sd">    app_secret = &#39;app_secret from Frankly Console&#39;</span>
 
 <span class="sd">    client = FranklyClient()</span>
-<span class="sd">    client.authenticate(app_key, app_secret)</span>
+<span class="sd">    client.open(app_key, app_secret)</span>
 
-<span class="sd">If the call to `authenticate` returns then authentication was successful and</span>
-<span class="sd">the application can move on and use this instance of `FranklyClient` to perform</span>
+<span class="sd">If the call to `open` returns then authentication was successful and the</span>
+<span class="sd">application can move on and use this instance of `FranklyClient` to perform</span>
 <span class="sd">other operations.</span>
 
 <span class="sd">*Publishing the `app_secret` value to the public can have security implications</span>
@@ -1672,7 +1672,7 @@ showing how to handle those situations:</p>
 
 <span class="sd">    try:</span>
 <span class="sd">        client = FranklyClient()</span>
-<span class="sd">        client.authenticate(app_key, app_secret)</span>
+<span class="sd">        client.open(app_key, app_secret)</span>
 
 <span class="sd">        ...</span>
 
@@ -1847,7 +1847,7 @@ showing how to handle those situations:</p>
     <span class="k">def</span> <span class="nf">__exit__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 
-    <span class="k">def</span> <span class="nf">authenticate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">app_key</span><span class="p">,</span> <span class="n">app_secret</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">open</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">app_key</span><span class="p">,</span> <span class="n">app_secret</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        This should be the first method called on an instance of FranklyClient,</span>
 <span class="sd">        after succesfully returning the client can be used to interact with the</span>
@@ -1862,8 +1862,15 @@ showing how to handle those situations:</p>
 <span class="sd">        - `app_secret (str)`  </span>
 <span class="sd">        The secret value associated the the key allowing the client to securely</span>
 <span class="sd">        authenticate against the Frankly API.</span>
+
+<span class="sd">        **Return**</span>
+
+<span class="sd">        On success the method returns a session object which contains two fields,</span>
+<span class="sd">        `app_id` with the identifier of the application this client has</span>
+<span class="sd">        authenticated for, and `app_user_id` with the identifier of the actual</span>
+<span class="sd">        user this client will run as.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">backend</span><span class="o">.</span><span class="n">authenticate</span><span class="p">(</span><span class="n">app_key</span><span class="p">,</span> <span class="n">app_secret</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">backend</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">app_key</span><span class="p">,</span> <span class="n">app_secret</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -1918,7 +1925,7 @@ showing how to handle those situations:</p>
 
 <span class="sd">        The method returns an object representing the newly created announcement.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">create</span><span class="p">([</span><span class="s">&#39;announcements&#39;</span><span class="p">],</span> <span class="n">payload</span><span class="o">=</span><span class="n">payload</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="s">&#39;/announcements&#39;</span><span class="p">,</span> <span class="n">payload</span><span class="o">=</span><span class="n">payload</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">create_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">payload</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -1940,7 +1947,7 @@ showing how to handle those situations:</p>
 
 <span class="sd">        The method returns an object representing the newly created file.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">create</span><span class="p">([</span><span class="s">&#39;files&#39;</span><span class="p">],</span> <span class="n">params</span><span class="o">=</span><span class="n">payload</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="s">&#39;/files&#39;</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">payload</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">create_room</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">payload</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -1976,7 +1983,7 @@ showing how to handle those situations:</p>
 
 <span class="sd">        The method returns an object representing the newly created room.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">create</span><span class="p">([</span><span class="s">&#39;rooms&#39;</span><span class="p">],</span> <span class="n">payload</span><span class="o">=</span><span class="n">payload</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="s">&#39;/rooms&#39;</span><span class="p">,</span> <span class="n">payload</span><span class="o">=</span><span class="n">payload</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">create_room_message</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">room_id</span><span class="p">,</span> <span class="o">**</span><span class="n">payload</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -1997,7 +2004,7 @@ showing how to handle those situations:</p>
 
 <span class="sd">        The method returns an object representing the newly created message.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">create</span><span class="p">([</span><span class="s">&#39;rooms&#39;</span><span class="p">,</span> <span class="n">room_id</span><span class="p">,</span> <span class="s">&#39;messages&#39;</span><span class="p">],</span> <span class="n">payload</span><span class="o">=</span><span class="n">payload</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="s">&#39;/rooms/{}/messages&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">room_id</span><span class="p">),</span> <span class="n">payload</span><span class="o">=</span><span class="n">payload</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">delete</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">payload</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -2038,7 +2045,7 @@ showing how to handle those situations:</p>
 <span class="sd">        The method returns an object representing the announcement wit the</span>
 <span class="sd">        specified id in the app.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">delete</span><span class="p">([</span><span class="s">&#39;announcements&#39;</span><span class="p">,</span> <span class="n">announcement_id</span><span class="p">])</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="s">&#39;/announcements/{}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">announcement_id</span><span class="p">))</span>
 
     <span class="k">def</span> <span class="nf">delete_room</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">room_id</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -2060,7 +2067,7 @@ showing how to handle those situations:</p>
 <span class="sd">        The method returns an object representing the room with the specified id</span>
 <span class="sd">        in the app.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">delete</span><span class="p">([</span><span class="s">&#39;rooms&#39;</span><span class="p">,</span> <span class="n">room_id</span><span class="p">])</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="s">&#39;/rooms/{}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">room_id</span><span class="p">))</span>
 
     <span class="k">def</span> <span class="nf">publish_announcement</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">announcement_id</span><span class="p">,</span> <span class="n">to_room_id</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -2077,7 +2084,7 @@ showing how to handle those situations:</p>
 <span class="sd">        - `room_id (int)`  </span>
 <span class="sd">        The identifier of the room to publish the announcement to.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">update</span><span class="p">([</span><span class="s">&#39;announcements&#39;</span><span class="p">,</span> <span class="n">announcement_id</span><span class="p">,</span> <span class="s">&#39;rooms&#39;</span><span class="p">,</span> <span class="n">to_room_id</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="s">&#39;/announcements/{}/rooms/{}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">announcement_id</span><span class="p">,</span> <span class="n">to_room_id</span><span class="p">))</span>
 
     <span class="k">def</span> <span class="nf">read</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">payload</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -2117,7 +2124,7 @@ showing how to handle those situations:</p>
 <span class="sd">        The method returns an object representing the announcement wit the</span>
 <span class="sd">        specified id in the app.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">read</span><span class="p">([</span><span class="s">&#39;announcements&#39;</span><span class="p">,</span> <span class="n">announcement_id</span><span class="p">])</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s">&#39;/announcements/{}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">announcement_id</span><span class="p">))</span>
 
     <span class="k">def</span> <span class="nf">read_announcement_list</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -2128,7 +2135,7 @@ showing how to handle those situations:</p>
 <span class="sd">        The method returns a list of annoucement objects ordered by id, which</span>
 <span class="sd">        may be empty if there are no announcements in the app.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">read</span><span class="p">([</span><span class="s">&#39;announcements&#39;</span><span class="p">])</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s">&#39;/announcements&#39;</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">read_announcement_room_list</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">announcement_id</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -2145,7 +2152,7 @@ showing how to handle those situations:</p>
 <span class="sd">        may be empty if there are no announcements in the app or none have been</span>
 <span class="sd">        published yet.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">read</span><span class="p">([</span><span class="s">&#39;announcements&#39;</span><span class="p">,</span> <span class="n">announcement_id</span><span class="p">,</span> <span class="s">&#39;rooms&#39;</span><span class="p">])</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s">&#39;/announcements/{}/rooms&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">announcement_id</span><span class="p">))</span>
 
     <span class="k">def</span> <span class="nf">read_room</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">room_id</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -2161,7 +2168,7 @@ showing how to handle those situations:</p>
 <span class="sd">        The method returns an object representing the room with the specified id</span>
 <span class="sd">        in the app.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">read</span><span class="p">([</span><span class="s">&#39;rooms&#39;</span><span class="p">,</span> <span class="n">room_id</span><span class="p">])</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s">&#39;/rooms/{}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">room_id</span><span class="p">))</span>
 
     <span class="k">def</span> <span class="nf">read_room_list</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -2172,7 +2179,7 @@ showing how to handle those situations:</p>
 <span class="sd">        The method returns a list of room objects ordered by id, which may be</span>
 <span class="sd">        empty if there are no rooms in the app.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">read</span><span class="p">([</span><span class="s">&#39;rooms&#39;</span><span class="p">])</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s">&#39;/rooms&#39;</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">read_room_message_list</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">room_id</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -2208,7 +2215,7 @@ showing how to handle those situations:</p>
 <span class="sd">        The method returns a list of message objects, which may be empty if no</span>
 <span class="sd">        messages were satisfying the query.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">read</span><span class="p">([</span><span class="s">&#39;rooms&#39;</span><span class="p">,</span> <span class="n">room_id</span><span class="p">,</span> <span class="s">&#39;messages&#39;</span><span class="p">],</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s">&#39;/rooms/{}/messages&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">room_id</span><span class="p">),</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">payload</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -2270,7 +2277,7 @@ showing how to handle those situations:</p>
 
 <span class="sd">        The method returns an object representing the newly created room.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">update</span><span class="p">([</span><span class="s">&#39;rooms&#39;</span><span class="p">,</span> <span class="n">room_id</span><span class="p">],</span> <span class="n">payload</span><span class="o">=</span><span class="n">payload</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="s">&#39;/rooms/{}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">room_id</span><span class="p">),</span> <span class="n">payload</span><span class="o">=</span><span class="n">payload</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">update_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">file_obj</span><span class="p">,</span> <span class="n">file_size</span><span class="p">,</span> <span class="n">mime_type</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -2450,7 +2457,7 @@ showing how to handle those situations:</p>
         <span class="bp">self</span><span class="o">.</span><span class="n">_message</span>   <span class="o">=</span> <span class="n">message</span>
 
     <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="s">&#39;</span><span class="si">%s</span><span class="s"> </span><span class="si">%s</span><span class="s"> [</span><span class="si">%s</span><span class="s">]: </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_operation</span><span class="p">,</span> <span class="n">join_path</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_path</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">_status</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_message</span><span class="p">)</span>
+        <span class="k">return</span> <span class="s">&#39;</span><span class="si">%s</span><span class="s"> </span><span class="si">%s</span><span class="s"> [</span><span class="si">%s</span><span class="s">]: </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_operation</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_path</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_status</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_message</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="s">&#39;FranklyError { </span><span class="si">%s</span><span class="s"> }&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">__str__</span><span class="p">()</span>
@@ -2530,7 +2537,10 @@ showing how to handle those situations:</p>
 
 <span class="k">class</span> <span class="nc">BaseBackend</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
 
-    <span class="k">def</span> <span class="nf">authenticate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">app_key</span><span class="p">,</span> <span class="n">app_secret</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">open</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">app_key</span><span class="p">,</span> <span class="n">app_secret</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span>
+
+    <span class="k">def</span> <span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span>
 
     <span class="k">def</span> <span class="nf">create</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">payload</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
@@ -2556,16 +2566,16 @@ showing how to handle those situations:</p>
         <span class="k">return</span> <span class="n">f</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
     <span class="k">except</span> <span class="n">RequestException</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-        <span class="n">_raise</span><span class="p">(</span><span class="mi">500</span><span class="p">,</span> <span class="n">e</span><span class="o">.</span><span class="n">message</span><span class="p">)</span>
+        <span class="n">_raise</span><span class="p">(</span><span class="mi">500</span><span class="p">,</span> <span class="n">six</span><span class="o">.</span><span class="n">text_type</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
 
     <span class="k">except</span> <span class="n">ConnectionError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-        <span class="n">_raise</span><span class="p">(</span><span class="mi">500</span><span class="p">,</span> <span class="n">e</span><span class="o">.</span><span class="n">message</span><span class="p">)</span>
+        <span class="n">_raise</span><span class="p">(</span><span class="mi">500</span><span class="p">,</span> <span class="n">six</span><span class="o">.</span><span class="n">text_type</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
 
     <span class="k">except</span> <span class="n">HTTPError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-        <span class="n">_raise</span><span class="p">(</span><span class="mi">400</span><span class="p">,</span> <span class="n">e</span><span class="o">.</span><span class="n">message</span><span class="p">)</span>
+        <span class="n">_raise</span><span class="p">(</span><span class="mi">400</span><span class="p">,</span> <span class="n">six</span><span class="o">.</span><span class="n">text_type</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
 
     <span class="k">except</span> <span class="n">URLRequired</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-        <span class="n">_raise</span><span class="p">(</span><span class="mi">400</span><span class="p">,</span> <span class="n">e</span><span class="o">.</span><span class="n">message</span><span class="p">)</span>
+        <span class="n">_raise</span><span class="p">(</span><span class="mi">400</span><span class="p">,</span> <span class="n">six</span><span class="o">.</span><span class="n">text_type</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
 
     <span class="k">except</span> <span class="n">TooManyRedirects</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
         <span class="n">_raise</span><span class="p">(</span><span class="mi">500</span><span class="p">,</span> <span class="s">&quot;frankly servers submitted too many redirections&quot;</span><span class="p">)</span>
@@ -2580,7 +2590,7 @@ showing how to handle those situations:</p>
         <span class="n">_raise</span><span class="p">(</span><span class="mi">408</span><span class="p">,</span> <span class="s">&quot;failed to submit the request in the allotted amount of time&quot;</span><span class="p">)</span>
 
     <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-        <span class="n">_raise</span><span class="p">(</span><span class="mi">500</span><span class="p">,</span> <span class="n">e</span><span class="o">.</span><span class="n">message</span><span class="p">)</span>
+        <span class="n">_raise</span><span class="p">(</span><span class="mi">500</span><span class="p">,</span> <span class="n">six</span><span class="o">.</span><span class="n">text_type</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
 
 <span class="k">def</span> <span class="nf">api</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
     <span class="nd">@wraps</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
@@ -2606,27 +2616,35 @@ showing how to handle those situations:</p>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">address</span><span class="p">,</span> <span class="n">connect_timeout</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">request_timeout</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">address</span> <span class="o">=</span> <span class="n">address</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">session</span> <span class="o">=</span> <span class="bp">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">connect_timeout</span> <span class="o">=</span> <span class="n">connect_timeout</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">request_timeout</span> <span class="o">=</span> <span class="n">request_timeout</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">http</span>    <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">Session</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">http</span><span class="o">.</span><span class="n">headers</span><span class="o">.</span><span class="n">update</span><span class="p">({</span>
             <span class="s">&#39;Accept&#39;</span>       <span class="p">:</span> <span class="s">&#39;application/json&#39;</span><span class="p">,</span>
             <span class="s">&#39;Content-Type&#39;</span> <span class="p">:</span> <span class="s">&#39;application/json&#39;</span><span class="p">,</span>
+            <span class="s">&#39;User-Agent&#39;</span>   <span class="p">:</span> <span class="s">&#39;Frankly-SDK/1.0.0 (Python)&#39;</span><span class="p">,</span>
         <span class="p">})</span>
 
-    <span class="k">def</span> <span class="nf">authenticate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">app_key</span><span class="p">,</span> <span class="n">app_secret</span><span class="p">):</span>
-        <span class="n">nce</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">read</span><span class="p">([</span><span class="s">&#39;auth&#39;</span><span class="p">,</span> <span class="s">&#39;nonce&#39;</span><span class="p">])</span>
+    <span class="k">def</span> <span class="nf">open</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">app_key</span><span class="p">,</span> <span class="n">app_secret</span><span class="p">):</span>
+        <span class="n">nce</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s">&#39;/auth/nonce&#39;</span><span class="p">)</span>
         <span class="n">idt</span> <span class="o">=</span> <span class="n">generate_identity_token</span><span class="p">(</span><span class="n">app_key</span><span class="p">,</span> <span class="n">app_secret</span><span class="p">,</span> <span class="n">nce</span><span class="p">,</span> <span class="n">role</span><span class="o">=</span><span class="s">&#39;admin&#39;</span><span class="p">)</span>
-        <span class="n">res</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">read</span><span class="p">([</span><span class="s">&#39;auth&#39;</span><span class="p">],</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+
+        <span class="n">session</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s">&#39;/auth&#39;</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span>
             <span class="s">&#39;identity_token&#39;</span><span class="p">:</span> <span class="n">idt</span><span class="p">,</span>
         <span class="p">})</span>
 
-        <span class="n">xsrf</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">http</span><span class="o">.</span><span class="n">cookies</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;xsrf&#39;</span><span class="p">)</span>
-
-        <span class="k">if</span> <span class="n">xsrf</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">http</span><span class="o">.</span><span class="n">headers</span><span class="p">[</span><span class="s">&#39;Frankly-XSRF&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">xsrf</span>
-
-        <span class="k">return</span> <span class="n">res</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">session</span> <span class="o">=</span> <span class="n">session</span>
+        <span class="k">return</span> <span class="n">FranklyObject</span><span class="p">(</span>
+            <span class="n">app_id</span>      <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;app_id&#39;</span><span class="p">),</span>
+            <span class="n">app_user_id</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;app_user_id&#39;</span><span class="p">),</span>
+            <span class="n">platform</span>    <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;platform&#39;</span><span class="p">,</span> <span class="s">&#39;python&#39;</span><span class="p">),</span>
+            <span class="n">version</span>     <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;version&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+            <span class="n">role</span>        <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;role&#39;</span><span class="p">),</span>
+            <span class="n">created_on</span>  <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;created_on&#39;</span><span class="p">),</span>
+            <span class="n">updated_on</span>  <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;updated_on&#39;</span><span class="p">),</span>
+            <span class="n">expires_on</span>  <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;expires_on&#39;</span><span class="p">),</span>
+        <span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">http</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
@@ -2670,7 +2688,7 @@ showing how to handle those situations:</p>
             <span class="n">headers</span><span class="p">[</span><span class="s">&#39;Content-Encoding&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">six</span><span class="o">.</span><span class="n">text_type</span><span class="p">(</span><span class="n">content_encoding</span><span class="p">)</span>
 
         <span class="n">operation</span> <span class="o">=</span> <span class="s">&#39;upload&#39;</span>
-        <span class="n">path</span>      <span class="o">=</span> <span class="n">split_path</span><span class="p">(</span><span class="n">urlparse</span><span class="p">(</span><span class="n">url</span><span class="p">)</span><span class="o">.</span><span class="n">path</span><span class="p">)</span>
+        <span class="n">path</span>      <span class="o">=</span> <span class="n">urlparse</span><span class="p">(</span><span class="n">url</span><span class="p">)</span><span class="o">.</span><span class="n">path</span>
         <span class="n">response</span>  <span class="o">=</span> <span class="n">request_wrapper</span><span class="p">(</span>
             <span class="n">operation</span><span class="p">,</span>
             <span class="n">path</span><span class="p">,</span>
@@ -2694,20 +2712,21 @@ showing how to handle those situations:</p>
         <span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">make_url</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">):</span>
-        <span class="k">return</span> <span class="s">&#39;</span><span class="si">%s%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">address</span><span class="p">,</span> <span class="n">join_path</span><span class="p">(</span><span class="n">path</span><span class="p">))</span>
+        <span class="k">return</span> <span class="s">&#39;</span><span class="si">%s%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">address</span><span class="p">,</span> <span class="n">path</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">make_params</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">params</span><span class="p">):</span>
-        <span class="k">if</span> <span class="n">params</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
-            <span class="k">return</span>
         <span class="n">new_params</span> <span class="o">=</span> <span class="p">{</span> <span class="p">}</span>
-        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">six</span><span class="o">.</span><span class="n">iteritems</span><span class="p">(</span><span class="n">params</span><span class="p">):</span>
-            <span class="k">if</span> <span class="n">v</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
-                <span class="k">continue</span>
-            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
-                <span class="n">v</span> <span class="o">=</span> <span class="s">&#39;true&#39;</span> <span class="k">if</span> <span class="n">v</span> <span class="k">else</span> <span class="s">&#39;false&#39;</span>
-            <span class="k">elif</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">six</span><span class="o">.</span><span class="n">text_type</span><span class="p">):</span>
-                <span class="n">v</span> <span class="o">=</span> <span class="n">six</span><span class="o">.</span><span class="n">text_type</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
-            <span class="n">new_params</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span>
+        <span class="k">if</span> <span class="n">params</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">six</span><span class="o">.</span><span class="n">iteritems</span><span class="p">(</span><span class="n">params</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">v</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+                    <span class="k">continue</span>
+                <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
+                    <span class="n">v</span> <span class="o">=</span> <span class="s">&#39;true&#39;</span> <span class="k">if</span> <span class="n">v</span> <span class="k">else</span> <span class="s">&#39;false&#39;</span>
+                <span class="k">elif</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">six</span><span class="o">.</span><span class="n">text_type</span><span class="p">):</span>
+                    <span class="n">v</span> <span class="o">=</span> <span class="n">six</span><span class="o">.</span><span class="n">text_type</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+                <span class="n">new_params</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">session</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">new_params</span><span class="p">[</span><span class="s">&#39;token&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">token</span>
         <span class="k">return</span> <span class="n">new_params</span>
 
 <span class="c"># Utilities</span>
@@ -2773,12 +2792,6 @@ showing how to handle those situations:</p>
         <span class="n">d</span><span class="o">.</span><span class="n">microsecond</span> <span class="o">/</span> <span class="mi">1000</span><span class="p">,</span>
         <span class="n">tz</span><span class="p">,</span>
     <span class="p">)</span>
-
-<span class="k">def</span> <span class="nf">join_path</span><span class="p">(</span><span class="n">p</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">normpath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s">&#39;/&#39;</span><span class="p">,</span> <span class="o">*</span><span class="p">[</span><span class="n">six</span><span class="o">.</span><span class="n">text_type</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">p</span><span class="p">]))</span>
-
-<span class="k">def</span> <span class="nf">split_path</span><span class="p">(</span><span class="n">p</span><span class="p">):</span>
-    <span class="k">return</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">p</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39;/&#39;</span><span class="p">)</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">]</span>
 </pre></div>
 
   </div>
@@ -3001,7 +3014,7 @@ only after sucessfuly authenticating.</p></div>
     <span class="k">def</span> <span class="nf">__exit__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 
-    <span class="k">def</span> <span class="nf">authenticate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">app_key</span><span class="p">,</span> <span class="n">app_secret</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">open</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">app_key</span><span class="p">,</span> <span class="n">app_secret</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        This should be the first method called on an instance of FranklyClient,</span>
 <span class="sd">        after succesfully returning the client can be used to interact with the</span>
@@ -3016,8 +3029,15 @@ only after sucessfuly authenticating.</p></div>
 <span class="sd">        - `app_secret (str)`  </span>
 <span class="sd">        The secret value associated the the key allowing the client to securely</span>
 <span class="sd">        authenticate against the Frankly API.</span>
+
+<span class="sd">        **Return**</span>
+
+<span class="sd">        On success the method returns a session object which contains two fields,</span>
+<span class="sd">        `app_id` with the identifier of the application this client has</span>
+<span class="sd">        authenticated for, and `app_user_id` with the identifier of the actual</span>
+<span class="sd">        user this client will run as.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">backend</span><span class="o">.</span><span class="n">authenticate</span><span class="p">(</span><span class="n">app_key</span><span class="p">,</span> <span class="n">app_secret</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">backend</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">app_key</span><span class="p">,</span> <span class="n">app_secret</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -3072,7 +3092,7 @@ only after sucessfuly authenticating.</p></div>
 
 <span class="sd">        The method returns an object representing the newly created announcement.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">create</span><span class="p">([</span><span class="s">&#39;announcements&#39;</span><span class="p">],</span> <span class="n">payload</span><span class="o">=</span><span class="n">payload</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="s">&#39;/announcements&#39;</span><span class="p">,</span> <span class="n">payload</span><span class="o">=</span><span class="n">payload</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">create_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">payload</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -3094,7 +3114,7 @@ only after sucessfuly authenticating.</p></div>
 
 <span class="sd">        The method returns an object representing the newly created file.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">create</span><span class="p">([</span><span class="s">&#39;files&#39;</span><span class="p">],</span> <span class="n">params</span><span class="o">=</span><span class="n">payload</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="s">&#39;/files&#39;</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">payload</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">create_room</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">payload</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -3130,7 +3150,7 @@ only after sucessfuly authenticating.</p></div>
 
 <span class="sd">        The method returns an object representing the newly created room.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">create</span><span class="p">([</span><span class="s">&#39;rooms&#39;</span><span class="p">],</span> <span class="n">payload</span><span class="o">=</span><span class="n">payload</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="s">&#39;/rooms&#39;</span><span class="p">,</span> <span class="n">payload</span><span class="o">=</span><span class="n">payload</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">create_room_message</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">room_id</span><span class="p">,</span> <span class="o">**</span><span class="n">payload</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -3151,7 +3171,7 @@ only after sucessfuly authenticating.</p></div>
 
 <span class="sd">        The method returns an object representing the newly created message.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">create</span><span class="p">([</span><span class="s">&#39;rooms&#39;</span><span class="p">,</span> <span class="n">room_id</span><span class="p">,</span> <span class="s">&#39;messages&#39;</span><span class="p">],</span> <span class="n">payload</span><span class="o">=</span><span class="n">payload</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="s">&#39;/rooms/{}/messages&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">room_id</span><span class="p">),</span> <span class="n">payload</span><span class="o">=</span><span class="n">payload</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">delete</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">payload</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -3192,7 +3212,7 @@ only after sucessfuly authenticating.</p></div>
 <span class="sd">        The method returns an object representing the announcement wit the</span>
 <span class="sd">        specified id in the app.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">delete</span><span class="p">([</span><span class="s">&#39;announcements&#39;</span><span class="p">,</span> <span class="n">announcement_id</span><span class="p">])</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="s">&#39;/announcements/{}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">announcement_id</span><span class="p">))</span>
 
     <span class="k">def</span> <span class="nf">delete_room</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">room_id</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -3214,7 +3234,7 @@ only after sucessfuly authenticating.</p></div>
 <span class="sd">        The method returns an object representing the room with the specified id</span>
 <span class="sd">        in the app.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">delete</span><span class="p">([</span><span class="s">&#39;rooms&#39;</span><span class="p">,</span> <span class="n">room_id</span><span class="p">])</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="s">&#39;/rooms/{}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">room_id</span><span class="p">))</span>
 
     <span class="k">def</span> <span class="nf">publish_announcement</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">announcement_id</span><span class="p">,</span> <span class="n">to_room_id</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -3231,7 +3251,7 @@ only after sucessfuly authenticating.</p></div>
 <span class="sd">        - `room_id (int)`  </span>
 <span class="sd">        The identifier of the room to publish the announcement to.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">update</span><span class="p">([</span><span class="s">&#39;announcements&#39;</span><span class="p">,</span> <span class="n">announcement_id</span><span class="p">,</span> <span class="s">&#39;rooms&#39;</span><span class="p">,</span> <span class="n">to_room_id</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="s">&#39;/announcements/{}/rooms/{}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">announcement_id</span><span class="p">,</span> <span class="n">to_room_id</span><span class="p">))</span>
 
     <span class="k">def</span> <span class="nf">read</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">payload</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -3271,7 +3291,7 @@ only after sucessfuly authenticating.</p></div>
 <span class="sd">        The method returns an object representing the announcement wit the</span>
 <span class="sd">        specified id in the app.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">read</span><span class="p">([</span><span class="s">&#39;announcements&#39;</span><span class="p">,</span> <span class="n">announcement_id</span><span class="p">])</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s">&#39;/announcements/{}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">announcement_id</span><span class="p">))</span>
 
     <span class="k">def</span> <span class="nf">read_announcement_list</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -3282,7 +3302,7 @@ only after sucessfuly authenticating.</p></div>
 <span class="sd">        The method returns a list of annoucement objects ordered by id, which</span>
 <span class="sd">        may be empty if there are no announcements in the app.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">read</span><span class="p">([</span><span class="s">&#39;announcements&#39;</span><span class="p">])</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s">&#39;/announcements&#39;</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">read_announcement_room_list</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">announcement_id</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -3299,7 +3319,7 @@ only after sucessfuly authenticating.</p></div>
 <span class="sd">        may be empty if there are no announcements in the app or none have been</span>
 <span class="sd">        published yet.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">read</span><span class="p">([</span><span class="s">&#39;announcements&#39;</span><span class="p">,</span> <span class="n">announcement_id</span><span class="p">,</span> <span class="s">&#39;rooms&#39;</span><span class="p">])</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s">&#39;/announcements/{}/rooms&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">announcement_id</span><span class="p">))</span>
 
     <span class="k">def</span> <span class="nf">read_room</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">room_id</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -3315,7 +3335,7 @@ only after sucessfuly authenticating.</p></div>
 <span class="sd">        The method returns an object representing the room with the specified id</span>
 <span class="sd">        in the app.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">read</span><span class="p">([</span><span class="s">&#39;rooms&#39;</span><span class="p">,</span> <span class="n">room_id</span><span class="p">])</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s">&#39;/rooms/{}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">room_id</span><span class="p">))</span>
 
     <span class="k">def</span> <span class="nf">read_room_list</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -3326,7 +3346,7 @@ only after sucessfuly authenticating.</p></div>
 <span class="sd">        The method returns a list of room objects ordered by id, which may be</span>
 <span class="sd">        empty if there are no rooms in the app.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">read</span><span class="p">([</span><span class="s">&#39;rooms&#39;</span><span class="p">])</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s">&#39;/rooms&#39;</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">read_room_message_list</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">room_id</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -3362,7 +3382,7 @@ only after sucessfuly authenticating.</p></div>
 <span class="sd">        The method returns a list of message objects, which may be empty if no</span>
 <span class="sd">        messages were satisfying the query.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">read</span><span class="p">([</span><span class="s">&#39;rooms&#39;</span><span class="p">,</span> <span class="n">room_id</span><span class="p">,</span> <span class="s">&#39;messages&#39;</span><span class="p">],</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s">&#39;/rooms/{}/messages&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">room_id</span><span class="p">),</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">payload</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -3424,7 +3444,7 @@ only after sucessfuly authenticating.</p></div>
 
 <span class="sd">        The method returns an object representing the newly created room.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">update</span><span class="p">([</span><span class="s">&#39;rooms&#39;</span><span class="p">,</span> <span class="n">room_id</span><span class="p">],</span> <span class="n">payload</span><span class="o">=</span><span class="n">payload</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="s">&#39;/rooms/{}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">room_id</span><span class="p">),</span> <span class="n">payload</span><span class="o">=</span><span class="n">payload</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">update_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">file_obj</span><span class="p">,</span> <span class="n">file_size</span><span class="p">,</span> <span class="n">mime_type</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -3671,55 +3691,6 @@ from the API can take (in seconds).</p>
   
             
   <div class="item">
-    <div class="name def" id="frankly.FranklyClient.authenticate">
-    <p>def <span class="ident">authenticate</span>(</p><p>self, app_key, app_secret)</p>
-    </div>
-    
-
-    
-  
-    <div class="desc"><p>This should be the first method called on an instance of FranklyClient,
-after succesfully returning the client can be used to interact with the
-Frankly API.</p>
-<p><strong>Arguments</strong></p>
-<ul>
-<li>
-<p><code>app_key (str)</code><br />
-The key that specifies which app this client is authenticating for, this
-value is provided by the Frankly Console.</p>
-</li>
-<li>
-<p><code>app_secret (str)</code><br />
-The secret value associated the the key allowing the client to securely
-authenticate against the Frankly API.</p>
-</li>
-</ul></div>
-  <div class="source_cont">
-  <p class="source_link"><a href="javascript:void(0);" onclick="toggle('source-frankly.FranklyClient.authenticate', this);">Show source &equiv;</a></p>
-  <div id="source-frankly.FranklyClient.authenticate" class="source">
-    <div class="codehilite"><pre><span class="k">def</span> <span class="nf">authenticate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">app_key</span><span class="p">,</span> <span class="n">app_secret</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    This should be the first method called on an instance of FranklyClient,</span>
-<span class="sd">    after succesfully returning the client can be used to interact with the</span>
-<span class="sd">    Frankly API.</span>
-<span class="sd">    **Arguments**</span>
-<span class="sd">    - `app_key (str)`  </span>
-<span class="sd">    The key that specifies which app this client is authenticating for, this</span>
-<span class="sd">    value is provided by the Frankly Console.</span>
-<span class="sd">    - `app_secret (str)`  </span>
-<span class="sd">    The secret value associated the the key allowing the client to securely</span>
-<span class="sd">    authenticate against the Frankly API.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">backend</span><span class="o">.</span><span class="n">authenticate</span><span class="p">(</span><span class="n">app_key</span><span class="p">,</span> <span class="n">app_secret</span><span class="p">)</span>
-</pre></div>
-
-  </div>
-</div>
-
-  </div>
-  
-            
-  <div class="item">
     <div class="name def" id="frankly.FranklyClient.close">
     <p>def <span class="ident">close</span>(</p><p>self)</p>
     </div>
@@ -3851,7 +3822,7 @@ messages.</p>
 <span class="sd">    **Return**</span>
 <span class="sd">    The method returns an object representing the newly created announcement.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">create</span><span class="p">([</span><span class="s">&#39;announcements&#39;</span><span class="p">],</span> <span class="n">payload</span><span class="o">=</span><span class="n">payload</span><span class="p">)</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="s">&#39;/announcements&#39;</span><span class="p">,</span> <span class="n">payload</span><span class="o">=</span><span class="n">payload</span><span class="p">)</span>
 </pre></div>
 
   </div>
@@ -3904,7 +3875,7 @@ the documentation).</p>
 <span class="sd">    **Return**</span>
 <span class="sd">    The method returns an object representing the newly created file.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">create</span><span class="p">([</span><span class="s">&#39;files&#39;</span><span class="p">],</span> <span class="n">params</span><span class="o">=</span><span class="n">payload</span><span class="p">)</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="s">&#39;/files&#39;</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">payload</span><span class="p">)</span>
 </pre></div>
 
   </div>
@@ -3985,7 +3956,7 @@ a Frankly SDK.</p>
 <span class="sd">    **Return**</span>
 <span class="sd">    The method returns an object representing the newly created room.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">create</span><span class="p">([</span><span class="s">&#39;rooms&#39;</span><span class="p">],</span> <span class="n">payload</span><span class="o">=</span><span class="n">payload</span><span class="p">)</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="s">&#39;/rooms&#39;</span><span class="p">,</span> <span class="n">payload</span><span class="o">=</span><span class="n">payload</span><span class="p">)</span>
 </pre></div>
 
   </div>
@@ -4034,7 +4005,7 @@ for more details about content objects.</li>
 <span class="sd">    **Return**</span>
 <span class="sd">    The method returns an object representing the newly created message.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">create</span><span class="p">([</span><span class="s">&#39;rooms&#39;</span><span class="p">,</span> <span class="n">room_id</span><span class="p">,</span> <span class="s">&#39;messages&#39;</span><span class="p">],</span> <span class="n">payload</span><span class="o">=</span><span class="n">payload</span><span class="p">)</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="s">&#39;/rooms/{}/messages&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">room_id</span><span class="p">),</span> <span class="n">payload</span><span class="o">=</span><span class="n">payload</span><span class="p">)</span>
 </pre></div>
 
   </div>
@@ -4132,7 +4103,7 @@ specified id in the app.</p></div>
 <span class="sd">    The method returns an object representing the announcement wit the</span>
 <span class="sd">    specified id in the app.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">delete</span><span class="p">([</span><span class="s">&#39;announcements&#39;</span><span class="p">,</span> <span class="n">announcement_id</span><span class="p">])</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="s">&#39;/announcements/{}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">announcement_id</span><span class="p">))</span>
 </pre></div>
 
   </div>
@@ -4179,7 +4150,66 @@ in the app.</p></div>
 <span class="sd">    The method returns an object representing the room with the specified id</span>
 <span class="sd">    in the app.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">delete</span><span class="p">([</span><span class="s">&#39;rooms&#39;</span><span class="p">,</span> <span class="n">room_id</span><span class="p">])</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="s">&#39;/rooms/{}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">room_id</span><span class="p">))</span>
+</pre></div>
+
+  </div>
+</div>
+
+  </div>
+  
+            
+  <div class="item">
+    <div class="name def" id="frankly.FranklyClient.open">
+    <p>def <span class="ident">open</span>(</p><p>self, app_key, app_secret)</p>
+    </div>
+    
+
+    
+  
+    <div class="desc"><p>This should be the first method called on an instance of FranklyClient,
+after succesfully returning the client can be used to interact with the
+Frankly API.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li>
+<p><code>app_key (str)</code><br />
+The key that specifies which app this client is authenticating for, this
+value is provided by the Frankly Console.</p>
+</li>
+<li>
+<p><code>app_secret (str)</code><br />
+The secret value associated the the key allowing the client to securely
+authenticate against the Frankly API.</p>
+</li>
+</ul>
+<p><strong>Return</strong></p>
+<p>On success the method returns a session object which contains two fields,
+<code>app_id</code> with the identifier of the application this client has
+authenticated for, and <code>app_user_id</code> with the identifier of the actual
+user this client will run as.</p></div>
+  <div class="source_cont">
+  <p class="source_link"><a href="javascript:void(0);" onclick="toggle('source-frankly.FranklyClient.open', this);">Show source &equiv;</a></p>
+  <div id="source-frankly.FranklyClient.open" class="source">
+    <div class="codehilite"><pre><span class="k">def</span> <span class="nf">open</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">app_key</span><span class="p">,</span> <span class="n">app_secret</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This should be the first method called on an instance of FranklyClient,</span>
+<span class="sd">    after succesfully returning the client can be used to interact with the</span>
+<span class="sd">    Frankly API.</span>
+<span class="sd">    **Arguments**</span>
+<span class="sd">    - `app_key (str)`  </span>
+<span class="sd">    The key that specifies which app this client is authenticating for, this</span>
+<span class="sd">    value is provided by the Frankly Console.</span>
+<span class="sd">    - `app_secret (str)`  </span>
+<span class="sd">    The secret value associated the the key allowing the client to securely</span>
+<span class="sd">    authenticate against the Frankly API.</span>
+<span class="sd">    **Return**</span>
+<span class="sd">    On success the method returns a session object which contains two fields,</span>
+<span class="sd">    `app_id` with the identifier of the application this client has</span>
+<span class="sd">    authenticated for, and `app_user_id` with the identifier of the actual</span>
+<span class="sd">    user this client will run as.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">backend</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">app_key</span><span class="p">,</span> <span class="n">app_secret</span><span class="p">)</span>
 </pre></div>
 
   </div>
@@ -4226,7 +4256,7 @@ The identifier of the room to publish the announcement to.</p>
 <span class="sd">    - `room_id (int)`  </span>
 <span class="sd">    The identifier of the room to publish the announcement to.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">update</span><span class="p">([</span><span class="s">&#39;announcements&#39;</span><span class="p">,</span> <span class="n">announcement_id</span><span class="p">,</span> <span class="s">&#39;rooms&#39;</span><span class="p">,</span> <span class="n">to_room_id</span><span class="p">])</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="s">&#39;/announcements/{}/rooms/{}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">announcement_id</span><span class="p">,</span> <span class="n">to_room_id</span><span class="p">))</span>
 </pre></div>
 
   </div>
@@ -4322,7 +4352,7 @@ specified id in the app.</p></div>
 <span class="sd">    The method returns an object representing the announcement wit the</span>
 <span class="sd">    specified id in the app.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">read</span><span class="p">([</span><span class="s">&#39;announcements&#39;</span><span class="p">,</span> <span class="n">announcement_id</span><span class="p">])</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s">&#39;/announcements/{}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">announcement_id</span><span class="p">))</span>
 </pre></div>
 
   </div>
@@ -4353,7 +4383,7 @@ may be empty if there are no announcements in the app.</p></div>
 <span class="sd">    The method returns a list of annoucement objects ordered by id, which</span>
 <span class="sd">    may be empty if there are no announcements in the app.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">read</span><span class="p">([</span><span class="s">&#39;announcements&#39;</span><span class="p">])</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s">&#39;/announcements&#39;</span><span class="p">)</span>
 </pre></div>
 
   </div>
@@ -4394,7 +4424,7 @@ published yet.</p></div>
 <span class="sd">    may be empty if there are no announcements in the app or none have been</span>
 <span class="sd">    published yet.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">read</span><span class="p">([</span><span class="s">&#39;announcements&#39;</span><span class="p">,</span> <span class="n">announcement_id</span><span class="p">,</span> <span class="s">&#39;rooms&#39;</span><span class="p">])</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s">&#39;/announcements/{}/rooms&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">announcement_id</span><span class="p">))</span>
 </pre></div>
 
   </div>
@@ -4433,7 +4463,7 @@ in the app.</p></div>
 <span class="sd">    The method returns an object representing the room with the specified id</span>
 <span class="sd">    in the app.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">read</span><span class="p">([</span><span class="s">&#39;rooms&#39;</span><span class="p">,</span> <span class="n">room_id</span><span class="p">])</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s">&#39;/rooms/{}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">room_id</span><span class="p">))</span>
 </pre></div>
 
   </div>
@@ -4464,7 +4494,7 @@ empty if there are no rooms in the app.</p></div>
 <span class="sd">    The method returns a list of room objects ordered by id, which may be</span>
 <span class="sd">    empty if there are no rooms in the app.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">read</span><span class="p">([</span><span class="s">&#39;rooms&#39;</span><span class="p">])</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s">&#39;/rooms&#39;</span><span class="p">)</span>
 </pre></div>
 
   </div>
@@ -4545,7 +4575,7 @@ messages were satisfying the query.</p></div>
 <span class="sd">    The method returns a list of message objects, which may be empty if no</span>
 <span class="sd">    messages were satisfying the query.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">read</span><span class="p">([</span><span class="s">&#39;rooms&#39;</span><span class="p">,</span> <span class="n">room_id</span><span class="p">,</span> <span class="s">&#39;messages&#39;</span><span class="p">],</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">)</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s">&#39;/rooms/{}/messages&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">room_id</span><span class="p">),</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">)</span>
 </pre></div>
 
   </div>
@@ -4808,7 +4838,7 @@ a Frankly SDK.</p>
 <span class="sd">    **Return**</span>
 <span class="sd">    The method returns an object representing the newly created room.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">update</span><span class="p">([</span><span class="s">&#39;rooms&#39;</span><span class="p">,</span> <span class="n">room_id</span><span class="p">],</span> <span class="n">payload</span><span class="o">=</span><span class="n">payload</span><span class="p">)</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="s">&#39;/rooms/{}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">room_id</span><span class="p">),</span> <span class="n">payload</span><span class="o">=</span><span class="n">payload</span><span class="p">)</span>
 </pre></div>
 
   </div>
@@ -5076,7 +5106,7 @@ any call to methods of the <a href="#frankly.FranklyClient"><code>FranklyClient<
         <span class="bp">self</span><span class="o">.</span><span class="n">_message</span>   <span class="o">=</span> <span class="n">message</span>
 
     <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="s">&#39;</span><span class="si">%s</span><span class="s"> </span><span class="si">%s</span><span class="s"> [</span><span class="si">%s</span><span class="s">]: </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_operation</span><span class="p">,</span> <span class="n">join_path</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_path</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">_status</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_message</span><span class="p">)</span>
+        <span class="k">return</span> <span class="s">&#39;</span><span class="si">%s</span><span class="s"> </span><span class="si">%s</span><span class="s"> [</span><span class="si">%s</span><span class="s">]: </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_operation</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_path</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_status</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_message</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="s">&#39;FranklyError { </span><span class="si">%s</span><span class="s"> }&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">__str__</span><span class="p">()</span>
