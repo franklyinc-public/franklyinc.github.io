@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Documentation by YARD 0.8.7.6</title>
+    <title>frankly</title>
     <style type="text/css">
   body {
   padding: 0 20px;
@@ -576,8 +576,21 @@ $(generateTOC);
   </head>
   <body>
     <div id="content">
-      <h1>Documentation by YARD 0.8.7.6</h1>
+      <h1>frankly</h1>
       <div id="readme">
+  
+<p>This gem exposes a REST API to give a higer control to customers over the
+way they want to use the platform. Most operations available through the
+Frankly Console can be automated by querying the Frankly API directly.</p>
+
+<p>But the API needing to be secure and flexible a developer needs to master a
+couple of concepts about how it works to take most advantage of it. To make
+the learning curve smoother and development faster the frankly module
+exposes operations available on the API through methods of a client object.</p>
+
+<p>Things like authentication which are redundant and unproductive tasks are
+nicely abstracted by the module to help developers focus on the core of
+what they need to get done with the Frankly API.</p>
 
 </div><h1>Top Level Namespace
   
@@ -664,17 +677,6 @@ REST APIs.</p>
 </div>
 <div class="tags">
   
-  <div class="examples">
-    <p class="tag_title">Examples:</p>
-    
-      
-      <pre class="example code"><code><span class='id identifier rubyid_require'>require</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>franklyclient</span><span class='tstring_end'>&#39;</span></span>
-
-<span class='id identifier rubyid_client'>client</span> <span class='op'>=</span> <span class='const'>FranklyClient</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
-<span class='id identifier rubyid_client'>client</span><span class='period'>.</span><span class='id identifier rubyid_authenticate'>authenticate</span> <span class='id identifier rubyid_app_key'>app_key</span><span class='comma'>,</span> <span class='id identifier rubyid_app_secret'>app_secret</span></code></pre>
-    
-  </div>
-
 
 </div>
 
@@ -694,7 +696,7 @@ REST APIs.</p>
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#authenticate-instance_method" title="#authenticate (instance method)">- (nil) <strong>authenticate</strong>(auth_key, auth_secret) </a>
+      <a href="#close-instance_method" title="#close (instance method)">- (Object) <strong>close</strong> </a>
     
 
     
@@ -709,7 +711,7 @@ REST APIs.</p>
 
   
     <span class="summary_desc"><div class='inline'>
-<p>Performs the authentication handshake.</p>
+<p>Discards all internal state maintained by this clien.</p>
 </div></span>
   
 </li>
@@ -718,7 +720,7 @@ REST APIs.</p>
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#create_message-instance_method" title="#create_message (instance method)">- (Hash) <strong>create_message</strong>(room_id, payload) </a>
+      <a href="#create-instance_method" title="#create (instance method)">- (Hash/Array) <strong>create</strong>(path, params = {}, payload = {}) </a>
     
 
     
@@ -733,7 +735,56 @@ REST APIs.</p>
 
   
     <span class="summary_desc"><div class='inline'>
-<p>Create a message for the room with id sepecified as first argument.</p>
+<p>This method exposes a generic interface for creating objects through the
+Frankly API.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#create_announcement-instance_method" title="#create_announcement (instance method)">- (Hash) <strong>create_announcement</strong>(payload) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Creates a new announcement object in the app.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#create_file-instance_method" title="#create_file (instance method)">- (Hash) <strong>create_file</strong>(params) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Creates a new file object on Frankly servers and returns that object.</p>
 </div></span>
   
 </li>
@@ -757,7 +808,82 @@ REST APIs.</p>
 
   
     <span class="summary_desc"><div class='inline'>
-<p>Creates a new room in the app.</p>
+<p>Creates a new room object in the app.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#create_room_message-instance_method" title="#create_room_message (instance method)">- (Hash) <strong>create_room_message</strong>(room_id, payload) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Creates a new message object in the room with id specified as first
+argument.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#delete-instance_method" title="#delete (instance method)">- (nil) <strong>delete</strong>(path, params = {}, payload = {}) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>This method exposes a generic interface for deleting objects through the
+Frankly API.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#delete_announcement-instance_method" title="#delete_announcement (instance method)">- (nil) <strong>delete_announcement</strong>(announcement_id) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Deletes an announcement object with id sepecified as first argument from
+the app.</p>
 </div></span>
   
 </li>
@@ -781,30 +907,8 @@ REST APIs.</p>
 
   
     <span class="summary_desc"><div class='inline'>
-<p>Delete the room object with id specified as argument.</p>
+<p>Deletes an room object with id sepecified as first argument from the app.</p>
 </div></span>
-  
-</li>
-
-      
-        <li class="public ">
-  <span class="summary_signature">
-    
-      <a href="#get_file_url-instance_method" title="#get_file_url (instance method)">- (Object) <strong>get_file_url</strong>(params) </a>
-    
-
-    
-  </span>
-  
-  
-  
-  
-  
-  
-  
-
-  
-    <span class="summary_desc"><div class='inline'></div></span>
   
 </li>
 
@@ -838,6 +942,155 @@ REST APIs.</p>
         <li class="public ">
   <span class="summary_signature">
     
+      <a href="#open-instance_method" title="#open (instance method)">- (nil) <strong>open</strong>(app_key, app_secret) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>This should be the first method called on an instance of FranklyClient,
+after succesfully returning the client can be used to interact with the
+Frankly API.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#publish_announcement-instance_method" title="#publish_announcement (instance method)">- (nil) <strong>publish_announcement</strong>(announcement_id, room_id) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Calling this method causes the announcement with id specified as first
+argument to the room with id specified as second argument.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#read-instance_method" title="#read (instance method)">- (Hash/Array) <strong>read</strong>(path, params = {}, payload = {}) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>This method exposes a generic interface for reading objects through the
+Frankly API.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#read_announcement-instance_method" title="#read_announcement (instance method)">- (Hash) <strong>read_announcement</strong>(announcement_id) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Retrieves an announcement object with id sepecified as first argument from
+the app.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#read_announcement_list-instance_method" title="#read_announcement_list (instance method)">- (Array) <strong>read_announcement_list</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Retrieves a list of announcements available in the app.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#read_announcement_room_list-instance_method" title="#read_announcement_room_list (instance method)">- (Array) <strong>read_announcement_room_list</strong>(announcement_id) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Retrieves a list of announcements available in the app.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#read_room-instance_method" title="#read_room (instance method)">- (Hash) <strong>read_room</strong>(room_id) </a>
     
 
@@ -853,7 +1106,7 @@ REST APIs.</p>
 
   
     <span class="summary_desc"><div class='inline'>
-<p>Fetchs the room with id sepecified as argument.</p>
+<p>Retrieves a room object with id specified as first argument from the app.</p>
 </div></span>
   
 </li>
@@ -877,7 +1130,105 @@ REST APIs.</p>
 
   
     <span class="summary_desc"><div class='inline'>
-<p>Fetches the list of rooms available in the app.</p>
+<p>Retrieves the list of all available rooms from the app.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#read_room_message_list-instance_method" title="#read_room_message_list (instance method)">- (Array) <strong>read_room_message_list</strong>(room_id, params) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Creates a new message object in the room with id specified as first
+argument.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#update-instance_method" title="#update (instance method)">- (Hash/Array) <strong>update</strong>(path, params = {}, payload = {}) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>This method exposes a generic interface for updating objects through the
+Frankly API.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#update_file-instance_method" title="#update_file (instance method)">- (nil) <strong>update_file</strong>(destination_url, file_obj, file_size, mime_type, encoding = nil) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Creates a new file object on Frankly servers and returns that object.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#update_file_from_path-instance_method" title="#update_file_from_path (instance method)">- (nil) <strong>update_file_from_path</strong>(destination_url, file_path) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Creates a new file object on Frankly servers and returns that object.</p>
 </div></span>
   
 </li>
@@ -901,7 +1252,7 @@ REST APIs.</p>
 
   
     <span class="summary_desc"><div class='inline'>
-<p>Updates the room object with id specified as first argument.</p>
+<p>Updates an existing room object in the app and return that object.</p>
 </div></span>
   
 </li>
@@ -910,7 +1261,7 @@ REST APIs.</p>
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#upload_file-instance_method" title="#upload_file (instance method)">- (Object) <strong>upload_file</strong>(file_path, destination_url) </a>
+      <a href="#upload-instance_method" title="#upload (instance method)">- (nil) <strong>upload</strong>(url, params, payload, content_length, content_type, content_encoding) </a>
     
 
     
@@ -924,7 +1275,60 @@ REST APIs.</p>
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'>
+<p>This method exposes a generic interface for uploading file contents through
+the Frankly API.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#upload_file-instance_method" title="#upload_file (instance method)">- (Hash) <strong>upload_file</strong>(file_obj, file_size, mime_type, encoding = nil, params) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>This method is convenience wrapper for creating a new file object on the
+Frankly API and setting its content.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#upload_file_from_path-instance_method" title="#upload_file_from_path (instance method)">- (Hash) <strong>upload_file_from_path</strong>(file_path, params) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>This method is convenience wrapper for creating a new file object on the
+Frankly API and setting its content.</p>
+</div></span>
   
 </li>
 
@@ -961,17 +1365,17 @@ REST APIs.</p>
       <pre class="lines">
 
 
-45
-46
-47
-48</pre>
+40
+41
+42
+43</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/franklyclient.rb', line 45</span>
+      <pre class="code"><span class="info file"># File 'lib/franklyclient.rb', line 40</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span>
-  <span class='ivar'>@cookies</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
   <span class='ivar'>@headers</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
+  <span class='ivar'>@session_token</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -986,9 +1390,9 @@ REST APIs.</p>
 
     
       <div class="method_details first">
-  <h3 class="signature first" id="authenticate-instance_method">
+  <h3 class="signature first" id="close-instance_method">
   
-    - (<tt>nil</tt>) <strong>authenticate</strong>(auth_key, auth_secret) 
+    - (<tt>Object</tt>) <strong>close</strong> 
   
 
   
@@ -997,72 +1401,13 @@ REST APIs.</p>
 </h3><div class="docstring">
   <div class="discussion">
     
-<p>Performs the authentication handshake</p>
-
-<p>If successful this client object will then be identified as an admin user
-of the app specified by the authentication key and secrets given as
-arguments.</p>
+<p>Discards all internal state maintained by this clien.</p>
 
 
   </div>
 </div>
 <div class="tags">
-  <p class="tag_title">Parameters:</p>
-<ul class="param">
   
-    <li>
-      
-        <span class='name'>auth_key</span>
-      
-      
-        <span class='type'>(<tt>String</tt>)</span>
-      
-      
-      
-        &mdash;
-        <div class='inline'>
-<p>The app&#39;s authentication key as provided by the Frankly console.</p>
-</div>
-      
-    </li>
-  
-    <li>
-      
-        <span class='name'>auth_secret</span>
-      
-      
-        <span class='type'>(<tt>String</tt>)</span>
-      
-      
-      
-        &mdash;
-        <div class='inline'>
-<p>The app&#39;s authentication secret as provided by the Frankly console.</p>
-</div>
-      
-    </li>
-  
-</ul>
-
-<p class="tag_title">Returns:</p>
-<ul class="return">
-  
-    <li>
-      
-      
-        <span class='type'>(<tt>nil</tt>)</span>
-      
-      
-      
-        &mdash;
-        <div class='inline'>
-<p>The method doesn&#39;t return anything, it modified the internal state of
-the object it is called on.</p>
-</div>
-      
-    </li>
-  
-</ul>
 
 </div><table class="source_code">
   <tr>
@@ -1070,51 +1415,17 @@ the object it is called on.</p>
       <pre class="lines">
 
 
-150
-151
-152
-153
-154
-155
-156
-157
-158
-159
-160
-161
-162
-163
-164
-165
-166
-167
-168
-169
-170</pre>
+84
+85
+86
+87</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/franklyclient.rb', line 150</span>
+      <pre class="code"><span class="info file"># File 'lib/franklyclient.rb', line 84</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_authenticate'>authenticate</span><span class='lparen'>(</span><span class='id identifier rubyid_auth_key'>auth_key</span><span class='comma'>,</span> <span class='id identifier rubyid_auth_secret'>auth_secret</span><span class='rparen'>)</span>
-  <span class='id identifier rubyid_nonce'>nonce</span> <span class='op'>=</span> <span class='const'>Auth</span><span class='period'>.</span><span class='id identifier rubyid_nonce'>nonce</span><span class='lbracket'>[</span><span class='int'>1</span><span class='op'>..</span><span class='op'>-</span><span class='int'>2</span><span class='rbracket'>]</span>
-
-  <span class='id identifier rubyid_auth_header'>auth_header</span> <span class='op'>=</span> <span class='lbrace'>{</span>
-    <span class='label'>typ:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>JWS</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span>
-    <span class='label'>alg:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>HS256</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span>
-    <span class='label'>cty:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>frankly-it;v1</span><span class='tstring_end'>&#39;</span></span>
-  <span class='rbrace'>}</span>
-  
-  <span class='id identifier rubyid_auth_claims'>auth_claims</span> <span class='op'>=</span> <span class='lbrace'>{</span>
-    <span class='label'>aak:</span> <span class='id identifier rubyid_auth_key'>auth_key</span><span class='comma'>,</span>
-    <span class='label'>iat:</span> <span class='const'>Time</span><span class='period'>.</span><span class='id identifier rubyid_now'>now</span><span class='period'>.</span><span class='id identifier rubyid_to_i'>to_i</span><span class='comma'>,</span>
-    <span class='label'>exp:</span> <span class='const'>Time</span><span class='period'>.</span><span class='id identifier rubyid_now'>now</span><span class='period'>.</span><span class='id identifier rubyid_to_i'>to_i</span> <span class='op'>+</span> <span class='int'>10</span> <span class='op'>*</span> <span class='int'>24</span> <span class='op'>*</span> <span class='int'>60</span> <span class='op'>*</span> <span class='int'>60</span><span class='comma'>,</span>
-    <span class='label'>nce:</span> <span class='id identifier rubyid_nonce'>nonce</span><span class='comma'>,</span>
-    <span class='label'>role:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>admin</span><span class='tstring_end'>&#39;</span></span>
-  <span class='rbrace'>}</span>
-
-  <span class='id identifier rubyid_identity_token'>identity_token</span> <span class='op'>=</span> <span class='const'>JWT</span><span class='period'>.</span><span class='id identifier rubyid_encode'>encode</span><span class='lparen'>(</span><span class='id identifier rubyid_auth_claims'>auth_claims</span><span class='comma'>,</span> <span class='id identifier rubyid_auth_secret'>auth_secret</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>HS256</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_auth_header'>auth_header</span><span class='rparen'>)</span>
-  <span class='ivar'>@cookies</span> <span class='op'>=</span> <span class='const'>Auth</span><span class='period'>.</span><span class='id identifier rubyid_auth'>auth</span><span class='lparen'>(</span><span class='id identifier rubyid_identity_token'>identity_token</span><span class='rparen'>)</span>
-  <span class='ivar'>@headers</span> <span class='op'>=</span> <span class='const'>Util</span><span class='period'>.</span><span class='id identifier rubyid_build_headers'>build_headers</span><span class='lparen'>(</span><span class='ivar'>@cookies</span><span class='rparen'>)</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_close'>close</span>
+  <span class='ivar'>@session_token</span> <span class='op'>=</span> <span class='kw'>nil</span>
+  <span class='ivar'>@headers</span> <span class='op'>=</span> <span class='kw'>nil</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -1122,9 +1433,9 @@ the object it is called on.</p>
 </div>
     
       <div class="method_details ">
-  <h3 class="signature " id="create_message-instance_method">
+  <h3 class="signature " id="create-instance_method">
   
-    - (<tt>Hash</tt>) <strong>create_message</strong>(room_id, payload) 
+    - (<tt>Hash/Array</tt>) <strong>create</strong>(path, params = {}, payload = {}) 
   
 
   
@@ -1133,9 +1444,8 @@ the object it is called on.</p>
 </h3><div class="docstring">
   <div class="discussion">
     
-<p>Create a message for the room with id sepecified as first argument. The
-message will be published to all current participants and subscribers of
-the room.</p>
+<p>This method exposes a generic interface for creating objects through the
+Frankly API. Every create_* method is implemented on top of this one.</p>
 
 
   </div>
@@ -1146,16 +1456,34 @@ the room.</p>
   
     <li>
       
-        <span class='name'>room_id</span>
+        <span class='name'>path</span>
       
       
-        <span class='type'>(<tt>Integer</tt>)</span>
+        <span class='type'>(<tt>Array</tt>)</span>
       
       
       
         &mdash;
         <div class='inline'>
-<p>The id of the room to create a message in.</p>
+<p>An Array of strings representing the collection to create an object in.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>params</span>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>{}</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Parameters passed as part of the request.</p>
 </div>
       
     </li>
@@ -1168,10 +1496,94 @@ the room.</p>
         <span class='type'>(<tt>Hash</tt>)</span>
       
       
+        <em class="default">(defaults to: <tt>{}</tt>)</em>
+      
       
         &mdash;
         <div class='inline'>
-<p>A hashing containing properties to set on the newly created message.</p>
+<p>Dict-like object representing the object to create.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Hash/Array</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The method returns either a hash, or an array of hashes representing the
+object or objects that were created.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+168
+169
+170</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/franklyclient.rb', line 168</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_create'>create</span><span class='lparen'>(</span><span class='id identifier rubyid_path'>path</span><span class='comma'>,</span> <span class='id identifier rubyid_params'>params</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='comma'>,</span> <span class='id identifier rubyid_payload'>payload</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
+  <span class='const'>JSON</span><span class='period'>.</span><span class='id identifier rubyid_parse'>parse</span> <span class='const'>Generic</span><span class='period'>.</span><span class='id identifier rubyid_create'>create</span><span class='lparen'>(</span><span class='ivar'>@headers</span><span class='comma'>,</span> <span class='ivar'>@session_token</span><span class='comma'>,</span> <span class='id identifier rubyid_path'>path</span><span class='comma'>,</span> <span class='id identifier rubyid_params'>params</span><span class='comma'>,</span> <span class='id identifier rubyid_payload'>payload</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="create_announcement-instance_method">
+  
+    - (<tt>Hash</tt>) <strong>create_announcement</strong>(payload) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Creates a new announcement object in the app. The properties of that new
+announcement are given as hash to the method.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>payload</span>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>A hash containing the properties of the new announcement. See the
+Announcement section above to see how properly format this argument</p>
 </div>
       
     </li>
@@ -1190,8 +1602,7 @@ the room.</p>
       
         &mdash;
         <div class='inline'>
-<p>The method returns a hashing containing properties of the newly created
-message.</p>
+<p>The method returns a hash that represents the newly created announcement.</p>
 </div>
       
     </li>
@@ -1204,17 +1615,96 @@ message.</p>
       <pre class="lines">
 
 
-74
-75
-76
-77</pre>
+264
+265
+266</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/franklyclient.rb', line 74</span>
+      <pre class="code"><span class="info file"># File 'lib/franklyclient.rb', line 264</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_create_message'>create_message</span><span class='lparen'>(</span><span class='id identifier rubyid_room_id'>room_id</span><span class='comma'>,</span> <span class='id identifier rubyid_payload'>payload</span><span class='rparen'>)</span>
-  <span class='const'>JSON</span><span class='period'>.</span><span class='id identifier rubyid_parse'>parse</span> <span class='const'>Message</span><span class='period'>.</span><span class='id identifier rubyid_create_message'>create_message</span><span class='lparen'>(</span><span class='ivar'>@headers</span><span class='comma'>,</span> <span class='ivar'>@cookies</span><span class='comma'>,</span>
-                                    <span class='id identifier rubyid_room_id'>room_id</span><span class='comma'>,</span> <span class='id identifier rubyid_payload'>payload</span><span class='period'>.</span><span class='id identifier rubyid_to_json'>to_json</span><span class='rparen'>)</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_create_announcement'>create_announcement</span><span class='lparen'>(</span><span class='id identifier rubyid_payload'>payload</span><span class='rparen'>)</span>
+  <span class='const'>Json</span><span class='period'>.</span><span class='id identifier rubyid_parse'>parse</span> <span class='const'>Announcement</span><span class='period'>.</span><span class='id identifier rubyid_create_announcement'>create_announcement</span><span class='lparen'>(</span><span class='ivar'>@headers</span><span class='comma'>,</span> <span class='ivar'>@session_token</span><span class='comma'>,</span> <span class='id identifier rubyid_payload'>payload</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="create_file-instance_method">
+  
+    - (<tt>Hash</tt>) <strong>create_file</strong>(params) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Creates a new file object on Frankly servers and returns that object. The
+properties of that new file are given as a hash to the method.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>params</span>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>A hash containing the properties of the new file. See the Files section
+above to see how properly format this argument.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The method returns a hash that represents the newly created file.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+370
+371
+372</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/franklyclient.rb', line 370</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_create_file'>create_file</span><span class='lparen'>(</span><span class='id identifier rubyid_params'>params</span><span class='rparen'>)</span>
+  <span class='const'>JSON</span><span class='period'>.</span><span class='id identifier rubyid_parse'>parse</span> <span class='const'>Files</span><span class='period'>.</span><span class='id identifier rubyid_create_file'>create_file</span><span class='lparen'>(</span><span class='ivar'>@headers</span><span class='comma'>,</span> <span class='ivar'>@session_token</span><span class='comma'>,</span> <span class='id identifier rubyid_params'>params</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -1233,7 +1723,8 @@ message.</p>
 </h3><div class="docstring">
   <div class="discussion">
     
-<p>Creates a new room in the app.</p>
+<p>Creates a new room object in the app. The properties of that new room are
+given as hash to the method.</p>
 
 
   </div>
@@ -1253,7 +1744,8 @@ message.</p>
       
         &mdash;
         <div class='inline'>
-<p>A hashing continaing properties to set on the newly created room.</p>
+<p>A hash containing the properties of the new room. See the Rooms section
+above to see how properly format this argument</p>
 </div>
       
     </li>
@@ -1272,7 +1764,7 @@ message.</p>
       
         &mdash;
         <div class='inline'>
-<p>A hashing containing properties of the newly created room.</p>
+<p>The method returns a hash that represents the newly created room.</p>
 </div>
       
     </li>
@@ -1285,15 +1777,15 @@ message.</p>
       <pre class="lines">
 
 
-57
-58
-59</pre>
+98
+99
+100</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/franklyclient.rb', line 57</span>
+      <pre class="code"><span class="info file"># File 'lib/franklyclient.rb', line 98</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_create_room'>create_room</span><span class='lparen'>(</span><span class='id identifier rubyid_payload'>payload</span><span class='rparen'>)</span>
-  <span class='const'>JSON</span><span class='period'>.</span><span class='id identifier rubyid_parse'>parse</span> <span class='const'>Rooms</span><span class='period'>.</span><span class='id identifier rubyid_create_room'>create_room</span><span class='lparen'>(</span><span class='ivar'>@headers</span><span class='comma'>,</span> <span class='ivar'>@cookies</span><span class='comma'>,</span> <span class='id identifier rubyid_payload'>payload</span><span class='period'>.</span><span class='id identifier rubyid_to_json'>to_json</span><span class='rparen'>)</span>
+  <span class='const'>JSON</span><span class='period'>.</span><span class='id identifier rubyid_parse'>parse</span> <span class='const'>Rooms</span><span class='period'>.</span><span class='id identifier rubyid_create_room'>create_room</span><span class='lparen'>(</span><span class='ivar'>@headers</span><span class='comma'>,</span> <span class='ivar'>@session_token</span><span class='comma'>,</span> <span class='id identifier rubyid_payload'>payload</span><span class='period'>.</span><span class='id identifier rubyid_to_json'>to_json</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -1301,9 +1793,9 @@ message.</p>
 </div>
     
       <div class="method_details ">
-  <h3 class="signature " id="delete_room-instance_method">
+  <h3 class="signature " id="create_room_message-instance_method">
   
-    - (<tt>nil</tt>) <strong>delete_room</strong>(room_id) 
+    - (<tt>Hash</tt>) <strong>create_room_message</strong>(room_id, payload) 
   
 
   
@@ -1312,7 +1804,9 @@ message.</p>
 </h3><div class="docstring">
   <div class="discussion">
     
-<p>Delete the room object with id specified as argument.</p>
+<p>Creates a new message object in the room with id specified as first
+argument. The properties of that new message are given as hash to the
+method.</p>
 
 
   </div>
@@ -1326,13 +1820,146 @@ message.</p>
         <span class='name'>room_id</span>
       
       
-        <span class='type'>(<tt>Integer</tt>)</span>
+        <span class='type'>(<tt>Int</tt>)</span>
       
       
       
         &mdash;
         <div class='inline'>
-<p>The id of the room that should be deleted by this method call.</p>
+<p>The identifier of the room to create the message in.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>payload</span>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>A hash containing the properties of the new message. See the Messages
+section above to see how properly format this argument</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The method returns a hash that represents the newly created message.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+341
+342
+343</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/franklyclient.rb', line 341</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_create_room_message'>create_room_message</span><span class='lparen'>(</span><span class='id identifier rubyid_room_id'>room_id</span><span class='comma'>,</span> <span class='id identifier rubyid_payload'>payload</span><span class='rparen'>)</span>
+  <span class='const'>JSON</span><span class='period'>.</span><span class='id identifier rubyid_parse'>parse</span> <span class='const'>Message</span><span class='period'>.</span><span class='id identifier rubyid_create_room_message'>create_room_message</span><span class='lparen'>(</span><span class='ivar'>@headers</span><span class='comma'>,</span> <span class='ivar'>@session_token</span><span class='comma'>,</span> <span class='id identifier rubyid_room_id'>room_id</span><span class='comma'>,</span> <span class='id identifier rubyid_payload'>payload</span><span class='period'>.</span><span class='id identifier rubyid_to_json'>to_json</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="delete-instance_method">
+  
+    - (<tt>nil</tt>) <strong>delete</strong>(path, params = {}, payload = {}) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>This method exposes a generic interface for deleting objects through the
+Frankly API. Every delete_* method is implemented on top of this one.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>path</span>
+      
+      
+        <span class='type'>(<tt>Array</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>An Array of strings representing the collection to delete an object in.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>params</span>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>{}</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Parameters passed as part of the request.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>payload</span>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>{}</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>A hash representing the body of the request.</p>
 </div>
       
     </li>
@@ -1365,15 +1992,15 @@ on failure.</p>
       <pre class="lines">
 
 
-124
-125
-126</pre>
+223
+224
+225</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/franklyclient.rb', line 124</span>
+      <pre class="code"><span class="info file"># File 'lib/franklyclient.rb', line 223</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_delete_room'>delete_room</span><span class='lparen'>(</span><span class='id identifier rubyid_room_id'>room_id</span><span class='rparen'>)</span>
-  <span class='const'>Rooms</span><span class='period'>.</span><span class='id identifier rubyid_delete_room'>delete_room</span><span class='lparen'>(</span><span class='ivar'>@headers</span><span class='comma'>,</span> <span class='ivar'>@cookies</span><span class='comma'>,</span> <span class='id identifier rubyid_room_id'>room_id</span><span class='rparen'>)</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_delete'>delete</span><span class='lparen'>(</span><span class='id identifier rubyid_path'>path</span><span class='comma'>,</span> <span class='id identifier rubyid_params'>params</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='comma'>,</span> <span class='id identifier rubyid_payload'>payload</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
+  <span class='const'>JSON</span><span class='period'>.</span><span class='id identifier rubyid_parse'>parse</span> <span class='const'>Generic</span><span class='period'>.</span><span class='id identifier rubyid_delete'>delete</span><span class='lparen'>(</span><span class='ivar'>@headers</span><span class='comma'>,</span> <span class='ivar'>@session_token</span><span class='comma'>,</span> <span class='id identifier rubyid_path'>path</span><span class='comma'>,</span> <span class='id identifier rubyid_params'>params</span><span class='comma'>,</span> <span class='id identifier rubyid_payload'>payload</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -1381,39 +2008,9 @@ on failure.</p>
 </div>
     
       <div class="method_details ">
-  <h3 class="signature " id="get_file_url-instance_method">
+  <h3 class="signature " id="delete_announcement-instance_method">
   
-    - (<tt>Object</tt>) <strong>get_file_url</strong>(params) 
-  
-
-  
-
-  
-</h3><table class="source_code">
-  <tr>
-    <td>
-      <pre class="lines">
-
-
-128
-129
-130</pre>
-    </td>
-    <td>
-      <pre class="code"><span class="info file"># File 'lib/franklyclient.rb', line 128</span>
-
-<span class='kw'>def</span> <span class='id identifier rubyid_get_file_url'>get_file_url</span><span class='lparen'>(</span><span class='id identifier rubyid_params'>params</span><span class='rparen'>)</span>
-  <span class='const'>JSON</span><span class='period'>.</span><span class='id identifier rubyid_parse'>parse</span> <span class='const'>Files</span><span class='period'>.</span><span class='id identifier rubyid_get_file_url'>get_file_url</span><span class='lparen'>(</span><span class='ivar'>@headers</span><span class='comma'>,</span> <span class='ivar'>@cookies</span><span class='comma'>,</span> <span class='id identifier rubyid_params'>params</span><span class='rparen'>)</span>
-<span class='kw'>end</span></pre>
-    </td>
-  </tr>
-</table>
-</div>
-    
-      <div class="method_details ">
-  <h3 class="signature " id="read_room-instance_method">
-  
-    - (<tt>Hash</tt>) <strong>read_room</strong>(room_id) 
+    - (<tt>nil</tt>) <strong>delete_announcement</strong>(announcement_id) 
   
 
   
@@ -1422,7 +2019,94 @@ on failure.</p>
 </h3><div class="docstring">
   <div class="discussion">
     
-<p>Fetchs the room with id sepecified as argument.</p>
+<p>Deletes an announcement object with id sepecified as first argument from
+the app. Note that deleting an announcement doesn&#39;t remove messages
+from rooms it has already been published to. This operation cannot be
+undone!</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>announcement_id</span>
+      
+      
+        <span class='type'>(<tt>Int</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The identifier of the announcement to delete.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The method doesn&#39;t return anything on success and throws an exception
+on failure.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+304
+305
+306</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/franklyclient.rb', line 304</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_delete_announcement'>delete_announcement</span><span class='lparen'>(</span><span class='id identifier rubyid_announcement_id'>announcement_id</span><span class='rparen'>)</span>
+  <span class='const'>Json</span><span class='period'>.</span><span class='id identifier rubyid_parse'>parse</span> <span class='const'>Announcement</span><span class='period'>.</span><span class='id identifier rubyid_delete_announcement'>delete_announcement</span><span class='lparen'>(</span><span class='ivar'>@headers</span><span class='comma'>,</span> <span class='ivar'>@session_token</span><span class='comma'>,</span> <span class='id identifier rubyid_announcement_id'>announcement_id</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="delete_room-instance_method">
+  
+    - (<tt>nil</tt>) <strong>delete_room</strong>(room_id) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Deletes an room object with id sepecified as first argument from the app.
+Note that this will cause all messages sent to this room to be deleted as
+well, a safer approach could be to change the room status to
+&#39;unpublished&#39; to hide it without erasing data. This operation
+cannot be undone!</p>
 
 
   </div>
@@ -1436,13 +2120,446 @@ on failure.</p>
         <span class='name'>room_id</span>
       
       
-        <span class='type'>(<tt>Integer</tt>)</span>
+        <span class='type'>(<tt>Int</tt>)</span>
       
       
       
         &mdash;
         <div class='inline'>
-<p>The id of the room to be fetched by this method call.</p>
+<p>The identifier of the room to delete.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The method doesn&#39;t return anything on success and throws an exception
+on failure.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+149
+150
+151</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/franklyclient.rb', line 149</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_delete_room'>delete_room</span><span class='lparen'>(</span><span class='id identifier rubyid_room_id'>room_id</span><span class='rparen'>)</span>
+  <span class='const'>Rooms</span><span class='period'>.</span><span class='id identifier rubyid_delete_room'>delete_room</span><span class='lparen'>(</span><span class='ivar'>@headers</span><span class='comma'>,</span> <span class='ivar'>@session_token</span><span class='comma'>,</span> <span class='id identifier rubyid_room_id'>room_id</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="open-instance_method">
+  
+    - (<tt>nil</tt>) <strong>open</strong>(app_key, app_secret) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>This should be the first method called on an instance of FranklyClient,
+after succesfully returning the client can be used to interact with the
+Frankly API.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>app_key</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The key that specifies which app this client is authenticating for, this
+value is provided by the Frankly Console.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>app_secret</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The secret value associated the the key allowing the client to securely
+authenticate against the Frankly API.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The method doesn&#39;t return anything, it modified the internal state of
+the object it is called on.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/franklyclient.rb', line 60</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_open'>open</span><span class='lparen'>(</span><span class='id identifier rubyid_app_key'>app_key</span><span class='comma'>,</span> <span class='id identifier rubyid_app_secret'>app_secret</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_nonce'>nonce</span> <span class='op'>=</span> <span class='const'>Auth</span><span class='period'>.</span><span class='id identifier rubyid_nonce'>nonce</span><span class='lbracket'>[</span><span class='int'>1</span><span class='op'>..</span><span class='op'>-</span><span class='int'>2</span><span class='rbracket'>]</span>
+
+  <span class='id identifier rubyid_auth_header'>auth_header</span> <span class='op'>=</span> <span class='lbrace'>{</span>
+    <span class='label'>typ:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>JWS</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span>
+    <span class='label'>alg:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>HS256</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span>
+    <span class='label'>cty:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>frankly-it;v1</span><span class='tstring_end'>&#39;</span></span>
+  <span class='rbrace'>}</span>
+
+  <span class='id identifier rubyid_auth_claims'>auth_claims</span> <span class='op'>=</span> <span class='lbrace'>{</span>
+    <span class='label'>aak:</span> <span class='id identifier rubyid_app_key'>app_key</span><span class='comma'>,</span>
+    <span class='label'>iat:</span> <span class='const'>Time</span><span class='period'>.</span><span class='id identifier rubyid_now'>now</span><span class='period'>.</span><span class='id identifier rubyid_to_i'>to_i</span><span class='comma'>,</span>
+    <span class='label'>exp:</span> <span class='const'>Time</span><span class='period'>.</span><span class='id identifier rubyid_now'>now</span><span class='period'>.</span><span class='id identifier rubyid_to_i'>to_i</span> <span class='op'>+</span> <span class='int'>10</span> <span class='op'>*</span> <span class='int'>24</span> <span class='op'>*</span> <span class='int'>60</span> <span class='op'>*</span> <span class='int'>60</span><span class='comma'>,</span>
+    <span class='label'>nce:</span> <span class='id identifier rubyid_nonce'>nonce</span><span class='comma'>,</span>
+    <span class='label'>role:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>admin</span><span class='tstring_end'>&#39;</span></span>
+  <span class='rbrace'>}</span>
+
+  <span class='id identifier rubyid_identity_token'>identity_token</span> <span class='op'>=</span> <span class='const'>JWT</span><span class='period'>.</span><span class='id identifier rubyid_encode'>encode</span><span class='lparen'>(</span><span class='id identifier rubyid_auth_claims'>auth_claims</span><span class='comma'>,</span> <span class='id identifier rubyid_app_secret'>app_secret</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>HS256</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_auth_header'>auth_header</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_session'>session</span> <span class='op'>=</span> <span class='const'>JSON</span><span class='period'>.</span><span class='id identifier rubyid_parse'>parse</span> <span class='const'>Auth</span><span class='period'>.</span><span class='id identifier rubyid_open'>open</span><span class='lparen'>(</span><span class='id identifier rubyid_identity_token'>identity_token</span><span class='rparen'>)</span>
+  <span class='ivar'>@session_token</span> <span class='op'>=</span> <span class='id identifier rubyid_session'>session</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>token</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span>
+  <span class='ivar'>@headers</span> <span class='op'>=</span> <span class='const'>Util</span><span class='period'>.</span><span class='id identifier rubyid_build_headers'>build_headers</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="publish_announcement-instance_method">
+  
+    - (<tt>nil</tt>) <strong>publish_announcement</strong>(announcement_id, room_id) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Calling this method causes the announcement with id specified as first
+argument to the room with id specified as second argument. The properties
+of that new announcement are given as hash to the method.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>announcement_id</span>
+      
+      
+        <span class='type'>(<tt>Int</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The identifier of the announcement to publish.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>room_id</span>
+      
+      
+        <span class='type'>(<tt>Int</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The identifier of the room to publish the announcement to.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The method doesn&#39;t return anything on success and throws an exception
+on failure.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+280
+281
+282</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/franklyclient.rb', line 280</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_publish_announcement'>publish_announcement</span><span class='lparen'>(</span><span class='id identifier rubyid_announcement_id'>announcement_id</span><span class='comma'>,</span> <span class='id identifier rubyid_room_id'>room_id</span><span class='rparen'>)</span>
+  <span class='const'>Json</span><span class='period'>.</span><span class='id identifier rubyid_parse'>parse</span> <span class='const'>Announcement</span><span class='period'>.</span><span class='id identifier rubyid_publish_announcement'>publish_announcement</span><span class='lparen'>(</span><span class='ivar'>@headers</span><span class='comma'>,</span> <span class='ivar'>@session_token</span><span class='comma'>,</span> <span class='id identifier rubyid_announcement_id'>announcement_id</span><span class='comma'>,</span> <span class='id identifier rubyid_room_id'>room_id</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="read-instance_method">
+  
+    - (<tt>Hash/Array</tt>) <strong>read</strong>(path, params = {}, payload = {}) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>This method exposes a generic interface for reading objects through the
+Frankly API. Every read_* method is implemented on top of this one.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>path</span>
+      
+      
+        <span class='type'>(<tt>Array</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>An Array of strings representing the collection to read an object in.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>params</span>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>{}</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Parameters passed as part of the request.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>payload</span>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>{}</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Dict-like object representing the object to create.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Hash/Array</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The method returns the object read from the API at the specified path.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+186
+187
+188</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/franklyclient.rb', line 186</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_read'>read</span><span class='lparen'>(</span><span class='id identifier rubyid_path'>path</span><span class='comma'>,</span> <span class='id identifier rubyid_params'>params</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='comma'>,</span> <span class='id identifier rubyid_payload'>payload</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
+  <span class='const'>JSON</span><span class='period'>.</span><span class='id identifier rubyid_parse'>parse</span> <span class='const'>Generic</span><span class='period'>.</span><span class='id identifier rubyid_read'>read</span><span class='lparen'>(</span><span class='ivar'>@headers</span><span class='comma'>,</span> <span class='ivar'>@session_token</span><span class='comma'>,</span> <span class='id identifier rubyid_path'>path</span><span class='comma'>,</span> <span class='id identifier rubyid_params'>params</span><span class='comma'>,</span> <span class='id identifier rubyid_payload'>payload</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="read_announcement-instance_method">
+  
+    - (<tt>Hash</tt>) <strong>read_announcement</strong>(announcement_id) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Retrieves an announcement object with id sepecified as first argument from
+the app.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>announcement_id</span>
+      
+      
+        <span class='type'>(<tt>Int</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The identifier of the announcement to fetch.</p>
 </div>
       
     </li>
@@ -1461,7 +2578,8 @@ on failure.</p>
       
         &mdash;
         <div class='inline'>
-<p>The method returns a hashing representing the current state of the room.</p>
+<p>The method returns a hash representing the announcement wit the specified
+id in the app.</p>
 </div>
       
     </li>
@@ -1474,15 +2592,15 @@ on failure.</p>
       <pre class="lines">
 
 
-96
-97
-98</pre>
+291
+292
+293</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/franklyclient.rb', line 96</span>
+      <pre class="code"><span class="info file"># File 'lib/franklyclient.rb', line 291</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_read_room'>read_room</span><span class='lparen'>(</span><span class='id identifier rubyid_room_id'>room_id</span><span class='rparen'>)</span>
-  <span class='const'>JSON</span><span class='period'>.</span><span class='id identifier rubyid_parse'>parse</span> <span class='const'>Rooms</span><span class='period'>.</span><span class='id identifier rubyid_read_room'>read_room</span><span class='lparen'>(</span><span class='ivar'>@headers</span><span class='comma'>,</span> <span class='ivar'>@cookies</span><span class='comma'>,</span> <span class='id identifier rubyid_room_id'>room_id</span><span class='rparen'>)</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_read_announcement'>read_announcement</span><span class='lparen'>(</span><span class='id identifier rubyid_announcement_id'>announcement_id</span><span class='rparen'>)</span>
+  <span class='const'>Json</span><span class='period'>.</span><span class='id identifier rubyid_parse'>parse</span> <span class='const'>Announcement</span><span class='period'>.</span><span class='id identifier rubyid_read_announcement'>read_announcement</span><span class='lparen'>(</span><span class='ivar'>@headers</span><span class='comma'>,</span> <span class='ivar'>@session_token</span><span class='comma'>,</span> <span class='id identifier rubyid_announcement_id'>announcement_id</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -1490,9 +2608,9 @@ on failure.</p>
 </div>
     
       <div class="method_details ">
-  <h3 class="signature " id="read_room_list-instance_method">
+  <h3 class="signature " id="read_announcement_list-instance_method">
   
-    - (<tt>Array</tt>) <strong>read_room_list</strong> 
+    - (<tt>Array</tt>) <strong>read_announcement_list</strong> 
   
 
   
@@ -1501,7 +2619,7 @@ on failure.</p>
 </h3><div class="docstring">
   <div class="discussion">
     
-<p>Fetches the list of rooms available in the app.</p>
+<p>Retrieves a list of announcements available in the app.</p>
 
 
   </div>
@@ -1520,8 +2638,8 @@ on failure.</p>
       
         &mdash;
         <div class='inline'>
-<p>The method returns a list of hasings representing all rooms currently
-available in the app.</p>
+<p>The method returns an array of annoucement hashes ordered by id, which may
+be empty if there are no announcements in the app.</p>
 </div>
       
     </li>
@@ -1534,15 +2652,698 @@ available in the app.</p>
       <pre class="lines">
 
 
-84
-85
-86</pre>
+313
+314
+315</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/franklyclient.rb', line 84</span>
+      <pre class="code"><span class="info file"># File 'lib/franklyclient.rb', line 313</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_read_announcement_list'>read_announcement_list</span>
+  <span class='const'>Json</span><span class='period'>.</span><span class='id identifier rubyid_parse'>parse</span> <span class='const'>Announcement</span><span class='period'>.</span><span class='id identifier rubyid_read_announcement_list'>read_announcement_list</span><span class='lparen'>(</span><span class='ivar'>@headers</span><span class='comma'>,</span> <span class='ivar'>@session_token</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="read_announcement_room_list-instance_method">
+  
+    - (<tt>Array</tt>) <strong>read_announcement_room_list</strong>(announcement_id) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Retrieves a list of announcements available in the app.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>announcement_id</span>
+      
+      
+        <span class='type'>(<tt>Int</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The identifier of the announcement to fetch.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The method returns an array of annoucement hashes ordered by id, which may
+be empty if there are no announcements in the app.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+325
+326
+327</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/franklyclient.rb', line 325</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_read_announcement_room_list'>read_announcement_room_list</span><span class='lparen'>(</span><span class='id identifier rubyid_announcement_id'>announcement_id</span><span class='rparen'>)</span>
+  <span class='const'>Json</span><span class='period'>.</span><span class='id identifier rubyid_parse'>parse</span> <span class='const'>Announcement</span><span class='period'>.</span><span class='id identifier rubyid_read_announcement_room_list'>read_announcement_room_list</span><span class='lparen'>(</span><span class='ivar'>@headers</span><span class='comma'>,</span> <span class='ivar'>@session_token</span><span class='comma'>,</span> <span class='id identifier rubyid_announcement_id'>announcement_id</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="read_room-instance_method">
+  
+    - (<tt>Hash</tt>) <strong>read_room</strong>(room_id) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Retrieves a room object with id specified as first argument from the app.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>room_id</span>
+      
+      
+        <span class='type'>(<tt>Int</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The identifier of the room to fetch.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The method returns a hash that represents the fetched room.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+118
+119
+120</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/franklyclient.rb', line 118</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_read_room'>read_room</span><span class='lparen'>(</span><span class='id identifier rubyid_room_id'>room_id</span><span class='rparen'>)</span>
+  <span class='const'>JSON</span><span class='period'>.</span><span class='id identifier rubyid_parse'>parse</span> <span class='const'>Rooms</span><span class='period'>.</span><span class='id identifier rubyid_read_room'>read_room</span><span class='lparen'>(</span><span class='ivar'>@headers</span><span class='comma'>,</span> <span class='ivar'>@session_token</span><span class='comma'>,</span> <span class='id identifier rubyid_room_id'>room_id</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="read_room_list-instance_method">
+  
+    - (<tt>Array</tt>) <strong>read_room_list</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Retrieves the list of all available rooms from the app.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The method returns a list of hashes ordered by id, which may be empty if
+there are no rooms in the app.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+107
+108
+109</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/franklyclient.rb', line 107</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_read_room_list'>read_room_list</span>
-  <span class='const'>JSON</span><span class='period'>.</span><span class='id identifier rubyid_parse'>parse</span> <span class='const'>Rooms</span><span class='period'>.</span><span class='id identifier rubyid_read_room_list'>read_room_list</span><span class='lparen'>(</span><span class='ivar'>@headers</span><span class='comma'>,</span> <span class='ivar'>@cookies</span><span class='rparen'>)</span>
+  <span class='const'>JSON</span><span class='period'>.</span><span class='id identifier rubyid_parse'>parse</span> <span class='const'>Rooms</span><span class='period'>.</span><span class='id identifier rubyid_read_room_list'>read_room_list</span><span class='lparen'>(</span><span class='ivar'>@headers</span><span class='comma'>,</span> <span class='ivar'>@session_token</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="read_room_message_list-instance_method">
+  
+    - (<tt>Array</tt>) <strong>read_room_message_list</strong>(room_id, params) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Creates a new message object in the room with id specified as first
+argument. The properties of that new message are given as hash to the
+method.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>room_id</span>
+      
+      
+        <span class='type'>(<tt>Int</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The identifier of the room to create the message in.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>params</span>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>A hash that defines the range of the messages that are fetched. See the
+Messages section above to see how properly format this argument.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The method returns an array of room hashes which may be empty if no
+messages satisfy the query.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+357
+358
+359</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/franklyclient.rb', line 357</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_read_room_message_list'>read_room_message_list</span><span class='lparen'>(</span><span class='id identifier rubyid_room_id'>room_id</span><span class='comma'>,</span> <span class='id identifier rubyid_params'>params</span><span class='rparen'>)</span>
+  <span class='const'>Json</span><span class='period'>.</span><span class='id identifier rubyid_parse'>parse</span> <span class='const'>Message</span><span class='period'>.</span><span class='id identifier rubyid_read_room_message_list'>read_room_message_list</span><span class='lparen'>(</span><span class='ivar'>@headers</span><span class='comma'>,</span> <span class='ivar'>@session_token</span><span class='comma'>,</span> <span class='id identifier rubyid_room_id'>room_id</span><span class='comma'>,</span> <span class='id identifier rubyid_params'>params</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="update-instance_method">
+  
+    - (<tt>Hash/Array</tt>) <strong>update</strong>(path, params = {}, payload = {}) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>This method exposes a generic interface for updating objects through the
+Frankly API. Every read_* method is implemented on top of this one.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>path</span>
+      
+      
+        <span class='type'>(<tt>Array</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>An Array of strings representing the collection to read an object in.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>params</span>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>{}</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Parameters passed as part of the request.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>payload</span>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>{}</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Dict-like object representing the object to create.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Hash/Array</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The method returns the object updated on the API at the specified path.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+204
+205
+206</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/franklyclient.rb', line 204</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_update'>update</span><span class='lparen'>(</span><span class='id identifier rubyid_path'>path</span><span class='comma'>,</span> <span class='id identifier rubyid_params'>params</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='comma'>,</span> <span class='id identifier rubyid_payload'>payload</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
+  <span class='const'>JSON</span><span class='period'>.</span><span class='id identifier rubyid_parse'>parse</span> <span class='const'>Generic</span><span class='period'>.</span><span class='id identifier rubyid_update'>update</span><span class='lparen'>(</span><span class='ivar'>@headers</span><span class='comma'>,</span> <span class='ivar'>@session_token</span><span class='comma'>,</span> <span class='id identifier rubyid_path'>path</span><span class='comma'>,</span> <span class='id identifier rubyid_params'>params</span><span class='comma'>,</span> <span class='id identifier rubyid_payload'>payload</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="update_file-instance_method">
+  
+    - (<tt>nil</tt>) <strong>update_file</strong>(destination_url, file_obj, file_size, mime_type, encoding = nil) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Creates a new file object on Frankly servers and returns that object. The
+properties of that new file are given as a hash to the method.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>destination_url</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The URL at which the file is hosted on Frankly servers. This can be
+obtained from the url field of an object returned by create_file for
+example.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>file_obj</span>
+      
+      
+        <span class='type'>(<tt>File</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>A file-like object (as returned by File.open(…, “rb”) for example)
+providing the new content of the file.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>file_size</span>
+      
+      
+        <span class='type'>(<tt>Int</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The size of the new file content (in bytes).</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>mime_type</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The mime type of the new file content.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>encoding</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>nil</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The encoding of the new file content (&#39;gzip&#39; for example).</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The method doesn&#39;t return anything on success and throws an exception
+on failure.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+396
+397
+398</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/franklyclient.rb', line 396</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_update_file'>update_file</span><span class='lparen'>(</span><span class='id identifier rubyid_destination_url'>destination_url</span><span class='comma'>,</span> <span class='id identifier rubyid_file_obj'>file_obj</span><span class='comma'>,</span> <span class='id identifier rubyid_file_size'>file_size</span><span class='comma'>,</span> <span class='id identifier rubyid_mime_type'>mime_type</span><span class='comma'>,</span> <span class='id identifier rubyid_encoding'>encoding</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='rparen'>)</span>
+  <span class='const'>Files</span><span class='period'>.</span><span class='id identifier rubyid_upload_file'>upload_file</span><span class='lparen'>(</span><span class='ivar'>@headers</span><span class='comma'>,</span> <span class='ivar'>@session_token</span><span class='comma'>,</span> <span class='id identifier rubyid_destination_url'>destination_url</span><span class='comma'>,</span> <span class='id identifier rubyid_file_obj'>file_obj</span><span class='comma'>,</span> <span class='id identifier rubyid_file_size'>file_size</span><span class='comma'>,</span> <span class='id identifier rubyid_mime_type'>mime_type</span><span class='comma'>,</span> <span class='id identifier rubyid_encoding'>encoding</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="update_file_from_path-instance_method">
+  
+    - (<tt>nil</tt>) <strong>update_file_from_path</strong>(destination_url, file_path) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Creates a new file object on Frankly servers and returns that object. The
+properties of that new file are given as a hash to the method.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>destination_url</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The URL at which the file is hosted on Frankly servers. This can be
+obtained from the url field of an object returned by create_file for
+example.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>file_path</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>A path to a local providing the new file content</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The method doesn&#39;t return anything on success and throws an exception
+on failure.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+412
+413
+414</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/franklyclient.rb', line 412</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_update_file_from_path'>update_file_from_path</span><span class='lparen'>(</span><span class='id identifier rubyid_destination_url'>destination_url</span><span class='comma'>,</span> <span class='id identifier rubyid_file_path'>file_path</span><span class='rparen'>)</span>
+  <span class='const'>Files</span><span class='period'>.</span><span class='id identifier rubyid_update_file_from_path'>update_file_from_path</span><span class='lparen'>(</span><span class='ivar'>@headers</span><span class='comma'>,</span> <span class='ivar'>@session_token</span><span class='comma'>,</span> <span class='id identifier rubyid_destination_url'>destination_url</span><span class='comma'>,</span> <span class='id identifier rubyid_file_path'>file_path</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -1561,7 +3362,8 @@ available in the app.</p>
 </h3><div class="docstring">
   <div class="discussion">
     
-<p>Updates the room object with id specified as first argument.</p>
+<p>Updates an existing room object in the app and return that object. The
+properties of that new room are given as a hash to the method.</p>
 
 
   </div>
@@ -1581,7 +3383,7 @@ available in the app.</p>
       
         &mdash;
         <div class='inline'>
-<p>The id of the room that should be updated by this method call.</p>
+<p>The identifier of the room to update.</p>
 </div>
       
     </li>
@@ -1597,7 +3399,8 @@ available in the app.</p>
       
         &mdash;
         <div class='inline'>
-<p>The hashing containing properties to update on the room.</p>
+<p>A hash containing the properties of the new room. See the Rooms section
+above to see how properly format this argument</p>
 </div>
       
     </li>
@@ -1616,8 +3419,7 @@ available in the app.</p>
       
         &mdash;
         <div class='inline'>
-<p>The method returns a hashing representing the new state of the updated
-room.</p>
+<p>The method returns a hash that represents the newly updated room.</p>
 </div>
       
     </li>
@@ -1630,17 +3432,180 @@ room.</p>
       <pre class="lines">
 
 
-111
-112
-113
-114</pre>
+134
+135
+136
+137</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/franklyclient.rb', line 111</span>
+      <pre class="code"><span class="info file"># File 'lib/franklyclient.rb', line 134</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_update_room'>update_room</span><span class='lparen'>(</span><span class='id identifier rubyid_room_id'>room_id</span><span class='comma'>,</span> <span class='id identifier rubyid_payload'>payload</span><span class='rparen'>)</span>
-  <span class='const'>JSON</span><span class='period'>.</span><span class='id identifier rubyid_parse'>parse</span> <span class='const'>Rooms</span><span class='period'>.</span><span class='id identifier rubyid_update_room'>update_room</span><span class='lparen'>(</span><span class='ivar'>@headers</span><span class='comma'>,</span> <span class='ivar'>@cookies</span><span class='comma'>,</span>
+  <span class='const'>JSON</span><span class='period'>.</span><span class='id identifier rubyid_parse'>parse</span> <span class='const'>Rooms</span><span class='period'>.</span><span class='id identifier rubyid_update_room'>update_room</span><span class='lparen'>(</span><span class='ivar'>@headers</span><span class='comma'>,</span> <span class='ivar'>@session_token</span><span class='comma'>,</span>
                                <span class='id identifier rubyid_room_id'>room_id</span><span class='comma'>,</span> <span class='id identifier rubyid_payload'>payload</span><span class='period'>.</span><span class='id identifier rubyid_to_json'>to_json</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="upload-instance_method">
+  
+    - (<tt>nil</tt>) <strong>upload</strong>(url, params, payload, content_length, content_type, content_encoding) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>This method exposes a generic interface for uploading file contents through
+the Frankly API. Every upload_* method is implemented on top of this one.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>url</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The URL at which the file is hosted on Frankly servers. This can be
+obtained from the url field of an object returned by create_file for
+example.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>params</span>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Parameters passed as part of the request.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>payload</span>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>A hash representing the body of the request.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>content_length</span>
+      
+      
+        <span class='type'>(<tt>Int</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The size of the new file content (in bytes).</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>content_type</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The mime type of the new file content.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>content_encoding</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The encoding of the new file content (&#39;gzip&#39; for example).</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The method doesn&#39;t return anything on success and throws an exception
+on failure.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+251
+252
+253</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/franklyclient.rb', line 251</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_upload'>upload</span><span class='lparen'>(</span><span class='id identifier rubyid_url'>url</span><span class='comma'>,</span> <span class='id identifier rubyid_params'>params</span><span class='comma'>,</span> <span class='id identifier rubyid_payload'>payload</span><span class='comma'>,</span> <span class='id identifier rubyid_content_length'>content_length</span><span class='comma'>,</span> <span class='id identifier rubyid_content_type'>content_type</span><span class='comma'>,</span> <span class='id identifier rubyid_content_encoding'>content_encoding</span><span class='rparen'>)</span>
+  <span class='const'>JSON</span><span class='period'>.</span><span class='id identifier rubyid_parse'>parse</span> <span class='const'>Generic</span><span class='period'>.</span><span class='id identifier rubyid_upload'>upload</span><span class='lparen'>(</span><span class='ivar'>@headers</span><span class='comma'>,</span> <span class='ivar'>@session_token</span><span class='comma'>,</span> <span class='id identifier rubyid_url'>url</span><span class='comma'>,</span> <span class='id identifier rubyid_params'>params</span><span class='comma'>,</span> <span class='id identifier rubyid_payload'>payload</span><span class='comma'>,</span> <span class='id identifier rubyid_content_length'>content_length</span><span class='comma'>,</span> <span class='id identifier rubyid_content_type'>content_type</span><span class='comma'>,</span> <span class='id identifier rubyid_content_encoding'>content_encoding</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -1650,27 +3615,242 @@ room.</p>
       <div class="method_details ">
   <h3 class="signature " id="upload_file-instance_method">
   
-    - (<tt>Object</tt>) <strong>upload_file</strong>(file_path, destination_url) 
+    - (<tt>Hash</tt>) <strong>upload_file</strong>(file_obj, file_size, mime_type, encoding = nil, params) 
   
 
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>This method is convenience wrapper for creating a new file object on the
+Frankly API and setting its content.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>file_obj</span>
+      
+      
+        <span class='type'>(<tt>File</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>A file-like object (as returned by File.open(…, “rb”) for example)
+providing the new content of the file.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>file_size</span>
+      
+      
+        <span class='type'>(<tt>Int</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The size of the new file content (in bytes).</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>mime_type</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The mime type of the new file content.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>encoding</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>nil</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The encoding of the new file content (&#39;gzip&#39; for example).</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>params</span>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>A hash containing the properties of the new file. See the Files section
+above to see how properly format this argument.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The method returns a hash that represents the newly created file.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-132
-133
-134</pre>
+437
+438
+439</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/franklyclient.rb', line 132</span>
+      <pre class="code"><span class="info file"># File 'lib/franklyclient.rb', line 437</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_upload_file'>upload_file</span><span class='lparen'>(</span><span class='id identifier rubyid_file_path'>file_path</span><span class='comma'>,</span> <span class='id identifier rubyid_destination_url'>destination_url</span><span class='rparen'>)</span>
-  <span class='const'>Files</span><span class='period'>.</span><span class='id identifier rubyid_upload_file'>upload_file</span><span class='lparen'>(</span><span class='ivar'>@headers</span><span class='comma'>,</span> <span class='ivar'>@cookies</span><span class='comma'>,</span> <span class='id identifier rubyid_file_path'>file_path</span><span class='comma'>,</span> <span class='id identifier rubyid_destination_url'>destination_url</span><span class='rparen'>)</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_upload_file'>upload_file</span><span class='lparen'>(</span><span class='id identifier rubyid_file_obj'>file_obj</span><span class='comma'>,</span> <span class='id identifier rubyid_file_size'>file_size</span><span class='comma'>,</span> <span class='id identifier rubyid_mime_type'>mime_type</span><span class='comma'>,</span> <span class='id identifier rubyid_encoding'>encoding</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='id identifier rubyid_params'>params</span><span class='rparen'>)</span>
+  <span class='const'>Files</span><span class='period'>.</span><span class='id identifier rubyid_upload_file'>upload_file</span><span class='lparen'>(</span><span class='ivar'>@headers</span><span class='comma'>,</span> <span class='ivar'>@session_token</span><span class='comma'>,</span> <span class='id identifier rubyid_destination_url'>destination_url</span><span class='comma'>,</span> <span class='id identifier rubyid_file_obj'>file_obj</span><span class='comma'>,</span> <span class='id identifier rubyid_file_size'>file_size</span><span class='comma'>,</span> <span class='id identifier rubyid_mime_type'>mime_type</span><span class='comma'>,</span> <span class='id identifier rubyid_encoding'>encoding</span><span class='comma'>,</span> <span class='id identifier rubyid_params'>params</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="upload_file_from_path-instance_method">
+  
+    - (<tt>Hash</tt>) <strong>upload_file_from_path</strong>(file_path, params) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>This method is convenience wrapper for creating a new file object on the
+Frankly API and setting its content.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>file_path</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>A path to a local providing the new file content</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>params</span>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>A hash containing the properties of the new file. See the Files section
+above to see how properly format this argument.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Hash</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The method returns a hash that represents the newly created file.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+452
+453
+454</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/franklyclient.rb', line 452</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_upload_file_from_path'>upload_file_from_path</span><span class='lparen'>(</span><span class='id identifier rubyid_file_path'>file_path</span><span class='comma'>,</span> <span class='id identifier rubyid_params'>params</span><span class='rparen'>)</span>
+  <span class='const'>Files</span><span class='period'>.</span><span class='id identifier rubyid_upload_file_from_path'>upload_file_from_path</span><span class='lparen'>(</span><span class='ivar'>@headers</span><span class='comma'>,</span> <span class='ivar'>@session_token</span><span class='comma'>,</span> <span class='id identifier rubyid_file_path'>file_path</span><span class='comma'>,</span> <span class='id identifier rubyid_params'>params</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -1683,7 +3863,7 @@ room.</p>
     </div>
 
     <div id="footer">
-  Generated on Tue May 12 19:06:02 2015 by
+  Generated on Tue May 19 11:13:13 2015 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.8.7.6 (ruby-2.0.0).
 </div>
