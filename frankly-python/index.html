@@ -1277,9 +1277,9 @@ announcements:</p>
     <span class="p">}],</span>
 <span class="p">)</span>
 
-<span class="n">client</span><span class="o">.</span><span class="n">publish_announcement</span><span class="p">(</span>
-    <span class="n">anno</span><span class="o">.</span><span class="n">id</span><span class="p">,</span>
+<span class="n">client</span><span class="o">.</span><span class="n">create_room_message</span><span class="p">(</span>
     <span class="n">room</span><span class="o">.</span><span class="n">id</span><span class="p">,</span>
+    <span class="n">announcement</span> <span class="o">=</span> <span class="n">anno</span><span class="o">.</span><span class="n">id</span><span class="p">,</span>
 <span class="p">)</span>
 </pre></div>
 
@@ -1585,9 +1585,9 @@ showing how to handle those situations:</p>
 <span class="sd">        }],</span>
 <span class="sd">    )</span>
 
-<span class="sd">    client.publish_announcement(</span>
-<span class="sd">        anno.id,</span>
+<span class="sd">    client.create_room_message(</span>
 <span class="sd">        room.id,</span>
+<span class="sd">        announcement = anno.id,</span>
 <span class="sd">    )</span>
 
 <span class="sd">As we can see here, the announcement is created with the same structure than</span>
