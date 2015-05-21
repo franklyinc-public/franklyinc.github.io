@@ -1067,7 +1067,6 @@ table {
     <li class="mono"><a href="#frankly.FranklyClient.delete_announcement">delete_announcement</a></li>
     <li class="mono"><a href="#frankly.FranklyClient.delete_room">delete_room</a></li>
     <li class="mono"><a href="#frankly.FranklyClient.open">open</a></li>
-    <li class="mono"><a href="#frankly.FranklyClient.publish_announcement">publish_announcement</a></li>
     <li class="mono"><a href="#frankly.FranklyClient.read">read</a></li>
     <li class="mono"><a href="#frankly.FranklyClient.read_announcement">read_announcement</a></li>
     <li class="mono"><a href="#frankly.FranklyClient.read_announcement_list">read_announcement_list</a></li>
@@ -1947,7 +1946,7 @@ showing how to handle those situations:</p>
 
 <span class="sd">        The method returns an object representing the newly created file.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="s">&#39;/files&#39;</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">payload</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="s">&#39;/files&#39;</span><span class="p">,</span> <span class="n">payload</span><span class="o">=</span><span class="n">payload</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">create_room</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">payload</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -2004,7 +2003,14 @@ showing how to handle those situations:</p>
 
 <span class="sd">        The method returns an object representing the newly created message.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="s">&#39;/rooms/{}/messages&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">room_id</span><span class="p">),</span> <span class="n">payload</span><span class="o">=</span><span class="n">payload</span><span class="p">)</span>
+        <span class="n">params</span> <span class="o">=</span> <span class="p">{</span>  <span class="p">}</span>
+
+        <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="p">(</span><span class="s">&#39;announcement&#39;</span><span class="p">,):</span>
+            <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">payload</span><span class="p">:</span>
+                <span class="n">params</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">payload</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+                <span class="k">del</span> <span class="n">payload</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="s">&#39;/rooms/{}/messages&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">room_id</span><span class="p">),</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">,</span> <span class="n">payload</span><span class="o">=</span><span class="n">payload</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">delete</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">payload</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -2068,23 +2074,6 @@ showing how to handle those situations:</p>
 <span class="sd">        in the app.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="s">&#39;/rooms/{}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">room_id</span><span class="p">))</span>
-
-    <span class="k">def</span> <span class="nf">publish_announcement</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">announcement_id</span><span class="p">,</span> <span class="n">to_room_id</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Calling this method causes the announcement with id specified as first</span>
-<span class="sd">        argument to the room with id specified as second argument.  </span>
-<span class="sd">        A message will be created and sent in real-time to all mobile or web</span>
-<span class="sd">        clients currently listening for incoming messages on that room.</span>
-
-<span class="sd">        **Arguments**</span>
-
-<span class="sd">        - `announcement_id (int)`  </span>
-<span class="sd">        The identifier of the announcement to publish.</span>
-
-<span class="sd">        - `room_id (int)`  </span>
-<span class="sd">        The identifier of the room to publish the announcement to.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="s">&#39;/announcements/{}/rooms/{}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">announcement_id</span><span class="p">,</span> <span class="n">to_room_id</span><span class="p">))</span>
 
     <span class="k">def</span> <span class="nf">read</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">payload</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -3114,7 +3103,7 @@ only after sucessfuly authenticating.</p></div>
 
 <span class="sd">        The method returns an object representing the newly created file.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="s">&#39;/files&#39;</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">payload</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="s">&#39;/files&#39;</span><span class="p">,</span> <span class="n">payload</span><span class="o">=</span><span class="n">payload</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">create_room</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">payload</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -3171,7 +3160,14 @@ only after sucessfuly authenticating.</p></div>
 
 <span class="sd">        The method returns an object representing the newly created message.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="s">&#39;/rooms/{}/messages&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">room_id</span><span class="p">),</span> <span class="n">payload</span><span class="o">=</span><span class="n">payload</span><span class="p">)</span>
+        <span class="n">params</span> <span class="o">=</span> <span class="p">{</span>  <span class="p">}</span>
+
+        <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="p">(</span><span class="s">&#39;announcement&#39;</span><span class="p">,):</span>
+            <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">payload</span><span class="p">:</span>
+                <span class="n">params</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">payload</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+                <span class="k">del</span> <span class="n">payload</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="s">&#39;/rooms/{}/messages&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">room_id</span><span class="p">),</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">,</span> <span class="n">payload</span><span class="o">=</span><span class="n">payload</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">delete</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">payload</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -3235,23 +3231,6 @@ only after sucessfuly authenticating.</p></div>
 <span class="sd">        in the app.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="s">&#39;/rooms/{}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">room_id</span><span class="p">))</span>
-
-    <span class="k">def</span> <span class="nf">publish_announcement</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">announcement_id</span><span class="p">,</span> <span class="n">to_room_id</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Calling this method causes the announcement with id specified as first</span>
-<span class="sd">        argument to the room with id specified as second argument.  </span>
-<span class="sd">        A message will be created and sent in real-time to all mobile or web</span>
-<span class="sd">        clients currently listening for incoming messages on that room.</span>
-
-<span class="sd">        **Arguments**</span>
-
-<span class="sd">        - `announcement_id (int)`  </span>
-<span class="sd">        The identifier of the announcement to publish.</span>
-
-<span class="sd">        - `room_id (int)`  </span>
-<span class="sd">        The identifier of the room to publish the announcement to.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="s">&#39;/announcements/{}/rooms/{}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">announcement_id</span><span class="p">,</span> <span class="n">to_room_id</span><span class="p">))</span>
 
     <span class="k">def</span> <span class="nf">read</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">payload</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -3875,7 +3854,7 @@ the documentation).</p>
 <span class="sd">    **Return**</span>
 <span class="sd">    The method returns an object representing the newly created file.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="s">&#39;/files&#39;</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">payload</span><span class="p">)</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="s">&#39;/files&#39;</span><span class="p">,</span> <span class="n">payload</span><span class="o">=</span><span class="n">payload</span><span class="p">)</span>
 </pre></div>
 
   </div>
@@ -4005,7 +3984,12 @@ for more details about content objects.</li>
 <span class="sd">    **Return**</span>
 <span class="sd">    The method returns an object representing the newly created message.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="s">&#39;/rooms/{}/messages&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">room_id</span><span class="p">),</span> <span class="n">payload</span><span class="o">=</span><span class="n">payload</span><span class="p">)</span>
+    <span class="n">params</span> <span class="o">=</span> <span class="p">{</span>  <span class="p">}</span>
+    <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="p">(</span><span class="s">&#39;announcement&#39;</span><span class="p">,):</span>
+        <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">payload</span><span class="p">:</span>
+            <span class="n">params</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">payload</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+            <span class="k">del</span> <span class="n">payload</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="s">&#39;/rooms/{}/messages&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">room_id</span><span class="p">),</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">,</span> <span class="n">payload</span><span class="o">=</span><span class="n">payload</span><span class="p">)</span>
 </pre></div>
 
   </div>
@@ -4210,53 +4194,6 @@ user this client will run as.</p></div>
 <span class="sd">    user this client will run as.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">backend</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">app_key</span><span class="p">,</span> <span class="n">app_secret</span><span class="p">)</span>
-</pre></div>
-
-  </div>
-</div>
-
-  </div>
-  
-            
-  <div class="item">
-    <div class="name def" id="frankly.FranklyClient.publish_announcement">
-    <p>def <span class="ident">publish_announcement</span>(</p><p>self, announcement_id, to_room_id)</p>
-    </div>
-    
-
-    
-  
-    <div class="desc"><p>Calling this method causes the announcement with id specified as first
-argument to the room with id specified as second argument.<br />
-A message will be created and sent in real-time to all mobile or web
-clients currently listening for incoming messages on that room.</p>
-<p><strong>Arguments</strong></p>
-<ul>
-<li>
-<p><code>announcement_id (int)</code><br />
-The identifier of the announcement to publish.</p>
-</li>
-<li>
-<p><code>room_id (int)</code><br />
-The identifier of the room to publish the announcement to.</p>
-</li>
-</ul></div>
-  <div class="source_cont">
-  <p class="source_link"><a href="javascript:void(0);" onclick="toggle('source-frankly.FranklyClient.publish_announcement', this);">Show source &equiv;</a></p>
-  <div id="source-frankly.FranklyClient.publish_announcement" class="source">
-    <div class="codehilite"><pre><span class="k">def</span> <span class="nf">publish_announcement</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">announcement_id</span><span class="p">,</span> <span class="n">to_room_id</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Calling this method causes the announcement with id specified as first</span>
-<span class="sd">    argument to the room with id specified as second argument.  </span>
-<span class="sd">    A message will be created and sent in real-time to all mobile or web</span>
-<span class="sd">    clients currently listening for incoming messages on that room.</span>
-<span class="sd">    **Arguments**</span>
-<span class="sd">    - `announcement_id (int)`  </span>
-<span class="sd">    The identifier of the announcement to publish.</span>
-<span class="sd">    - `room_id (int)`  </span>
-<span class="sd">    The identifier of the room to publish the announcement to.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="s">&#39;/announcements/{}/rooms/{}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">announcement_id</span><span class="p">,</span> <span class="n">to_room_id</span><span class="p">))</span>
 </pre></div>
 
   </div>
