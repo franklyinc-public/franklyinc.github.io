@@ -1787,7 +1787,6 @@ showing how to handle those situations:</p>
 <span class="sd">    Each instance of FranklyClient maintains its own connection pool to Frankly</span>
 <span class="sd">    servers, if client is not required anymore the application should call the</span>
 <span class="sd">    `close` method to release system resources.  </span>
-<span class="sd">    A client should not be used anymore after being closed.  </span>
 <span class="sd">    Note that instances of FranklyClient can be used as context managers to</span>
 <span class="sd">    automatically be closed when exiting the `with` statement.</span>
 
@@ -2917,7 +2916,6 @@ is independant from the other ones.</p>
 <p>Each instance of FranklyClient maintains its own connection pool to Frankly
 servers, if client is not required anymore the application should call the
 <code>close</code> method to release system resources.<br />
-A client should not be used anymore after being closed.<br />
 Note that instances of FranklyClient can be used as context managers to
 automatically be closed when exiting the <code>with</code> statement.</p>
 <p><strong>[thread safety]</strong><br />
@@ -2944,7 +2942,6 @@ only after sucessfuly authenticating.</p></div>
 <span class="sd">    Each instance of FranklyClient maintains its own connection pool to Frankly</span>
 <span class="sd">    servers, if client is not required anymore the application should call the</span>
 <span class="sd">    `close` method to release system resources.  </span>
-<span class="sd">    A client should not be used anymore after being closed.  </span>
 <span class="sd">    Note that instances of FranklyClient can be used as context managers to</span>
 <span class="sd">    automatically be closed when exiting the `with` statement.</span>
 
