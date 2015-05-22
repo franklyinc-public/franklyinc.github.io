@@ -1885,8 +1885,8 @@ showing how to handle those situations:</p>
 
 <span class="sd">        **Arguments**</span>
 
-<span class="sd">        - `path (list)`  </span>
-<span class="sd">        A list of values representing the collection to create an object in.</span>
+<span class="sd">        - `path (str)`  </span>
+<span class="sd">        The path to the collection where a new resource will be created.</span>
 
 <span class="sd">        - `params (dict)`  </span>
 <span class="sd">        Parameters passed as part of the request.</span>
@@ -2018,8 +2018,8 @@ showing how to handle those situations:</p>
 
 <span class="sd">        **Arguments**</span>
 
-<span class="sd">        - `path (list)`  </span>
-<span class="sd">        A list of values representing the collection to create an object in.</span>
+<span class="sd">        - `path (str)`  </span>
+<span class="sd">        The path to the resource that will be deleted.</span>
 
 <span class="sd">        - `params (dict)`  </span>
 <span class="sd">        Parameters passed as part of the request.</span>
@@ -2081,8 +2081,8 @@ showing how to handle those situations:</p>
 
 <span class="sd">        **Arguments**</span>
 
-<span class="sd">        - `path (list)`  </span>
-<span class="sd">        A list of values representing the collection to create an object in.</span>
+<span class="sd">        - `path (str)`  </span>
+<span class="sd">        The path to the resource that will be fetched.</span>
 
 <span class="sd">        - `params (dict)`  </span>
 <span class="sd">        Parameters passed as part of the request.</span>
@@ -2212,8 +2212,8 @@ showing how to handle those situations:</p>
 
 <span class="sd">        **Arguments**</span>
 
-<span class="sd">        - `path (list)`  </span>
-<span class="sd">        A list of values representing the collection to create an object in.</span>
+<span class="sd">        - `path (str)`  </span>
+<span class="sd">        The path to the resource that will be updated.</span>
 
 <span class="sd">        - `params (dict)`  </span>
 <span class="sd">        Parameters passed as part of the request.</span>
@@ -3039,8 +3039,8 @@ only after sucessfuly authenticating.</p></div>
 
 <span class="sd">        **Arguments**</span>
 
-<span class="sd">        - `path (list)`  </span>
-<span class="sd">        A list of values representing the collection to create an object in.</span>
+<span class="sd">        - `path (str)`  </span>
+<span class="sd">        The path to the collection where a new resource will be created.</span>
 
 <span class="sd">        - `params (dict)`  </span>
 <span class="sd">        Parameters passed as part of the request.</span>
@@ -3172,8 +3172,8 @@ only after sucessfuly authenticating.</p></div>
 
 <span class="sd">        **Arguments**</span>
 
-<span class="sd">        - `path (list)`  </span>
-<span class="sd">        A list of values representing the collection to create an object in.</span>
+<span class="sd">        - `path (str)`  </span>
+<span class="sd">        The path to the resource that will be deleted.</span>
 
 <span class="sd">        - `params (dict)`  </span>
 <span class="sd">        Parameters passed as part of the request.</span>
@@ -3235,8 +3235,8 @@ only after sucessfuly authenticating.</p></div>
 
 <span class="sd">        **Arguments**</span>
 
-<span class="sd">        - `path (list)`  </span>
-<span class="sd">        A list of values representing the collection to create an object in.</span>
+<span class="sd">        - `path (str)`  </span>
+<span class="sd">        The path to the resource that will be fetched.</span>
 
 <span class="sd">        - `params (dict)`  </span>
 <span class="sd">        Parameters passed as part of the request.</span>
@@ -3366,8 +3366,8 @@ only after sucessfuly authenticating.</p></div>
 
 <span class="sd">        **Arguments**</span>
 
-<span class="sd">        - `path (list)`  </span>
-<span class="sd">        A list of values representing the collection to create an object in.</span>
+<span class="sd">        - `path (str)`  </span>
+<span class="sd">        The path to the resource that will be updated.</span>
 
 <span class="sd">        - `params (dict)`  </span>
 <span class="sd">        Parameters passed as part of the request.</span>
@@ -3705,8 +3705,8 @@ Every <code>create_*</code> method is implemented on top of this one.</p>
 <p><strong>Arguments</strong></p>
 <ul>
 <li>
-<p><code>path (list)</code><br />
-A list of values representing the collection to create an object in.</p>
+<p><code>path (str)</code><br />
+The path to the collection where a new resource will be created.</p>
 </li>
 <li>
 <p><code>params (dict)</code><br />
@@ -3728,8 +3728,8 @@ Dict-like object representing the object to create.</p>
 <span class="sd">    the Frankly API.  </span>
 <span class="sd">    Every `create_*` method is implemented on top of this one.</span>
 <span class="sd">    **Arguments**</span>
-<span class="sd">    - `path (list)`  </span>
-<span class="sd">    A list of values representing the collection to create an object in.</span>
+<span class="sd">    - `path (str)`  </span>
+<span class="sd">    The path to the collection where a new resource will be created.</span>
 <span class="sd">    - `params (dict)`  </span>
 <span class="sd">    Parameters passed as part of the request.</span>
 <span class="sd">    - `payload (dict)`  </span>
@@ -4005,8 +4005,8 @@ Every <code>delete_*</code> method is implemented on top of this one.</p>
 <p><strong>Arguments</strong></p>
 <ul>
 <li>
-<p><code>path (list)</code><br />
-A list of values representing the collection to create an object in.</p>
+<p><code>path (str)</code><br />
+The path to the resource that will be deleted.</p>
 </li>
 <li>
 <p><code>params (dict)</code><br />
@@ -4026,8 +4026,8 @@ Dict-like object representing the object to create.</p>
 <span class="sd">    the Frankly API.  </span>
 <span class="sd">    Every `delete_*` method is implemented on top of this one.</span>
 <span class="sd">    **Arguments**</span>
-<span class="sd">    - `path (list)`  </span>
-<span class="sd">    A list of values representing the collection to create an object in.</span>
+<span class="sd">    - `path (str)`  </span>
+<span class="sd">    The path to the resource that will be deleted.</span>
 <span class="sd">    - `params (dict)`  </span>
 <span class="sd">    Parameters passed as part of the request.</span>
 <span class="sd">    - `payload (dict)`  </span>
@@ -4209,8 +4209,8 @@ Every <code>read_*</code> method is implemented on top of this one.</p>
 <p><strong>Arguments</strong></p>
 <ul>
 <li>
-<p><code>path (list)</code><br />
-A list of values representing the collection to create an object in.</p>
+<p><code>path (str)</code><br />
+The path to the resource that will be fetched.</p>
 </li>
 <li>
 <p><code>params (dict)</code><br />
@@ -4232,8 +4232,8 @@ Dict-like object representing the object to create.</p>
 <span class="sd">    Frankly API.  </span>
 <span class="sd">    Every `read_*` method is implemented on top of this one.</span>
 <span class="sd">    **Arguments**</span>
-<span class="sd">    - `path (list)`  </span>
-<span class="sd">    A list of values representing the collection to create an object in.</span>
+<span class="sd">    - `path (str)`  </span>
+<span class="sd">    The path to the resource that will be fetched.</span>
 <span class="sd">    - `params (dict)`  </span>
 <span class="sd">    Parameters passed as part of the request.</span>
 <span class="sd">    - `payload (dict)`  </span>
@@ -4528,8 +4528,8 @@ Every <code>update_*</code> method is implemented on top of this one.</p>
 <p><strong>Arguments</strong></p>
 <ul>
 <li>
-<p><code>path (list)</code><br />
-A list of values representing the collection to create an object in.</p>
+<p><code>path (str)</code><br />
+The path to the resource that will be updated.</p>
 </li>
 <li>
 <p><code>params (dict)</code><br />
@@ -4551,8 +4551,8 @@ Dict-like object representing the object to create.</p>
 <span class="sd">    Frankly API.  </span>
 <span class="sd">    Every `update_*` method is implemented on top of this one.</span>
 <span class="sd">    **Arguments**</span>
-<span class="sd">    - `path (list)`  </span>
-<span class="sd">    A list of values representing the collection to create an object in.</span>
+<span class="sd">    - `path (str)`  </span>
+<span class="sd">    The path to the resource that will be updated.</span>
 <span class="sd">    - `params (dict)`  </span>
 <span class="sd">    Parameters passed as part of the request.</span>
 <span class="sd">    - `payload (dict)`  </span>
