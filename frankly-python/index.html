@@ -1114,7 +1114,7 @@ table {
   <h1 class="title"><span class="name">frankly</span> module</h1>
   <p>The module provides types and functions for interacting with the <strong>Frankly API</strong>.</p>
 <h1>Goal</h1>
-<p>Frankly exposes a REST API to give a higer control to customers over the way
+<p>Frankly exposes a REST API to give a higher control to customers over the way
 they want to use the platform.
 Most operations available through the <strong>Frankly Console</strong> can be automated by
 querying the <strong>Frankly API</strong> directly.</p>
@@ -1211,7 +1211,7 @@ Naturally <code>FranklyClient</code> instances can publish and fetch messages to
 
 <span class="o">...</span>
 
-<span class="n">message1</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">create_message</span><span class="p">(</span>
+<span class="n">message1</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">create_room_message</span><span class="p">(</span>
     <span class="n">room</span><span class="o">.</span><span class="n">id</span><span class="p">,</span>
     <span class="n">contents</span> <span class="o">=</span> <span class="p">[{</span>
       <span class="s">&#39;type&#39;</span> <span class="p">:</span> <span class="s">&#39;text/plain&#39;</span><span class="p">,</span>
@@ -1219,7 +1219,7 @@ Naturally <code>FranklyClient</code> instances can publish and fetch messages to
     <span class="p">}],</span>
 <span class="p">)</span>
 
-<span class="n">message2</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">create_message</span><span class="p">(</span>
+<span class="n">message2</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">create_room_message</span><span class="p">(</span>
     <span class="n">room</span><span class="o">.</span><span class="n">id</span><span class="p">,</span>
     <span class="n">contents</span> <span class="o">=</span> <span class="p">[{</span>
       <span class="s">&#39;type&#39;</span><span class="p">:</span> <span class="s">&#39;image/*&#39;</span><span class="p">,</span>
@@ -1402,7 +1402,7 @@ showing how to handle those situations:</p>
 <span class="sd">Goal</span>
 <span class="sd">====</span>
 
-<span class="sd">Frankly exposes a REST API to give a higer control to customers over the way</span>
+<span class="sd">Frankly exposes a REST API to give a higher control to customers over the way</span>
 <span class="sd">they want to use the platform.</span>
 <span class="sd">Most operations available through the **Frankly Console** can be automated by</span>
 <span class="sd">querying the **Frankly API** directly.</span>
@@ -1518,7 +1518,7 @@ showing how to handle those situations:</p>
 
 <span class="sd">    ...</span>
 
-<span class="sd">    message1 = client.create_message(</span>
+<span class="sd">    message1 = client.create_room_message(</span>
 <span class="sd">        room.id,</span>
 <span class="sd">        contents = [{</span>
 <span class="sd">          &#39;type&#39; : &#39;text/plain&#39;,</span>
@@ -1526,7 +1526,7 @@ showing how to handle those situations:</p>
 <span class="sd">        }],</span>
 <span class="sd">    )</span>
 
-<span class="sd">    message2 = client.create_message(</span>
+<span class="sd">    message2 = client.create_room_message(</span>
 <span class="sd">        room.id,</span>
 <span class="sd">        contents = [{</span>
 <span class="sd">          &#39;type&#39;: &#39;image/*&#39;,</span>
@@ -1991,11 +1991,19 @@ showing how to handle those situations:</p>
 
 <span class="sd">        **Arguments**</span>
 
+<span class="sd">        - `room_id (int)`  </span>
+<span class="sd">        The identifier of the room to create a message in.</span>
+
 <span class="sd">        - `contents (list)`  </span>
 <span class="sd">        A list of content objects representing what will be embedded into the</span>
 <span class="sd">        messages once the announcement is published to one or more rooms.  </span>
 <span class="sd">        Refer to the *Announcement* and *Message* sections of the docuementation</span>
 <span class="sd">        for more details about content objects.</span>
+
+<span class="sd">        - `announcement (int)`</span>
+<span class="sd">        If specified the `contents` argument may be omitted, and the message&#39;s</span>
+<span class="sd">        content will be copied from the announcement object with id set on this</span>
+<span class="sd">        argument.</span>
 
 <span class="sd">        **Return**</span>
 
@@ -2046,7 +2054,7 @@ showing how to handle those situations:</p>
 
 <span class="sd">        **Return**</span>
 
-<span class="sd">        The method returns an object representing the announcement wit the</span>
+<span class="sd">        The method returns an object representing the announcement with the</span>
 <span class="sd">        specified id in the app.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="s">&#39;/announcements/{}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">announcement_id</span><span class="p">))</span>
@@ -2064,7 +2072,7 @@ showing how to handle those situations:</p>
 <span class="sd">        **Arguments**</span>
 
 <span class="sd">        - `room_id (int)`  </span>
-<span class="sd">        The identifier of the room to fetch.</span>
+<span class="sd">        The identifier of the room to delete.</span>
 
 <span class="sd">        **Return**</span>
 
@@ -2108,7 +2116,7 @@ showing how to handle those situations:</p>
 
 <span class="sd">        **Return**</span>
 
-<span class="sd">        The method returns an object representing the announcement wit the</span>
+<span class="sd">        The method returns an object representing the announcement with the</span>
 <span class="sd">        specified id in the app.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s">&#39;/announcements/{}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">announcement_id</span><span class="p">))</span>
@@ -2135,9 +2143,8 @@ showing how to handle those situations:</p>
 
 <span class="sd">        **Return**</span>
 
-<span class="sd">        The method returns a list of annoucement objects ordered by id, which</span>
-<span class="sd">        may be empty if there are no announcements in the app or none have been</span>
-<span class="sd">        published yet.</span>
+<span class="sd">        The method returns a list of room objects ordered by id, which</span>
+<span class="sd">        may be empty if the announcement haven&#39;t been published yet.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s">&#39;/announcements/{}/rooms&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">announcement_id</span><span class="p">))</span>
 
@@ -2176,6 +2183,9 @@ showing how to handle those situations:</p>
 
 <span class="sd">        **Arguments**</span>
 
+<span class="sd">        - `room_id (int)`</span>
+<span class="sd">        The identifier of the room to fetch messages from.</span>
+
 <span class="sd">        - `offset (int)`  </span>
 <span class="sd">        The id of the message to consider as starting offset for the query.  </span>
 <span class="sd">        If the offset is not specified the server will use the id of the most</span>
@@ -2187,7 +2197,7 @@ showing how to handle those situations:</p>
 <span class="sd">        or if there are less than the requested number of messages available.  </span>
 <span class="sd">        If the limit is not set the server will use a default limit instead,</span>
 <span class="sd">        which means there are no way to retrieve the entire list of messages in</span>
-<span class="sd">        a room (because that could potentially be few million entries).</span>
+<span class="sd">        a room (because that could potentially be millions of entries).</span>
 
 <span class="sd">        - `contextual (bool)`  </span>
 <span class="sd">        When set to true only contextual messages will be returned in the result</span>
@@ -3145,11 +3155,19 @@ only after sucessfuly authenticating.</p></div>
 
 <span class="sd">        **Arguments**</span>
 
+<span class="sd">        - `room_id (int)`  </span>
+<span class="sd">        The identifier of the room to create a message in.</span>
+
 <span class="sd">        - `contents (list)`  </span>
 <span class="sd">        A list of content objects representing what will be embedded into the</span>
 <span class="sd">        messages once the announcement is published to one or more rooms.  </span>
 <span class="sd">        Refer to the *Announcement* and *Message* sections of the docuementation</span>
 <span class="sd">        for more details about content objects.</span>
+
+<span class="sd">        - `announcement (int)`</span>
+<span class="sd">        If specified the `contents` argument may be omitted, and the message&#39;s</span>
+<span class="sd">        content will be copied from the announcement object with id set on this</span>
+<span class="sd">        argument.</span>
 
 <span class="sd">        **Return**</span>
 
@@ -3200,7 +3218,7 @@ only after sucessfuly authenticating.</p></div>
 
 <span class="sd">        **Return**</span>
 
-<span class="sd">        The method returns an object representing the announcement wit the</span>
+<span class="sd">        The method returns an object representing the announcement with the</span>
 <span class="sd">        specified id in the app.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="s">&#39;/announcements/{}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">announcement_id</span><span class="p">))</span>
@@ -3218,7 +3236,7 @@ only after sucessfuly authenticating.</p></div>
 <span class="sd">        **Arguments**</span>
 
 <span class="sd">        - `room_id (int)`  </span>
-<span class="sd">        The identifier of the room to fetch.</span>
+<span class="sd">        The identifier of the room to delete.</span>
 
 <span class="sd">        **Return**</span>
 
@@ -3262,7 +3280,7 @@ only after sucessfuly authenticating.</p></div>
 
 <span class="sd">        **Return**</span>
 
-<span class="sd">        The method returns an object representing the announcement wit the</span>
+<span class="sd">        The method returns an object representing the announcement with the</span>
 <span class="sd">        specified id in the app.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s">&#39;/announcements/{}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">announcement_id</span><span class="p">))</span>
@@ -3289,9 +3307,8 @@ only after sucessfuly authenticating.</p></div>
 
 <span class="sd">        **Return**</span>
 
-<span class="sd">        The method returns a list of annoucement objects ordered by id, which</span>
-<span class="sd">        may be empty if there are no announcements in the app or none have been</span>
-<span class="sd">        published yet.</span>
+<span class="sd">        The method returns a list of room objects ordered by id, which</span>
+<span class="sd">        may be empty if the announcement haven&#39;t been published yet.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s">&#39;/announcements/{}/rooms&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">announcement_id</span><span class="p">))</span>
 
@@ -3330,6 +3347,9 @@ only after sucessfuly authenticating.</p></div>
 
 <span class="sd">        **Arguments**</span>
 
+<span class="sd">        - `room_id (int)`</span>
+<span class="sd">        The identifier of the room to fetch messages from.</span>
+
 <span class="sd">        - `offset (int)`  </span>
 <span class="sd">        The id of the message to consider as starting offset for the query.  </span>
 <span class="sd">        If the offset is not specified the server will use the id of the most</span>
@@ -3341,7 +3361,7 @@ only after sucessfuly authenticating.</p></div>
 <span class="sd">        or if there are less than the requested number of messages available.  </span>
 <span class="sd">        If the limit is not set the server will use a default limit instead,</span>
 <span class="sd">        which means there are no way to retrieve the entire list of messages in</span>
-<span class="sd">        a room (because that could potentially be few million entries).</span>
+<span class="sd">        a room (because that could potentially be millions of entries).</span>
 
 <span class="sd">        - `contextual (bool)`  </span>
 <span class="sd">        When set to true only contextual messages will be returned in the result</span>
@@ -3951,11 +3971,23 @@ The properties of that new message are given as keyword arguments to the
 method.</p>
 <p><strong>Arguments</strong></p>
 <ul>
-<li><code>contents (list)</code><br />
+<li>
+<p><code>room_id (int)</code><br />
+The identifier of the room to create a message in.</p>
+</li>
+<li>
+<p><code>contents (list)</code><br />
 A list of content objects representing what will be embedded into the
 messages once the announcement is published to one or more rooms.<br />
 Refer to the <em>Announcement</em> and <em>Message</em> sections of the docuementation
-for more details about content objects.</li>
+for more details about content objects.</p>
+</li>
+<li>
+<p><code>announcement (int)</code>
+If specified the <code>contents</code> argument may be omitted, and the message's
+content will be copied from the announcement object with id set on this
+argument.</p>
+</li>
 </ul>
 <p><strong>Return</strong></p>
 <p>The method returns an object representing the newly created message.</p></div>
@@ -3969,11 +4001,17 @@ for more details about content objects.</li>
 <span class="sd">    The properties of that new message are given as keyword arguments to the</span>
 <span class="sd">    method.</span>
 <span class="sd">    **Arguments**</span>
+<span class="sd">    - `room_id (int)`  </span>
+<span class="sd">    The identifier of the room to create a message in.</span>
 <span class="sd">    - `contents (list)`  </span>
 <span class="sd">    A list of content objects representing what will be embedded into the</span>
 <span class="sd">    messages once the announcement is published to one or more rooms.  </span>
 <span class="sd">    Refer to the *Announcement* and *Message* sections of the docuementation</span>
 <span class="sd">    for more details about content objects.</span>
+<span class="sd">    - `announcement (int)`</span>
+<span class="sd">    If specified the `contents` argument may be omitted, and the message&#39;s</span>
+<span class="sd">    content will be copied from the announcement object with id set on this</span>
+<span class="sd">    argument.</span>
 <span class="sd">    **Return**</span>
 <span class="sd">    The method returns an object representing the newly created message.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -4061,7 +4099,7 @@ it has already been published to.</p>
 The identifier of the announcement to fetch.</li>
 </ul>
 <p><strong>Return</strong></p>
-<p>The method returns an object representing the announcement wit the
+<p>The method returns an object representing the announcement with the
 specified id in the app.</p></div>
   <div class="source_cont">
   <p class="source_link"><a href="javascript:void(0);" onclick="toggle('source-frankly.FranklyClient.delete_announcement', this);">Show source &equiv;</a></p>
@@ -4077,7 +4115,7 @@ specified id in the app.</p></div>
 <span class="sd">    - `announcement_id (int)`  </span>
 <span class="sd">    The identifier of the announcement to fetch.</span>
 <span class="sd">    **Return**</span>
-<span class="sd">    The method returns an object representing the announcement wit the</span>
+<span class="sd">    The method returns an object representing the announcement with the</span>
 <span class="sd">    specified id in the app.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="s">&#39;/announcements/{}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">announcement_id</span><span class="p">))</span>
@@ -4105,7 +4143,7 @@ as well, a safer approach could be to change the room status to
 <p><strong>Arguments</strong></p>
 <ul>
 <li><code>room_id (int)</code><br />
-The identifier of the room to fetch.</li>
+The identifier of the room to delete.</li>
 </ul>
 <p><strong>Return</strong></p>
 <p>The method returns an object representing the room with the specified id
@@ -4122,7 +4160,7 @@ in the app.</p></div>
 <span class="sd">    This operation cannot be undone!</span>
 <span class="sd">    **Arguments**</span>
 <span class="sd">    - `room_id (int)`  </span>
-<span class="sd">    The identifier of the room to fetch.</span>
+<span class="sd">    The identifier of the room to delete.</span>
 <span class="sd">    **Return**</span>
 <span class="sd">    The method returns an object representing the room with the specified id</span>
 <span class="sd">    in the app.</span>
@@ -4266,7 +4304,7 @@ from the app.</p>
 The identifier of the announcement to fetch.</li>
 </ul>
 <p><strong>Return</strong></p>
-<p>The method returns an object representing the announcement wit the
+<p>The method returns an object representing the announcement with the
 specified id in the app.</p></div>
   <div class="source_cont">
   <p class="source_link"><a href="javascript:void(0);" onclick="toggle('source-frankly.FranklyClient.read_announcement', this);">Show source &equiv;</a></p>
@@ -4279,7 +4317,7 @@ specified id in the app.</p></div>
 <span class="sd">    - `announcement_id (int)`  </span>
 <span class="sd">    The identifier of the announcement to fetch.</span>
 <span class="sd">    **Return**</span>
-<span class="sd">    The method returns an object representing the announcement wit the</span>
+<span class="sd">    The method returns an object representing the announcement with the</span>
 <span class="sd">    specified id in the app.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s">&#39;/announcements/{}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">announcement_id</span><span class="p">))</span>
@@ -4337,9 +4375,8 @@ may be empty if there are no announcements in the app.</p></div>
 The identifier of the announcement to get the list of rooms for.</li>
 </ul>
 <p><strong>Return</strong></p>
-<p>The method returns a list of annoucement objects ordered by id, which
-may be empty if there are no announcements in the app or none have been
-published yet.</p></div>
+<p>The method returns a list of room objects ordered by id, which
+may be empty if the announcement haven't been published yet.</p></div>
   <div class="source_cont">
   <p class="source_link"><a href="javascript:void(0);" onclick="toggle('source-frankly.FranklyClient.read_announcement_room_list', this);">Show source &equiv;</a></p>
   <div id="source-frankly.FranklyClient.read_announcement_room_list" class="source">
@@ -4350,9 +4387,8 @@ published yet.</p></div>
 <span class="sd">    - `announcement_id (int)`  </span>
 <span class="sd">    The identifier of the announcement to get the list of rooms for.</span>
 <span class="sd">    **Return**</span>
-<span class="sd">    The method returns a list of annoucement objects ordered by id, which</span>
-<span class="sd">    may be empty if there are no announcements in the app or none have been</span>
-<span class="sd">    published yet.</span>
+<span class="sd">    The method returns a list of room objects ordered by id, which</span>
+<span class="sd">    may be empty if the announcement haven&#39;t been published yet.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s">&#39;/announcements/{}/rooms&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">announcement_id</span><span class="p">))</span>
 </pre></div>
@@ -4447,6 +4483,10 @@ wish to receive.</p>
 <p><strong>Arguments</strong></p>
 <ul>
 <li>
+<p><code>room_id (int)</code>
+The identifier of the room to fetch messages from.</p>
+</li>
+<li>
 <p><code>offset (int)</code><br />
 The id of the message to consider as starting offset for the query.<br />
 If the offset is not specified the server will use the id of the most
@@ -4459,7 +4499,7 @@ choose to send a lower count if that value exceeds the maximum allowed
 or if there are less than the requested number of messages available.<br />
 If the limit is not set the server will use a default limit instead,
 which means there are no way to retrieve the entire list of messages in
-a room (because that could potentially be few million entries).</p>
+a room (because that could potentially be millions of entries).</p>
 </li>
 <li>
 <p><code>contextual (bool)</code><br />
@@ -4483,6 +4523,8 @@ messages were satisfying the query.</p></div>
 <span class="sd">    The keyword arguments are used to specify which message range the client</span>
 <span class="sd">    wish to receive.</span>
 <span class="sd">    **Arguments**</span>
+<span class="sd">    - `room_id (int)`</span>
+<span class="sd">    The identifier of the room to fetch messages from.</span>
 <span class="sd">    - `offset (int)`  </span>
 <span class="sd">    The id of the message to consider as starting offset for the query.  </span>
 <span class="sd">    If the offset is not specified the server will use the id of the most</span>
@@ -4493,7 +4535,7 @@ messages were satisfying the query.</p></div>
 <span class="sd">    or if there are less than the requested number of messages available.  </span>
 <span class="sd">    If the limit is not set the server will use a default limit instead,</span>
 <span class="sd">    which means there are no way to retrieve the entire list of messages in</span>
-<span class="sd">    a room (because that could potentially be few million entries).</span>
+<span class="sd">    a room (because that could potentially be millions of entries).</span>
 <span class="sd">    - `contextual (bool)`  </span>
 <span class="sd">    When set to true only contextual messages will be returned in the result</span>
 <span class="sd">    list.  </span>
