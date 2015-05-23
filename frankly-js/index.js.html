@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>index.js - Documentation</title>
+
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="FranklyClient.html">FranklyClient</a><ul class='methods'><li data-type='method'><a href="FranklyClient.html#close">close</a></li><li data-type='method'><a href="FranklyClient.html#create">create</a></li><li data-type='method'><a href="FranklyClient.html#createAnnouncement">createAnnouncement</a></li><li data-type='method'><a href="FranklyClient.html#createRoom">createRoom</a></li><li data-type='method'><a href="FranklyClient.html#createRoomListener">createRoomListener</a></li><li data-type='method'><a href="FranklyClient.html#createRoomMessage">createRoomMessage</a></li><li data-type='method'><a href="FranklyClient.html#createRoomMessageFlag">createRoomMessageFlag</a></li><li data-type='method'><a href="FranklyClient.html#createRoomParticipant">createRoomParticipant</a></li><li data-type='method'><a href="FranklyClient.html#createRoomSubscriber">createRoomSubscriber</a></li><li data-type='method'><a href="FranklyClient.html#del">del</a></li><li data-type='method'><a href="FranklyClient.html#deleteAnnouncement">deleteAnnouncement</a></li><li data-type='method'><a href="FranklyClient.html#deleteRoom">deleteRoom</a></li><li data-type='method'><a href="FranklyClient.html#deleteRoomListener">deleteRoomListener</a></li><li data-type='method'><a href="FranklyClient.html#deleteRoomParticipant">deleteRoomParticipant</a></li><li data-type='method'><a href="FranklyClient.html#deleteRoomSubscriber">deleteRoomSubscriber</a></li><li data-type='method'><a href="FranklyClient.html#open">open</a></li><li data-type='method'><a href="FranklyClient.html#read">read</a></li><li data-type='method'><a href="FranklyClient.html#readAnnouncement">readAnnouncement</a></li><li data-type='method'><a href="FranklyClient.html#readAnnouncementList">readAnnouncementList</a></li><li data-type='method'><a href="FranklyClient.html#readAnnouncementRoomList">readAnnouncementRoomList</a></li><li data-type='method'><a href="FranklyClient.html#readApp">readApp</a></li><li data-type='method'><a href="FranklyClient.html#readRoom">readRoom</a></li><li data-type='method'><a href="FranklyClient.html#readRoomCount">readRoomCount</a></li><li data-type='method'><a href="FranklyClient.html#readRoomList">readRoomList</a></li><li data-type='method'><a href="FranklyClient.html#readRoomMessageList">readRoomMessageList</a></li><li data-type='method'><a href="FranklyClient.html#readRoomParticipantList">readRoomParticipantList</a></li><li data-type='method'><a href="FranklyClient.html#readRoomSubscriberList">readRoomSubscriberList</a></li><li data-type='method'><a href="FranklyClient.html#readUser">readUser</a></li><li data-type='method'><a href="FranklyClient.html#update">update</a></li><li data-type='method'><a href="FranklyClient.html#updateRoom">updateRoom</a></li><li data-type='method'><a href="FranklyClient.html#updateUser">updateUser</a></li></ul></li><li><a href="FranklyError.html">FranklyError</a></li></ul><h3>Events</h3><ul><li><a href="FranklyClient.html#event:authenticate">authenticate</a></li><li><a href="FranklyClient.html#event:close">close</a></li><li><a href="FranklyClient.html#event:connect">connect</a></li><li><a href="FranklyClient.html#event:create">create</a></li><li><a href="FranklyClient.html#event:delete">delete</a></li><li><a href="FranklyClient.html#event:disconnect">disconnect</a></li><li><a href="FranklyClient.html#event:error">error</a></li><li><a href="FranklyClient.html#event:open">open</a></li><li><a href="FranklyClient.html#event:read">read</a></li><li><a href="FranklyClient.html#event:update">update</a></li></ul><h3>Global</h3><ul><li><a href="global.html#generateIdentityToken">generateIdentityToken</a></li></ul>
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">index.js</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/*!
+ * The MIT License (MIT)
+ *
+ * Copyright (c) 2015 Frankly Inc.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+'use strict'
+
+var FranklyClient = require('./frankly/client.js')
+var FranklyError  = require('./frankly/error.js')
+var jwt           = require('./frankly/jwt.js')
+
+/**
+ * @fileOverview
+ *
+ * &lt;a name="Installation">&lt;h2>Installation&lt;/h2>&lt;/a>
+ *
+ * &lt;p>
+ * The code is publicly available on npm in a module named &lt;a href="">&lt;em>frankly-js&lt;/em>&lt;/a>.
+ * &lt;/p>
+ *
+ * &lt;p>
+ * &lt;code>$ npm install frankly-js&lt;/code>
+ * &lt;/p>
+ *
+ * &lt;a name="Goal">&lt;h2>Goal&lt;/h2>&lt;/a>
+ *
+ * &lt;p>
+ * Frankly exposes a REST API to give a higher control to customers over the way
+ * they want to use the platform. Most operations available through the Frankly
+ * Console can be automated by querying the Frankly API directly.
+ * &lt;/p>
+ *
+ * As the API needs to be secure and flexible, a developer needs to master a
+ * couple of concepts about how it works in order to take the greatest advantage
+ * of it. To make the learning curve smoother and development faster, the frankly
+ * module exposes operations available on the API through python methods of a
+ * client object.
+ *
+ * &lt;p>
+ * Things like authentication which are redundant and unproductive tasks are
+ * nicely abstracted by the module to help developers focus on the core of what
+ * they need to get done with the Frankly API.
+ * &lt;/p>
+ *
+ * &lt;a name="User">&lt;h2>Usage&lt;/h2>&lt;/a>
+ *
+ * &lt;p>
+ * The sections bellow explain how to use the module to authenticate and query
+ * the &lt;strong>Frankly API&lt;/strong>.
+ * &lt;/p>
+ *
+ * &lt;p>
+ * All operations to the API are made from instances of the {@link FranklyClient} class.
+ * Those objects expose methods to the application which map to remote procedure
+ * calls (RPC) on the &lt;strong>Frankly&lt;/strong> servers, they also negotiate and maintain the
+ * state required by the API's security policies.
+ * &lt;/p>
+ *
+ * Here's how {@link FranklyClient} instances are created:
+ * &lt;pre>
+ *     var FranklyClient = require('frankly').FranklyClient
+ *
+ *     var client = new FranklyClient()
+ * &lt;/pre>
+ *
+ * &lt;a name="Authenticate">&lt;h3>Authentication&lt;/h3>&lt;/a>
+ *
+ * &lt;p>
+ * Before performing any operation (calling any method) the client instance needs
+ * to authenticate against Frankly API.
+ * The API supports different level of permissions but this module is design to
+ * only allow &lt;em>admin&lt;/em> authentication.
+ * &lt;/p>
+ *
+ * &lt;p>
+ * When authenticating as an &lt;em>admin&lt;/em> user the client needs to be given the
+ * &lt;code>appKey&lt;/code> and &lt;code>appSecret&lt;/code> values obtained from the
+ * &lt;a href="https://console.franklychat.com/">Frankly Console&lt;/a>
+ * &lt;/p>
+ *
+ * Here's how to perform authentication from a Node.js application:
+ * &lt;pre>
+ *     var FranklyClient = require('frankly').FranklyClient
+ *
+ *     var appKey    = 'appKey from Frankly Console'
+ *     var appSecret = 'appSecret from Frankly Console'
+ *
+ *     var client = new FranklyClient()
+ *     client.open(appKey, appSecret)
+ * &lt;/pre>
+ *
+ * &lt;p>
+ * When authenticating from a client application running in the browser the
+ * &lt;code>appKey&lt;/code> and &lt;code>appSecret&lt;/code> values shouldn't be exposed
+ * and the application's backend servers must generate the identity token using
+ * the secret and return it to the client to successfully authenticate.
+ * &lt;/p>
+ *
+ * Here's how to perform authentication form a browser application:
+ * &lt;pre>
+ *     var client = new frankly.FranklyClient
+ *
+ *     client.open(function (nonce) {
+ *         return new Promise(function (resolve, reject) {
+ *             var req = new XMLHttpRequest()
+ *
+ *             req.onreadystatechange = function () {
+ *                 if (req.readyState === 4) {
+ *                     if (req.stats === 200) {
+ *                          resolve(req.responseText)
+ *                     } else {
+ *                          reject('something went wrong')
+ *                     }
+ *                 }
+ *             }
+ *
+ *             req.open('https://partner.domain.com/identity-token?nonce=' + nonce)
+ *             req.send()
+ *         })
+ *     })
+ * &lt;/pre>
+ *
+ * &lt;p>
+ * The client instance automatically performs reconnection and reauthentication when
+ * necessary so the method passed to {@link FranklyClient#open} may be called multiple
+ * times.
+ * &lt;/p>
+ *
+ * &lt;p>
+ * &lt;em>Publishing the &lt;code>appSecret&lt;/code> value to the public can have security
+ * implications and could be used by an attacker to alter the content of an application.&lt;/em>
+ * &lt;/p>
+ *
+ * &lt;a name="Rooms">&lt;h3>Rooms&lt;/h3>&lt;/a>
+ *
+ * &lt;p>
+ * One of the central concepts in the &lt;strong>Frankly API&lt;/strong> is the chat room.
+ * An application can create, update and delete chat rooms. A chat room can be
+ * seen as a collection of messages, with some associated meta-data like the title,
+ * description or avatar image to be displayed when the end users access the mobile
+ * or web app embedding a &lt;strong>Frankly SDK&lt;/strong>.
+ * &lt;/p>
+ *
+ * This code snippet shows how to create chat rooms:
+ * &lt;pre>
+ *     var FranklyClient = require('frankly').FranklyClient
+ *
+ *     ...
+ *
+ *     client.createRoom({
+ *         title       : 'Hi',
+ *         description : 'My First Chat Room',
+ *         status      : 'active',
+ *     }).then(function (msg) { ... })
+ *      .catch(function (err) { ... })
+ * &lt;/pre>
+ *
+ * &lt;p>
+ * As we can see here, when creating a room the application must specify a *status*
+ * property which can be one of the following:
+ * &lt;/p>
+ *
+ * &lt;ul>
+ * &lt;li>
+ * &lt;code>unpublished&lt;/code> in this state the room will not be shown to clients
+ * fetching the list of available rooms in the app, this is useful if the application
+ * needs to create rooms that shouldn't be available yet because they still need to be
+ * modified.
+ * &lt;/li>
+ *
+ * &lt;li>
+ * &lt;code>active&lt;/code> in this state the room will be displayed in all clients fetching
+ * the list of available rooms that end users can join to start chatting with each other.
+ * &lt;/li>
+ *
+ * &lt;li>
+ * &lt;code>inactive&lt;/code> this last state is an intermediary state between the first two,
+ * the room will be part of fetching operations but they will not be displayed in the
+ * mobile or web app UI, it is useful for testing purposes.
+ * &lt;/li>
+ * &lt;/ul>
+ *
+ * &lt;a name="Messages">&lt;h3>Messages&lt;/h3>&lt;/a>
+ *
+ * &lt;p>
+ * Frankly being a chat platform it allows applications to send and receive messages.
+ * Naturally {@link FranklyClient} instances can publish and fetch messages to chat
+ * rooms.
+ * &lt;/p>
+ *
+ * This code snippet shows hot to create messages:
+ * &lt;pre>
+ *     var FranklyClient = require('frankly').FranklyClient
+ *
+ *     ...
+ *
+ *     client.createRoomMessage(
+ *         room.id, {
+ *         contents: [{
+ *           type  : 'text/plain',
+ *           value : 'Hello World!',
+ *         }],
+ *     }).then(function (msg) { ... })
+ *      .catch(function (err) { ... })
+ *
+ *     client.createRoomMessage(
+ *         room.id, {
+ *         contents: [{
+ *           type : 'image/*',
+ *           url  : 'https://app.franklychat.com/files/...',
+ *         }]
+ *     }).then(function (msg) { ... })
+ *      .catch(function (err) { ... })
+ * &lt;/pre>
+ *
+ * &lt;p>
+ * Let's explain quickly what's happening here: messages published to chat rooms
+ * actually support multiple parts, they may contain few text entries, or a text
+ * and an image, etc... So the *contents* property is actually a list of objects.
+ * Fields of the content objects are:
+ * &lt;/p>
+ *
+ * &lt;ul>
+ * &lt;li>
+ * &lt;code>type&lt;/code> which is the mime type of the actual content it represent and gives
+ * the application informations about how to render the content. This is mandatory.
+ * &lt;/li>
+ *
+ * &lt;li>
+ * &lt;code>value&lt;/code> which is used for inline resources directly embedded into the message.
+ * &lt;/li>
+ *
+ * &lt;li>
+ * &lt;code>url&lt;/code> which is used for remote resources that the application can upload and
+ * download in parallel of sending or receiving messages. On of *value* or *url*
+ * must be specified.
+ * &lt;/li>
+ * &lt;/ul>
+ *
+ * &lt;p>
+ * Typically, text messages are inlined because they are small enough resources
+ * that they can be embedded into the message without impact user experience.
+ * Images on the other end may take a while to download and rendering can be
+ * optimized using caching mechanisms to avoid downloading large resources too
+ * often, that's why they should provided as a remote resource (we'll see later
+ * in the *Files* section how to generate remote resource URLs).
+ *
+ * &lt;p>
+ * &lt;em>Keep in mind that messages will be broadcasted to every client application
+ * currently listening for messages on the same chat room when they are created.&lt;/em>
+ * &lt;/p>
+ *
+ * &lt;a name="Announcements">&lt;h3>Announcements&lt;/h3>&lt;/a>
+ *
+ * &lt;p>
+ * Announcements are a different type of messages which are only available to
+ * admin users.
+ * &lt;/br>
+ * A client authenticated with admin priviledges can create announcements in the
+ * app, which can then be published to one or more rooms at a later time.
+ * &lt;/p>
+ *
+ * &lt;p>
+ * In mobile and web apps embedding a &lt;strong>Frankly SDK&lt;/strong>, announcements are rendered
+ * differently from regular messages, they are highlighted and can be forced to
+ * stick at the top of the chat room UI to give some context to end users about
+ * what is currently ongoing.
+ * &lt;/p>
+ *
+ * Here's how an app using the frankly module would create and then publish
+ * announcements:
+ * &lt;pre>
+ *     var FranklyClient = require('frankly').FranklyClient
+ *
+ *     ...
+ *
+ *     client.createAnnouncement({
+ *         contents: [{
+ *           type  : 'text/plain',
+ *           value : 'Welcome!',
+ *         }],
+ *     })
+ *     .then(function (anno) {
+ *         return client.createRoomMessage(room.id, {
+ *             announcement: anno.id,
+ *         })
+ *     })
+ *     .then(function (msg) {
+ *         ...
+ *     })
+ *     .catch(function (err) {
+ *         ...
+ *     })
+ * &lt;/pre>
+ *
+ * &lt;p>
+ * As we can see here, the announcement is created with the same structure than
+ * a regular message.
+ * &lt;br/>
+ * The content of the announcement is actually what is going to be set as the
+ * message content when published to a room and obeys the same rules that were
+ * described in the &lt;a href="#Messages">Messages&lt;/a> section regarding inline and remote content.
+ * &lt;/p>
+ *
+ * @copyright Copyright (c) 2015 Frankly Inc.
+ * @license MIT
+ * @name frankly
+ */
+ module.exports = {
+   FranklyClient         : FranklyClient,
+   FranklyError          : FranklyError,
+   generateIdentityToken : jwt.generateIdentityToken,
+ }
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0</a> on Fri May 22 2015 19:43:38 GMT-0700 (PDT) using the Minami theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/linenumber.js"></script>
+</body>
+</html>
