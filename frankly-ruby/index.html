@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>frankly</title>
+    <title>Documentation by YARD 0.8.7.6</title>
     <style type="text/css">
   body {
   padding: 0 20px;
@@ -576,21 +576,262 @@ $(generateTOC);
   </head>
   <body>
     <div id="content">
-      <h1>frankly</h1>
+      <h1>Documentation by YARD 0.8.7.6</h1>
       <div id="readme">
   
-<p>This gem exposes a REST API to give a higer control to customers over the
-way they want to use the platform. Most operations available through the
-Frankly Console can be automated by querying the Frankly API directly.</p>
+<p># The MIT License (MIT)</p>
 
-<p>But the API needing to be secure and flexible a developer needs to master a
-couple of concepts about how it works to take most advantage of it. To make
-the learning curve smoother and development faster the frankly module
-exposes operations available on the API through methods of a client object.</p>
+<p>Copyright © 2015 Frankly Inc.</p>
 
-<p>Things like authentication which are redundant and unproductive tasks are
-nicely abstracted by the module to help developers focus on the core of
-what they need to get done with the Frankly API.</p>
+<p>Permission is hereby granted, free of charge, to any person obtaining a
+copy of this software and associated documentation files (the “Software”),
+to deal in the Software without restriction, including without limitation
+the rights to use, copy, modify, merge, publish, distribute, sublicense,
+and/or sell copies of the Software, and to permit persons to whom the
+Software is furnished to do so, subject to the following conditions:</p>
+
+<p>The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.</p>
+
+<p>THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+DEALINGS IN THE SOFTWARE. #</p>
+
+<h1 id="label-Usage">Usage</h1>
+
+<p>The sections below explain how to use the module to authenticate and query
+the <strong> Frankly API</strong>.</p>
+
+<p>All operations to the API are made from instances of the
+<strong>FranklyClient</strong> class. Those objects expose methods to the
+application which map to remote procedure calls (RPC) on the
+<strong>Frankly</strong> servers, they also negotiate and maintain the
+state required by the API&#39;s security policies.</p>
+
+<p>Here&#39;s how <strong>FranklyClient</strong> instances are created:</p>
+
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&#39;franklyclient&#39;</span>
+<span class="ruby-identifier">client</span> = <span class="ruby-constant">FranklyClient</span>.<span class="ruby-identifier">new</span>
+</pre>
+
+<h2 id="label-Authentication">Authentication</h2>
+
+<p>Before performing any operation (calling any method) the client instance
+needs to authenticate against Frankly API. The API supports different level
+of permissions but this module is design to only allow <em>admin</em>
+authentication.</p>
+
+<p>When authenticating as an <em>admin</em> user the client needs to be given
+the <strong>app_key</strong> and <strong>app_secret</strong> values
+obtained from the <a href="https://console.franklychat.com/">Frankly
+Console</a>.</p>
+
+<p>Here&#39;s how to perform authentication:</p>
+
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&#39;franklyclient&#39;</span>
+
+<span class="ruby-identifier">app_key</span>    = <span class="ruby-string">&#39;app_key from Frankly Console&#39;</span>
+<span class="ruby-identifier">app_secret</span> = <span class="ruby-string">&#39;app_secret from Frankly Console&#39;</span>
+
+<span class="ruby-identifier">client</span> = <span class="ruby-constant">FranklyClient</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">client</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">app_key</span>, <span class="ruby-identifier">app_secret</span>)
+</pre>
+
+<p>If the call to <strong>open</strong> returns then authentication was
+successful and the application can move on and use this instance of
+<strong>FranklyClient</strong> to perform other operations.</p>
+
+<p><em>Publishing the</em> <strong>app_secret</strong> <em>value to the public
+can have security implications and could be used by an attacker to alter
+the content of an application.</em></p>
+
+<h2 id="label-Rooms">Rooms</h2>
+
+<p>One of the central concepts in the <strong>Frankly API</strong> is the chat
+room. An application can create, update and delete chat rooms. A chat room
+can be seen as a collection of messages, with some associated meta-data
+like the title, description or avatar image to be displayed when the end
+users access the mobile or web app embedding a <strong>Frankly
+SDK</strong>.</p>
+
+<p>This code snippet shows how to create chat rooms:</p>
+
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&#39;franklyclient&#39;</span>
+
+<span class="ruby-identifier">room_payload</span> = {
+  <span class="ruby-identifier">title</span><span class="ruby-operator">:</span>       <span class="ruby-string">&#39;Hi&#39;</span>,
+  <span class="ruby-identifier">description</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;My First Chat Room&#39;</span>,
+  <span class="ruby-identifier">status</span><span class="ruby-operator">:</span>      <span class="ruby-string">&#39;active&#39;</span>
+}
+<span class="ruby-identifier">room</span> = <span class="ruby-identifier">client</span>.<span class="ruby-identifier">create_room</span>(<span class="ruby-identifier">room_payload</span>)
+</pre>
+
+<p>As we can see here, when creating a room the application must specify a
+<em>status</em> property which can be one of the following:</p>
+<ul><li>
+<p><strong>unpublished</strong> in this state the room will not be shown to
+clients fetching the list of available rooms in the app, this is useful if
+the application needs to create rooms that shouldn&#39;t be available yet
+because they still need to be modified.</p>
+</li><li>
+<p><strong>active</strong> in this state the room will be displayed in all
+clients fetching the list of available rooms that end users can join to
+start chatting with each other.</p>
+</li><li>
+<p><strong>inactive</strong> this last state is an intermediary state between
+the first two, the room will be part of fetching operations but they will
+not be displayed in the mobile or web app UI, it is useful for testing
+purposes.</p>
+</li></ul>
+
+<h2 id="label-Message">Message</h2>
+
+<p>Frankly being a chat platform it allows applications to send and receive
+messages. Naturally <strong>FranklyClient</strong> instances can publish
+and fetch messages to chat rooms.</p>
+
+<p>This code snippet shows how to create messages:</p>
+
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&#39;franklyclient&#39;</span>
+
+<span class="ruby-identifier">message1_payload</span> = {
+  <span class="ruby-identifier">contents</span><span class="ruby-operator">:</span> [{
+    <span class="ruby-identifier">type</span><span class="ruby-operator">:</span>  <span class="ruby-string">&#39;text/plain&#39;</span>,
+    <span class="ruby-identifier">value</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;Hello World!&#39;</span>
+  }]
+}
+<span class="ruby-identifier">message1</span> = <span class="ruby-identifier">client</span>.<span class="ruby-identifier">create_room_message</span>(<span class="ruby-identifier">room</span>[<span class="ruby-string">&#39;id&#39;</span>],<span class="ruby-identifier">create_payload</span>)
+
+<span class="ruby-identifier">message2_payload</span> = {
+  <span class="ruby-identifier">contents</span><span class="ruby-operator">:</span> [{
+    <span class="ruby-identifier">type</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;image/*&#39;</span>,
+    <span class="ruby-identifier">url</span><span class="ruby-operator">:</span>  <span class="ruby-string">&#39;https://app.franklychat.com/files/...&#39;</span>
+  }]
+}
+<span class="ruby-identifier">message2</span> = <span class="ruby-identifier">client</span>.<span class="ruby-identifier">create_room_message</span>(<span class="ruby-identifier">room</span>[<span class="ruby-string">&#39;id&#39;</span>],<span class="ruby-identifier">create_payload</span>)
+</pre>
+
+<p>Let&#39;s explain quickly what&#39;s happening here: messages published to
+chat rooms actually support multiple parts, they may contain few text
+entries, or a text and an image, etc… So the <em>contents</em> property is
+actually a list of objects. Fields of the content objects are:</p>
+<ul><li>
+<p><strong>type</strong> which is the mime type of the actual content it
+represent and gives the application informations about how to render the
+content. This is mandatory.</p>
+</li><li>
+<p><strong>value</strong> which is used for inline resources directly embedded
+into the message.</p>
+</li><li>
+<p><strong>url</strong> which is used for remote resources that the
+application can upload and download in parallel of sending or receiving
+messages. One of <em>value</em> or <em>url</em> must be specified.</p>
+</li></ul>
+
+<p>Typically, text messages are inlined because they are small enough
+resources that they can be embedded into the message without impact user
+experience. Images on the other end may take a while to download and
+rendering can be optimized using caching mechanisms to avoid downloading
+large resources too often, that&#39;s why they should provided as a remote
+resource (we&#39;ll see later in the <em>Files</em> section how to generate
+remote resource URLs).</p>
+
+<p><em>Keep in mind that messages will be broadcasted to every client
+application currently listening for messages on the same chat room when
+they are created.</em></p>
+
+<h2 id="label-Announcements">Announcements</h2>
+
+<p>Announcements are a different type of messages which are only available to
+admin users. A client authenticated with admin priviledges can create
+announcements in the app, which can then be published to one or more rooms
+at a later time.</p>
+
+<p>In mobile and web apps embedding a <strong>Frankly SDK</strong>,
+announcements are rendered differently from regular messages, they are
+highlighted and can be forced to stick at the top of the chat room UI to
+give some context to end users about what is currently ongoing.</p>
+
+<p>Here&#39;s how an app using the frankly module would create and then
+publish announcements:</p>
+
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&#39;franklyclient&#39;</span>
+
+<span class="ruby-identifier">anno_payload</span> = {
+  <span class="ruby-identifier">contents</span><span class="ruby-operator">:</span> [{
+    <span class="ruby-identifier">type</span><span class="ruby-operator">:</span>  <span class="ruby-string">&#39;text/plain&#39;</span>,
+    <span class="ruby-identifier">value</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;Hello World!&#39;</span>
+  }]
+}
+
+<span class="ruby-identifier">anno</span> = <span class="ruby-identifier">client</span>.<span class="ruby-identifier">create_announcement</span>(<span class="ruby-identifier">anno_payload</span>)
+<span class="ruby-identifier">client</span>.<span class="ruby-identifier">create_room_message</span>(<span class="ruby-identifier">room</span>.<span class="ruby-identifier">id</span>, {<span class="ruby-identifier">announcement</span><span class="ruby-operator">:</span> <span class="ruby-identifier">anno</span>[<span class="ruby-string">&#39;id&#39;</span>]})
+</pre>
+
+<p>As we can see here, the announcement is created with the same structure
+than a regular message. The content of the announcement is actually what is
+going to be set as the message content when published to a room and obeys
+the same rules that were described in the <em>Messages</em> section
+regarding inline and remote content.</p>
+
+<h2 id="label-Files">Files</h2>
+
+<p>Objects of the <strong>Frankly API</strong> can have URL properties set to
+reference remote resources like images. All these URLs must be within the
+<strong>+<a
+href="https://app.franklychat.com">app.franklychat.com</a>+</strong>
+domain, which means an application must upload these resources to Frankly
+servers.</p>
+
+<p>Uploading a file happens in two steps, first the application needs to
+request a new file URL to the <strong>Frankly API</strong>, then it can use
+that URL to upload a resource to Frankly servers. Lukily the frankly module
+abstracts this nicely in a single operation, here&#39;s an example of how
+to set an image for a chat room:</p>
+
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&#39;franklyclient&#39;</span>
+
+<span class="ruby-identifier">file_payload</span> = {
+  <span class="ruby-identifier">category</span><span class="ruby-operator">:</span>  <span class="ruby-string">&#39;useravatar&#39;</span>,
+  <span class="ruby-identifier">type</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;image&#39;</span>
+}
+
+<span class="ruby-identifier">file</span> = <span class="ruby-identifier">client</span>.<span class="ruby-identifier">upload_file_from_path</span>(<span class="ruby-string">&#39;./path/to/image.pnp&#39;</span>,<span class="ruby-identifier">file_payload</span>)
+<span class="ruby-identifier">room</span> = <span class="ruby-identifier">client</span>.<span class="ruby-identifier">update_room</span>(<span class="ruby-identifier">room</span>.<span class="ruby-identifier">id</span>, {<span class="ruby-identifier">avatar_image_url</span> = <span class="ruby-identifier">file</span>[<span class="ruby-string">&#39;url&#39;</span>]})
+</pre>
+
+<p>The object returned by a call to
+<strong><code>upload_file_from_path</code></strong> and other upload
+methods is created in the first step described above. The
+<strong><code>category</code></strong> parameter shown here is a hint given
+the the <strong>Frankly API</strong> to know what formatting rules should
+be applied to the resource. This is useful to provide a better integration
+with Frankly and better user experience as files will be optimized for
+different situations based on their category.</p>
+
+<p>Here are the file categories currently available:</p>
+<ul><li>
+<p><strong>chat</strong> The default category which is usually applied to
+images sent by end users.</p>
+</li><li>
+<p><strong>useravatar</strong> This category optimizes files intended to be
+displayed as part of a user profile.</p>
+</li><li>
+<p><strong>roomavatar</strong> This category optimizes files intended to be
+displayed on room lists.</p>
+</li><li>
+<p><strong>featuredavatar</strong> Used for files intended to be displayed to
+represent featued rooms.</p>
+</li><li>
+<p><strong>sticker</strong> This category optimizes files that are used for
+sticker messages.</p>
+</li><li>
+<p><strong>stickerpack</strong> for being used as an avatar of a sticker pack.</p>
+</li></ul>
 
 </div><h1>Top Level Namespace
   
@@ -3969,7 +4210,7 @@ above to see how properly format this argument.</p>
     </div>
 
     <div id="footer">
-  Generated on Tue May 26 18:08:38 2015 by
+  Generated on Tue May 26 18:12:59 2015 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.8.7.6 (ruby-2.0.0).
 </div>
