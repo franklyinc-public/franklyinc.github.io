@@ -627,7 +627,236 @@ what they need to get done with the Frankly API.</p>
 
 
 
+  
+    <h2>
+      Instance Method Summary
+      <small>(<a href="#" class="summary_toggle">collapse</a>)</small>
+    </h2>
 
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="index.html#generate_identity_token-instance_method" title="#generate_identity_token (instance method)">- (String) <strong>generate_identity_token</strong>(app_key, app_secret, nonce, user_id = nil, role = nil) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>This function generates an identity token suitable for a single
+authentication attempt of a client against the Frankly API or SDK.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="generate_identity_token-instance_method">
+  
+    - (<tt>String</tt>) <strong>generate_identity_token</strong>(app_key, app_secret, nonce, user_id = nil, role = nil) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>This function generates an identity token suitable for a single
+authentication attempt of a client against the Frankly API or SDK</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>app_key</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The key that specifies which app this client is authenticating for, this
+value is provided by the Frankly Console.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>app_secret</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The secret value associated the the key allowing the client to securely
+authenticate against the Frankly API.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>nonce</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The nonce value got from Frankly SDK or API whether the identity generation
+comes from an client device or app backend.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>user_id</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>nil</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>This argument must be set to make the SDK operate on behalf of a specific
+user of the app. For backend services willing to interact with the API
+directly this may be omitted.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>role</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>nil</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>For backend services using the Frankly API this can be set to
+&#39;admin&#39; to generate a token allowing the client to get admin
+priviledges and perform operations that regular users are forbidden to.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The function returns the generated identity token as a string.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/franklyclient.rb', line 241</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_generate_identity_token'>generate_identity_token</span><span class='lparen'>(</span><span class='id identifier rubyid_app_key'>app_key</span><span class='comma'>,</span> <span class='id identifier rubyid_app_secret'>app_secret</span><span class='comma'>,</span> <span class='id identifier rubyid_nonce'>nonce</span><span class='comma'>,</span> <span class='id identifier rubyid_user_id'>user_id</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='id identifier rubyid_role'>role</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_auth_header'>auth_header</span> <span class='op'>=</span> <span class='lbrace'>{</span>
+    <span class='label'>typ:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>JWS</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span>
+    <span class='label'>alg:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>HS256</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span>
+    <span class='label'>cty:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>frankly-it;v1</span><span class='tstring_end'>&#39;</span></span>
+  <span class='rbrace'>}</span>
+
+  <span class='id identifier rubyid_auth_claims'>auth_claims</span> <span class='op'>=</span> <span class='lbrace'>{</span>
+    <span class='label'>aak:</span> <span class='id identifier rubyid_app_key'>app_key</span><span class='comma'>,</span>
+    <span class='label'>iat:</span> <span class='const'>Time</span><span class='period'>.</span><span class='id identifier rubyid_now'>now</span><span class='period'>.</span><span class='id identifier rubyid_to_i'>to_i</span><span class='comma'>,</span>
+    <span class='label'>exp:</span> <span class='const'>Time</span><span class='period'>.</span><span class='id identifier rubyid_now'>now</span><span class='period'>.</span><span class='id identifier rubyid_to_i'>to_i</span> <span class='op'>+</span> <span class='int'>10</span> <span class='op'>*</span> <span class='int'>24</span> <span class='op'>*</span> <span class='int'>60</span> <span class='op'>*</span> <span class='int'>60</span><span class='comma'>,</span>
+    <span class='label'>nce:</span> <span class='id identifier rubyid_nonce'>nonce</span>
+  <span class='rbrace'>}</span>
+
+  <span class='id identifier rubyid_auth_claims'>auth_claims</span><span class='lbracket'>[</span><span class='symbol'>:uid</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_user_id'>user_id</span> <span class='kw'>unless</span> <span class='id identifier rubyid_user_id'>user_id</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+  <span class='id identifier rubyid_auth_claims'>auth_claims</span><span class='lbracket'>[</span><span class='symbol'>:role</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_role'>role</span> <span class='kw'>unless</span> <span class='id identifier rubyid_role'>role</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+
+  <span class='const'>JWT</span><span class='period'>.</span><span class='id identifier rubyid_encode'>encode</span><span class='lparen'>(</span><span class='id identifier rubyid_auth_claims'>auth_claims</span><span class='comma'>,</span> <span class='id identifier rubyid_app_secret'>app_secret</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>HS256</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_auth_header'>auth_header</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
 
 
 <h1>Class: FranklyClient
@@ -769,7 +998,7 @@ Frankly API.</p>
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#create_file-instance_method" title="#create_file (instance method)">- (Hash) <strong>create_file</strong>(params) </a>
+      <a href="#create_file-instance_method" title="#create_file (instance method)">- (Hash) <strong>create_file</strong>(payload) </a>
     
 
     
@@ -960,31 +1189,6 @@ the app.</p>
 <p>This should be the first method called on an instance of FranklyClient,
 after succesfully returning the client can be used to interact with the
 Frankly API.</p>
-</div></span>
-  
-</li>
-
-      
-        <li class="public ">
-  <span class="summary_signature">
-    
-      <a href="#publish_announcement-instance_method" title="#publish_announcement (instance method)">- (nil) <strong>publish_announcement</strong>(announcement_id, room_id) </a>
-    
-
-    
-  </span>
-  
-  
-  
-  
-  
-  
-  
-
-  
-    <span class="summary_desc"><div class='inline'>
-<p>Calling this method causes the announcement with id specified as first
-argument to the room with id specified as second argument.</p>
 </div></span>
   
 </li>
@@ -1365,13 +1569,13 @@ Frankly API and setting its content.</p>
       <pre class="lines">
 
 
-40
-41
-42
-43</pre>
+264
+265
+266
+267</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/franklyclient.rb', line 40</span>
+      <pre class="code"><span class="info file"># File 'lib/franklyclient.rb', line 264</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span>
   <span class='ivar'>@headers</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
@@ -1415,13 +1619,13 @@ Frankly API and setting its content.</p>
       <pre class="lines">
 
 
-84
-85
-86
-87</pre>
+309
+310
+311
+312</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/franklyclient.rb', line 84</span>
+      <pre class="code"><span class="info file"># File 'lib/franklyclient.rb', line 309</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_close'>close</span>
   <span class='ivar'>@session_token</span> <span class='op'>=</span> <span class='kw'>nil</span>
@@ -1534,12 +1738,12 @@ object or objects that were created.</p>
       <pre class="lines">
 
 
-168
-169
-170</pre>
+393
+394
+395</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/franklyclient.rb', line 168</span>
+      <pre class="code"><span class="info file"># File 'lib/franklyclient.rb', line 393</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_create'>create</span><span class='lparen'>(</span><span class='id identifier rubyid_path'>path</span><span class='comma'>,</span> <span class='id identifier rubyid_params'>params</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='comma'>,</span> <span class='id identifier rubyid_payload'>payload</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
   <span class='const'>JSON</span><span class='period'>.</span><span class='id identifier rubyid_parse'>parse</span> <span class='const'>Generic</span><span class='period'>.</span><span class='id identifier rubyid_create'>create</span><span class='lparen'>(</span><span class='ivar'>@headers</span><span class='comma'>,</span> <span class='ivar'>@session_token</span><span class='comma'>,</span> <span class='id identifier rubyid_path'>path</span><span class='comma'>,</span> <span class='id identifier rubyid_params'>params</span><span class='comma'>,</span> <span class='id identifier rubyid_payload'>payload</span><span class='rparen'>)</span>
@@ -1615,12 +1819,12 @@ Announcement section above to see how properly format this argument</p>
       <pre class="lines">
 
 
-264
-265
-266</pre>
+489
+490
+491</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/franklyclient.rb', line 264</span>
+      <pre class="code"><span class="info file"># File 'lib/franklyclient.rb', line 489</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_create_announcement'>create_announcement</span><span class='lparen'>(</span><span class='id identifier rubyid_payload'>payload</span><span class='rparen'>)</span>
   <span class='const'>Json</span><span class='period'>.</span><span class='id identifier rubyid_parse'>parse</span> <span class='const'>Announcement</span><span class='period'>.</span><span class='id identifier rubyid_create_announcement'>create_announcement</span><span class='lparen'>(</span><span class='ivar'>@headers</span><span class='comma'>,</span> <span class='ivar'>@session_token</span><span class='comma'>,</span> <span class='id identifier rubyid_payload'>payload</span><span class='rparen'>)</span>
@@ -1633,7 +1837,7 @@ Announcement section above to see how properly format this argument</p>
       <div class="method_details ">
   <h3 class="signature " id="create_file-instance_method">
   
-    - (<tt>Hash</tt>) <strong>create_file</strong>(params) 
+    - (<tt>Hash</tt>) <strong>create_file</strong>(payload) 
   
 
   
@@ -1654,7 +1858,7 @@ properties of that new file are given as a hash to the method.</p>
   
     <li>
       
-        <span class='name'>params</span>
+        <span class='name'>payload</span>
       
       
         <span class='type'>(<tt>Hash</tt>)</span>
@@ -1696,15 +1900,15 @@ above to see how properly format this argument.</p>
       <pre class="lines">
 
 
-370
-371
-372</pre>
+579
+580
+581</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/franklyclient.rb', line 370</span>
+      <pre class="code"><span class="info file"># File 'lib/franklyclient.rb', line 579</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_create_file'>create_file</span><span class='lparen'>(</span><span class='id identifier rubyid_params'>params</span><span class='rparen'>)</span>
-  <span class='const'>JSON</span><span class='period'>.</span><span class='id identifier rubyid_parse'>parse</span> <span class='const'>Files</span><span class='period'>.</span><span class='id identifier rubyid_create_file'>create_file</span><span class='lparen'>(</span><span class='ivar'>@headers</span><span class='comma'>,</span> <span class='ivar'>@session_token</span><span class='comma'>,</span> <span class='id identifier rubyid_params'>params</span><span class='rparen'>)</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_create_file'>create_file</span><span class='lparen'>(</span><span class='id identifier rubyid_payload'>payload</span><span class='rparen'>)</span>
+  <span class='const'>JSON</span><span class='period'>.</span><span class='id identifier rubyid_parse'>parse</span> <span class='const'>Files</span><span class='period'>.</span><span class='id identifier rubyid_create_file'>create_file</span><span class='lparen'>(</span><span class='ivar'>@headers</span><span class='comma'>,</span> <span class='ivar'>@session_token</span><span class='comma'>,</span> <span class='id identifier rubyid_payload'>payload</span><span class='period'>.</span><span class='id identifier rubyid_to_json'>to_json</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -1777,12 +1981,12 @@ above to see how properly format this argument</p>
       <pre class="lines">
 
 
-98
-99
-100</pre>
+323
+324
+325</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/franklyclient.rb', line 98</span>
+      <pre class="code"><span class="info file"># File 'lib/franklyclient.rb', line 323</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_create_room'>create_room</span><span class='lparen'>(</span><span class='id identifier rubyid_payload'>payload</span><span class='rparen'>)</span>
   <span class='const'>JSON</span><span class='period'>.</span><span class='id identifier rubyid_parse'>parse</span> <span class='const'>Rooms</span><span class='period'>.</span><span class='id identifier rubyid_create_room'>create_room</span><span class='lparen'>(</span><span class='ivar'>@headers</span><span class='comma'>,</span> <span class='ivar'>@session_token</span><span class='comma'>,</span> <span class='id identifier rubyid_payload'>payload</span><span class='period'>.</span><span class='id identifier rubyid_to_json'>to_json</span><span class='rparen'>)</span>
@@ -1875,15 +2079,15 @@ section above to see how properly format this argument</p>
       <pre class="lines">
 
 
-341
-342
-343</pre>
+550
+551
+552</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/franklyclient.rb', line 341</span>
+      <pre class="code"><span class="info file"># File 'lib/franklyclient.rb', line 550</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_create_room_message'>create_room_message</span><span class='lparen'>(</span><span class='id identifier rubyid_room_id'>room_id</span><span class='comma'>,</span> <span class='id identifier rubyid_payload'>payload</span><span class='rparen'>)</span>
-  <span class='const'>JSON</span><span class='period'>.</span><span class='id identifier rubyid_parse'>parse</span> <span class='const'>Message</span><span class='period'>.</span><span class='id identifier rubyid_create_room_message'>create_room_message</span><span class='lparen'>(</span><span class='ivar'>@headers</span><span class='comma'>,</span> <span class='ivar'>@session_token</span><span class='comma'>,</span> <span class='id identifier rubyid_room_id'>room_id</span><span class='comma'>,</span> <span class='id identifier rubyid_payload'>payload</span><span class='period'>.</span><span class='id identifier rubyid_to_json'>to_json</span><span class='rparen'>)</span>
+  <span class='const'>JSON</span><span class='period'>.</span><span class='id identifier rubyid_parse'>parse</span> <span class='const'>Message</span><span class='period'>.</span><span class='id identifier rubyid_create_room_message'>create_room_message</span><span class='lparen'>(</span><span class='ivar'>@headers</span><span class='comma'>,</span> <span class='ivar'>@session_token</span><span class='comma'>,</span> <span class='id identifier rubyid_room_id'>room_id</span><span class='comma'>,</span> <span class='id identifier rubyid_payload'>payload</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -1992,12 +2196,12 @@ on failure.</p>
       <pre class="lines">
 
 
-223
-224
-225</pre>
+448
+449
+450</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/franklyclient.rb', line 223</span>
+      <pre class="code"><span class="info file"># File 'lib/franklyclient.rb', line 448</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_delete'>delete</span><span class='lparen'>(</span><span class='id identifier rubyid_path'>path</span><span class='comma'>,</span> <span class='id identifier rubyid_params'>params</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='comma'>,</span> <span class='id identifier rubyid_payload'>payload</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
   <span class='const'>JSON</span><span class='period'>.</span><span class='id identifier rubyid_parse'>parse</span> <span class='const'>Generic</span><span class='period'>.</span><span class='id identifier rubyid_delete'>delete</span><span class='lparen'>(</span><span class='ivar'>@headers</span><span class='comma'>,</span> <span class='ivar'>@session_token</span><span class='comma'>,</span> <span class='id identifier rubyid_path'>path</span><span class='comma'>,</span> <span class='id identifier rubyid_params'>params</span><span class='comma'>,</span> <span class='id identifier rubyid_payload'>payload</span><span class='rparen'>)</span>
@@ -2075,12 +2279,12 @@ on failure.</p>
       <pre class="lines">
 
 
-304
-305
-306</pre>
+513
+514
+515</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/franklyclient.rb', line 304</span>
+      <pre class="code"><span class="info file"># File 'lib/franklyclient.rb', line 513</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_delete_announcement'>delete_announcement</span><span class='lparen'>(</span><span class='id identifier rubyid_announcement_id'>announcement_id</span><span class='rparen'>)</span>
   <span class='const'>Json</span><span class='period'>.</span><span class='id identifier rubyid_parse'>parse</span> <span class='const'>Announcement</span><span class='period'>.</span><span class='id identifier rubyid_delete_announcement'>delete_announcement</span><span class='lparen'>(</span><span class='ivar'>@headers</span><span class='comma'>,</span> <span class='ivar'>@session_token</span><span class='comma'>,</span> <span class='id identifier rubyid_announcement_id'>announcement_id</span><span class='rparen'>)</span>
@@ -2159,12 +2363,12 @@ on failure.</p>
       <pre class="lines">
 
 
-149
-150
-151</pre>
+374
+375
+376</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/franklyclient.rb', line 149</span>
+      <pre class="code"><span class="info file"># File 'lib/franklyclient.rb', line 374</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_delete_room'>delete_room</span><span class='lparen'>(</span><span class='id identifier rubyid_room_id'>room_id</span><span class='rparen'>)</span>
   <span class='const'>Rooms</span><span class='period'>.</span><span class='id identifier rubyid_delete_room'>delete_room</span><span class='lparen'>(</span><span class='ivar'>@headers</span><span class='comma'>,</span> <span class='ivar'>@session_token</span><span class='comma'>,</span> <span class='id identifier rubyid_room_id'>room_id</span><span class='rparen'>)</span>
@@ -2259,31 +2463,31 @@ the object it is called on.</p>
       <pre class="lines">
 
 
-60
-61
-62
-63
-64
-65
-66
-67
-68
-69
-70
-71
-72
-73
-74
-75
-76
-77
-78
-79
-80
-81</pre>
+285
+286
+287
+288
+289
+290
+291
+292
+293
+294
+295
+296
+297
+298
+299
+300
+301
+302
+303
+304
+305
+306</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/franklyclient.rb', line 60</span>
+      <pre class="code"><span class="info file"># File 'lib/franklyclient.rb', line 285</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_open'>open</span><span class='lparen'>(</span><span class='id identifier rubyid_app_key'>app_key</span><span class='comma'>,</span> <span class='id identifier rubyid_app_secret'>app_secret</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_nonce'>nonce</span> <span class='op'>=</span> <span class='const'>Auth</span><span class='period'>.</span><span class='id identifier rubyid_nonce'>nonce</span><span class='lbracket'>[</span><span class='int'>1</span><span class='op'>..</span><span class='op'>-</span><span class='int'>2</span><span class='rbracket'>]</span>
@@ -2302,108 +2506,10 @@ the object it is called on.</p>
     <span class='label'>role:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>admin</span><span class='tstring_end'>&#39;</span></span>
   <span class='rbrace'>}</span>
 
-  <span class='id identifier rubyid_identity_token'>identity_token</span> <span class='op'>=</span> <span class='const'>JWT</span><span class='period'>.</span><span class='id identifier rubyid_encode'>encode</span><span class='lparen'>(</span><span class='id identifier rubyid_auth_claims'>auth_claims</span><span class='comma'>,</span> <span class='id identifier rubyid_app_secret'>app_secret</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>HS256</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_auth_header'>auth_header</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_identity_token'>identity_token</span> <span class='op'>=</span> <span class='id identifier rubyid_generate_identity_token'>generate_identity_token</span><span class='lparen'>(</span><span class='id identifier rubyid_app_key'>app_key</span><span class='comma'>,</span> <span class='id identifier rubyid_app_secret'>app_secret</span><span class='comma'>,</span> <span class='id identifier rubyid_nonce'>nonce</span><span class='comma'>,</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>admin</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
   <span class='id identifier rubyid_session'>session</span> <span class='op'>=</span> <span class='const'>JSON</span><span class='period'>.</span><span class='id identifier rubyid_parse'>parse</span> <span class='const'>Auth</span><span class='period'>.</span><span class='id identifier rubyid_open'>open</span><span class='lparen'>(</span><span class='id identifier rubyid_identity_token'>identity_token</span><span class='rparen'>)</span>
   <span class='ivar'>@session_token</span> <span class='op'>=</span> <span class='id identifier rubyid_session'>session</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>token</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span>
   <span class='ivar'>@headers</span> <span class='op'>=</span> <span class='const'>Util</span><span class='period'>.</span><span class='id identifier rubyid_build_headers'>build_headers</span>
-<span class='kw'>end</span></pre>
-    </td>
-  </tr>
-</table>
-</div>
-    
-      <div class="method_details ">
-  <h3 class="signature " id="publish_announcement-instance_method">
-  
-    - (<tt>nil</tt>) <strong>publish_announcement</strong>(announcement_id, room_id) 
-  
-
-  
-
-  
-</h3><div class="docstring">
-  <div class="discussion">
-    
-<p>Calling this method causes the announcement with id specified as first
-argument to the room with id specified as second argument. The properties
-of that new announcement are given as hash to the method.</p>
-
-
-  </div>
-</div>
-<div class="tags">
-  <p class="tag_title">Parameters:</p>
-<ul class="param">
-  
-    <li>
-      
-        <span class='name'>announcement_id</span>
-      
-      
-        <span class='type'>(<tt>Int</tt>)</span>
-      
-      
-      
-        &mdash;
-        <div class='inline'>
-<p>The identifier of the announcement to publish.</p>
-</div>
-      
-    </li>
-  
-    <li>
-      
-        <span class='name'>room_id</span>
-      
-      
-        <span class='type'>(<tt>Int</tt>)</span>
-      
-      
-      
-        &mdash;
-        <div class='inline'>
-<p>The identifier of the room to publish the announcement to.</p>
-</div>
-      
-    </li>
-  
-</ul>
-
-<p class="tag_title">Returns:</p>
-<ul class="return">
-  
-    <li>
-      
-      
-        <span class='type'>(<tt>nil</tt>)</span>
-      
-      
-      
-        &mdash;
-        <div class='inline'>
-<p>The method doesn&#39;t return anything on success and throws an exception
-on failure.</p>
-</div>
-      
-    </li>
-  
-</ul>
-
-</div><table class="source_code">
-  <tr>
-    <td>
-      <pre class="lines">
-
-
-280
-281
-282</pre>
-    </td>
-    <td>
-      <pre class="code"><span class="info file"># File 'lib/franklyclient.rb', line 280</span>
-
-<span class='kw'>def</span> <span class='id identifier rubyid_publish_announcement'>publish_announcement</span><span class='lparen'>(</span><span class='id identifier rubyid_announcement_id'>announcement_id</span><span class='comma'>,</span> <span class='id identifier rubyid_room_id'>room_id</span><span class='rparen'>)</span>
-  <span class='const'>Json</span><span class='period'>.</span><span class='id identifier rubyid_parse'>parse</span> <span class='const'>Announcement</span><span class='period'>.</span><span class='id identifier rubyid_publish_announcement'>publish_announcement</span><span class='lparen'>(</span><span class='ivar'>@headers</span><span class='comma'>,</span> <span class='ivar'>@session_token</span><span class='comma'>,</span> <span class='id identifier rubyid_announcement_id'>announcement_id</span><span class='comma'>,</span> <span class='id identifier rubyid_room_id'>room_id</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -2511,12 +2617,12 @@ Frankly API. Every read_* method is implemented on top of this one.</p>
       <pre class="lines">
 
 
-186
-187
-188</pre>
+411
+412
+413</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/franklyclient.rb', line 186</span>
+      <pre class="code"><span class="info file"># File 'lib/franklyclient.rb', line 411</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_read'>read</span><span class='lparen'>(</span><span class='id identifier rubyid_path'>path</span><span class='comma'>,</span> <span class='id identifier rubyid_params'>params</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='comma'>,</span> <span class='id identifier rubyid_payload'>payload</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
   <span class='const'>JSON</span><span class='period'>.</span><span class='id identifier rubyid_parse'>parse</span> <span class='const'>Generic</span><span class='period'>.</span><span class='id identifier rubyid_read'>read</span><span class='lparen'>(</span><span class='ivar'>@headers</span><span class='comma'>,</span> <span class='ivar'>@session_token</span><span class='comma'>,</span> <span class='id identifier rubyid_path'>path</span><span class='comma'>,</span> <span class='id identifier rubyid_params'>params</span><span class='comma'>,</span> <span class='id identifier rubyid_payload'>payload</span><span class='rparen'>)</span>
@@ -2592,12 +2698,12 @@ id in the app.</p>
       <pre class="lines">
 
 
-291
-292
-293</pre>
+500
+501
+502</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/franklyclient.rb', line 291</span>
+      <pre class="code"><span class="info file"># File 'lib/franklyclient.rb', line 500</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_read_announcement'>read_announcement</span><span class='lparen'>(</span><span class='id identifier rubyid_announcement_id'>announcement_id</span><span class='rparen'>)</span>
   <span class='const'>Json</span><span class='period'>.</span><span class='id identifier rubyid_parse'>parse</span> <span class='const'>Announcement</span><span class='period'>.</span><span class='id identifier rubyid_read_announcement'>read_announcement</span><span class='lparen'>(</span><span class='ivar'>@headers</span><span class='comma'>,</span> <span class='ivar'>@session_token</span><span class='comma'>,</span> <span class='id identifier rubyid_announcement_id'>announcement_id</span><span class='rparen'>)</span>
@@ -2652,12 +2758,12 @@ be empty if there are no announcements in the app.</p>
       <pre class="lines">
 
 
-313
-314
-315</pre>
+522
+523
+524</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/franklyclient.rb', line 313</span>
+      <pre class="code"><span class="info file"># File 'lib/franklyclient.rb', line 522</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_read_announcement_list'>read_announcement_list</span>
   <span class='const'>Json</span><span class='period'>.</span><span class='id identifier rubyid_parse'>parse</span> <span class='const'>Announcement</span><span class='period'>.</span><span class='id identifier rubyid_read_announcement_list'>read_announcement_list</span><span class='lparen'>(</span><span class='ivar'>@headers</span><span class='comma'>,</span> <span class='ivar'>@session_token</span><span class='rparen'>)</span>
@@ -2732,12 +2838,12 @@ be empty if there are no announcements in the app.</p>
       <pre class="lines">
 
 
-325
-326
-327</pre>
+534
+535
+536</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/franklyclient.rb', line 325</span>
+      <pre class="code"><span class="info file"># File 'lib/franklyclient.rb', line 534</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_read_announcement_room_list'>read_announcement_room_list</span><span class='lparen'>(</span><span class='id identifier rubyid_announcement_id'>announcement_id</span><span class='rparen'>)</span>
   <span class='const'>Json</span><span class='period'>.</span><span class='id identifier rubyid_parse'>parse</span> <span class='const'>Announcement</span><span class='period'>.</span><span class='id identifier rubyid_read_announcement_room_list'>read_announcement_room_list</span><span class='lparen'>(</span><span class='ivar'>@headers</span><span class='comma'>,</span> <span class='ivar'>@session_token</span><span class='comma'>,</span> <span class='id identifier rubyid_announcement_id'>announcement_id</span><span class='rparen'>)</span>
@@ -2811,12 +2917,12 @@ be empty if there are no announcements in the app.</p>
       <pre class="lines">
 
 
-118
-119
-120</pre>
+343
+344
+345</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/franklyclient.rb', line 118</span>
+      <pre class="code"><span class="info file"># File 'lib/franklyclient.rb', line 343</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_read_room'>read_room</span><span class='lparen'>(</span><span class='id identifier rubyid_room_id'>room_id</span><span class='rparen'>)</span>
   <span class='const'>JSON</span><span class='period'>.</span><span class='id identifier rubyid_parse'>parse</span> <span class='const'>Rooms</span><span class='period'>.</span><span class='id identifier rubyid_read_room'>read_room</span><span class='lparen'>(</span><span class='ivar'>@headers</span><span class='comma'>,</span> <span class='ivar'>@session_token</span><span class='comma'>,</span> <span class='id identifier rubyid_room_id'>room_id</span><span class='rparen'>)</span>
@@ -2871,12 +2977,12 @@ there are no rooms in the app.</p>
       <pre class="lines">
 
 
-107
-108
-109</pre>
+332
+333
+334</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/franklyclient.rb', line 107</span>
+      <pre class="code"><span class="info file"># File 'lib/franklyclient.rb', line 332</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_read_room_list'>read_room_list</span>
   <span class='const'>JSON</span><span class='period'>.</span><span class='id identifier rubyid_parse'>parse</span> <span class='const'>Rooms</span><span class='period'>.</span><span class='id identifier rubyid_read_room_list'>read_room_list</span><span class='lparen'>(</span><span class='ivar'>@headers</span><span class='comma'>,</span> <span class='ivar'>@session_token</span><span class='rparen'>)</span>
@@ -2970,12 +3076,12 @@ messages satisfy the query.</p>
       <pre class="lines">
 
 
-357
-358
-359</pre>
+566
+567
+568</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/franklyclient.rb', line 357</span>
+      <pre class="code"><span class="info file"># File 'lib/franklyclient.rb', line 566</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_read_room_message_list'>read_room_message_list</span><span class='lparen'>(</span><span class='id identifier rubyid_room_id'>room_id</span><span class='comma'>,</span> <span class='id identifier rubyid_params'>params</span><span class='rparen'>)</span>
   <span class='const'>Json</span><span class='period'>.</span><span class='id identifier rubyid_parse'>parse</span> <span class='const'>Message</span><span class='period'>.</span><span class='id identifier rubyid_read_room_message_list'>read_room_message_list</span><span class='lparen'>(</span><span class='ivar'>@headers</span><span class='comma'>,</span> <span class='ivar'>@session_token</span><span class='comma'>,</span> <span class='id identifier rubyid_room_id'>room_id</span><span class='comma'>,</span> <span class='id identifier rubyid_params'>params</span><span class='rparen'>)</span>
@@ -3086,12 +3192,12 @@ Frankly API. Every read_* method is implemented on top of this one.</p>
       <pre class="lines">
 
 
-204
-205
-206</pre>
+429
+430
+431</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/franklyclient.rb', line 204</span>
+      <pre class="code"><span class="info file"># File 'lib/franklyclient.rb', line 429</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_update'>update</span><span class='lparen'>(</span><span class='id identifier rubyid_path'>path</span><span class='comma'>,</span> <span class='id identifier rubyid_params'>params</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='comma'>,</span> <span class='id identifier rubyid_payload'>payload</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
   <span class='const'>JSON</span><span class='period'>.</span><span class='id identifier rubyid_parse'>parse</span> <span class='const'>Generic</span><span class='period'>.</span><span class='id identifier rubyid_update'>update</span><span class='lparen'>(</span><span class='ivar'>@headers</span><span class='comma'>,</span> <span class='ivar'>@session_token</span><span class='comma'>,</span> <span class='id identifier rubyid_path'>path</span><span class='comma'>,</span> <span class='id identifier rubyid_params'>params</span><span class='comma'>,</span> <span class='id identifier rubyid_payload'>payload</span><span class='rparen'>)</span>
@@ -3236,12 +3342,12 @@ on failure.</p>
       <pre class="lines">
 
 
-396
-397
-398</pre>
+605
+606
+607</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/franklyclient.rb', line 396</span>
+      <pre class="code"><span class="info file"># File 'lib/franklyclient.rb', line 605</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_update_file'>update_file</span><span class='lparen'>(</span><span class='id identifier rubyid_destination_url'>destination_url</span><span class='comma'>,</span> <span class='id identifier rubyid_file_obj'>file_obj</span><span class='comma'>,</span> <span class='id identifier rubyid_file_size'>file_size</span><span class='comma'>,</span> <span class='id identifier rubyid_mime_type'>mime_type</span><span class='comma'>,</span> <span class='id identifier rubyid_encoding'>encoding</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='rparen'>)</span>
   <span class='const'>Files</span><span class='period'>.</span><span class='id identifier rubyid_upload_file'>upload_file</span><span class='lparen'>(</span><span class='ivar'>@headers</span><span class='comma'>,</span> <span class='ivar'>@session_token</span><span class='comma'>,</span> <span class='id identifier rubyid_destination_url'>destination_url</span><span class='comma'>,</span> <span class='id identifier rubyid_file_obj'>file_obj</span><span class='comma'>,</span> <span class='id identifier rubyid_file_size'>file_size</span><span class='comma'>,</span> <span class='id identifier rubyid_mime_type'>mime_type</span><span class='comma'>,</span> <span class='id identifier rubyid_encoding'>encoding</span><span class='rparen'>)</span>
@@ -3335,12 +3441,12 @@ on failure.</p>
       <pre class="lines">
 
 
-412
-413
-414</pre>
+621
+622
+623</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/franklyclient.rb', line 412</span>
+      <pre class="code"><span class="info file"># File 'lib/franklyclient.rb', line 621</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_update_file_from_path'>update_file_from_path</span><span class='lparen'>(</span><span class='id identifier rubyid_destination_url'>destination_url</span><span class='comma'>,</span> <span class='id identifier rubyid_file_path'>file_path</span><span class='rparen'>)</span>
   <span class='const'>Files</span><span class='period'>.</span><span class='id identifier rubyid_update_file_from_path'>update_file_from_path</span><span class='lparen'>(</span><span class='ivar'>@headers</span><span class='comma'>,</span> <span class='ivar'>@session_token</span><span class='comma'>,</span> <span class='id identifier rubyid_destination_url'>destination_url</span><span class='comma'>,</span> <span class='id identifier rubyid_file_path'>file_path</span><span class='rparen'>)</span>
@@ -3432,13 +3538,13 @@ above to see how properly format this argument</p>
       <pre class="lines">
 
 
-134
-135
-136
-137</pre>
+359
+360
+361
+362</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/franklyclient.rb', line 134</span>
+      <pre class="code"><span class="info file"># File 'lib/franklyclient.rb', line 359</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_update_room'>update_room</span><span class='lparen'>(</span><span class='id identifier rubyid_room_id'>room_id</span><span class='comma'>,</span> <span class='id identifier rubyid_payload'>payload</span><span class='rparen'>)</span>
   <span class='const'>JSON</span><span class='period'>.</span><span class='id identifier rubyid_parse'>parse</span> <span class='const'>Rooms</span><span class='period'>.</span><span class='id identifier rubyid_update_room'>update_room</span><span class='lparen'>(</span><span class='ivar'>@headers</span><span class='comma'>,</span> <span class='ivar'>@session_token</span><span class='comma'>,</span>
@@ -3597,12 +3703,12 @@ on failure.</p>
       <pre class="lines">
 
 
-251
-252
-253</pre>
+476
+477
+478</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/franklyclient.rb', line 251</span>
+      <pre class="code"><span class="info file"># File 'lib/franklyclient.rb', line 476</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_upload'>upload</span><span class='lparen'>(</span><span class='id identifier rubyid_url'>url</span><span class='comma'>,</span> <span class='id identifier rubyid_params'>params</span><span class='comma'>,</span> <span class='id identifier rubyid_payload'>payload</span><span class='comma'>,</span> <span class='id identifier rubyid_content_length'>content_length</span><span class='comma'>,</span> <span class='id identifier rubyid_content_type'>content_type</span><span class='comma'>,</span> <span class='id identifier rubyid_content_encoding'>content_encoding</span><span class='rparen'>)</span>
   <span class='const'>JSON</span><span class='period'>.</span><span class='id identifier rubyid_parse'>parse</span> <span class='const'>Generic</span><span class='period'>.</span><span class='id identifier rubyid_upload'>upload</span><span class='lparen'>(</span><span class='ivar'>@headers</span><span class='comma'>,</span> <span class='ivar'>@session_token</span><span class='comma'>,</span> <span class='id identifier rubyid_url'>url</span><span class='comma'>,</span> <span class='id identifier rubyid_params'>params</span><span class='comma'>,</span> <span class='id identifier rubyid_payload'>payload</span><span class='comma'>,</span> <span class='id identifier rubyid_content_length'>content_length</span><span class='comma'>,</span> <span class='id identifier rubyid_content_type'>content_type</span><span class='comma'>,</span> <span class='id identifier rubyid_content_encoding'>content_encoding</span><span class='rparen'>)</span>
@@ -3745,12 +3851,12 @@ above to see how properly format this argument.</p>
       <pre class="lines">
 
 
-437
-438
-439</pre>
+646
+647
+648</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/franklyclient.rb', line 437</span>
+      <pre class="code"><span class="info file"># File 'lib/franklyclient.rb', line 646</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_upload_file'>upload_file</span><span class='lparen'>(</span><span class='id identifier rubyid_file_obj'>file_obj</span><span class='comma'>,</span> <span class='id identifier rubyid_file_size'>file_size</span><span class='comma'>,</span> <span class='id identifier rubyid_mime_type'>mime_type</span><span class='comma'>,</span> <span class='id identifier rubyid_encoding'>encoding</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='id identifier rubyid_params'>params</span><span class='rparen'>)</span>
   <span class='const'>Files</span><span class='period'>.</span><span class='id identifier rubyid_upload_file'>upload_file</span><span class='lparen'>(</span><span class='ivar'>@headers</span><span class='comma'>,</span> <span class='ivar'>@session_token</span><span class='comma'>,</span> <span class='id identifier rubyid_destination_url'>destination_url</span><span class='comma'>,</span> <span class='id identifier rubyid_file_obj'>file_obj</span><span class='comma'>,</span> <span class='id identifier rubyid_file_size'>file_size</span><span class='comma'>,</span> <span class='id identifier rubyid_mime_type'>mime_type</span><span class='comma'>,</span> <span class='id identifier rubyid_encoding'>encoding</span><span class='comma'>,</span> <span class='id identifier rubyid_params'>params</span><span class='rparen'>)</span>
@@ -3842,12 +3948,12 @@ above to see how properly format this argument.</p>
       <pre class="lines">
 
 
-452
-453
-454</pre>
+661
+662
+663</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/franklyclient.rb', line 452</span>
+      <pre class="code"><span class="info file"># File 'lib/franklyclient.rb', line 661</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_upload_file_from_path'>upload_file_from_path</span><span class='lparen'>(</span><span class='id identifier rubyid_file_path'>file_path</span><span class='comma'>,</span> <span class='id identifier rubyid_params'>params</span><span class='rparen'>)</span>
   <span class='const'>Files</span><span class='period'>.</span><span class='id identifier rubyid_upload_file_from_path'>upload_file_from_path</span><span class='lparen'>(</span><span class='ivar'>@headers</span><span class='comma'>,</span> <span class='ivar'>@session_token</span><span class='comma'>,</span> <span class='id identifier rubyid_file_path'>file_path</span><span class='comma'>,</span> <span class='id identifier rubyid_params'>params</span><span class='rparen'>)</span>
@@ -3863,7 +3969,7 @@ above to see how properly format this argument.</p>
     </div>
 
     <div id="footer">
-  Generated on Tue May 19 11:18:38 2015 by
+  Generated on Tue May 26 18:00:41 2015 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.8.7.6 (ruby-2.0.0).
 </div>
