@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Frankly Server Authentication</title>
+    <meta name="keywords" content="Frankly Platform" />
+    <link type="text/css" rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" type="text/css">
+	<title>Frankly Server Authentication Guide</title>
+	
+	
+</head>
+
+
+<body>
+
+	<h1>
+		Frankly Server Authentication Guide
+	</h1>
+<p><i>Last updated May 05, 2015</i></p>
+
+<br>
+<br>
+
+	<h2>
+		Outline
+	</h2>
+
+	<ul>	
+		<li><a href="#summary">Summary</a>
+		<li><a href="#jwt">JWT</a>
+		<li><a href="#auth_flow">Authentication Flow</a>
+	</ul>
+	
+<br>
+<br>
+
+<a id="summary">
+	<h2>
+		Summary
+	</h2>
+	
+<p>
+	This document describes how the Frankly Authentication works and what components Frankly partners must build in order to support authentication of their users on Frankly’s infrastructure.
+</p>
+</a>
+
+<br>
+<br>
+
+<a id="jwt">
+	<h2>
+		JWT
+	</h2>
+
+<p>
+	Frankly Authentication mechanism is based on JWT (JSON Web Token), a web standard for sharing user authentication in a secure way.
+</p>
+
+<p>
+	JWT libraries are provided for all popular programming languages and are referenced at <a href="http://jwt.io/">jwt.io</a>.
+</p>
+
+<p>
+	The full JWT specifications can be found <a href="https://openid.net/specs/draft-jones-json-web-token-07.html">here</a>, the reader should consult and become familiar with how JWT works prior to continuing with this document.
+</p>
+</a>
+
+<br>
+<br>
+
+<a id="auth_flow">
+<h2>
+	Authentication Flow
+</h2>
+
+<h3>
+	1. Generate a Nonce Value
+	
+</h3>
+
+<p>
+	JSON Web Tokens embed a unique value called nonce which is used to protect against man-in-the-middle attacks by adding a random component to the token in order to make it impossible to predict a valid token.
+</p>
+
+<p>
+	Frankly’s infrastructure provides a public HTTP endpoint that must be queried to generate a nonce value as a first step of the authentication flow. The response contains the nonce value represented as a JSON string which can be used for only one authentication attempt.
+</p>
+
+<p>
+	Example: GET request to https://app.franklychat.com/auth/nonce to get a nonce value.
+</p>
+
+<pre><code>
+	$ curl -X GET https://app.franklychat.com/auth/nonce
+	"054afc088ea94717aa6121768f13a57a"
+</code></pre>
+
+<br>
+<br>
+
+<h3>
+	2. Generate an Identity Token
+</h3>
+
+<p>
+	After getting a nonce value from Frankly’s infrastructure, the partner app has to generate an identity token that embeds user’s information and is signed using the secret key that can be found in the <a href="https://console.franklychat.com/">Frankly Console</a>.
+</p>
+
+<p>
+	The JWT token must have the following structure:
+</p>
+
+<pre><code>
+	Header
+
+	{
+	  “typ”: “JWS”,
+	  “alg”: “HS256”,
+	  “cty”: “frankly-it;v1”
+	}
+
+	Claims
+
+	{
+	  “aak”: <authentication key obtained from frankly console>,
+	  “uid”: <unique user identifier> (optional),
+	  “iat”: <token generation time as a unix timestamp>,
+	  “exp”: <token expiration time as a unix timestamp>,
+	  “nce”: <nonce value obtained in step 1>,
+	  “role”: ”admin” (optional)
+	}
+
+	Signature
+
+	HMACSHA256(
+	base64UrlEncode(Header) + "." +	base64UrlEncode(Claims),
+	<authentication secret obtained from frankly console>
+	)
+</code></pre>
+
+<br>
+
+<p>
+	Once encoded and signed with the authentication secret the app should have a value that looks like this:
+</p>
+
+<br>
+
+<pre><code>
+	Identity Token
+
+	eyJ0eXAiOiJKV1MiLCJhbGciOiJIUzI1NiIsImN0eSI6ImZyYW5rbHktaXQ7djEifQ.eyJhYWsiOiIwMTIzNDU2Nzg5IiwidWlkIjoxMjM0NTY3ODkwLCJpYXQiOjEyMzQ1Njc4OTAsImV4cCI6MTIzNDU2Nzg5MCwibmNlIjoiMDU0YWZjMDg4ZWE5NDcxN2FhNjEyMTc2OGYxM2E1N2EifQ.BawHATknj5vTB5GF8yz0b-pAVidGF9enV0WBU6dirPo
+</code></pre>
+
+<br>
+<br>
+
+<h3>
+	3. Generate a Session Token
+</h3>
+
+<p>
+	After generating an identity token the app can then request a session token to be able to use Frankly’s API.
+</p>
+
+<p>
+	Obtaining a session token can be done by querying https://app.franklychat.com/auth and setting the identity_token query string parameter to the value generated in step 2.
+</p>
+
+<p>
+	This session token will come in the response as two cookies (token and xsrf) that the HTTP client should set whenever it attempts to use any of the Frankly API endpoints.
+</p>
+
+<p>
+	Example: GET request on <a href="https://app.franklychat.com/auth">https://app.franklychat.com/auth</a>
+</p>
+
+<pre><code>
+	$ curl -v -X GET https://app.franklychat.com/auth?identity_token=...
+	> GET /auth?identity_token=... HTTP/1.1
+	> Host: app.franklychat.com
+	> ...
+	> 
+	< HTTP/1.1 200 OK
+	< Set-Cookie: token=<session token>
+	< Set-Cookie: xsrf=<xsrf token>
+	< ...
+	<
+</code></pre>
+</a>
+
+	
+
+<br>
+<br>
+<br>
+<br>
+<br>
+		
+</body>
+</html>
+	
+	
