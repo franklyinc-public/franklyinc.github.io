@@ -245,42 +245,41 @@ This method is where you should utilize your back end server as detailed in Fran
 <p>
 
 	<ol>			
-			<li>Set the FranklySDK’s <code>profileDelegate</code> to an object that conforms to the <code>FranklySDKUserProfileDelegate</code> protocol.
+		<li>Set the FranklySDK’s <code>profileDelegate</code> to an object that conforms to the <code>FranklySDKUserProfileDelegate</code> protocol.
 				
-				<br><br>
+<br><br>
 				
-			<p>In our example code, we’ve made our <code>ViewController</code> also conform to this protocol</p>
+		<p>In our example code, we’ve made our <code>ViewController</code> also conform to this protocol</p>
 
-			<pre><code>
-				@interface ViewController : UIViewController &lt;FranklySDKAuthenticationDelegate, FranklySDKUserProfileDelegate&gt;
-			</code></pre>
+<pre><code>
+	@interface ViewController : UIViewController &lt;FranklySDKAuthenticationDelegate, FranklySDKUserProfileDelegate&gt;
+</code></pre>
 
-			<pre><code>
-			- (void)viewDidLoad {
+<pre><code>
+	- (void)viewDidLoad {
 
-				[super viewDidLoad];
+		[super viewDidLoad];
 
-				[FranklySDK sharedInstance].authenticationDelegate = self;
-				[FranklySDK sharedInstance].profileDelegate = self;				
+		[FranklySDK sharedInstance].authenticationDelegate = self;
+		[FranklySDK sharedInstance].profileDelegate = self;				
 
-				[[FranklySDK sharedInstance] initiateAuthentication];
-			}
-			</code></pre>
+		[[FranklySDK sharedInstance] initiateAuthentication];
+	}
+	</code></pre>
 			
-			The profile delegate will get called every time the user profile image or display name changes.  Also, you can enable or disable user editing of their
-			profile data within the FranklySDK UI by allowing your delegate respond appropriately to the <code>-(BOOL)shouldAllowProfileEditing</code> delegate request.  
+		<p>The profile delegate will get called every time the user profile image or display name changes.  Also, you can enable or disable user editing of their profile data within the FranklySDK UI by allowing your delegate respond appropriately to the <code>-(BOOL)shouldAllowProfileEditing</code> delegate request.</p>  
 			
-			<br><br>
+<br><br>
 
-			<li>Setting the user's display name and avatar can be done via the calls through the FranklySDK object
+		<li>Setting the user's display name and avatar can be done via the calls through the FranklySDK object
 			
-			<pre><code>
+<pre><code>
 
-				-(void)setUserName:(NSString *)userName profileImage:(UIImage *)image];
+	-(void)setUserName:(NSString *)userName profileImage:(UIImage *)image];
 
-			</code></pre>
+</code></pre>
 			
-			<li>When the user name and image have been updated and synced with the server the profileDelegate will get a called back that they have been changed. 
+		<li>When the user name and image have been updated and synced with the server the profileDelegate will get a called back that they have been changed. 
 					
 	</ol>
 
@@ -299,9 +298,13 @@ This method is where you should utilize your back end server as detailed in Fran
 	Now you’re ready to set up your Rooms and Room List.
 </p>
 
+<br>
+
 <p>
-	Refer to the <a href="../frankly-admin-console/index.html">Admin Console Documentation</a> for setting up your Rooms in your app.
+	<i>***Important Note</i> Please make sure you've set up at least one Room in the Admin Console before proceeding. If you don't have an Admin Console account, please contact us at <a href="mailto:platform-support@franklychat.com">platform-support@franklychat.com</a>.
 </p>
+
+<br>
 
 <p>
 	To use the SDK:
@@ -321,7 +324,7 @@ This method is where you should utilize your back end server as detailed in Fran
 </h2>
 	
 <p>
-	If your delegate receives the doUserAuthentication callback then you should present a log in or sign up screen. When the user has completed logging in, you should call restart the authentication process by calling initiateAuthentication again. 
+	If your delegate receives the <code>doUserAuthentication</code> callback then you should present a log in or sign up screen. When the user has completed logging in, you should call restart the authentication process by calling <code>initiateAuthentication</code> again. 
 </p>
 </a>
 
