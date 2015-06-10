@@ -245,42 +245,41 @@ This method is where you should utilize your back end server as detailed in Fran
 <p>
 
 	<ol>			
-			<li>Set the FranklySDK’s <code>profileDelegate</code> to an object that conforms to the <code>FranklySDKUserProfileDelegate</code> protocol.
+		<li>Set the FranklySDK’s <code>profileDelegate</code> to an object that conforms to the <code>FranklySDKUserProfileDelegate</code> protocol.
 				
-				<br><br>
+<br><br>
 				
-			<p>In our example code, we’ve made our <code>ViewController</code> also conform to this protocol</p>
+		<p>In our example code, we’ve made our <code>ViewController</code> also conform to this protocol</p>
 
-			<pre><code>
-				@interface ViewController : UIViewController &lt;FranklySDKAuthenticationDelegate, FranklySDKUserProfileDelegate&gt;
-			</code></pre>
+<pre><code>
+	@interface ViewController : UIViewController &lt;FranklySDKAuthenticationDelegate, FranklySDKUserProfileDelegate&gt;
+</code></pre>
 
-			<pre><code>
-			- (void)viewDidLoad {
+<pre><code>
+	- (void)viewDidLoad {
 
-				[super viewDidLoad];
+		[super viewDidLoad];
 
-				[FranklySDK sharedInstance].authenticationDelegate = self;
-				[FranklySDK sharedInstance].profileDelegate = self;				
+		[FranklySDK sharedInstance].authenticationDelegate = self;
+		[FranklySDK sharedInstance].profileDelegate = self;				
 
-				[[FranklySDK sharedInstance] initiateAuthentication];
-			}
-			</code></pre>
+		[[FranklySDK sharedInstance] initiateAuthentication];
+	}
+	</code></pre>
 			
-			The profile delegate will get called every time the user profile image or display name changes.  Also, you can enable or disable user editing of their
-			profile data within the FranklySDK UI by allowing your delegate respond appropriately to the <code>-(BOOL)shouldAllowProfileEditing</code> delegate request.  
+		<p>The profile delegate will get called every time the user profile image or display name changes.  Also, you can enable or disable user editing of their profile data within the FranklySDK UI by allowing your delegate respond appropriately to the <code>-(BOOL)shouldAllowProfileEditing</code> delegate request.</p>  
 			
-			<br><br>
+<br><br>
 
-			<li>Setting the user's display name and avatar can be done via the calls through the FranklySDK object
+		<li>Setting the user's display name and avatar can be done via the calls through the FranklySDK object
 			
-			<pre><code>
+<pre><code>
 
-				-(void)setUserName:(NSString *)userName profileImage:(UIImage *)image];
+	-(void)setUserName:(NSString *)userName profileImage:(UIImage *)image];
 
-			</code></pre>
+</code></pre>
 			
-			<li>When the user name and image have been updated and synced with the server the profileDelegate will get a called back that they have been changed. 
+		<li>When the user name and image have been updated and synced with the server the profileDelegate will get a called back that they have been changed. 
 					
 	</ol>
 
