@@ -7,6 +7,7 @@
     <link type="text/css" rel="stylesheet" href="../css/main.css">
     <link rel="stylesheet" type="text/css">
 	<link href="../themes/prism.css" rel="stylesheet" />
+	<script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js?skin=sunburst"></script>
 	<title>Frankly Android SDK Integration Guide</title>
 	
 	
@@ -55,7 +56,7 @@
 </h3>
 	
 <p>	
-	Download <code>frankly-sdk-1.0.0.aar</code> into your app’s <code>libs</code> - <a href="https://www.dropbox.com/s/t31yn07eizz6yx7/Frankly_Android_SDK_1.0.0_20150522.zip?dl=0">click here</a>.
+	Download <code>frankly-sdk-1.0.0.aar</code> into your app’s <code>libs</code> - <a href="https://github.com/franklyinc/frankly-android" target="_blank">click here</a>.
 </p>
 
 <br>
@@ -68,7 +69,8 @@
 <p>
 Modify your app module's <code>build.gradle</code>.
 
-<pre><code>
+<div  style="width:60%;">		
+<pre class="prettyprint"><code class="lang-java">
 repositories {
     ...
     flatDir {
@@ -88,6 +90,7 @@ dependencies {
     compile 'net.jodah:expiringmap:0.4.1'
 }
 </code></pre>
+</div>
 
 <br>
 <br>
@@ -97,18 +100,17 @@ dependencies {
 </h3>
 	
 <p>	
-	Partners must declare the Frankly Android SDK’s content provider with their app’s package name as a prefix of the authorities value in the <code>AndroidManifest.xml</code> file:
+	Partners must declare the Frankly Android SDK’s content provider with their app’s package name as a prefix of the authorities value in the <code>AndroidManifest.xml</code> file, where <code>&lt;app_package_name&gt;</code> is the package name of the app where the Frankly Android SDK is being integrated:
 </p>
 
-<pre><code>
+<div  style="width:60%;">		
+<pre class="prettyprint"><code class="lang-xml">
 &lt;provider
         android:name="com.frankly.franklysdk.contentprovider.FranklySdkContentProvider"
         android:authorities="&lt;app_package_name>.contentprovider.FranklySdkContentProvider"/&gt;
 </code></pre>
+</div>
 
-<p>
-	where <code>&lt;app_package_name&gt;</code> is the package name of the app where the Frankly Android SDK is being integrated.
-</p>
 
 <br>
 <br>
@@ -121,7 +123,8 @@ dependencies {
 	Partners must implement an <code>OnAuthenticationRequestListener</code> class to handle user authentication:
 </p>
 
-<pre><code>
+<div  style="width:60%;">		
+<pre class="prettyprint"><code class="lang-java">
 private class MyOnAuthenticationRequestListener implements Authenticator.OnAuthenticationRequestListener {
     public void onAuthenticationRequest(final Authenticator authenticator, final String nonce) {
         // For security, post nonce to your backend to retrieve an identity token
@@ -135,6 +138,7 @@ private class MyOnAuthenticationRequestListener implements Authenticator.OnAuthe
     }
 }
 </code></pre>
+</div>
 
 <p>
 	<strong>Note:</strong> The identity token is meant to be retrieved from the Partner’s servers rather than being hardcoded into the app.
@@ -143,22 +147,25 @@ private class MyOnAuthenticationRequestListener implements Authenticator.OnAuthe
 <p>
 	After defining the <code>OnAuthenticationRequestListener</code> class, Partners must create an instance of the class and pass it into the Frankly Android SDK’s Authenticator class:
 
-<pre><code>
+<div  style="width:60%;">		
+<pre class="prettyprint"><code class="lang-java">
 Authenticator authenticator = Authenticator.getInstance(context);
 authenticator.setOnAuthenticationRequestListener(authenticationRequestListener);
 </code></pre>
+</div>
 
 <br>
 <br>
 
 <h3>
 	5. Configure the RoomListActivity
-</H3>
+</h3>
 	
 <p>	
 	<code>RoomListActivity</code> must be declared in app's <code>AndroidManifest.xml</code> file:
 
-<pre><code>
+<div  style="width:80%;">		
+<pre class="prettyprint"><code class="lang-xml">
 &lt;activity
         android:configChanges="keyboardHidden|orientation|screenSize"
         android:label="&lt;room_list_title&gt;"
@@ -171,6 +178,7 @@ authenticator.setOnAuthenticationRequestListener(authenticationRequestListener);
         android:value="&lt;parent_activity>"/&gt;
 &lt;/activity&gt;
 </code></pre>
+</div>
 
 <p>
 	where <code><room_list_title></code> is the title of <code>RoomListActivity</code> and <code>&lt;parent_activity&gt;</code> is the destination when the <code>RoomListActivity</code> is exited via "Up" navigation.
@@ -187,12 +195,14 @@ authenticator.setOnAuthenticationRequestListener(authenticationRequestListener);
 	The Frankly Android SDK contains a <code>RoomListActivity</code> class which contains everything needed to show the chatroom list and allow the user to join any of the chatrooms:
 </p>
 
-<pre><code>
+<div  style="width:80%;">		
+<pre class="prettyprint"><code class="lang-java">
 import com.frankly.franklysdk.app.RoomListActivity;
 ...
 Intent intent = new Intent(context, RoomListActivity.class);
 context.startActivity(intent);
 </code></pre>
+</div>
 
 <br>
 <br>
@@ -204,7 +214,7 @@ context.startActivity(intent);
 	
 <p>
 	<ol>
-		<li>Create empty project in AndroidStudio
+		<li>Create empty project in Android Studio
 		<li>Download and import sample app <code>File > New Module > Import Existing Project > folder of unzipped sample.zip</code>
 	</ol>
 </p>
@@ -226,12 +236,15 @@ context.startActivity(intent);
 	Partners can choose to specify the Frankly Android SDK to connect to either the test servers or production servers, or have the SDK automatically decide which servers to connect to during development. This can be accomplished by specifying the following <code>meta-data</code> tag in the <code>AndroidManifest.xml</code> file:
 </p>
 
-<pre><code>
+<div  style="width:60%;">		
+<pre class="prettyprint"><code class="lang-xml">
 &lt;meta-data
     android:name="com.frankly.franklysdk.ServerGroup"
     android:value="prod|test|auto" /&gt;
 </code></pre>
+</div>
 
+<br><br>
 
 <table border="1" style="width:40%">
 	<tr>
@@ -266,12 +279,15 @@ context.startActivity(intent);
 To assist with allowing apps to provide their own basic customizations to existing Frankly Android SDK Views, Activities, and Fragments, the following styles can be overridden and specified by Partners in XML style files:
 </p>
 
-<pre><code>
+<div  style="width:60%;">		
+<pre class="prettyprint"><code class="lang-java">
 &lt;?xml version="1.0" encoding="utf-8"?&gt;
 &lt;resources&gt;
     &lt;color name="frankly_sdk_primary"&gt;#6600FF&lt;/color&gt;
 &lt;/resources&gt;
 </pre></code>
+</div>
+
 </a>
 
 <br>
@@ -292,19 +308,29 @@ To assist with allowing apps to provide their own basic customizations to existi
 	<i>Symptoms</i>
 </p>
 
-<pre><code>
+<div  style="width:60%;">		
+<pre class="prettyprint"><code class="lang-java">
 Error:duplicate files during packaging of APK ...
     Path in archive: META-INF/NOTICE.txt
 </pre></code>
+</div>
+
+<br>
 
 <p>
 or
 </p>
 
-<pre><code>
+<br>
+
+<div  style="width:60%;">		
+<pre class="prettyprint"><code class="lang-java">
 Error:Execution failed for task ':app:packageDebug'.
 Duplicate files copied in APK META-INF/NOTICE.txt ...
 </pre></code>
+</div>
+
+<br>
 
 <p>
 	<i>Solution</i>
@@ -313,14 +339,16 @@ Duplicate files copied in APK META-INF/NOTICE.txt ...
 <p>	
 Add <code>packagingOptions</code> into app's <code>build.gradle</code>.
 
-<pre><code>
+<div  style="width:60%;">		
+<pre class="prettyprint"><code class="lang-java">
 packagingOptions {
     exclude 'META-INF/LICENSE.txt'
     exclude 'META-INF/NOTICE.txt'
 }
 </pre></code>
+</div>
 
-<br>
+<br><br>
 
 <h3>
 	Manifest Merger Failed
@@ -330,19 +358,24 @@ packagingOptions {
 	<i>Symptoms</i>
 </p>
 
-<pre><code>
+<div  style="width:60%;">		
+<pre class="prettyprint"><code class="lang-java">
 Manifest merger failed : Attribute application@icon value=(@mipmap/ic_launcher) from AndroidManifest.xml ...
 </pre></code>
+</div>
+
+<br>
 
 <p>
 	<i>Solution</i>
 </p>
 	
 <p>	
-	Add <code>'tools:replace="android:icon"'</code> to element at <code>AndroidManifest.xml</code>
+	Add <code>'tools:replace="android:icon"'</code> to element at <code>AndroidManifest.xml</code>:
 </p>	
 	
-<pre><code>
+<div  style="width:60%;">		
+<pre class="prettyprint"><code class="lang-xml">
     &lt;manifest xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         ...&gt;
@@ -350,6 +383,7 @@ Manifest merger failed : Attribute application@icon value=(@mipmap/ic_launcher) 
         ...
         tools:replace="android:icon"&gt;
 </pre></code>
+</div>
 	
 <br>
 		
@@ -362,17 +396,18 @@ Manifest merger failed : Attribute application@icon value=(@mipmap/ic_launcher) 
 </p>
 
 <p>	
-Caused by: <code>java.lang.NullPointerException:</code> Attempt to invoke virtual method <code>'java.lang.String android.net.Uri.getScheme()'</code> on a null object reference
+Caused by: <code>java.lang.NullPointerException:</code> Attempt to invoke virtual method <code>'java.lang.String android.net.Uri.getScheme()'</code> on a null object reference at:
 </p>
 
-<p>	
-	at
-</p>
 
-<pre><code>	
+<div  style="width:60%;">		
+<pre class="prettyprint"><code class="lang-java">
 	com.frankly.franklysdk.network.FranklyClientDelegator.getInstance(FranklyClientDelegator.java:86)
     …
 </pre></code>
+</div>
+
+<br>
 
 <p>
 	<i>Solution</i>
@@ -382,11 +417,14 @@ Caused by: <code>java.lang.NullPointerException:</code> Attempt to invoke virtua
 	Currently there is no production server prepared. Therefore, you should configure test server.
 </p>
 
-<pre><code>
+<div  style="width:60%;">		
+<pre class="prettyprint"><code class="lang-java">
 &lt;meta-data
     android:name="com.frankly.franklysdk.ServerGroup"
     android:value="test"/&gt;
 </pre></code>
+</div>
+
 </a>
 
 

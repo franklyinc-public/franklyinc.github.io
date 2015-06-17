@@ -1,5 +1,114 @@
+/*For Main Index Header*/
+.header {
+	position: relative;
+	width: 50%;
+	left: 330px;
+	padding-top: 20px;
+	padding-bottom: 20px;
+	font-family: 'Roboto', sans-serif;
+}
 
-  body {
+.header-no_underline a {
+	text-decoration: none;
+}
+
+
+/*For Side Bar*/
+.sidebar-container {
+   position: fixed;
+   left: 0px;
+   bottom: 0px;
+   top: 0px;
+   background-color: #2a2e33;
+   color: #ffffff;
+   font-family: 'Roboto', sans-serif;
+}
+
+.sidebar-logo {
+	background-image: url("../images/franklyinc_logo_color_large.png");
+	background-size: 100%;
+	margin: 30px;
+	width: 210px;
+	height: 70px;
+}
+
+.sidebar-content {
+   margin-right: 30px;
+   color: #ffffff;
+   font-family: 'Roboto', sans-serif;
+   line-height: 30px;
+}
+
+.sidebar a {
+	text-decoration: none;
+	color: #ffffff;
+}
+
+.sidebar a:visited {
+	color: #ffffff;
+}
+
+.sidebar a:hover {
+	color: #C6C9CE;
+}
+
+.sidebar li {
+	list-style-type: none;
+}
+
+
+/*For Index Body*/
+.doc {
+	position: relative;
+	width: 50%;
+	left: 330px;
+	padding-top: 20px;
+	padding-bottom: 20px;
+    font-family: 'Roboto', sans-serif;
+    word-wrap: break-word;
+}
+
+.doc a {
+	text-decoration: none;
+}
+
+.doc h {
+	text-decoration: none;
+}
+
+
+/*For Wells*/
+.well-bottom-nav {
+	position: relative;
+	width: 70%;
+	left: 330px;
+	padding-top: 20px;
+	padding-bottom: 20px;
+    font-family: 'Roboto', sans-serif;
+    word-wrap: break-word;
+}
+
+/*For Page Buttons*/
+.pager-container {
+	position: relative;
+	width: 70%;
+	left: 330px;
+	padding-top: 20px;
+	padding-bottom: 20px;
+    font-family: 'Roboto', sans-serif;
+    word-wrap: break-word;
+}
+}
+
+
+/*For Code Snippets*/
+/*All other Code Snippet Formatting is handled by Prettify now*/
+
+
+
+
+/*From Ruby Gem Doc*/
+body {
   padding: 0 20px;
   font-family: "Lucida Sans", "Lucida Grande", Verdana, Arial, sans-serif;
   font-size: 13px;
@@ -338,3 +447,7 @@ pre.code .rubyid_backref,
 pre.code .rubyid_nth_ref { color: #6D79DE; }
 pre.code .regexp, .dregexp { color: #036A07; }
 pre.code a { border-bottom: 1px dotted #bbf; }
+
+
+
+

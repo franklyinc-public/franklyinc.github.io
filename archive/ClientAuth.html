@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Authenticating the Frankly Client</title>
+    <meta name="keywords" content="Frankly Platform" />
+    <link type="text/css" rel="stylesheet" href="css/main.css">
+    <link type="text/css" rel="stylesheet" href="css/bootstrap.css">	
+    <link rel="stylesheet" type="text/css">
+	<script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js?skin=sunburst"></script>	
+	
+</head>
+
+<div class="sidebar-container" data-role="main">
+
+	<div class="sidebar-content">
+		<ul class="sidebar" id="sidenavbar">
+			<li><a href="index.html/#Getting_Started">Getting Started</a>
+			<li><a href="#Concepts">Concepts</a>
+			<li><a href="access.html">Signing Up with Frankly</a>
+			<li><a href="InstallSDK.html">Installing the SDK</a>
+			<li><a href="InitializeSDK.html">Initializing the SDK</a>
+			<li><a href="ServerAuth.html">Authenticating with Frankly Servers</a>
+			<li>Authenticating the Frankly Client
+				<ul>
+					<li><a href="#Client_Auth_iOS">iOS SDK</a>
+					<li><a href="#Client_Auth_Android">Android SDK</a>
+					<li><a href="#Client_Auth_JS">JavaScript SDK</a>
+				</ul>
+			<li><a href="#BasicIntegration.html">Basic Integration</a>
+			<li><a href="CustomizingUI.html">Customizing the UI</a>
+			<li><a href="AdvancedIntegrations.html">Advanced Integrations</a>
+			<li><a href="APIReference.html">API Reference</a>
+			<li><a href="Support.html">Support</a>
+		</ul>
+	</div>
+
+</div>
+
+
+<div class="header">
+	<h1 class="noborder">
+		Authenticating the Frankly Client
+	</h1>
+
+<br>
+
+		<ul>
+			<li><a href="#Authing_iOS">iOS SDK</a>
+			<li><a href="#Authing_Android">Android SDK</a>
+			<li><a href="#Authing_JS">JavaScript SDK</a>
+			<li><a href="#Security">A Note on Security</a>
+		</ul>
+	
+</div>
+
+<br>
+<br>
+
+<div class="doc">
+		<a id="Authing_iOS">
+			<h3>
+				Authenticating the iOS SDK
+			</h3>
+		</a>
+
+
+		<ol>	
+			<li>Set the FranklySDK’s <code>authenticationDelegate</code> to an object that conforms to the <code>FranklySDKAuthenticationDelegate</code> protocol.
+				<ul>
+					<li>In our example code, we’ve made our <code>ViewController</code> conform to the protocol:
+				</ul>		
+
+<br>
+
+<div  style="width:80%;">
+<pre class="prettyprint"><code class="lang-cpp">
+	@interface ViewController : UIViewController &lt;FranklySDKAuthenticationDelegate&gt;
+</code></pre>
+</div>
+
+<br>
+
+			<li>You set the FranklySDK authenticationDelegate and initiate authentication as follows:
+
+<br>
+
+<div  style="width:80%;">
+<pre class="prettyprint"><code class="lang-cpp">
+	- (void)viewDidLoad {
+
+		[super viewDidLoad];
+
+		[FranklySDK sharedInstance].authenticationDelegate = self;
+
+		[[FranklySDK sharedInstance] initiateAuthentication];
+
+	}
+</code></pre>
+</div>
+
+<br>
+
+			<li>Next you will need to set up the following:
+				<ul>
+					<li><code>FranklyAuthenticationDelegate</code> requires the following functions:
+						<ul>
+							<li><code>identifierWithNonce:completion:</code><br>
+
+	This method is where you should utilize your back end server as detailed in Frankly Server Authentication document to create a valid identifier. The user ID sent to the server is optional, however, if you choose not to include a user ID then the user will only be allowed in Spectator Mode.  If a user in Spectator Mode attempts to participate it will trigger a call to the delegate’s doUserAuthentication method at which point you should present a login screen. When your server responds with the identifier, call completion to finish the authentication process.
+
+							<li><strong>You must call completion or the process will never finish.</strong>
+							<li>We have included a test function in <code>FranklySDK.h, retrieveIdentitifierWithUserID:Nonce:authKey:authSecret:completionBlock,</code> that will allow you to bypass your server and retrieve an identifier from Frankly’s servers.  Because it requires putting in your auth key and secret, <strong>it is only for testing.</strong>
+
+							<ul>
+								<li>Your Auth Key and Auth Secret can be found within the Admin Console under Settings
+							</ul>
+						</ul>
+						<li><code>authenticationDidSucceedWithUserID:(NSNumber*)</code> - After this message is received, you may use the SDK.
+						<li><code>authenticationDidFailWithError:(NSError*)</code> - If this message is received, you need to start authentication process over before you may use the SDK. 
+				</ul>
+
+<br>
+
+<div  style="width:80%;">
+<pre class="prettyprint"><code class="lang-cpp">
+- (void)identifierWithNonce:(NSString *)nonce completion:(void (^)(NSString *identifier))completion {
+
+    FranklySDK *franklySDK = [FranklySDK sharedInstance];
+
+    // ONLY FOR TESTING - REQUEST IDENTIFIER FROM YOUR SERVER 
+    [franklySDK retrieveIdentitifierWithUserID:self.userId
+                                         Nonce:nonce
+                                       authKey:self.authKey
+                                    authSecret:self.authSecret
+                               completionBlock:^(NSString *identifier, NSError *error) {
+        if (identifier != nil) {
+            completion(identifier);
+        }
+    }];
+}
+</code></pre>
+</div>
+
+<br>
+
+<div  style="width:80%;">
+<pre class="prettyprint"><code class="lang-cpp">
+- (void)authenticationDidSucceedWithUserID:(NSNumber *)userID {
+
+	NSLog(@"authentication did succeed");
+
+}
+</code></pre>
+</div>
+
+<br>
+
+<div  style="width:80%;">
+<pre class="prettyprint"><code class="lang-cpp">
+- (void)authenticationDidFailWithError:(NSError *)error {
+
+	NSLog(@"authentication did fail");
+}
+</code></pre>
+</div>
+
+<br>
+
+				<li>Once you're done setting up those pieces, try running the build.
+			</ol>
+
+<br>
+<br>
+
+		<a id="Authing_Android">
+			<h3>
+				Authenticating the Android SDK
+			</h3>
+		</a>
+	
+	<p>	
+		Partners must implement an <code>OnAuthenticationRequestListener</code> class to handle user authentication:
+	</p>
+
+<div  style="width:80%;">		
+<pre class="prettyprint"><code class="lang-java">
+private class MyOnAuthenticationRequestListener implements Authenticator.OnAuthenticationRequestListener {
+    public void onAuthenticationRequest(final Authenticator authenticator, final String nonce) {
+        // For security, post nonce to your backend to retrieve an identity token
+        final String identityToken = "&lt;my_identity_token&gt;";
+
+        try {
+            authenticator.authenticate(identityToken);
+        } catch (final IOException e) {
+            e.printStackTrace();
+        }
+    }
+}
+</code></pre>
+</div>
+
+	<p>
+		<strong>Note:</strong> The identity token is meant to be retrieved from the Partner’s servers rather than being hardcoded into the app.
+	</p>
+
+	<p>
+		After defining the <code>OnAuthenticationRequestListener</code> class, Partners must create an instance of the class and pass it into the Frankly Android SDK’s Authenticator class:
+	</p>
+
+<div  style="width:80%;">		
+<pre class="prettyprint"><code class="lang-java">
+Authenticator authenticator = Authenticator.getInstance(context);
+authenticator.setOnAuthenticationRequestListener(authenticationRequestListener);
+</code></pre>
+</div>
+
+<br>
+<br>
+
+		<a id="Security">
+			<h3>
+				A Note on Security
+			</h3>
+		</a>
+		
+		<p>
+			In all cases, your application's <code>appKey</code> and <code>appSecret</code> should NOT be stored on the client and your application's backend servers should be responsible for generating identity tokens, using the <code>appSecret</code> to return it to the client to successfully authenticate. Storing your application's <code>appKey</code> and <code>appSecret</code> exposes you to unnecessary security risks where an attacker could obtain these values to communicate with Frankly services on your behalf. Please note that some examples do highlight the ability to directly authenticate with Frankly services from your application's client, however these are also noted as examples meant for checking progress of early integration steps.
+		</p>
+
+</div>
+
+<br>
+<br>
+<br>
+<br>
+
+<div class="well-bottom-nav">
+	<div class="panel panel-default">
+		<div class="panel-body">
+			<h4 align="right">
+				<a href="BasicIntegration.html">Next: Basic Integration <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></a>
+			</h4>
+		</div>
+	</div>
+</div>
+
+<br>
+<br>
+
+
+</div>
+
+</html>

@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Advanced Integrations</title>
+    <meta name="keywords" content="Frankly Platform" />
+    <link type="text/css" rel="stylesheet" href="css/main.css">
+    <link type="text/css" rel="stylesheet" href="css/bootstrap.css">	
+    <link rel="stylesheet" type="text/css">
+	<script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js?skin=sunburst"></script>	
+	
+</head>
+
+<div class="sidebar-container" data-role="main">
+
+<div class="sidebar-logo"></div>
+
+	<div class="sidebar-content">
+		<ul class="sidebar" id="sidenavbar">
+			<li><a href="index.html">Getting Started</a>
+			<li><a href="InstallSDK.html">Installing the SDK</a>
+			<li><a href="InitializeSDK.html">Initializing the SDK</a>
+			<li><a href="Auth.html">Authenticating with Frankly</a>
+			<li><a href="BasicIntegration.html">Basic Integration</a>
+			<li>Advanced Integrations
+				<ul>
+					<li><a href="#Open_Room">Directly Opening a Room</a>
+					<li><a href="#Server_APIs">Server API Access</a>
+					<li><a href="#Ruby_SDK">Ruby SDK</a>
+					<li><a href="#Python_SDK">Python SDK</a>
+				</ul>
+			<li><a href="APIReference.html">API Reference</a>
+			<li><a href="downloads.html">Downloads</a>
+			<li><a href="Support.html">Support</a>
+		</ul>
+	</div>
+
+</div>
+
+<div class="header">
+	<h1 class="noborder">
+		Advanced Integrations with Frankly Platform
+	</h1>	
+	
+<br>
+
+		<ul>
+			<li><a href="#Open_Room">OPening a Room without a Room List</a>
+			<li><a href="#Server_APIs">Server API Access</a>
+			<li><a href="#Ruby_SDK">Ruby SDK</a>
+			<li><a href="#Python_SDK">Python SDK</a>
+		</ul>
+
+</div>
+
+<br>
+<br>
+
+<div class="doc">
+	<a id="Open_Room">
+		<h3>
+			Opening a Room without a Room List
+		</h3>
+	</a>
+	
+	<p>
+		While the Frankly client SDKs do provide UI for the Frankly Room List and Frankly Rooms, we understand that displaying a Frankly Room List won't always make sense in the context of many developers' applications. For that reason, we're providing a client API meant for directly accessing any Room, already created for your application, simply by passing a Room ID. Please note of course that you have the option of simply hardcoding the Room ID in your client or using our server API to fetch the desired Room ID.
+	</p>
+	
+<br>
+	
+	<h4>
+		Using the Room API in the iOS SDK
+	</h4>
+	
+	<p>
+		In order to open a Frankly Room in the SDK while bypassing the Frankly Room List UI you must specify the <code>roomId</code> for the Room you'd like to open, as well as the Room <code>title</code> that you'd like to show to the end user while the Frankly SDK is retrieving the Room's metadata from Frankly servers. Calling the following will retrieve a view controller for the given <code>roomId</code> if non-nil, otherwise it will return nil.
+	</p>
+		
+<div  style="width:80%;">
+<pre class="prettyprint"><code>
+- (UIViewController *)roomViewControllerWithRoomId:(NSNumber *)roomId title:(NSString *)title;
+</code></pre>
+</div>
+
+<br>
+
+	<p>
+		Calling the following will retrieve a Frankly-styled navigation controller which contains a view controller for the given <code>roomId</code> if non-nil, otherwise it will return nil.
+	</p>
+
+<div  style="width:80%;">
+<pre class="prettyprint"><code>
+- (UIViewController *)roomNavigationControllerWithRoomId:(NSNumber *)roomId title:(NSString *)title;
+</code></pre>
+</div>
+
+<br>
+<br>
+
+	<h4>
+		Using the Room API in the Android SDK
+	</h4>
+	
+	<p>
+		<i>Coming soon!</i>
+	</p>
+		
+<br>
+<br>
+
+	<a id="Server_APIs">
+		<h3>
+			Server API Access
+		</h3>
+	</a>
+	
+	<p>
+		The sections below describes how developers are able to interact direction with Frankly's server APIs to create more custom integrations on the Frankly Platform. To provide a clean interface for develoeprs to interact with Frankly's server APIs, we're providing a Python module and Ruby gem that are meant to easily be integrated with your existing backend stack. In the event that you need access to Frankly's server APIs in a language that is better compatible with your backend or that you are more comfortable with, please let us know by sending an email to <a href="mailto:platform-support@franklychat.com">platform-support@franklychat.com</a>.
+	</p>
+	
+<br>
+<br>
+
+	<a id="Ruby_SDK">
+		<h3>
+			Ruby SDK
+		</h3>
+	</a>
+	
+	<p>
+		<i>Coming soon!</i>
+	</p>
+	
+<br>
+<br>
+
+	<a id="Python_SDK">
+		<h3>
+			Python SDK
+		</h3>
+	</a>
+	
+	<p>
+		<i>Coming soon!</i>
+	</p>
+
+</div>
+
+<br>
+<br>
+<br>
+<br>
+
+<!--
+<div class="well-bottom-nav">
+	<div class="panel panel-default">
+		<div class="panel-body">
+			<h4 align="right">
+				<a href="APIReference.html">Next: API Reference <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></a>
+			</h4>
+		</div>
+	</div>
+</div>
+-->
+
+<div class="pager-container">
+<nav>
+  <ul class="pager">
+    <li class="previous"><a href="BasicIntegration.html"><span aria-hidden="true">&larr;</span> Basic Integration</a></li>
+    <li class="next"><a href="APIReference.html">API Reference <span aria-hidden="true">&rarr;</span></a></li>
+  </ul>
+</nav>
+</div>
+
+<br>
+<br>
+
+
+</html>
