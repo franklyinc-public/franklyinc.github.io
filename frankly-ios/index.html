@@ -6,7 +6,7 @@
     <meta name="keywords" content="Frankly Platform" />
     <link type="text/css" rel="stylesheet" href="../css/main.css">
     <link rel="stylesheet" type="text/css">
-	<link href="../themes/prism.css" rel="stylesheet" />
+	<script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js?skin=sunburst"></script>
 	<title>Frankly iOS SDK Integration Guide</title>
 	
 	
@@ -62,9 +62,10 @@
 	Adding FranklySDK to your project using CocoaPods is easy. You'll need to install it on your computer if you haven't already.
 </p>
 	
-	<pre><code><samp>
+
+	<pre><code>
 	sudo gem install cocoapods
-	</samp></code></pre>
+	</code></pre>
 
 <p>
 	Once you've installed CocoaPods, just add the following to your Podfile and run pod install. You're done!
@@ -83,7 +84,7 @@
 	</h3>
 
 	<ol>
-		<li>Download the SDK from the compressed file/link included in the email.
+		<li>Download the SDK by <a href="https://github.com/franklyinc/frankly-ios" target="_blank">clicking here</a>.
 		<li>Add the FranklySDK Folder to your Xcode project 
 			<br><br> <img src="../images/ios_sdk_xcode_installation_1.png" border="1"> <br><br><br>
 		<li>Link the following libraries and frameworks by accessing the General tab in the Project File. Under Linked Frameworks and Libraries, add the following:
@@ -96,7 +97,9 @@
 			<li><pre><code>SystemConfiguration.framework</pre></code>
 		</ul>
 		
-		<br><br> <img src="../images/ios_sdk_xcode_installation_2.png" border="1"> <br><br><br>
+<br><br> 
+		
+		<img src="../images/ios_sdk_xcode_installation_2.png" border="1"> <br><br><br>
 		
 		<li>Update your project’s Build Settings by accessing the Build Settings tab in the Project File. Make sure your filter is set to All. Search for Other Linker Flags and set it to “<code>-ObjC</code>”
 			<br><br> <img src="../images/ios_sdk_xcode_installation_3.png" border="1"> <br><br><br>
@@ -116,14 +119,18 @@
 	
 	<ol>	
 		<li>In your <code>AppDelegate.m</code> file, import the <code>FranklySDK.h</code>
-		<pre><code>
+		
+<div  style="width:60%;">		
+		<pre class="prettyprint"><code class="lang-cpp">
 	#import “AppDelegate.h”
 	#import “FranklySDK/headers/FranklySDK.h”			
 		</code></pre>
+</div>
 
 		<li>In the <code>AppDelegate.m</code> file under the <code>application:didFinishLaunchingWithOptions</code> method, add the following:
 
-<pre><code>
+<div  style="width:60%;">
+<pre class="prettyprint"><code class="lang-cpp">
 	(BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 
 	// serverType is one of the FRSDKServerType enum values
@@ -133,6 +140,7 @@
 
 	}
 </code></pre>
+</div>
 
 	</ol>
 </a>
@@ -151,15 +159,26 @@
 
 	<ol>	
 		<li>Set the FranklySDK’s <code>authenticationDelegate</code> to an object that conforms to the <code>FranklySDKAuthenticationDelegate</code> protocol.
-<p>In our example code, we’ve made our <code>ViewController</code> conform to the protocol</p>
+			<ul>
+				<li>In our example code, we’ve made our <code>ViewController</code> conform to the protocol:
+			</ul>		
 
-<pre><code>
+<br>
+
+<div  style="width:60%;">
+<pre class="prettyprint"><code class="lang-cpp">
 	@interface ViewController : UIViewController &lt;FranklySDKAuthenticationDelegate&gt;
 </code></pre>
+</div>
+
+<br>
 
 		<li>You set the FranklySDK authenticationDelegate and initiate authentication as follows:
 
-<pre><code>
+<br>
+
+<div  style="width:60%;">
+<pre class="prettyprint"><code class="lang-cpp">
 - (void)viewDidLoad {
 
 	[super viewDidLoad];
@@ -170,6 +189,9 @@
 
 }
 </code></pre>
+</div>
+
+<br>
 
 		<li>Next you will need to set up the following:
 			<ul>
@@ -188,8 +210,12 @@ This method is where you should utilize your back end server as detailed in Fran
 					</ul>
 					<li><code>authenticationDidSucceedWithUserID:(NSNumber*)</code> - After this message is received, you may use the SDK.
 					<li><code>authenticationDidFailWithError:(NSError*)</code> - If this message is received, you need to start authentication process over before you may use the SDK. 
+</ul>
 
-<pre><code>
+<br>
+
+<div  style="width:60%;">
+<pre class="prettyprint"><code class="lang-cpp">
 - (void)identifierWithNonce:(NSString *)nonce completion:(void (^)(NSString *identifier))completion {
 
     FranklySDK *franklySDK = [FranklySDK sharedInstance];
@@ -206,31 +232,34 @@ This method is where you should utilize your back end server as detailed in Fran
     }];
 }
 </code></pre>
+</div>
 
 <br>
 
-<pre><code>
+<div  style="width:60%;">
+<pre class="prettyprint"><code class="lang-cpp">
 - (void)authenticationDidSucceedWithUserID:(NSNumber *)userID {
 
 	NSLog(@"authentication did succeed");
 
 }
 </code></pre>
+</div>
 
 <br>
 
-<pre><code>
+<div  style="width:60%;">
+<pre class="prettyprint"><code class="lang-cpp">
 - (void)authenticationDidFailWithError:(NSError *)error {
 
 	NSLog(@"authentication did fail");
 }
 </code></pre>
+</div>
 
 <br>
 
-</ul>
-
-					<li>Try running the build
+		<li>Once you're done setting up those pieces, try running the build.
 </ol>
 </a>
 
@@ -247,15 +276,22 @@ This method is where you should utilize your back end server as detailed in Fran
 	<ol>			
 		<li>Set the FranklySDK’s <code>profileDelegate</code> to an object that conforms to the <code>FranklySDKUserProfileDelegate</code> protocol.
 				
-<br><br>
-				
-		<p>In our example code, we’ve made our <code>ViewController</code> also conform to this protocol</p>
+			<ul>
+				<li>In our example code, we’ve made our <code>ViewController</code> also conform to this protocol:
+			</ul>
 
-<pre><code>
+<br>
+
+<div  style="width:80%;">
+<pre class="prettyprint"><code class="lang-cpp">
 	@interface ViewController : UIViewController &lt;FranklySDKAuthenticationDelegate, FranklySDKUserProfileDelegate&gt;
 </code></pre>
+</div>
 
-<pre><code>
+<br>
+
+<div  style="width:80%;">
+<pre class="prettyprint"><code class="lang-cpp">
 	- (void)viewDidLoad {
 
 		[super viewDidLoad];
@@ -265,19 +301,25 @@ This method is where you should utilize your back end server as detailed in Fran
 
 		[[FranklySDK sharedInstance] initiateAuthentication];
 	}
-	</code></pre>
+</code></pre>
+</div>
 			
-		<p>The profile delegate will get called every time the user profile image or display name changes.  Also, you can enable or disable user editing of their profile data within the FranklySDK UI by allowing your delegate respond appropriately to the <code>-(BOOL)shouldAllowProfileEditing</code> delegate request.</p>  
+<br>
+			<ul>
+				<li>The profile delegate will get called every time the user profile image or display name changes.  Also, you can enable or disable user editing of their profile data within the FranklySDK UI by allowing your delegate respond appropriately to the <code>-(BOOL)shouldAllowProfileEditing</code> delegate request.
+			</ul>
 			
 <br><br>
 
-		<li>Setting the user's display name and avatar can be done via the calls through the FranklySDK object
-			
-<pre><code>
+		<li>Setting the user's display name and avatar can be done via the calls through the FranklySDK object:
+
+<div  style="width:60%;">			
+<pre class="prettyprint"><code class="lang-cpp">
 
 	-(void)setUserName:(NSString *)userName profileImage:(UIImage *)image];
 
 </code></pre>
+</div>			
 			
 		<li>When the user name and image have been updated and synced with the server the profileDelegate will get a called back that they have been changed. 
 					

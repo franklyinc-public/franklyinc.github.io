@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Initializing the SDK</title>
+    <meta name="keywords" content="Frankly Platform" />
+    <link type="text/css" rel="stylesheet" href="css/main.css">
+    <link type="text/css" rel="stylesheet" href="css/bootstrap.css">	
+    <link rel="stylesheet" type="text/css">
+	<script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js?skin=sunburst"></script>	
+	
+</head>
+
+<div class="sidebar-container" data-role="main">
+
+<div class="sidebar-logo"></div>
+
+	<div class="sidebar-content">
+		<ul class="sidebar" id="sidenavbar">
+			<li><a href="index.html">Getting Started</a>
+			<li><a href="InstallSDK.html">Installing the SDK</a>
+			<li>Initializing the SDK
+				<ul>
+					<li><a href="#Initializing_iOS">iOS SDK</a>
+					<li><a href="#Initializing_Android">Android SDK</a>
+					<li><a href="#Initializing_JS">JavaScript SDK</a>
+				</ul>				
+			<li><a href="Auth.html">Authenticating with Frankly</a>
+			<li><a href="BasicIntegration.html">Basic Integration</a>
+			<li><a href="AdvancedIntegrations.html">Advanced Integrations</a>
+			<li><a href="APIReference.html">API Reference</a>
+			<li><a href="downloads.html">Downloads</a>
+			<li><a href="Support.html">Support</a>
+		</ul>
+	</div>
+
+</div>
+
+
+<div class="header">
+	<h1 class="noborder">
+		Initializing the Frankly SDK
+	</h1>
+	
+<br>
+	
+		<ul>
+			<li><a href="#Initializing_iOS">iOS SDK</a>
+			<li><a href="#Initializing_Android">Android SDK</a>
+			<li><a href="#Initializing_JS">JavaScript SDK</a>
+		</ul>
+
+</div>
+
+<br>
+<br>
+		
+
+<!-- This needs to be cleaned up -->
+		
+<div class="doc">
+		<a id="Initializing_iOS">
+			<h3>
+				Initializing the iOS SDK
+			</h3>
+		</a>			
+			
+			<p>
+				In your <code>AppDelegate.m</code> file, import the <code>FranklySDK.h</code>:
+			</p>
+		
+<div  style="width:80%;">		
+<pre class="prettyprint"><code class="lang-cpp">
+	#import “AppDelegate.h”
+	#import “FranklySDK/headers/FranklySDK.h”			
+</code></pre>
+</div>
+			
+			<p>
+				In the <code>AppDelegate.m</code> file under the <code>application:didFinishLaunchingWithOptions</code> method, add the following:
+			</p>
+			
+<div  style="width:80%;">
+<pre class="prettyprint"><code class="lang-cpp">
+	(BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+
+	// serverType is one of the FRSDKServerType enum values
+	[FranklySDK initializeSDKWithServerType: serverType];
+
+	return YES;
+
+	}
+</code></pre>
+</div>
+			
+
+<br>
+<br>		
+
+
+		<a id="Initializing_Android">
+			<h3>
+				Initializing the Android SDK
+			</h3>
+		</a>
+			
+			<p>
+				Partners must declare the Frankly Android SDK’s content provider with their app’s package name as a prefix of the authorities value in the <code>AndroidManifest.xml</code> file, where <code>&lt;app_package_name&gt;</code> is the package name of the app where the Frankly Android SDK is being integrated:
+			</p>
+			
+
+<div  style="width:80%;">		
+<pre class="prettyprint"><code class="lang-xml">
+	&lt;provider
+			android:name="com.frankly.franklysdk.contentprovider.FranklySdkContentProvider"
+			android:authorities="&lt;app_package_name>.contentprovider.FranklySdkContentProvider"/&gt;
+</code></pre>
+</div>
+
+		
+<br>
+<br>
+
+		<a id="Initializing_JS">
+			<h3>
+				Initializing the JavaScript SDK
+			</h3>
+		</a>
+			
+			<p>
+				All operations to the API are made from instances of the <code>FranklyClient</code> class. Those objects expose methods to the application which map to remote procedure calls (RPCs) on the Frankly servers and they also negotiate and maintain the state required by the API's security policies.
+			</p>
+			
+			<p>
+				Here's how <code>FranklyClient</code> instances are created:
+			</p>
+			
+<div style="width:80%;">
+<pre class="prettyprint"><code class="lang-js">
+	var FranklyClient = require( 'frankly-js' )	.FranklyClient
+	
+	var client = new FranklyClient()
+</code></pre>
+</div>	
+		
+
+		
+</div>
+
+<br>
+<br>
+<br>
+<br>
+
+<!--
+<div class="well-bottom-nav">
+	<div class="panel panel-default">
+		<div class="panel-body">
+			<h4 align="right">
+				<a href="Auth.html">Next: Authenticating with Frankly <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></a>
+			</h4>
+		</div>
+	</div>
+</div>
+-->
+
+<div class="pager-container">
+<nav>
+  <ul class="pager">
+    <li class="previous"><a href="InstallSDK.html"><span aria-hidden="true">&larr;</span> Installing the SDK</a></li>
+    <li class="next"><a href="Auth.html">Authenticating with Frankly <span aria-hidden="true">&rarr;</span></a></li>
+  </ul>
+</nav>
+</div>
+
+
+<br>
+<br>
+
+
+</div>
+
+</html>
