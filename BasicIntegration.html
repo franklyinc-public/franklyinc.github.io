@@ -14,7 +14,7 @@
 	
 </head>
 
-<div class="sidebar-container" data-role="main">
+<div class="sidebar-container">
 
 <div class="sidebar-logo"></div>
 
@@ -40,62 +40,62 @@
 
 </div>
 
-
-<div class="header">
-	<h1 class="noborder">
-		Basic Integration
-	</h1>
-
-<br>
-
-		<ul>
-			<li><a href="#First_Room">Setting Up Your First Room List</a>
-			<li><a href="#User_Auth">Handling User Authentication</a>
-			<li><a href="#Set_DisplayName_Avatar">Setting the Display Name & Profile Avatar</a>
-			<li><a href="#Guest_Mode">Enabling Guest Mode Access</a>
-		</ul>
-
-</div>
+<div class="container container-body">
+	<div class="header">
+		<h1 class="noborder">
+			Basic Integration
+		</h1>
 
 <br>
 
-<div class="doc">
-	<a id="First_Room">
-		<h3>
-			Setting Up Your First Room List
-		</h3>
-	</a>
+			<ul>
+				<li><a href="#First_Room">Setting Up Your First Room List</a>
+				<li><a href="#User_Auth">Handling User Authentication</a>
+				<li><a href="#Set_DisplayName_Avatar">Setting the Display Name & Profile Avatar</a>
+				<li><a href="#Guest_Mode">Enabling Guest Mode Access</a>
+			</ul>
 
-	<p>
-		<i>Important Note</i> Please make sure you've set up at least one Room in the Admin Console before proceeding. If you're unsure of how to do this or if you don't have Admin Console access, please see <i><a href="index.html">Getting Started</a></i> for next steps.
-	</p>
+	</div>
+
+<br>
+
+	<div class="doc">
+		<a id="First_Room">
+			<h3>
+				Setting Up Your First Room List
+			</h3>
+		</a>
+
+		<p>
+			<i>Important Note</i> Please make sure you've set up at least one Room in the Admin Console before proceeding. If you're unsure of how to do this or if you don't have Admin Console access, please see <i><a href="index.html">Getting Started</a></i> for next steps.
+		</p>
 	
 <br>
 
-	<h4>
-		Calling the Room List via the iOS SDK
-	</h4>
+		<h4>
+			Calling the Room List via the iOS SDK
+		</h4>
 
 
 
 <br>
 
-	<p>
-		To call the Room List, retrieve the room list controller, <code>[FranklySDK roomListViewController]</code> and present it in your app or push it on your navigation controller.
-	</p>
+		<p>
+			To call the Room List, retrieve the room list controller, <code>[FranklySDK roomListViewController]</code> and present it in your app or push it on your navigation controller.
+		</p>
 		
 <br>
 <br>
 
-	<h4>
-		Calling the Room List via the Android SDK
-	</h4>
+		<h4>
+			Calling the Room List via the Android SDK
+		</h4>
 		
-	<p>	
-		Please note that <code>RoomListActivity</code> must first be declared in app's <code>AndroidManifest.xml</code> file where <code>&lt;room_list_title&gt;</code> is the title of <code>RoomListActivity</code> and <code>&lt;parent_activity&gt;</code> is the destination when the <code>RoomListActivity</code> is exited via "Up" navigation:
-	</p>
+		<p>	
+			Please note that <code>RoomListActivity</code> must first be declared in app's <code>AndroidManifest.xml</code> file where <code>&lt;room_list_title&gt;</code> is the title of <code>RoomListActivity</code> and <code>&lt;parent_activity&gt;</code> is the destination when the <code>RoomListActivity</code> is exited via "Up" navigation:
+		</p>
 
-<div  style="width:80%;">		
+
 <pre class="prettyprint"><code class="lang-xml">
 &lt;activity
         android:configChanges="keyboardHidden|orientation|screenSize"
@@ -109,107 +109,107 @@
         android:value="&lt;parent_activity>"/&gt;
 &lt;/activity&gt;
 </code></pre>
-</div>
+
 
 
 <br>
 <br>
 
-<p>
-	The Frankly Android SDK contains a <code>RoomListActivity</code> class which contains everything needed to show the chatroom list and allow the user to join any of the chatrooms:
-</p>
+	<p>
+		The Frankly Android SDK contains a <code>RoomListActivity</code> class which contains everything needed to show the chatroom list and allow the user to join any of the chatrooms:
+	</p>
 
-<div  style="width:80%;">		
+
 <pre class="prettyprint"><code class="lang-java">
 import com.frankly.franklysdk.app.RoomListActivity;
 ...
 Intent intent = new Intent(context, RoomListActivity.class);
 context.startActivity(intent);
 </code></pre>
-</div>
+
 
 <br>
 <br>
 
-<!--
-	<h4>
-		Calling the Room List via the JavaScript SDK
-	</h4>
+	<!--
+		<h4>
+			Calling the Room List via the JavaScript SDK
+		</h4>
 		
-	<p>	
-		<i>Coming soon!</i>
-	</p>
--->
+		<p>	
+			<i>Coming soon!</i>
+		</p>
+	-->
 
-</div>
+	</div>
 
-<div class="doc">
-	<a id="User_Auth">
-		<h3>
-			Handling User Authentication
-		</h3>
-	</a>
-	
-<br>
-
-	<h4>
-		User Authentication via the iOS SDK
-	</h4>
-	
-	<p>
-		If your delegate receives the <code>doUserAuthentication</code> callback then you should present a log in or sign up screen. When the user has completed logging in, you should call restart the authentication process by calling <code>initiateAuthentication</code> again. 
-	</p>
-
-<br>
-
-	<h4>
-		User Authentication via the Android SDK
-	</h4>
-	
-	<p>
-		<i>Coming soon!</i>
-	</p>
-	
-<br>
-
-	<h4>
-		User Authentication via the JavaScript SDK
-	</h4>
-	
-	<p>
-		<i>Coming soon!</i>
-	</p>
-
-</div>
-
-<div class="doc">
-		<a id="Set_DisplayName_Avatar">
+	<div class="doc">
+		<a id="User_Auth">
 			<h3>
-				Setting the Display Name & Profile Avatar
+				Handling User Authentication
 			</h3>
 		</a>
-		
+	
 <br>
 
 		<h4>
-			Setting User Info via the iOS SDK
+			User Authentication via the iOS SDK
 		</h4>
-		
-		<p>			
-			Set the FranklySDK’s <code>profileDelegate</code> to an object that conforms to the <code>FranklySDKUserProfileDelegate</code> protocol. In our example code, we’ve made our <code>ViewController</code> also conform to this protocol:
+	
+		<p>
+			If your delegate receives the <code>doUserAuthentication</code> callback then you should present a log in or sign up screen. When the user has completed logging in, you should call restart the authentication process by calling <code>initiateAuthentication</code> again. 
 		</p>
 
 <br>
 
-<div  style="width:80%;">
-<pre class="prettyprint"><code class="lang-cpp">
-@interface ViewController : UIViewController &lt;FranklySDKAuthenticationDelegate, FranklySDKUserProfileDelegate&gt;
-</code></pre>
-</div>
+		<h4>
+			User Authentication via the Android SDK
+		</h4>
+	
+		<p>
+			<i>Coming soon!</i>
+		</p>
+	
+<br>
+
+		<h4>
+			User Authentication via the JavaScript SDK
+		</h4>
+	
+		<p>
+			<i>Coming soon!</i>
+		</p>
+
+	</div>
+
+	<div class="doc">
+			<a id="Set_DisplayName_Avatar">
+				<h3>
+					Setting the Display Name & Profile Avatar
+				</h3>
+			</a>
+		
+<br>
+
+			<h4>
+				Setting User Info via the iOS SDK
+			</h4>
+		
+			<p>			
+				Set the FranklySDK’s <code>profileDelegate</code> to an object that conforms to the <code>FranklySDKUserProfileDelegate</code> protocol. In our example code, we’ve made our <code>ViewController</code> also conform to this protocol:
+			</p>
 
 <br>
 
-<div  style="width:80%;">
+
+<pre class="prettyprint"><code class="lang-cpp">
+@interface ViewController : UIViewController &lt;FranklySDKAuthenticationDelegate, FranklySDKUserProfileDelegate&gt;
+</code></pre>
+
+
+<br>
+
+
 <pre class="prettyprint"><code class="lang-cpp">
 - (void)viewDidLoad {
 
@@ -221,123 +221,124 @@ context.startActivity(intent);
 	[[FranklySDK sharedInstance] initiateAuthentication];
 }
 </code></pre>
-</div>
+
 			
 <br>
 
-		<p>
-			The profile delegate will get called every time the user profile image or display name changes.  Also, you can enable or disable user editing of their profile data within the FranklySDK UI by allowing your delegate respond appropriately to the <code>-(BOOL)shouldAllowProfileEditing</code> delegate request.
-		</p>
+			<p>
+				The profile delegate will get called every time the user profile image or display name changes.  Also, you can enable or disable user editing of their profile data within the FranklySDK UI by allowing your delegate respond appropriately to the <code>-(BOOL)shouldAllowProfileEditing</code> delegate request.
+			</p>
 			
 <br>
 
-		<p>
-			Setting the user's display name and avatar can be done via the calls through the FranklySDK object:
-		</p>
+			<p>
+				Setting the user's display name and avatar can be done via the calls through the FranklySDK object:
+			</p>
 
-<div  style="width:80%;">			
+
 <pre class="prettyprint"><code class="lang-cpp">
 -(void)setUserName:(NSString *)userName profileImage:(UIImage *)image];
 </code></pre>
-</div>			
+
 		
-		<p>	
-			When the user name and image have been updated and synced with the server the profileDelegate will get a called back that they have been changed.
-		</p>
+			<p>	
+				When the user name and image have been updated and synced with the server the profileDelegate will get a called back that they have been changed.
+			</p>
 		
 <br>
 
-		<h4>
-			Setting User Info via the Android SDK
-		</h4>
+			<h4>
+				Setting User Info via the Android SDK
+			</h4>
 		
-		<p>
-			Developers can upload new avatars for users to the Frankly servers as follows:
+			<p>
+				Developers can upload new avatars for users to the Frankly servers as follows:
 
-<div  style="width:80%;">			
+
 <pre class="prettyprint"><code class="lang-java">
 final UserManager userManager = UserManager.getInstance(context);
 final String userAvatarUrlString = userManager.uploadUserAvatar(context, intent);
 </code></pre>
-</div>		
 
-		<p>
-			where the Intent contains either the data URI of the Intent, or an extra called "data" which stores a Bitmap. (The Android Gallery app currently returns the data in this format in onActivityResult().) Note that simply uploading the image does not tie the image to any particular user. The returned URL string must be set on a User object and passed to UserManager for persisting as follows:
-		</p>
 
-<div  style="width:80%;">			
+			<p>
+				where the Intent contains either the data URI of the Intent, or an extra called "data" which stores a Bitmap. (The Android Gallery app currently returns the data in this format in onActivityResult().) Note that simply uploading the image does not tie the image to any particular user. The returned URL string must be set on a User object and passed to UserManager for persisting as follows:
+			</p>
+
+
 <pre class="prettyprint"><code class="lang-java">
 user.setAvatarImageUrlString(userAvatarUrlString);
 userManager.update(user);
 </code></pre>
-</div>
 
-		<p>
-			Similarly, to update the display name of a user, simply do the following:
-		</p>
 
-<div  style="width:80%;">			
+			<p>
+				Similarly, to update the display name of a user, simply do the following:
+			</p>
+
+
 <pre class="prettyprint"><code class="lang-java">
 user.setDisplayName(displayName);
 userManager.update(user);
 </code></pre>
-</div>
 
-		<p>
-			<b>WARNING:</b> All UserManager calls must be done on a non-UI thread.
-		</p>
 
-<br>
-
-		<h4>
-			Setting User Info via the JavaScript SDK
-		</h4>
-		
-		<p>
-			<i>Coming soon!</i>
-		</p>
-
-</div>
-
-<div class="doc">
-		<a id="Guest_Mode">
-			<h3>
-				Enabling Guest Mode Access
-			</h3>
-		</a>
-		
-<br>
-
-		<p>
-			<i>Coming soon!</i>
-		</p>
-				
-</div>
+			<p>
+				<b>WARNING:</b> All UserManager calls must be done on a non-UI thread.
+			</p>
 
 <br>
-<br>
-<br>
-<br>
 
-<!--
-<div class="well-bottom-nav">
-	<div class="panel panel-default">
-		<div class="panel-body">
-			<h4 align="right">
-				<a href="CustomizingUI.html">Next: Customizing the UI <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></a>
+			<h4>
+				Setting User Info via the JavaScript SDK
 			</h4>
+		
+			<p>
+				<i>Coming soon!</i>
+			</p>
+
+	</div>
+
+	<div class="doc">
+			<a id="Guest_Mode">
+				<h3>
+					Enabling Guest Mode Access
+				</h3>
+			</a>
+		
+<br>
+
+			<p>
+				<i>Coming soon!</i>
+			</p>
+				
+	</div>
+
+<br>
+<br>
+<br>
+<br>
+
+	<!--
+	<div class="well-bottom-nav">
+		<div class="panel panel-default">
+			<div class="panel-body">
+				<h4 align="right">
+					<a href="CustomizingUI.html">Next: Customizing the UI <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></a>
+				</h4>
+			</div>
 		</div>
 	</div>
-</div>
--->
+	-->
 
-<div class="pager-container">
-<nav>
-  <ul class="pager">
-    <li class="previous"><a href="Auth.html"><span aria-hidden="true">&larr;</span> Authenticating with Frankly</a></li>
-    <li class="next"><a href="AdvancedIntegrations.html">Advanced Integrations <span aria-hidden="true">&rarr;</span></a></li>
-  </ul>
-</nav>
+	<div class="pager-container">
+	<nav>
+	  <ul class="pager">
+	    <li class="previous"><a href="Auth.html"><span aria-hidden="true">&larr;</span> Authenticating with Frankly</a></li>
+	    <li class="next"><a href="AdvancedIntegrations.html">Advanced Integrations <span aria-hidden="true">&rarr;</span></a></li>
+	  </ul>
+	</nav>
+	</div>
 </div>
 
 <br>

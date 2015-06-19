@@ -14,7 +14,7 @@
 	
 </head>
 
-<div class="sidebar-container" data-role="main">
+<div class="sidebar-container">
 
 <div class="sidebar-logo"></div>
 
@@ -40,157 +40,156 @@
 </div>
 
 
-<div class="header">
-	<h1 class="noborder">
-		Installing the Frankly SDK
-	</h1>
+<div class="container container-body">
+	<div class="header">
+		<h1 class="noborder">
 
-<br>
+		</h1>
+
+	<br>
 	
-		<ul>
-			<li><a href="#Installing_iOS">iOS SDK</a>
-			<li><a href="#Installing_Android">Android SDK</a>
-			<li><a href="#Installing_JS">JavaScript SDK</a>
-		</ul>
+			<ul>
+				<li><a href="#Installing_iOS">iOS SDK</a>
+				<li><a href="#Installing_Android">Android SDK</a>
+				<li><a href="#Installing_JS">JavaScript SDK</a>
+			</ul>
 
-</div>
+	</div>
 
-<br>
-<br>
+	<br>
+	<br>
 
 		
-<!-- This needs to be cleaned up -->
+	<!-- This needs to be cleaned up -->
 
-<div class="doc">
-		<a id="Installing_iOS">
-			<h3>
-				iOS SDK
-			</h3>
-		</a>
+	<div class="doc">
+			<a id="Installing_iOS">
+				<h3>
+					iOS SDK
+				</h3>
+			</a>
 
-		<a id="cocoapods">
-			<h4>
-				Integrating with CocoaPods (recommended)
-			</h4>
-		</a>
+			<a id="cocoapods">
+				<h4>
+					Integrating with CocoaPods (recommended)
+				</h4>
+			</a>
 
-		<p>
-			Adding FranklySDK to your project using CocoaPods is easy. You'll need to install it on your computer if you haven't already.
-		</p>
-	
-<div  style="width:80%;">
-<pre class="prettyprint"><code>
-	sudo gem install cocoapods
-</code></pre>
-</div>
-
-<br>
-
-		<p>
-			Once you've installed CocoaPods, just add the following to your Podfile and run pod install. You're done!
-		</p>
-
-<div  style="width:80%;">
-<pre class="prettyprint"><code>
-	pod 'FranklySDK', '~> 1.0.0'
-</pre></code>
-</div>
-
-
-<br>
-
-		<a id="traditional">
-			<h4>
-				Traditional Installation
-			</h4>
-		</a>
-			
 			<p>
-				Grab the SDK by going to the <a href="downloads.html">Downloads</a>, then add the FranklySDK Folder to your Xcode project.
+				Adding FranklySDK to your project using CocoaPods is easy. You'll need to install it on your computer if you haven't already.
 			</p>
+	
+
+<pre class="prettyprint"><code>
+$ sudo gem install cocoapods
+</code></pre>
+
+
+<br>
+
+			<p>
+				Once you've installed CocoaPods, just add the following to your Podfile and run pod install. You're done!
+			</p>
+
+
+<pre class="prettyprint"><code>
+pod 'FranklySDK', '~> 1.0.0'
+</pre></code>
+
+
+
+<br>
+
+			<a id="traditional">
+				<h4>
+					Traditional Installation
+				</h4>
+			</a>
+			
+				<p>
+					Grab the SDK by going to the <a href="downloads.html">Downloads</a>, then add the FranklySDK Folder to your Xcode project.
+				</p>
 					
 <br> 
 
-			<img src="images/ios_sdk_xcode_installation_1.png" border="1" width="300px">
+				<img src="images/ios_sdk_xcode_installation_1.png" border="1" width="300px">
 				
 <br>
 <br>
 <br>
 
-			<p>
-				Link the following libraries and frameworks by accessing the General tab in the Project File. Under Linked Frameworks and Libraries, add the following:
-			</p>
+				<p>
+					Link the following libraries and frameworks by accessing the General tab in the Project File. Under Linked Frameworks and Libraries, add the following:
+				</p>
 				
-			<ul>
-				<li><code>libicucore.dylib</code>
-				<li><code>CFNetwork.framework</code>
-				<li><code>Security.framework</code>
-				<li><code>Foundation.framework</code>
-				<li><code>CoreData.framework</code>
-				<li><code>SystemConfiguration.framework</code>
-			</ul>
+				<ul>
+					<li><code>libicucore.dylib</code>
+					<li><code>CFNetwork.framework</code>
+					<li><code>Security.framework</code>
+					<li><code>Foundation.framework</code>
+					<li><code>CoreData.framework</code>
+					<li><code>SystemConfiguration.framework</code>
+				</ul>
 		
 <br>
 <br> 
 		
-			<img src="images/ios_sdk_xcode_installation_2.png" border="1" width="748px"> 
+				<img src="images/ios_sdk_xcode_installation_2.png" border="1" width="748px"> 
 				
 <br>
 <br>
 <br>
-			<p>
-				Update your project’s Build Settings by accessing the Build Settings tab in the Project File. Make sure your filter is set to All. Search for Other Linker Flags and set it to “<code>-ObjC</code>."
-			</p>
+				<p>
+					Update your project’s Build Settings by accessing the Build Settings tab in the Project File. Make sure your filter is set to All. Search for Other Linker Flags and set it to “<code>-ObjC</code>."
+				</p>
 
 <br>
 <br> 
 
-			<img src="images/ios_sdk_xcode_installation_3.png" border="1" width="748px"> 
+				<img src="images/ios_sdk_xcode_installation_3.png" border="1" width="748px"> 
 
 <br>
 <br>
 <br>
 
-		<p>			
-			Try Building your Project. If Building Succeeds, let’s move on to Initializing the SDK. If Building Fails, please check your steps and make sure you’ve completed all the steps.
-		</p>
+			<p>			
+				Try Building your Project. If Building Succeeds, let’s move on to Initializing the SDK. If Building Fails, please check your steps and make sure you’ve completed all the steps.
+			</p>
 		
 		
-</div>
+	</div>
 
 
 <br>
 <br>
 
 
-<!-- This needs to be cleaned up -->
+	<div class="doc">
+			<a id="Installing_Android">
+				<h3>
+					Android SDK
+				</h3>
+			</a>
 
-<div class="doc">
-		<a id="Installing_Android">
-			<h3>
-				Android SDK
-			</h3>
-		</a>
-
-			<h4>						
-				1. Download Frankly SDK into your <code>libs</code>
-			</h4>
+				<h4>						
+					1. Download Frankly SDK into your <code>libs</code>
+				</h4>
 	
-			<p>	
-				To download <code>frankly-sdk-1.0.0.aar</code> into your app’s <code>libs</code>, <a href="https://github.com/franklyinc/frankly-android" target="_blank">click here</a>.
-			</p>
+				<p>	
+					To download <code>frankly-sdk-1.0.0.aar</code> into your app’s <code>libs</code>, <a href="https://github.com/franklyinc/frankly-android" target="_blank">click here</a>.
+				</p>
 
 <br>
 <br>
 
-			<h4>
-				2. Configure build script
-			</h4>
+				<h4>
+					2. Configure build script
+				</h4>
 
-			<p>
-				Modify your app module's <code>build.gradle</code>.
+				<p>
+					Modify your app module's <code>build.gradle</code>.
 
-<div  style="width:80%;">		
+
 <pre class="prettyprint"><code class="lang-java">
 repositories {
     ...
@@ -211,73 +210,74 @@ dependencies {
     compile 'net.jodah:expiringmap:0.4.1'
 }
 </code></pre>
-</div>
-</div>
+
+	</div>
 
 <br>
 <br>
 
-<!-- This needs to be cleaned up -->
 
-<div class="doc">
-		<a id="Installing_JS">
-			<h3>
-				JavaScript SDK
-			</h3>
-		</a>
+	<div class="doc">
+			<a id="Installing_JS">
+				<h3>
+					JavaScript SDK
+				</h3>
+			</a>
 
-			<h4>						
-				Installing with NPM
-			</h4>
+				<h4>						
+					Installing with NPM
+				</h4>
 	
-			<p>	
-				The recommended way to access the Frankly JavaScript SDK is via the <a href="https://www.npmjs.com/package/frankly-js" target="_blank">public NPM repo named frankly-js</a>. 
-			</p>	
+				<p>	
+					The recommended way to access the Frankly JavaScript SDK is via the <a href="https://www.npmjs.com/package/frankly-js" target="_blank">public NPM repo named frankly-js</a>. 
+				</p>	
 			
-			<p>	
-				If prefered, you can also download the SDK via the <a href="http://franklyinc.github.io/frankly-js">public Frankly github repo</a>.
-			</p>
+				<p>	
+					If prefered, you can also download the SDK via the <a href="http://franklyinc.github.io/frankly-js">public Frankly github repo</a>.
+				</p>
 
-<br>
+	<br>
 
-			<p>
-				To install via NPM:
-			</p>
+				<p>
+					To install via NPM:
+				</p>
 
-<div style="width:80%">			
+
 <pre class="prettyprint"><code>
 $ npm install frankly-js
 </code></pre>
-</div>
-</div>
+
+	</div>
 
 <br>
 <br>
 <br>
 <br>
 
-<!--
-<div class="well-bottom-nav">
-	<div class="panel panel-default">
-		<div class="panel-body">
-			<h4 align="right">
-				<a href="InitializeSDK.html">Next: Initializing the SDK <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></a>
-			</h4>
+	<!--
+	<div class="well-bottom-nav">
+		<div class="panel panel-default">
+			<div class="panel-body">
+				<h4 align="right">
+					<a href="InitializeSDK.html">Next: Initializing the SDK <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></a>
+				</h4>
+			</div>
 		</div>
 	</div>
-</div>
--->
+	-->
 
-<div class="pager-container">
-<nav>
-  <ul class="pager">
-    <li class="previous"><a href="index.html"><span aria-hidden="true">&larr;</span> Getting Started</a></li>
-    <li class="next"><a href="InitializeSDK.html">Initializing the SDK <span aria-hidden="true">&rarr;</span></a></li>
-  </ul>
-</nav>
-</div>
+	<div class="pager-container">
+	<nav>
+	  <ul class="pager">
+	    <li class="previous"><a href="index.html"><span aria-hidden="true">&larr;</span> Getting Started</a></li>
+	    <li class="next"><a href="InitializeSDK.html">Initializing the SDK <span aria-hidden="true">&rarr;</span></a></li>
+	  </ul>
+	</nav>
+	</div>
 
 <br>
 <br>
+
+</div>
 
 </html>

@@ -1,8 +1,7 @@
 /*For Main Index Header*/
 .header {
 	position: relative;
-	width: 50%;
-	left: 330px;
+	width: 80%;
 	padding-top: 20px;
 	padding-bottom: 20px;
 	font-family: 'Roboto', sans-serif;
@@ -56,12 +55,14 @@
 	list-style-type: none;
 }
 
-
 /*For Index Body*/
+.container.container-body {
+	margin-left: 315px;
+}
+
 .doc {
 	position: relative;
-	width: 50%;
-	left: 330px;
+	width: 80%;
 	padding-top: 20px;
 	padding-bottom: 20px;
     font-family: 'Roboto', sans-serif;
@@ -91,8 +92,6 @@
 /*For Page Buttons*/
 .pager-container {
 	position: relative;
-	width: 70%;
-	left: 330px;
 	padding-top: 20px;
 	padding-bottom: 20px;
     font-family: 'Roboto', sans-serif;
