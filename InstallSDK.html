@@ -43,7 +43,7 @@
 <div class="container container-body">
 	<div class="header">
 		<h1 class="noborder">
-
+			Installing the SDK
 		</h1>
 
 	<br>
@@ -71,12 +71,12 @@
 
 			<a id="cocoapods">
 				<h4>
-					Integrating with CocoaPods (recommended)
+					Installing with CocoaPods (recommended)
 				</h4>
 			</a>
 
 			<p>
-				Adding FranklySDK to your project using CocoaPods is easy. You'll need to install it on your computer if you haven't already.
+				Adding FranklySDK to your project using CocoaPods is easy. Make sure to <a href="https://guides.cocoapods.org/using/getting-started.html" target="_blank">install CocoaPods</a> on your computer if you haven't already. Continue to the SDK install step once you have CocoaPods installed.
 			</p>
 	
 
@@ -157,14 +157,14 @@ pod 'FranklySDK', '~> 1.0.0'
 			</p>
 		
 		
-	</div>
+
 
 
 <br>
 <br>
 
 
-	<div class="doc">
+
 			<a id="Installing_Android">
 				<h3>
 					Android SDK
@@ -172,52 +172,53 @@ pod 'FranklySDK', '~> 1.0.0'
 			</a>
 
 				<h4>						
-					1. Download Frankly SDK into your <code>libs</code>
+					1. Place Frankly SDK in Project's <code>libs</code> Directory
 				</h4>
 	
 				<p>	
-					To download <code>frankly-sdk-1.0.0.aar</code> into your app’s <code>libs</code>, visit the <a href="downloads.html" target="_blank">Downloads page</a>.
+					After downloading the Android SDK from the <a href="downloads.html" target="_blank">Downloads page</a>, add frankly-sdk-x.aar into the <code>libs</code> directory of your app module.
 				</p>
 
 <br>
 <br>
 
 				<h4>
-					2. Configure build script
+					2. Configure Build Script
 				</h4>
 
 				<p>
-					Modify your app module's <code>build.gradle</code>.
+					Add dependencies to your app module's <code>build.gradle</code>:
 
 
 <pre class="prettyprint"><code class="lang-java">
 repositories {
-    ...
     flatDir {
         dirs 'libs'
     }
 }
 
 dependencies {
-    ...
-    compile(name: 'frankly-sdk-1.0.0', ext: 'aar')
-    compile 'com.android.support:appcompat-v7:22.0.0'
-    compile 'com.google.code.gson:gson:2.3.1'
-    compile 'org.apache.commons:commons-lang3:3.3.2'
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile(name: 'frankly-sdk-release', ext: 'aar')
+    compile 'com.android.support:appcompat-v7:22.+'
+    compile 'org.apache.commons:commons-lang3:3.4'
     compile 'org.apache.commons:commons-io:1.3.2'
     compile 'org.apache.commons:commons-collections4:4.0'
-    compile 'com.squareup.picasso:picasso:2.5.0'
-    compile 'net.jodah:expiringmap:0.4.1'
+    compile 'com.google.code.gson:gson:2.3.1'
+    compile 'com.squareup.okhttp:okhttp:2.4.0'
+    compile 'com.squareup.okhttp:okhttp-ws:2.4.0'
+    compile 'com.squareup:otto:1.3.6'
+    compile 'com.squareup.picasso:picasso:2.5.+'
 }
 </code></pre>
 
-	</div>
+
 
 <br>
 <br>
 
 
-	<div class="doc">
+
 			<a id="Installing_JS">
 				<h3>
 					JavaScript SDK
