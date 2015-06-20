@@ -109,18 +109,43 @@
 			</a>
 			
 				<p>
-					Partners must declare the Frankly Android SDK’s content provider with their app’s package name as a prefix of the authorities value in the <code>AndroidManifest.xml</code> file, where <code>&lt;app_package_name&gt;</code> is the package name of the app where the Frankly Android SDK is being integrated:
+					The Frankly SDK requires the following permissions:
 				</p>
+
+
+<pre class="prettyprint"><code>
+android.permission.INTERNET
+android.permission.ACCESS_NETWORK_STATE
+android.permission.READ_EXTERNAL_STORAGE
+</code></pre>
+
+<br>
 			
+				<p>
+					Partners must declare the Frankly Android SDK’s content provider with their app’s package name as a prefix of the authorities value in the <code>AndroidManifest.xml</code> file, where <code>&lt;app_package_name&gt;</code> is the package name of the app where the Frankly Android SDK is being integrated:
+				</p>			
 
 	
 <pre class="prettyprint"><code class="lang-xml">
-	&lt;provider
-			android:name="com.frankly.franklysdk.contentprovider.FranklySdkContentProvider"
-			android:authorities="&lt;app_package_name>.contentprovider.FranklySdkContentProvider"/&gt;
+&lt;provider
+    android:authorities="&lt;app_package_name&gt;.contentprovider.FranklySdkContentProvider"
+    android:name="com.frankly.franklysdk.contentprovider.FranklySdkContentProvider" /&gt;
 </code></pre>
 
+<br>
 
+				<p>
+					And <code>RoomListActivity</code> should be declared where <code>&lt;room_list_title&gt;</code> is the title to show in <code>RoomListActivity</code>.
+				</p>
+				
+<pre class="prettyprint"><code class="lang-xml">
+&lt;activity
+    android:name="com.frankly.franklysdk.app.RoomListActivity"
+    android:theme="@style/FranklySdk.Theme"
+    android:configChanges="keyboardHidden|orientation|screenSize"
+    android:label="&lt;room_list_title&gt;"
+    android:screenOrientation="portrait" /&gt;
+</code></pre>	
 		
 <br>
 <br>

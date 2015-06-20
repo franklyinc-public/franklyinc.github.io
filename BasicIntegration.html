@@ -81,7 +81,7 @@
 <br>
 
 		<p>
-			To call the Room List, retrieve the room list controller, <code>[FranklySDK roomListViewController]</code> and present it in your app or push it on your navigation controller.
+			To call the Room List, retrieve the room list controller, <code>[FranklySDK roomListViewController]</code>, and present it in your app or push it on your navigation controller.
 		</p>
 		
 <br>
@@ -92,38 +92,13 @@
 		</h4>
 		
 		<p>	
-			Please note that <code>RoomListActivity</code> must first be declared in app's <code>AndroidManifest.xml</code> file where <code>&lt;room_list_title&gt;</code> is the title of <code>RoomListActivity</code> and <code>&lt;parent_activity&gt;</code> is the destination when the <code>RoomListActivity</code> is exited via "Up" navigation:
+			The Frankly SDK contains a <code>RoomListActivity</code> class which contains everything needed to show the chatroom list and allow the user to join chatrooms:
 		</p>
 
 
-<pre class="prettyprint"><code class="lang-xml">
-&lt;activity
-        android:configChanges="keyboardHidden|orientation|screenSize"
-        android:label="&lt;room_list_title&gt;"
-        android:name="com.frankly.franklysdk.app.RoomListActivity"
-        android:parentActivityName="&lt;parent_activity&gt;"
-        android:screenOrientation="portrait"
-        android:theme="@style/FranklySdkTheme.White">
-    &lt;meta-data
-        android:name="android.support.PARENT_ACTIVITY"
-        android:value="&lt;parent_activity>"/&gt;
-&lt;/activity&gt;
-</code></pre>
-
-
-
-<br>
-<br>
-
-	<p>
-		The Frankly Android SDK contains a <code>RoomListActivity</code> class which contains everything needed to show the chatroom list and allow the user to join any of the chatrooms:
-	</p>
-
-
 <pre class="prettyprint"><code class="lang-java">
-import com.frankly.franklysdk.app.RoomListActivity;
-...
 Intent intent = new Intent(context, RoomListActivity.class);
+
 context.startActivity(intent);
 </code></pre>
 
@@ -143,44 +118,7 @@ context.startActivity(intent);
 
 	</div>
 
-	<div class="doc">
-		<a id="User_Auth">
-			<h3>
-				Handling User Authentication
-			</h3>
-		</a>
-	
 <br>
-
-		<h4>
-			User Authentication via the iOS SDK
-		</h4>
-	
-		<p>
-			If your delegate receives the <code>doUserAuthentication</code> callback then you should present a log in or sign up screen. When the user has completed logging in, you should call restart the authentication process by calling <code>initiateAuthentication</code> again. 
-		</p>
-
-<br>
-
-		<h4>
-			User Authentication via the Android SDK
-		</h4>
-	
-		<p>
-			<i>Coming soon!</i>
-		</p>
-	
-<br>
-
-		<h4>
-			User Authentication via the JavaScript SDK
-		</h4>
-	
-		<p>
-			<i>Coming soon!</i>
-		</p>
-
-	</div>
 
 	<div class="doc">
 			<a id="Set_DisplayName_Avatar">

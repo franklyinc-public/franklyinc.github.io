@@ -355,6 +355,12 @@ eyJ0eXAiOiJKV1MiLCJhbGciOiJIUzI1NiIsImN0eSI6ImZyYW5rbHktaXQ7djEifQ.eyJhYWsiOiIwM
 				<p>
 					Once you're done setting up those pieces, try running the build.
 				</p>
+				
+<br>
+				
+				<p>
+					If your delegate receives the <code>doUserAuthentication</code> callback then you should present a log in or sign up screen. When the user has completed logging in, you should call restart the authentication process by calling <code>initiateAuthentication</code> again. 
+				</p>
 
 <br>
 <br>
@@ -371,23 +377,23 @@ eyJ0eXAiOiJKV1MiLCJhbGciOiJIUzI1NiIsImN0eSI6ImZyYW5rbHktaXQ7djEifQ.eyJhYWsiOiIwM
 
 
 <pre class="prettyprint"><code class="lang-java">
-private class MyOnAuthenticationRequestListener implements Authenticator.OnAuthenticationRequestListener {
-    public void onAuthenticationRequest(final Authenticator authenticator, final String nonce) {
-        // For security, post nonce to your backend to retrieve an identity token
-        final String identityToken = "&lt;my_identity_token&gt;";
+private class YourOnAuthenticationRequestListener implements Authenticator.OnAuthenticationRequestListener {
+    @Override
+    public void onAuthenticationRequest(final Authenticator authenticator, final String nonce) throws IOException {
+        // For security, post nonce to your backend to retrieve an identity token.
+        // For testing purposes, you can integrate using Frankly's identity token generation method
+        // `FranklySDK.IntegrationHelper.getIdentityToken(...)`.
 
-        try {
-            authenticator.authenticate(identityToken);
-        } catch (final IOException e) {
-            e.printStackTrace();
-        }
+        final String identityToken = YourService.getIdentityToken(nonce, userId);
+
+        authenticator.authenticate(identityToken);
     }
 }
 </code></pre>
 
 
 			<p>
-				<strong>Note:</strong> The identity token is meant to be retrieved from the Partner’s servers rather than being hardcoded into the app.
+				<strong>Note:</strong> The identity token is meant to be retrieved from the partner’s servers rather than being hardcoded into the app.
 			</p>
 
 			<p>
@@ -396,8 +402,10 @@ private class MyOnAuthenticationRequestListener implements Authenticator.OnAuthe
 
 
 <pre class="prettyprint"><code class="lang-java">
-Authenticator authenticator = Authenticator.getInstance(context);
-authenticator.setOnAuthenticationRequestListener(authenticationRequestListener);
+final YourOnAuthenticationRequestListener yourOnAuthenticationRequestListener = new YourOnAuthenticationRequestListener();
+final Authenticator authenticator = Authenticator.getInstance(context);
+
+authenticator.setOnAuthenticationRequestListener(yourOnAuthenticationRequestListener);
 </code></pre>
 
 
