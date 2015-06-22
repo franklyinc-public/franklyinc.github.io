@@ -56,7 +56,7 @@
 }
 
 /*For Responsive Header*/
-@media (min-width: 651px) {
+@media (min-width: 801px) {
 	nav.navbar {
 		margin-top:-51px;
 		opacity: 0;
@@ -72,7 +72,7 @@
 	}
 }
 
-@media (max-width: 650px) {
+@media (max-width: 800px) {
 	.sidebar-container {
 		margin-left: -315px;
 		opacity: 0;
