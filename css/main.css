@@ -55,14 +55,56 @@
 	list-style-type: none;
 }
 
-/*For Index Body*/
-.container.container-body {
-	margin-left: 315px;
+/*For Responsive Header*/
+@media (min-width: 651px) {
+	nav.navbar {
+		margin-top:-51px;
+		opacity: 0;
+		transition: all 0.5s;
+	}
+	.sidebar-container {
+		margin-left: 0px;
+		transition: all 0.5s;
+	}
+	.container.container-body {
+		margin-left: 315px;
+		transition: all 0.5s;
+	}
 }
 
+@media (max-width: 650px) {
+	.sidebar-container {
+		margin-left: -315px;
+		opacity: 0;
+		transition: all 0.5s;
+	}
+	.container.container-body {
+		margin-left: 0px;
+		transition: all 0.5s;
+	}
+	nav.navbar {
+		margin-top:0px;
+		transition: all 0.5s;
+	}
+}
+
+nav.navbar {
+	background-color: #2a2e33;
+}	
+
+.mobile-logo {
+	background-image: url("../images/franklyinc_logo_color_large.png");
+	background-size: 100%;
+	margin: 5px;
+	width: 120px;
+	height: 40px;
+}
+
+
+/*For Index Body*/
 .doc {
 	position: relative;
-	width: 80%;
+	width: 90%;
 	padding-top: 20px;
 	padding-bottom: 20px;
     font-family: 'Roboto', sans-serif;
