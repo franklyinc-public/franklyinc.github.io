@@ -10,33 +10,70 @@
 	<link rel="icon" 
 	      type="image/png" 
 	      href="frankly_favicon_32x32_no_bg.png">
-	<script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js?skin=sunburst"></script>	
+	<script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js?skin=sunburst"></script>
+	<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+	<script src="js/load_frankly_menus.js"></script>
+	
+	<script> 
+	var frankly_menu = [
+	'<ul>',
+		'<li><a href="index.html">Getting Started</a></li>',
+		'<li><a href="InstallSDK.html">Installing the SDK</a></li>',
+		'<li><a href="InitializeSDK.html">Initializing the SDK</a>',
+		'<li><a href="Auth.html">Authenticating</a>',
+			'<ul>',
+				'<li><a href="#overview">Overview</a></li>',
+				'<li><a href="#jwt">JWT</a></li>',
+				'<li><a href="#auth_flow">Server Authentication</a></li>',
+				'<li><a href="#client_auth">Client Authentication</a></li>',
+				'<li><a href="#security">A Note on Security</a></li>',
+			'</ul>',
+		'</li>',
+		'<li><a href="BasicIntegration.html">Basic Integration</a>',
+		'<li><a href="AdvancedIntegrations.html">Advanced Integrations</a>',
+		'<li><a href="APIReference.html">API Reference</a>',
+		'<li><a href="downloads.html">Downloads</a>',
+		'<li><a href="Support.html">Support</a>',
+	'</ul>'
+	];
+	
+	
+	jQuery(document).ready(function($){
+  		set_menu_array(frankly_menu);
+  	});
+	</script>
 	
 </head>
+
+<nav class="navbar navbar-inverse" role="navigation" style="z-index:100">
+   <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" 
+         data-target="#frankly-navbar-collapse">
+         <span class="sr-only">Toggle navigation</span>
+         <span class="icon-bar"></span>
+         <span class="icon-bar"></span>
+         <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html"><div class="mobile-logo"></div></a>
+   </div>
+   <div class="collapse navbar-collapse" id="frankly-navbar-collapse">
+      <!--Nav Bar List Goes Here-->
+   </div>
+</nav>
+
+<script>
+	jQuery(document).ready(function($){
+		load_menus();
+	});
+</script>
 
 <div class="sidebar-container">
 
 <div class="sidebar-logo"></div>
 
-	<div class="sidebar-content">
-		<ul class="sidebar" id="sidenavbar">
-			<li><a href="index.html">Getting Started</a>
-			<li><a href="InstallSDK.html">Installing the SDK</a>
-			<li><a href="InitializeSDK.html">Initializing the SDK</a>
-			<li>Authenticating with Frankly
-				<ul>
-					<li><a href="#summary">Summary</a>
-					<li><a href="#jwt">JWT</a>
-					<li><a href="#auth_flow">Server Authentication</a>
-					<li><a href="#client_auth">Client Authentication</a>
-					<li><a href="#security">A Note on Security</a>
-				</ul>
-			<li><a href="BasicIntegration.html">Basic Integration</a>
-			<li><a href="AdvancedIntegrations.html">Advanced Integrations</a>
-			<li><a href="APIReference.html">API Reference</a>
-			<li><a href="downloads.html">Downloads</a>				
-			<li><a href="Support.html">Support</a>
-		</ul>
+	<div class="sidebar-content" id="side-nav-container">
+		<!--Side Bar List Goes Here-->
 	</div>
 
 </div>
@@ -45,13 +82,13 @@
 <div class="container container-body">
 	<div class="header">
 		<h1 class="noborder">
-			Authenticating with Frankly
+			Authenticating
 		</h1>
 
 <br>
 
 			<ul>	
-				<li><a href="#summary">Summary</a>
+				<li><a href="#overview">Overview</a>
 				<li><a href="#jwt">JWT</a>
 				<li><a href="#auth_flow">Server Authentication Flow</a>
 				<li><a href="#client_auth">Handling Authentication in the Client</a>
@@ -70,14 +107,14 @@
 
 	<div class="doc">
 
-			<a id="summary">
+			<a id="overview">
 				<h3>
-					Summary
+					Overview
 				</h3>
 			</a>
 	
 			<p>
-				This document describes how the Frankly Authentication works and what components Frankly partners must build in order to support authentication of their users on Frankly’s infrastructure.
+				This document describes how the Frankly Authentication works and what components Frankly partners must build in order to support authentication of their users on Frankly’s platform.
 			</p>
 
 
