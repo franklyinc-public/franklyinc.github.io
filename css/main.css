@@ -1,7 +1,6 @@
 /*For Main Index Header*/
 .header {
 	position: relative;
-	width: 80%;
 	padding-top: 20px;
 	padding-bottom: 20px;
 	font-family: 'Roboto', sans-serif;
@@ -109,7 +108,6 @@ nav.navbar {
 /*For Index Body*/
 .doc {
 	position: relative;
-	width: 90%;
 	padding-top: 20px;
 	padding-bottom: 20px;
     font-family: 'Roboto', sans-serif;
@@ -124,6 +122,9 @@ nav.navbar {
 	text-decoration: none;
 }
 
+img {
+	max-width: 100%;
+        }
 
 /*For Wells*/
 .well-bottom-nav {
