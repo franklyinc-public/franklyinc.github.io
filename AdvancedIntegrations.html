@@ -30,13 +30,13 @@
 				'<li><a href="#Server_APIs">Server API Access</a></li>',
 				'<li><a href="#Indepth_Usage">Indepth Usage</a></li>',
        			    '<ul>',
-				        '<li><a href="#Authentication">- Authentication</a></li>',
-				        '<li><a href="#Rooms">- Rooms</a></li>',
-				        '<li><a href="#Messages">- Messages</a></li>',
-				        '<li><a href="#Announcements">- Announcements</a></li>',
-				        '<li><a href="#Users">- Users</a></li>',
-				        '<li><a href="#Files">- Files</a></li>',
-				        '<li><a href="#Moderation">- Moderation</a></li>',
+				        '<li><a href="#Authentication">Authentication</a></li>',
+				        '<li><a href="#Rooms">Rooms</a></li>',
+				        '<li><a href="#Messages">Messages</a></li>',
+				        '<li><a href="#Announcements">Announcements</a></li>',
+				        '<li><a href="#Users">Users</a></li>',
+				        '<li><a href="#Files">Files</a></li>',
+				        '<li><a href="#Moderation">Moderation</a></li>',
 			        '</ul>',
 			'</ul>',
 		'</li>',
@@ -129,7 +129,7 @@
 		</p>
 		
 
-<pre class="prettyprint"><code>
+<pre class="prettyprint"><code class="lang-ruby">
 - (UIViewController *)roomViewControllerWithRoomId:(NSNumber *)roomId title:(NSString *)title;
 </code></pre>
 
@@ -141,7 +141,7 @@
 		</p>
 
 
-<pre class="prettyprint"><code>
+<pre class="prettyprint"><code class="lang-ruby">
 - (UIViewController *)roomNavigationControllerWithRoomId:(NSNumber *)roomId title:(NSString *)title;
 </code></pre>
 
@@ -200,7 +200,7 @@
  Here's how <b>FranklyClient</b> instances are created:
  </p>
 
-<pre class="prettyprint"><code>
+<pre class="prettyprint"><code class="lang-ruby">
      require 'frankly-ruby'
      client = FranklyClient.new
  </code></pre>
@@ -225,7 +225,7 @@ Before performing any operation (calling any method) the client instance needs t
  Here's how to perform authentication:
  </p>
 
-  <pre class="prettyprint"><code>
+  <pre class="prettyprint"><code class="lang-ruby">
      require 'frankly-ruby'
 
      app_key    = 'app_key from Frankly Console'
@@ -261,7 +261,7 @@ Before performing any operation (calling any method) the client instance needs t
  This code snippet shows how to create chat rooms:
  </p>
 
- <pre class="prettyprint"><code>
+ <pre class="prettyprint"><code class="lang-ruby">
      require 'frankly-ruby'
 
      room_payload = {
@@ -306,7 +306,7 @@ Before performing any operation (calling any method) the client instance needs t
  </p>
 
  
- <pre class="prettyprint"><code>
+ <pre class="prettyprint"><code class="lang-ruby">
       room = client.create_room(room_payload)
       count = client.read_room_count(room['id'])
  </code></pre>
@@ -325,7 +325,7 @@ Before performing any operation (calling any method) the client instance needs t
  This code snippet shows how to create messages:
  </p>
 
- <pre class="prettyprint"><code>
+ <pre class="prettyprint"><code class="lang-ruby">
      require 'frankly-ruby'
 
      message1_payload = {
@@ -402,7 +402,7 @@ Announcements are a type of message that is only available to admin users.
  </p>
 
  
- <pre class="prettyprint"><code>
+<pre class="prettyprint"><code class="lang-ruby">
      require 'frankly-ruby'
 
      anno_payload = {
@@ -499,110 +499,84 @@ Announcements are a type of message that is only available to admin users.
    <h4>Files</h4>
  </a>
 
-  <p>
-Objects of the <b>Frankly API</b> can have URL properties set to reference remote resources like images. All these
- URLs must be within the <b>+https://app.franklychat.com+</b> domain, which means an application must upload these
- resources to Frankly servers.
- </p>
+	<p>
+		Objects of the <b>Frankly API</b> can have URL properties set to reference remote resources like images. All these URLs must be within the <b>+https://app.franklychat.com+</b> domain, which means an application must upload these resources to Frankly servers.
+	</p>
 
- <p>
- Uploading a file happens in two steps, first the application needs to request a new file URL to the <b>Frankly API</b>,
- then it can use that URL to upload a resource to Frankly servers. Lukily the frankly module abstracts this nicely in a
- single operation, here's an example of how to set an image for a chat room:
- </p>
+	<p>
+		Uploading a file happens in two steps, first the application needs to request a new file URL to the <b>Frankly API</b>, then it can use that URL to upload a resource to Frankly servers. Lukily the frankly module abstracts this nicely in a single operation, here's an example of how to set an image for a chat room:
+	</p>
 
  
- <pre class="prettyprint"><code>
-     require 'frankly-ruby'
+<pre class="prettyprint"><code class="lang-ruby">
+    require 'frankly-ruby'
 
-     file_payload = {
-       category:  'useravatar',
-       type: 'image'
-     }
+    file_payload = {
+      category:  'useravatar',
+      type: 'image'
+    }
 
-     file = client.upload_file_from_path('./path/to/image.pnp',file_payload)
-     room = client.update_room(room.id, {avatar_image_url = file['url']})
- </code></pre>
-   <br/>
+    file = client.upload_file_from_path('./path/to/image.pnp',file_payload)
+    room = client.update_room(room.id, {avatar_image_url = file['url']})
+</code></pre>
 
- <p>
- The object returned by a call to <b>upload_file_from_path</b> and other upload methods is created in the first step
- described above. The <b>category</b> parameter shown here is used by the <b>Frankly API</b> to determine which
- formatting rules should be applied to the resource. Since the files will be optimized for different situations based
- on their category, it will be easier to integrate with Frankly and this will create a better user experience.
- </p>
+<br/>
 
- <p>
- Here are the file categories currently available:
- </p>
+	<p>
+		The object returned by a call to <b>upload_file_from_path</b> and other upload methods is created in the first step described above. The <b>category</b> parameter shown here is used by the <b>Frankly API</b> to determine which formatting rules should be applied to the resource. Since the files will be optimized for different situations based on their category, it will be easier to integrate with Frankly and this will create a better user experience.
+	</p>
 
- <ul>
- <li><b>chat</b>
-   This is the default category and is usually applied to images sent by end users.
- </li>
+	<p>
+		Here are the file categories currently available:
+	</p>
 
- <li><b>useravatar</b>
-   This category is for files that will be displayed in room lists.
- </li>
+	<ul>
+		 <li><b>chat</b>
+		   This is the default category and is usually applied to images sent by end users.</li>
+		 <li><b>useravatar</b>
+		   This category is for files that will be displayed in room lists.</li>
+		 <li><b>roomavatar</b>
+		   This category is for files that will be displayed in room lists.</li>
+		 <li><b>featuredavatar</b>
+		   This category is for files that will represent featured rooms.</li>
+		 <li><b>sticker</b>
+		   This category is for files that are used in sticker messages.</li>
+		 <li><b>stickerpack</b>
+		   This category is for files that will be the avatar of a sticker pack.</li>
+	</ul>
 
- <li><b>roomavatar</b>
-   This category is for files that will be displayed in room lists.
- </li>
+<br/>
 
- <li><b>featuredavatar</b>
-   This category is for files that will represent featured rooms.
- </li>
+	   <a id="Moderation">
+	     <h4>
+			 Moderation
+		 </h4>
+	   </a>
 
- <li><b>sticker</b>
-   This category is for files that are used in sticker messages.
- </li>
-
- <li><b>stickerpack</b>
-   This category is for files that will be the avatar of a sticker pack.
- </li>
- </ul>
-   <br/>
-
-   <a id="Moderation">
-     <h4>Moderation</h4>
-   </a>
-
-   <br/>
+<br/>
 
    <a id="Bans">
      <h5>Bans</h5>
    </a>
  
- <p>
- With the <b>Frankly API</b>, you can read the ban status of a given user. A banned user will not be able to send
- messages so it will be useful to determine programmatically if a user has been banned.
-   Here's an example of how you can read the ban status of a user
- </p>
+	 <p>
+	 With the <b>Frankly API</b>, you can read the ban status of a given user. A banned user will not be able to send
+	 messages so it will be useful to determine programmatically if a user has been banned.
+	   Here's an example of how you can read the ban status of a user
+	 </p>
 
- <pre class="prettyprint"><code>
-     require ‘frankly-client’
+<pre class="prettyprint"><code>
+require ‘frankly-client’
 
-     user_id = some number
-     ban = client.read_user_ban(user_id)
- </code></pre>
-   <br/>
+user_id = some number
+ban = client.read_user_ban(user_id)
+</code></pre>
+
 
 <br>
 <br>
 <br>
 <br>
-
-<!--
-<div class="well-bottom-nav">
-	<div class="panel panel-default">
-		<div class="panel-body">
-			<h4 align="right">
-				<a href="APIReference.html">Next: API Reference <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></a>
-			</h4>
-		</div>
-	</div>
-</div>
--->
 
 <div class="pager-container">
 <nav>
