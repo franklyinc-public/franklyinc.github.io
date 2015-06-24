@@ -145,14 +145,32 @@ img {
     font-family: 'Roboto', sans-serif;
     word-wrap: break-word;
 }
+
+
+/*For API Reference Pages*/
+iframe {
+  border: 0;
+  overflow: auto;
 }
 
+.fill {
+  width: 100%;
+  height: 90%;
+}
+
+html .fill {
+  margin: 0;
+  width: 1500px;
+  height: 100%;
+  overflow: none;
+}
+
+body .fill {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  overflow: none;
+}
 
 /*For Code Snippets*/
 /*All other Code Snippet Formatting is handled by Prettify now*/
-
-
-
-
-
-
