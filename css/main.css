@@ -73,6 +73,7 @@
 	.container.container-body {
 		margin-left: 315px;
 		transition: all 0.5s;
+		max-width: calc(100% - 315px);
 	}
 }
 
