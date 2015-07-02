@@ -28,7 +28,8 @@
 				'<li><a href="#First_Room">First Room List</a></li>',
 				'<li><a href="#Set_DisplayName_Avatar">Profile Info</a></li>',
 				'<li><a href="#JS_Room_Embed">Embeddable Rooms</a></li>',
-				'<li><a href="#Guest_Mode">Guest Mode Access</a></li>',		
+				'<li><a href="#Guest_Mode">Guest Mode Access</a></li>',
+				'<li><a href="#UI_Customization">Customizing UI</a></li>',
 			'</ul>',
 		'</li>',
 		'<li><a href="AdvancedIntegrations.html">Advanced Integrations</a>',
@@ -91,6 +92,7 @@
 				<li><a href="#Set_DisplayName_Avatar">Setting the Display Name & Profile Avatar</a>
 				<li><a href="#JS_Room_Embed">Embedding a Room on Web</a></li>
 				<li><a href="#Guest_Mode">Enabling Guest Mode Access</a>
+				<li><a href="#UI_Customization">Customizing UI</a></li>
 			</ul>
 
 	</div>
@@ -405,9 +407,7 @@ userManager.update(user);
 <br>
 <br>
 <br>
-			
-			
-			
+		
 	</div>
 
 	<div class="doc">
@@ -423,6 +423,166 @@ userManager.update(user);
 				<i>Coming soon!</i>
 			</p>
 				
+	</div>
+	
+	<div class="doc">
+			<a id="UI_Customization">
+				<h3>
+					Customizing UI in the SDK
+				</h3>
+			</a>
+			
+			<p>
+				This section will describe how the Frankly SDKs allow you to customize various components of the provided UI.
+			</p>
+			
+<br>
+
+			<h4>
+				<b>Customizing the iOS SDK</b>
+			</h4>
+			
+			<p>
+				FranklySDK on iOS allows partners to set values that affect FranklySDK's interface within the partner app. This data is passed in via a standard plist file.  An example data file, FRSDKExampleConfig.plist, is included FranklySDK package.
+			</p>
+			
+			<p>
+				Partners may modify that file, or create a new one and then, any time after <code>initializeSDKWithServerType:</code> has been called,add the file to FranklySDK via the <code>function addCustomizationFile:(NSURL *)fileURL</code>. Multiple files may be added via this call, any collisions with existing keys will cause the existing value to be overwritten by the new value.
+			</p>
+			
+<br>			
+			
+			<h5>
+				<b>Customization Plist</b>
+			</h5>
+			
+			<p>
+				This is a standard Apple plist file which means it’s an XML file with a single object named Root.  FranklySDK expects this Root object to be a dictionary of dictionaries.  Each dictionary represents a customization category that is populated with key value pairs.
+			</p>
+
+<br>			
+
+			<h5>
+				<b>Data Types</b>
+			</h5>
+			
+			<p>
+				The base values stored in the dictionaries in the customization file will be of the following types:
+			</p>
+			
+				<ul>
+					<li><b>Data Types</b> This is a string that follows a standard hex string format with alpha.  It maybe be preceded by ‘0x’ or ‘#’ but the last 8 characters should represent the hex values  in red, green, blue, alpha order.  So the color white with full opacity would be represented as 0xFFFFFFFF and black, haf opacity would be represented as 0x0000007F.</li>
+				</ul>
+				
+<br>
+
+			<h5>
+				<b>Customization Categories</b>
+			</h5>
+			
+				<ul>
+					<li><b>ui</b></li>
+					<ul>
+						<li>the ui key contains a dictionary of key value pairs with the following keys:</li>
+					</ul>
+				</ul>
+
+<br>
+
+	<div class="panel panel-default">
+		  <table class="table">
+		    <tr>
+				<td><b>Color Key</b></td>
+				<td><b>Use Case</b></td>
+			</tr>
+			<tr>
+				<td><code>primary-fg-color</code></td>
+				<td>Takes a color value and is used throughout the app as primary foreground color.</td>
+			</tr>
+			<tr>
+				<td><code>primary-bg-color</code></td>
+				<td>Takes a color value and is used throughout the app as the primary background color.</td>
+			</tr>
+			<tr>
+				<td><code>accent-bg-color</code></td>
+				<td>Takes a color value and is used throughout the app as an accent color. Most noticeably as the background of the locked Input Bar.</td>
+			</tr>
+			<tr>
+				<td><code>brand-bg-color</code></td>
+				<td>Takes a color value. Is used as the background for Sticky Messages when they are docked at the top of a Room.</td>
+			</tr>
+			<tr>
+				<td><code>attention-bg-color</code></td>
+				<td>Takes a color value. Is used in the custom activity indicators.</td>
+			</tr>
+		  </table>
+	</div>
+				
+<br>		
+<br>
+
+			<h4>
+				<b>Customizing the Android SDK</b>
+			</h4>
+			
+			<p>
+				To assist with allowing apps to provide their own basic customizations to existing Frankly SDK Views, Activities, and Fragments, you can override the default styles in XML style files:
+			</p>
+			
+<pre class="prettyprint"><code class="lang-xml">
+&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;resources&gt;
+    &lt;color name="frankly_sdk_primary_background"&gt;#151515&lt;/color&gt;
+    &lt;color name="frankly_sdk_primary_foreground"&gt;#FFFFFF&lt;/color&gt;
+    &lt;color name="frankly_sdk_accent_background"&gt;#FD3C1C&lt;/color&gt;
+    &lt;color name="frankly_sdk_accent_foreground"&gt;#FFFFFF&lt;/color&gt;
+    &lt;color name="frankly_sdk_brand_background"&gt;#252525&lt;/color&gt;
+    &lt;color name="frankly_sdk_brand_foreground"&gt;#FFFFFF&lt;/color&gt;
+    &lt;color name="frankly_sdk_attention"&gt;#4891F0&lt;/color&gt;
+&lt;/resources&gt;
+</code></pre>			
+			
+<br>
+<br>
+
+	<div class="panel panel-default">
+		  <table class="table">
+		    <tr>
+				<td><b>Color Key</b></td>
+				<td><b>Use Case</b></td>
+			</tr>
+			<tr>
+				<td><code>frankly_sdk_primary_background</code></td>
+				<td>Activity actionbar background</td>
+			</tr>
+			<tr>
+				<td><code>frankly_sdk_primary_foreground</code></td>
+				<td>Activity actionbar foreground</td>
+			</tr>
+			<tr>
+				<td><code>frankly_sdk_accent_background</code></td>
+				<td>Indicating a primed state such as send button active state, toggle checked, subscribed room, locked bar background for input message bar</td>
+			</tr>
+			<tr>
+				<td><code>frankly_sdk_accent_foreground</code></td>
+				<td>Foreground items color where the background has <code>frankly_sdk_accent_background</code> color such as locked bar forground items</td>
+			</tr>
+			<tr>
+				<td><code>frankly_sdk_brand_background</code></td>
+				<td>Denoting who and what explicitly belongs to the brand such as sticky messages cell background</td>
+			</tr>
+			<tr>
+				<td><code>frankly_sdk_brand_foreground</code></td>
+				<td>Foreground items color where the background has <code>frankly_sdk_brand_background</code> color such as sticky messages foreground items</td>
+			</tr>
+			<tr>
+				<td><code>frankly_sdk_attention</code>
+				<td>Indicating an attention to user such as new sticker pack indicator and activity indicator base color</td>
+			</tr>
+		  </table>
+	</div>
+
+			
 	</div>
 
 <br>
