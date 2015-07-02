@@ -439,17 +439,90 @@ userManager.update(user);
 <br>
 
 			<h4>
-				Customizing the iOS SDK
+				<b>Customizing the iOS SDK</b>
 			</h4>
 			
 			<p>
-				...
+				FranklySDK on iOS allows partners to set values that affect FranklySDK's interface within the partner app. This data is passed in via a standard plist file.  An example data file, FRSDKExampleConfig.plist, is included FranklySDK package.
 			</p>
 			
+			<p>
+				Partners may modify that file, or create a new one and then, any time after <code>initializeSDKWithServerType:</code> has been called,add the file to FranklySDK via the <code>function addCustomizationFile:(NSURL *)fileURL</code>. Multiple files may be added via this call, any collisions with existing keys will cause the existing value to be overwritten by the new value.
+			</p>
+			
+<br>			
+			
+			<h5>
+				<b>Customization Plist</b>
+			</h5>
+			
+			<p>
+				This is a standard Apple plist file which means it’s an XML file with a single object named Root.  FranklySDK expects this Root object to be a dictionary of dictionaries.  Each dictionary represents a customization category that is populated with key value pairs.
+			</p>
+
+<br>			
+
+			<h5>
+				<b>Data Types</b>
+			</h5>
+			
+			<p>
+				The base values stored in the dictionaries in the customization file will be of the following types:
+			</p>
+			
+				<ul>
+					<li><b>Data Types</b> This is a string that follows a standard hex string format with alpha.  It maybe be preceded by ‘0x’ or ‘#’ but the last 8 characters should represent the hex values  in red, green, blue, alpha order.  So the color white with full opacity would be represented as 0xFFFFFFFF and black, haf opacity would be represented as 0x0000007F.</li>
+				</ul>
+				
+<br>
+
+			<h5>
+				<b>Customization Categories</b>
+			</h5>
+			
+				<ul>
+					<li><b>ui</b></li>
+					<ul>
+						<li>the ui key contains a dictionary of key value pairs with the following keys:</li>
+					</ul>
+				</ul>
+
+<br>
+
+	<div class="panel panel-default">
+		  <table class="table">
+		    <tr>
+				<td><b>Color Key</b></td>
+				<td><b>Use Case</b></td>
+			</tr>
+			<tr>
+				<td><code>primary-fg-color</code></td>
+				<td>Takes a color value and is used throughout the app as primary foreground color.</td>
+			</tr>
+			<tr>
+				<td><code>primary-bg-color</code></td>
+				<td>Takes a color value and is used throughout the app as the primary background color.</td>
+			</tr>
+			<tr>
+				<td><code>accent-bg-color</code></td>
+				<td>Takes a color value and is used throughout the app as an accent color. Most noticeably as the background of the locked Input Bar.</td>
+			</tr>
+			<tr>
+				<td><code>brand-bg-color</code></td>
+				<td>Takes a color value. Is used as the background for Sticky Messages when they are docked at the top of a Room.</td>
+			</tr>
+			<tr>
+				<td><code>attention-bg-color</code></td>
+				<td>Takes a color value. Is used in the custom activity indicators.</td>
+			</tr>
+		  </table>
+	</div>
+				
+<br>		
 <br>
 
 			<h4>
-				Customizing the Android SDK
+				<b>Customizing the Android SDK</b>
 			</h4>
 			
 			<p>
