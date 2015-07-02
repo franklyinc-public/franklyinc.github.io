@@ -28,7 +28,8 @@
 				'<li><a href="#First_Room">First Room List</a></li>',
 				'<li><a href="#Set_DisplayName_Avatar">Profile Info</a></li>',
 				'<li><a href="#JS_Room_Embed">Embeddable Rooms</a></li>',
-				'<li><a href="#Guest_Mode">Guest Mode Access</a></li>',		
+				'<li><a href="#Guest_Mode">Guest Mode Access</a></li>',
+				'<li><a href="#UI_Customization">Customizing UI</a></li>',
 			'</ul>',
 		'</li>',
 		'<li><a href="AdvancedIntegrations.html">Advanced Integrations</a>',
@@ -91,6 +92,7 @@
 				<li><a href="#Set_DisplayName_Avatar">Setting the Display Name & Profile Avatar</a>
 				<li><a href="#JS_Room_Embed">Embedding a Room on Web</a></li>
 				<li><a href="#Guest_Mode">Enabling Guest Mode Access</a>
+				<li><a href="#UI_Customization">Customizing UI</a></li>
 			</ul>
 
 	</div>
@@ -405,9 +407,7 @@ userManager.update(user);
 <br>
 <br>
 <br>
-			
-			
-			
+		
 	</div>
 
 	<div class="doc">
@@ -423,6 +423,93 @@ userManager.update(user);
 				<i>Coming soon!</i>
 			</p>
 				
+	</div>
+	
+	<div class="doc">
+			<a id="UI_Customization">
+				<h3>
+					Customizing UI in the SDK
+				</h3>
+			</a>
+			
+			<p>
+				This section will describe how the Frankly SDKs allow you to customize various components of the provided UI.
+			</p>
+			
+<br>
+
+			<h4>
+				Customizing the iOS SDK
+			</h4>
+			
+			<p>
+				...
+			</p>
+			
+<br>
+
+			<h4>
+				Customizing the Android SDK
+			</h4>
+			
+			<p>
+				To assist with allowing apps to provide their own basic customizations to existing Frankly SDK Views, Activities, and Fragments, you can override the default styles in XML style files:
+			</p>
+			
+<pre class="prettyprint"><code class="lang-xml">
+&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;resources&gt;
+    &lt;color name="frankly_sdk_primary_background"&gt;#151515&lt;/color&gt;
+    &lt;color name="frankly_sdk_primary_foreground"&gt;#FFFFFF&lt;/color&gt;
+    &lt;color name="frankly_sdk_accent_background"&gt;#FD3C1C&lt;/color&gt;
+    &lt;color name="frankly_sdk_accent_foreground"&gt;#FFFFFF&lt;/color&gt;
+    &lt;color name="frankly_sdk_brand_background"&gt;#252525&lt;/color&gt;
+    &lt;color name="frankly_sdk_brand_foreground"&gt;#FFFFFF&lt;/color&gt;
+    &lt;color name="frankly_sdk_attention"&gt;#4891F0&lt;/color&gt;
+&lt;/resources&gt;
+</code></pre>			
+			
+<br>
+<br>
+
+	<div class="panel panel-default">
+		  <table class="table">
+		    <tr>
+				<td><b>Color Key</b></td>
+				<td><b>Use Case</b></td>
+			</tr>
+			<tr>
+				<td><code>frankly_sdk_primary_background</code></td>
+				<td>Activity actionbar background</td>
+			</tr>
+			<tr>
+				<td><code>frankly_sdk_primary_foreground</code></td>
+				<td>Activity actionbar foreground</td>
+			</tr>
+			<tr>
+				<td><code>frankly_sdk_accent_background</code></td>
+				<td>Indicating a primed state such as send button active state, toggle checked, subscribed room, locked bar background for input message bar</td>
+			</tr>
+			<tr>
+				<td><code>frankly_sdk_accent_foreground</code></td>
+				<td>Foreground items color where the background has <code>frankly_sdk_accent_background</code> color such as locked bar forground items</td>
+			</tr>
+			<tr>
+				<td><code>frankly_sdk_brand_background</code></td>
+				<td>Denoting who and what explicitly belongs to the brand such as sticky messages cell background</td>
+			</tr>
+			<tr>
+				<td><code>frankly_sdk_brand_foreground</code></td>
+				<td>Foreground items color where the background has <code>frankly_sdk_brand_background</code> color such as sticky messages foreground items</td>
+			</tr>
+			<tr>
+				<td><code>frankly_sdk_attention</code>
+				<td>Indicating an attention to user such as new sticker pack indicator and activity indicator base color</td>
+			</tr>
+		  </table>
+	</div>
+
+			
 	</div>
 
 <br>
