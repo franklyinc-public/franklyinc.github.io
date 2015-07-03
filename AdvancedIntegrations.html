@@ -162,8 +162,17 @@
 		</h4>
 	
 		<p>
-			<i>Coming soon!</i>
+			<code>RoomActivity</code> allows the user to join a specified chatroom directly.
 		</p>
+
+
+<pre class="prettyprint"><code class="lang-java">
+Intent intent = new Intent(this, RoomActivity.class);
+
+intent.putExtra(RoomActivity.EXTRA_ROOM_ID, roomId);
+
+context.startActivity(intent);
+</code></pre>	
 		
 <br>
 <br>
@@ -181,267 +190,244 @@
 <br>
 <br>
 
-<a id="In-depth_Usage">
-  <h3>In-depth Usage</h3>
-  </a>
+		<a id="In-depth_Usage">
+			<h3>
+				In-depth Usage
+			</h3>
+		</a>
 
- <p>
-   The sections below explain how to use the module to authenticate and query the <b>Frankly API</b> using other SDKs that can be embedded other types of applications (servers, automation workers, desktop applications, etc...).
- </p>
+		<p>
+			The sections below explain how to use the module to authenticate and query the <b>Frankly API</b> using other SDKs that can be embedded other types of applications (servers, automation workers, desktop applications, etc...).
+		</p>
 
- <p>
-   <br/>
-  <em>We'll be using Ruby for code examples, please consult the API reference for the language
-    you're interested in to get more details of language-specific syntaxes</em>.
-  <br/>
-  </br>
- </p>
+<br>
 
- <p>
- All operations to the API are made from instances of the <b>FranklyClient</b> class. Those
- objects expose methods to the application which map to remote procedure calls (RPC)
- on the <b>Frankly</b> servers, they also negotiate and maintain the state required by the
- API's security policies.
- </p>
+		<p>
+		  <em>We'll be using Ruby for code examples, please consult the API reference for the language you're interested in to get more details of language-specific syntaxes.</em>
+		</p>
 
- <p>
- Here's how <b>FranklyClient</b> instances are created:
- </p>
+<br>
+
+		<p>
+			All operations to the API are made from instances of the <b>FranklyClient</b> class. Those objects expose methods to the application which map to remote procedure calls (RPC) on the <b>Frankly</b> servers, they also negotiate and maintain the state required by the API's security policies.
+		</p>
+
+		<p>
+			Here's how <b>FranklyClient</b> instances are created:
+		</p>
+
 
 <pre class="prettyprint"><code class="lang-ruby">
-     require 'frankly-ruby'
-     client = FranklyClient.new
- </code></pre>
-   <br/>
-
-   <a id="Authentication">
-     <h4>Authentication</h4>
-   </a>
-
- <p>
-Before performing any operation (calling any method) the client instance needs to authenticate
- against Frankly API. The API supports different permission levels but this module is designed
- to only allow <em>admin</em> authentication.
- </p>
-
- <p>
- In order to authenticate as an <em>admin</em> user, the client needs to be given the <b>app_key</b>
- and <b>app_secret</b> values obtained from the {Frankly Console}[https://console.franklychat.com/].
- </p>
-
- <p>
- Here's how to perform authentication:
- </p>
-
-  <pre class="prettyprint"><code class="lang-ruby">
-     require 'frankly-ruby'
-
-     app_key    = 'app_key from Frankly Console'
-     app_secret = 'app_secret from Frankly Console'
-
-     client = FranklyClient.new
-     client.open(app_key, app_secret)
+	require 'frankly-ruby'
+	client = FranklyClient.new
  </code></pre>
 
- <p>
- The call to <b>open</b> returns a session object if the authentication was successful. The application can now
- use this instance of <b>FranklyClient</b> to perform other operations.
- </p>
+<br>
 
- <p>
- <em>Please do not publish your</em> <b>app_secret</b> <em>value to the public. This can have security implications
-   and could be used by an attacker to alter the content of your application.</em>
- </p>
-   <br/>
+		<a id="Authentication">
+			<h4>
+				Authentication
+			</h4>
+		</a>
 
-   <a id="Rooms">
-     <h4>Rooms</h4>
-     </a>
+		<p>
+			Before performing any operation (calling any method) the client instance needs to authenticate against Frankly API. The API supports different permission levels but this module is designed to only allow <em>admin</em> authentication.
+		</p>
 
- <p>
-  One of the central concepts in the <b>Frankly API</b> is the chat room. A chat room is a collection of
-  messageswith some associated meta-data, like the title, description, or avatar image, that can be
-  displayed when the end users access a mobile or web app that uses the <b>Frankly SDK</b>.
-  With the <b>Frankly API</b>, you can create, update, and delete chat rooms.
- </p>
+		<p>
+			In order to authenticate as an <em>admin</em> user, the client needs to be given the <code>app_key</code> and <code>app_secret</code> values obtained from the <a href="https://console.franklychat.com/">Frankly Admin Console</a>.
+		</p>
 
- <p>
- This code snippet shows how to create chat rooms:
- </p>
+		<p>
+			Here's how to perform authentication:
+		</p>
 
- <pre class="prettyprint"><code class="lang-ruby">
-     require 'frankly-ruby'
+<pre class="prettyprint"><code class="lang-ruby">
+	require 'frankly-ruby'
 
-     room_payload = {
-       title:       'Hi',
-       description: 'My First Chat Room',
-       status:      'active'
-     }
-     room = client.create_room(room_payload)
- </code></pre>
-   <br/>
+	app_key    = 'app_key from Frankly Console'
+	app_secret = 'app_secret from Frankly Console'
 
- <p>
- As we can see here, when creating the room the application must specify a <em>status</em> property
- which can be one of the following:
- </p>
+	client = FranklyClient.new
+	client.open(app_key, app_secret)
+</code></pre>
 
- <ul>
- <li><b>unpublished</b> In this state, the room will not be shown to clients fetching the list of
-   available rooms in the app. This is useful if the application needs to create rooms that shouldn't
-   be available yet because they still need to be modified.
- </li>
+<br>
 
- <li><b>active</b> In this state, the room will be fetched by clients and will be displayed in the list of available
-   rooms that end users can join to start chatting with each other.
- </li>
+		<p>
+			The call to <b>open</b> returns a session object if the authentication was successful. The application can now use this instance of <b>FranklyClient</b> to perform other operations.
+		</p>
 
- <li><b>inactive</b> This last state is an intermediary state between the first two. The room will be
-   part of fetching operations but it will not be displayed in the mobile or web app UI. This state is useful
-   for testing purposes.
- </li>
- </ul>
+		<p>
+			<em>Please do not publish your</em> <b>app_secret</b> <em>value to the public. This can have security implications and could be used by an attacker to alter the content of your application.</em>
+		</p>
 
- <p>
- In addition to the data available in the room object, you can also fetch data about the number of users that are
- in that room. The room count function returns a hash that lists the <b>active</b>, <b>online</b>, and <b>subscribed</b>
- user counts. <b>Online</b> represents the users that are currently in the room, <b>subscribed</b> represents the users
- that have subscribed to the room, and <b>active</b> is the union of the online and subscribed users.
- </p>
+<br>
 
- <p>
- This code snippet shows how to fetch the room count:
- </p>
+		<a id="Rooms">
+			<h4>
+				Rooms
+			</h4>
+		</a>
+
+		<p>
+			One of the central concepts in the <b>Frankly API</b> is the chat room. A chat room is a collection of messageswith some associated meta-data, like the title, description, or avatar image, that can be displayed when the end users access a mobile or web app that uses the <b>Frankly SDK</b>. With the <b>Frankly API</b>, you can create, update, and delete chat rooms.
+		</p>
+
+		<p>
+			This code snippet shows how to create chat rooms:
+		</p>
+
+<pre class="prettyprint"><code class="lang-ruby">
+	require 'frankly-ruby'
+
+	room_payload = {
+		title:       'Hi',
+		description: 'My First Chat Room',
+		status:      'active'
+	}
+	room = client.create_room(room_payload)
+</code></pre>
+
+<br>
+
+		<p>
+			As we can see here, when creating the room the application must specify a <em>status</em> property which can be one of the following:
+		</p>
+
+		<ul>
+			<li><b>unpublished</b> In this state, the room will not be shown to clients fetching the list of available rooms in the app. This is useful if the application needs to create rooms that shouldn't be available yet because they still need to be modified.</li>
+			<li><b>active</b> In this state, the room will be fetched by clients and will be displayed in the list of available Rooms that end users can join to start chatting with each other.</li>
+			<li><b>inactive</b> This last state is an intermediary state between the first two. The room will be part of fetching operations but it will not be displayed in the mobile or web app UI. This state is useful for testing purposes.</li>
+		</ul>
+
+<br>
+
+		<p>
+			In addition to the data available in the room object, you can also fetch data about the number of users that are in that room. The room count function returns a hash that lists the <b>active</b>, <b>online</b>, and <b>subscribed</b> user counts. <b>Online</b> represents the users that are currently in the room, <b>subscribed</b> represents the users that have subscribed to the room, and <b>active</b> is the union of the online and subscribed users.
+		</p>
+
+<br>
+
+		<p>
+			This code snippet shows how to fetch the room count:
+		</p>
 
  
- <pre class="prettyprint"><code class="lang-ruby">
-      room = client.create_room(room_payload)
-      count = client.read_room_count(room['id'])
- </code></pre>
-   <br/>
+<pre class="prettyprint"><code class="lang-ruby">
+	room = client.create_room(room_payload)
+	count = client.read_room_count(room['id'])
+</code></pre>
 
-   <a id="Messages">
-     <h4>Messages</h4>
-   </a>
+<br>
 
- <p>
- Frankly, being a chat platform, allows applications to send and receive messages. Naturally,
- <b>FranklyClient</b> instances can fetch messages and publish them to chat rooms.
- </p>
+		<a id="Messages">
+			<h4>
+				Messages
+			</h4>
+		</a>
 
- <p>
- This code snippet shows how to create messages:
- </p>
+		<p>
+			Frankly, being a chat platform, allows applications to send and receive messages. Naturally, <b>FranklyClient</b> instances can fetch messages and publish them to chat rooms.
+		</p>
 
- <pre class="prettyprint"><code class="lang-ruby">
-     require 'frankly-ruby'
+		<p>
+			This code snippet shows how to create messages:
+		</p>
 
-     message1_payload = {
-       contents: [{
-         type:  'text/plain',
-         value: 'Hello World!'
-       }]
-     }
-     message1 = client.create_room_message(room['id'],create_payload)
+<pre class="prettyprint"><code class="lang-ruby">
+	require 'frankly-ruby'
 
-     message2_payload = {
-       contents: [{
+	message1_payload = {
+		contents: [{
+		type:  'text/plain',
+        value: 'Hello World!'
+	}]
+	}
+	message1 = client.create_room_message(room['id'],create_payload)
+
+	message2_payload = {
+		contents: [{
          type: 'image/*',
          url:  'https://app.franklychat.com/files/...'
-       }]
+	 	}]
      }
-     message2 = client.create_room_message(room['id'],create_payload)
- </code></pre>
-   <br/>
+	 message2 = client.create_room_message(room['id'],create_payload)
+</code></pre>
 
- <p>
- Let's explain what's happening here: messages published to chat rooms can contain multiple
- parts; they could contain a few text enries, text an an image, several images, etc. The contents
- property of the message is actually a list of objects, the fields of the <em>contents</em> objects are:
- </p>
+<br>
 
- <ul>
- <li><b>type</b> This is the mime type of the actual content it represents, it gives the application
-   information about how to render the content. This field is mandatory.
- </li>
+		<p>
+			Let's explain what's happening here: messages published to chat rooms can contain multiple parts; they could contain a few text enries, text an an image, several images, etc. The contents property of the message is actually a list of objects, the fields of the <em>contents</em> objects are:
+		</p>
 
- <li><b>value</b> This is used for inline resources directly embedded into the message. One of <em>value</em>
-   or <em>url</em> must be specified.
- </li>
+		<ul>
+			<li><b>type</b> This is the mime type of the actual content it represents, it gives the application information about how to render the content. This field is mandatory.</li>
+			<li><b>value</b> This is used for inline resources directly embedded into the message. One of <em>value</em> or <em>url</em> must be specified.</li>
+			<li><b>url</b> This is the inline resource that is directly imbedded into the message. One of <em>value</em> or <em>url</em> must be specified.</li>
+		</ul>
 
- <li><b>url</b> This is the inline resource that is directly imbedded into the message.
-   One of <em>value</em> or <em>url</em> must be specified.
- </li>
- </ul>
+		<p>
+			Typically, text messages are inlined because they are small enough resources that they can be embedded into the message without having an impact on the user experience. Images, on the other hand, may take a while to download and caching mechanisms can be used to optimize rendering by preventing large resources from downloading too often. This is why we provide the <em>value</em> as a remote resouce (we'll see later in the <em>Files</em> section how to generate remote resource URLs).
+		</p>
 
- <p>
- Typically, text messages are inlined because they are small enough resources that they can be embedded into
- the message without having an impact on the user experience. Images, on the other hand, may take a while to download
- and caching mechanisms can be used to optimize rendering by preventing large resources from downloading too often.
- This is why we provide the <em>value</em> as a remote resouce (we'll see later in the  <em>Files</em> section how to
- generate remote resource URLs).
- </p>
+		<p>
+			<em>Keep in mind that when a message is created, it will be broadcasted to every client application that is currently listening for messages in that chat room.</em>
+		</p>
 
- <p>
- <em>Keep in mind that when a message is created, it will be broadcasted to every client application that is currently
-   listening for messages in that chat room.</em>
- </p>
-   <br/>
+<br>
 
-   <a id="Announcements">
-     <h4>Announcements</h4>
-   </a>
+		<a id="Announcements">
+			<h4>
+				Announcements
+			</h4>
+		</a>
 
-  <p>
-Announcements are a type of message that is only available to admin users.
- A client authenticated with admin priviledges can create announcements in the app which can be published
- to one or more rooms at a later time.
- </p>
+		<p>
+			Announcements are a type of message that is only available to admin users. A client authenticated with admin priviledges can create announcements in the app which can be published to one or more rooms at a later time.
+		</p>
 
- <p>
- Currently, the only type of Announcement is the Sticky Message. Once the most recent Sticky
- Message sent reaches the top of the Chat Room UI, it will anchor to the top until a new
- Sticky Message replaces it. This provides context to the end users about what has recently
- happened or what is currently happening to make it easier for them to jump in and chat.
- </p>
+		<p>
+			Currently, the only type of Announcement is the Sticky Message. Once the most recent Sticky Message sent reaches the top of the Chat Room UI, it will anchor to the top until a new Sticky Message replaces it. This provides context to the end users about what has recently happened or what is currently happening to make it easier for them to jump in and chat.
+		</p>
 
- <p>
- Here's how an app using the frankly module would create and then publish announcements:
- </p>
+		<p>
+			Here's how an app using the frankly module would create and then publish announcements:
+		</p>
 
  
 <pre class="prettyprint"><code class="lang-ruby">
-     require 'frankly-ruby'
+	require 'frankly-ruby'
 
-     anno_payload = {
-       sticky: true,
-       contents: [{
-         type:  'text/plain',
-         value: 'Hello World!'
-       }]
-     }
+	anno_payload = {
+		sticky: true,
+		contents: [{
+			type:  'text/plain',
+			value: 'Hello World!'
+		}]
+	}
 
-     anno = client.create_announcement(anno_payload)
-     client.create_room_message(room.id, {announcement: anno['id']})
- </code></pre>
-   <br/>
+	anno = client.create_announcement(anno_payload)
+	client.create_room_message(room.id, {announcement: anno['id']})
+</code></pre>
 
- <p>
- As we can see here, the announcement is created with the same structure than a regular message. The content of the
- announcement well be set as the message content when it is published to the room and the contents field obeys the rules
- about inline and remote content that were described in the <em>Messages</em> section.
- </p>
- <br/>
+<br>
 
- <a id="Users">
-   <h4>Users</h4>
- </a>
+		<p>
+			As we can see here, the announcement is created with the same structure than a regular message. The content of the announcement well be set as the message content when it is published to the room and the contents field obeys the rules about inline and remote content that were described in the <em>Messages</em> section.
+		</p>
 
- <p>
-   A central concept of the <b>Frankly API</b> is the <em>USer</em>. Users represent people using
-   the chat platform within an app. They are created during authentication and one using in the
-   <b>Frankly API</b> should be to a one user on the host application.
- </p>
+<br>
+
+		<a id="Users">
+			<h4>
+				Users
+			</h4>
+		</a>
+
+		<p>
+			A central concept of the <b>Frankly API</b> is the <em>USer</em>. Users represent people using the chat platform within an app. They are created during authentication and one using in the <b>Frankly API</b> should be to a one user on the host application.
+		</p>
 
  <a id="Roles">
    <h5>Roles</h5>
