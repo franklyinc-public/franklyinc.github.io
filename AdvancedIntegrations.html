@@ -28,6 +28,7 @@
 			'<ul>',
 				'<li><a href="#Open_Room">Directly Opening a Room</a></li>',
 				'<li><a href="#Server_APIs">Server API Access</a></li>',
+				'<li><a href="#Installing_ServerSDKs">Server SDKs</a></li>',
 				'<li><a href="#Indepth_Usage">Indepth Usage</a></li>',
        			    '<ul>',
 				        '<li><a href="#Authentication">Authentication</a></li>',
@@ -98,6 +99,7 @@
 			<ul>
 				<li><a href="#Open_Room">Directly Opening a Room</a>
 				<li><a href="#Server_APIs">Server API Access</a>
+				<li><a href="#Installing_ServerSDKs">Server SDKs</a></li>
 				<li><a href="#In-depth_Usage">In-depth Usage</a>
        			    <ul>
 				        <li><a href="#Authentication">Authentication</a></li>
@@ -184,11 +186,131 @@ context.startActivity(intent);
 		</a>
 	
 		<p>
-			The sections below describes how developers are able to interact direction with Frankly's server APIs to create more custom integrations on the Frankly Platform. To provide a clean interface for develoeprs to interact with Frankly's server APIs, we're providing a Python module and Ruby gem that are meant to easily be integrated with your existing backend stack. In the event that you need access to Frankly's server APIs in a language that is better compatible with your backend or that you are more comfortable with, please let us know by sending an email to <a href="mailto:platform-support@franklychat.com">platform-support@franklychat.com</a>.
+			The sections below describes how developers are able to interact direction with Frankly's server APIs to create more custom integrations on the Frankly Chat Platform. To provide a clean interface for develoeprs to interact with Frankly's server APIs, we're providing a Python module and Ruby gem that are meant to easily be integrated with your existing backend stack. In the event that you need access to Frankly's server APIs in a language that is better compatible with your backend or that you are more comfortable with, please let us know by sending an email to <a href="mailto:platform-support@franklychat.com">platform-support@franklychat.com</a>.
 		</p>
 	
 <br>
 <br>
+
+
+
+		<a id="Installing_ServerSDKs">
+			<h3>
+				Installing the Server SDKs
+			</h3>
+		</a>
+
+
+<br>
+
+
+		<h4>
+			Installing the Python SDK
+		</h4>
+
+		<p>	
+			The Frankly Python module can be installed, like most Python modules, using pip:
+		</p>	
+
+
+<pre class="prettyprint"><code>
+$ pip install frankly-python
+</code></pre>
+
+<br>
+
+		<h5>
+			<b>Compatibility</b>
+		</h5>
+		
+		<p>
+			The frankly-python module requires Python 2.7.9+ or Python 3.4.0+ to be used successfully.
+		</p>
+		
+			
+<br>
+			
+			
+		<h5>
+			<b>Testing</b>
+		</h5>
+			
+		<p>
+			The test suite relies on environment variables to figure out where to connect to for tests that make API calls. You should set these three environment variables before running the tests:
+		</p>
+
+			
+<pre class="prettyprint"><code class="lang-py">
+export FRANKLY_APP_HOST=https://app.franklychat.com
+export FRANKLY_APP_KEY={app key from the Frankly Console}
+export FRANKLY_APP_SECRET={app secret from the Frankly Console}
+</code></pre>
+
+
+<br>
+
+
+		<p>
+			The easiest way to run the test suite is to use the nose python module, then run:
+		</p>
+
+<pre class="prettyprint"><code>
+$ python2 -m nose
+</code></pre>
+
+
+<br>
+
+
+<pre class="prettyprint"><code>
+$ python3 -m nose
+</code></pre>
+
+
+<br>
+<br>
+
+
+		<h4>
+			Installing the Ruby SDK
+		</h4>
+		
+		<p>
+			In your Gemfile include:
+		</p>
+		
+<pre class="prettyprint"><code class="lang-rb">
+gem 'frankly-ruby', :git => 'git://github.com/franklyinc/frankly-ruby.git'
+</code></pre>
+
+
+<br>
+
+
+		<p>
+			... then run:
+		</p>
+		
+<pre class="prettyprint"><code>
+bundle install
+</code></pre>
+
+
+<br>
+
+
+		<p>
+			To use the Frankly Ruby gem:
+		</p>
+		
+<pre class="prettyprint"><code>
+require 'frankly-ruby'
+</code></pre>
+
+
+<br>
+<br>
+
 
 		<a id="In-depth_Usage">
 			<h3>
