@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <title>Advanced Integrations</title>
-    <meta name="keywords" content="Frankly Platform" />
+    <meta name="keywords" content="Frankly Chat Service Platform" />
 	<meta name="viewport" content="width=device-width, initial-scale=1"/>
     <link type="text/css" rel="stylesheet" href="css/main.css">
     <link type="text/css" rel="stylesheet" href="css/bootstrap.css">	
@@ -19,7 +19,7 @@
 	<script> 
 	var frankly_menu = [
 	'<ul>',
-		'<li><a href="index.html">Getting Started</a></li>',
+		'<li><a href="http://franklyinc.github.io">Getting Started</a></li>',
 		'<li><a href="InstallSDK.html">Installing the SDK</a></li>',
 		'<li><a href="InitializeSDK.html">Initializing the SDK</a>',
 		'<li><a href="Auth.html">Authenticating</a>',
@@ -53,6 +53,19 @@
   	});
 	</script>
 	
+	<script>
+		(function() {
+			var cx = '007928927613488122909:hbugzpc0lua';
+			var gcse = document.createElement('script');
+			gcse.type = 'text/javascript';
+			gcse.async = true;
+			gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+				'//cse.google.com/cse.js?cx=' + cx;
+			var s = document.getElementsByTagName('script')[0];
+			s.parentNode.insertBefore(gcse, s);
+		})();
+	</script>
+	
 </head>
 
 <nav class="navbar navbar-inverse" role="navigation" style="z-index:100">
@@ -79,7 +92,16 @@
 
 <div class="sidebar-container">
 
-<div class="sidebar-logo"><a href="index.html"></a></div>
+	<div class="sidebar-logo"><a href="index.html"></a></div>
+
+	<div class="sidebar-content sidebar-search">
+
+		<form action="search.html">
+			<input type="text" class="form-control" name="q" placeholder="Search Frankly docs" aria-describedby="basic-addon2">
+		</form>
+  
+	</div>
+
 
 	<div class="sidebar-content" id="side-nav-container">
 		<!--Side Bar List Goes Here-->
