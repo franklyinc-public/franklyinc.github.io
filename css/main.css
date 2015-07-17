@@ -12,6 +12,13 @@
 
 
 /*For Side Bar*/
+.sidebar-search {
+   margin: 30px;
+   background-color: #2a2e33;
+   color: #ffffff;
+   font-family: 'Roboto', sans-serif;
+}
+
 .sidebar-container {
    position: fixed;
    left: 0px;
@@ -42,6 +49,12 @@
    font-family: 'Roboto', sans-serif;
    line-height: 30px;
 }
+
+/*
+.sidebar-search {
+	width: 200px;
+}
+*/
 
 .sidebar a {
 	text-decoration: none;
