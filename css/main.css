@@ -50,12 +50,6 @@
    line-height: 30px;
 }
 
-/*
-.sidebar-search {
-	width: 200px;
-}
-*/
-
 .sidebar a {
 	text-decoration: none;
 	color: #ffffff;
@@ -72,6 +66,7 @@
 .sidebar li {
 	list-style-type: none;
 }
+
 
 /*For Responsive Header*/
 @media (min-width: 768px) {
@@ -144,7 +139,8 @@ nav.navbar {
 
 img {
 	max-width: 100%;
-        }
+}
+
 
 /*For Wells*/
 .well-bottom-nav {
@@ -156,6 +152,7 @@ img {
     font-family: 'Roboto', sans-serif;
     word-wrap: break-word;
 }
+
 
 /*For Page Buttons*/
 .pager-container {
@@ -192,5 +189,16 @@ body .fill {
   overflow: none;
 }
 
-/*For Code Snippets*/
-/*All other Code Snippet Formatting is handled by Prettify now*/
+
+/*All Code Snippet Formatting is handled by Prettify*/
+
+/*For Search Results*/
+.gsc-option-menu-container .gsc-selected-option-container {
+	width: 90%!important
+}
+
+.gsc-table-result {
+	margin-left: 8px
+}
+
+
