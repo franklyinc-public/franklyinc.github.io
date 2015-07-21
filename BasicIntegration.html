@@ -35,7 +35,7 @@
 		'<li><a href="AdvancedIntegrations.html">Advanced Integrations</a>',
 		'<li><a href="APIReference.html">API Reference</a>',
 		'<li><a href="downloads.html">Downloads</a>',
-		'<li><a href="Support.html">Support</a>',
+		'<li><a href="Support.html">Contact & Support</a>',
 	'</ul>'
 	];
 	
@@ -69,7 +69,7 @@
          <span class="icon-bar"></span>
          <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="index.html"><div class="mobile-logo"></div></a>
+      <a class="navbar-brand" href="http://franklyinc.github.io"><div class="mobile-logo"></div></a>
    </div>
    <div class="collapse navbar-collapse" id="frankly-navbar-collapse">
       <!--Nav Bar List Goes Here-->
@@ -84,7 +84,7 @@
 
 <div class="sidebar-container">
 
-	<div class="sidebar-logo"><a href="index.html"></a></div>
+	<div class="sidebar-logo"><a href="http://franklyinc.github.io"></a></div>
 
 	<div class="sidebar-content sidebar-search">
 
@@ -121,40 +121,37 @@
 <br>
 
 	<div class="doc">
-		<a id="First_Room">
+		<div class="section" id="First_Room">
 			<h3>
 				Setting Up Your First Room List
 			</h3>
-		</a>
 
-		<p>
-			<i>Important Note</i> Please make sure you've set up at least one Room in the Admin Console before proceeding. If you're unsure of how to do this or if you don't have Admin Console access, please see <i><a href="index.html">Getting Started</a></i> for next steps.
-		</p>
+			<p>
+				<i>Important Note</i> Please make sure you've set up at least one Room in the Admin Console before proceeding. If you're unsure of how to do this or if you don't have Admin Console access, please see <i><a href="http://franklyinc.github.io">Getting Started</a></i> for next steps.
+			</p>
 	
 <br>
 
-		<h4>
-			Calling the Room List via the iOS SDK
-		</h4>
-
-
+			<h4>
+				Calling the Room List via the iOS SDK
+			</h4>
 
 <br>
 
-		<p>
-			To call the Room List, retrieve the room list controller, <code>[FranklySDK roomListViewController]</code>, and present it in your app or push it on your navigation controller.
-		</p>
+			<p>
+				To call the Room List, retrieve the room list controller, <code>[FranklySDK roomListViewController]</code>, and present it in your app or push it on your navigation controller.
+			</p>
 		
 <br>
 <br>
 
-		<h4>
-			Calling the Room List via the Android SDK
-		</h4>
+			<h4>
+				Calling the Room List via the Android SDK
+			</h4>
 		
-		<p>	
-			The Frankly SDK contains a <code>RoomListActivity</code> class which contains everything needed to show the chatroom list and allow the user to join chatrooms:
-		</p>
+			<p>	
+				The Frankly SDK contains a <code>RoomListActivity</code> class which contains everything needed to show the chatroom list and allow the user to join chatrooms:
+			</p>
 
 
 <pre class="prettyprint"><code class="lang-java">
@@ -169,21 +166,20 @@ context.startActivity(intent);
 <br>
 
 	<div class="doc">
-			<a id="Set_DisplayName_Avatar">
+			<div class="section" id="Set_DisplayName_Avatar">
 				<h3>
 					Setting the Display Name & Profile Avatar
 				</h3>
-			</a>
 		
 <br>
 
-			<h4>
-				Setting User Info via the iOS SDK
-			</h4>
+				<h4>
+					Setting User Info via the iOS SDK
+				</h4>
 		
-			<p>			
-				Set the FranklySDK’s <code>profileDelegate</code> to an object that conforms to the <code>FranklySDKUserProfileDelegate</code> protocol. In our example code, we’ve made our <code>ViewController</code> also conform to this protocol:
-			</p>
+				<p>			
+					Set the FranklySDK’s <code>profileDelegate</code> to an object that conforms to the <code>FranklySDKUserProfileDelegate</code> protocol. In our example code, we’ve made our <code>ViewController</code> also conform to this protocol:
+				</p>
 
 <br>
 
@@ -211,15 +207,15 @@ context.startActivity(intent);
 			
 <br>
 
-			<p>
-				The profile delegate will get called every time the user profile image or display name changes.  Also, you can enable or disable user editing of their profile data within the FranklySDK UI by allowing your delegate respond appropriately to the <code>-(BOOL)shouldAllowProfileEditing</code> delegate request.
-			</p>
+				<p>
+					The profile delegate will get called every time the user profile image or display name changes.  Also, you can enable or disable user editing of their profile data within the FranklySDK UI by allowing your delegate respond appropriately to the <code>-(BOOL)shouldAllowProfileEditing</code> delegate request.
+				</p>
 			
 <br>
 
-			<p>
-				Setting the user's display name and avatar can be done via the calls through the FranklySDK object:
-			</p>
+				<p>
+					Setting the user's display name and avatar can be done via the calls through the FranklySDK object:
+				</p>
 
 
 <pre class="prettyprint"><code class="lang-cpp">
@@ -227,19 +223,20 @@ context.startActivity(intent);
 </code></pre>
 
 		
-			<p>	
-				When the user name and image have been updated and synced with the server the profileDelegate will get a called back that they have been changed.
-			</p>
+				<p>	
+					When the user name and image have been updated and synced with the server the profileDelegate will get a called back that they have been changed.
+				</p>
 		
 <br>
 
-			<h4>
-				Setting User Info via the Android SDK
-			</h4>
+				<h4>
+					Setting User Info via the Android SDK
+				</h4>
 		
-			<p>
-				Developers can upload new avatars for users to the Frankly servers as follows:
-
+				<p>
+					Developers can upload new avatars for users to the Frankly servers as follows:
+				</p>
+			
 
 <pre class="prettyprint"><code class="lang-java">
 final UserManager userManager = UserManager.getInstance(context);
@@ -247,9 +244,9 @@ final String userAvatarUrlString = userManager.uploadUserAvatar(context, intent)
 </code></pre>
 
 
-			<p>
-				where the Intent contains either the data URI of the Intent, or an extra called "data" which stores a Bitmap. (The Android Gallery app currently returns the data in this format in onActivityResult().) Note that simply uploading the image does not tie the image to any particular user. The returned URL string must be set on a User object and passed to UserManager for persisting as follows:
-			</p>
+				<p>
+					where the Intent contains either the data URI of the Intent, or an extra called "data" which stores a Bitmap. (The Android Gallery app currently returns the data in this format in onActivityResult().) Note that simply uploading the image does not tie the image to any particular user. The returned URL string must be set on a User object and passed to UserManager for persisting as follows:
+				</p>
 
 
 <pre class="prettyprint"><code class="lang-java">
@@ -258,9 +255,9 @@ userManager.update(user);
 </code></pre>
 
 
-			<p>
-				Similarly, to update the display name of a user, simply do the following:
-			</p>
+				<p>
+					Similarly, to update the display name of a user, simply do the following:
+				</p>
 
 
 <pre class="prettyprint"><code class="lang-java">
@@ -269,51 +266,49 @@ userManager.update(user);
 </code></pre>
 
 
-			<p>
-				<b>WARNING:</b> All UserManager calls must be done on a non-UI thread.
-			</p>
+				<p>
+					<b>WARNING:</b> All UserManager calls must be done on a non-UI thread.
+				</p>
 
 <br>
 
-			<h4>
-				Setting User Info via the JavaScript SDK
-			</h4>
+				<h4>
+					Setting User Info via the JavaScript SDK
+				</h4>
 		
-			<p>
-				<i>Coming soon!</i>
-			</p>
+				<p>
+					<i>Coming soon!</i>
+				</p>
 
 	</div>
 
-<br>
 
 	<div class="doc">
-			<a id="JS_Room_Embed">
+			<div class="section" id="JS_Room_Embed">
 				<h3>
 					Embedding a Room on Web
 				</h3>
-			</a>
 		
 <br>
 
-			<p>
-				The Frankly Web App can be embedded directly into your web app through the use of JavaScript and iframes. This service allows your users the ability to use Frankly supported chat without having to leave your web app.
-			</p>
+				<p>
+					The Frankly Web App can be embedded directly into your web app through the use of JavaScript and iframes. This service allows your users the ability to use Frankly supported chat without having to leave your web app.
+				</p>
 		
-			<p>
-				There are two steps that need to be taken in order to embed Frankly within your web app:
-			<p/>
+				<p>
+					There are two steps that need to be taken in order to embed Frankly within your web app:
+				<p/>
 			
-			<p>
-				<ul>
-					<li>Include the Frankly Widget script on the page that will contain the Frankly Web App, including a small script on the page to initialize the Frankly Web App.</li>
-					<li>Embed the Frankly Web App using the <code>&lt;iframe&gt;</code> tag.</li>
-				</ul>
-			</p>
+				<p>
+					<ul>
+						<li>Include the Frankly Widget script on the page that will contain the Frankly Web App, including a small script on the page to initialize the Frankly Web App.</li>
+						<li>Embed the Frankly Web App using the <code>&lt;iframe&gt;</code> tag.</li>
+					</ul>
+				</p>
 			
-			<p>
-				More detail on these steps below.
-			</p>
+				<p>
+					More detail on these steps below.
+				</p>
 			
 <br>
 <br>
@@ -324,15 +319,16 @@ userManager.update(user);
 <br>
 <br>
 
-			<h4>
-				1. Include Frankly Widget Script
-			</h4>
+				<h4>
+					1. Include Frankly Widget Script
+				</h4>
 			
 <br>
 
-			<p>
-				Include the following line of code in the head of your HTML:
-			</p>
+				<p>
+					Include the following line of code in the head of your HTML:
+				</p>
+
 			
 <pre class="prettyprint">
 <code class="lang-html">
@@ -353,33 +349,34 @@ userManager.update(user);
 </code></pre>
 
 <br>
-		<p>
-			This script sets the configuration for your page to host the Frankly Web App, allowing it to run within your web app.
-		</p>
-		
-		<p>
-			The call to <code>frankly.widgets.init</code> configures the web page to properly communicate with the embedded Frankly Widgets.
-		</p>
-		
-		<p>
-			The function set to <code>onAuthenticationRequest</code> will be called when the widget needs to authenticate as a user in order to render the view and enable chatting. It must return a javascript promise where the resolve callback must be called with the generated identity token.
-		</p>
 
-		<p>
-			<b>Note</b> the section of the above script that includes the <b>TODO</b> statement. This section must be replaced with code that generates an identity token using one of Frankly’s server SDKs. We strongly recommend that you generate this token on your server side, and call it from a script within this script block. Exposing your Frankly App key and secret within this code block may compromise the security of your Frankly Web App. For more information on generating an identity token using one of Frankly’s server SDKs, please consult the documentation on <a href="Auth.html#auth_flow">generating identity tokens</a>.
-		</p>
+			<p>
+				This script sets the configuration for your page to host the Frankly Web App, allowing it to run within your web app.
+			</p>
+		
+			<p>
+				The call to <code>frankly.widgets.init</code> configures the web page to properly communicate with the embedded Frankly Widgets.
+			</p>
+		
+			<p>
+				The function set to <code>onAuthenticationRequest</code> will be called when the widget needs to authenticate as a user in order to render the view and enable chatting. It must return a javascript promise where the resolve callback must be called with the generated identity token.
+			</p>
+
+			<p>
+				<b>Note</b> the section of the above script that includes the <b>TODO</b> statement. This section must be replaced with code that generates an identity token using one of Frankly’s server SDKs. We strongly recommend that you generate this token on your server side, and call it from a script within this script block. Exposing your Frankly App key and secret within this code block may compromise the security of your Frankly Web App. For more information on generating an identity token using one of Frankly’s server SDKs, please consult the documentation on <a href="Auth.html#auth_flow">generating identity tokens</a>.
+			</p>
 
 <br>
 
-		<h4>
-			2. Embed the Frankly Web App in an iframe
-		</h4>
+			<h4>
+				2. Embed the Frankly Web App in an iframe
+			</h4>
 		
 <br>
 
-	 	<p>
-			Include the following line of code in the body of your HTML, at the place that you want the Frankly Web App to appear:
-		</p>
+		 	<p>
+				Include the following line of code in the body of your HTML, at the place that you want the Frankly Web App to appear:
+			</p>
 		
 <pre class="prettyprint"><code>
 	&lt;iframe src="https://app.franklychat.com/web/{app_id}/#/{room_id}"&gt;&lt;/iframe&gt;
@@ -387,9 +384,9 @@ userManager.update(user);
 
 <br>
 
-		<p>
-			You will need to replace <code>{app_id}</code> with your app’s unique numeric ID, e.g. 123, and replace <code>{room_id}</code> with your room’s unique numeric ID, e.g. 9876. If you wish to display all room avatar tiles to your users, rather than embedding a specific room, then include the following code in your HTML:
-		</p>
+			<p>
+				You will need to replace <code>{app_id}</code> with your app’s unique numeric ID, e.g. 123, and replace <code>{room_id}</code> with your room’s unique numeric ID, e.g. 9876. If you wish to display all room avatar tiles to your users, rather than embedding a specific room, then include the following code in your HTML:
+			</p>
 		
 <pre class="prettyprint"><code class="lang=html">
 	&lt;iframe src="https://app.franklychat.com/web/{app_id}"&gt;&lt;/iframe&gt;
@@ -397,9 +394,9 @@ userManager.update(user);
 
 <br>
 
-		<p>
-			You can get your <code>app_id</code> by logging into the Frankly Admin Panel and selecting <i>Settings</i> in the left hand menu.
-		</p>
+			<p>
+				You can get your <code>app_id</code> by logging into the Frankly Admin Panel and selecting <i>Settings</i> in the left hand menu.
+			</p>
 		
 <br>
 <br>
@@ -413,9 +410,9 @@ userManager.update(user);
 <br>
 <br>
 
-		<p>
-			Scroll down the page until you reach the <i>Web App Settings</i> panel. It is here that you can find your Web App ID, as the suffix of your App URL:
-		</p>
+			<p>
+				Scroll down the page until you reach the <i>Web App Settings</i> panel. It is here that you can find your Web App ID, as the suffix of your App URL:
+			</p>
 
 <br>
 <br>
@@ -426,129 +423,129 @@ userManager.update(user);
 			</figure>
 
 <br>
-<br>
-<br>
-		
+		</div>
 	</div>
 
 	<div class="doc">
-			<a id="Guest_Mode">
+			<div class="section" id="Guest_Mode">
 				<h3>
 					Enabling Guest Mode Access
 				</h3>
-			</a>
 		
 <br>
 
-			<p>
-				<i>Coming soon!</i>
-			</p>
-				
+				<p>
+					<i>Coming soon!</i>
+				</p>
+
+			</div>
 	</div>
 	
+	
 	<div class="doc">
-			<a id="UI_Customization">
+			<div class="section" id="UI_Customization">
 				<h3>
 					Customizing UI in the SDK
 				</h3>
-			</a>
-			
-			<p>
-				This section will describe how the Frankly SDKs allow you to customize various components of the provided UI.
-			</p>
-			
-<br>
 
-			<h4>
-				<b>Customizing the iOS SDK</b>
-			</h4>
+				<p>
+					This section will describe how the Frankly SDKs allow you to customize various components of the provided UI.
+				</p>
+			</div>
 			
-			<p>
-				FranklySDK on iOS allows partners to set values that affect FranklySDK's interface within the partner app. This data is passed in via a standard plist file.  An example data file, FRSDKExampleConfig.plist, is included FranklySDK package.
-			</p>
 			
-			<p>
-				Partners may modify that file, or create a new one and then, any time after <code>initializeSDKWithServerType:</code> has been called,add the file to FranklySDK via the <code>function addCustomizationFile:(NSURL *)fileURL</code>. Multiple files may be added via this call, any collisions with existing keys will cause the existing value to be overwritten by the new value.
-			</p>
+			<div class="section" id="Customizing_iOS">
+				<h4>
+					<b>Customizing the iOS SDK</b>
+				</h4>
+			
+				<p>
+					FranklySDK on iOS allows partners to set values that affect FranklySDK's interface within the partner app. This data is passed in via a standard plist file.  An example data file, FRSDKExampleConfig.plist, is included FranklySDK package.
+				</p>
+			
+				<p>
+					Partners may modify that file, or create a new one and then, any time after <code>initializeSDKWithServerType:</code> has been called,add the file to FranklySDK via the <code>function addCustomizationFile:(NSURL *)fileURL</code>. Multiple files may be added via this call, any collisions with existing keys will cause the existing value to be overwritten by the new value.
+				</p>
 			
 <br>			
 			
-			<h5>
-				<b>Customization Plist</b>
-			</h5>
+				<h5>
+					<b>Customization Plist</b>
+				</h5>
 			
-			<p>
-				This is a standard Apple plist file which means it’s an XML file with a single object named Root.  FranklySDK expects this Root object to be a dictionary of dictionaries.  Each dictionary represents a customization category that is populated with key value pairs.
-			</p>
+				<p>
+					This is a standard Apple plist file which means it’s an XML file with a single object named Root.  FranklySDK expects this Root object to be a dictionary of dictionaries.  Each dictionary represents a customization category that is populated with key value pairs.
+				</p>
 
 <br>			
 
-			<h5>
-				<b>Data Types</b>
-			</h5>
+				<h5>
+					<b>Data Types</b>
+				</h5>
 			
-			<p>
-				The base values stored in the dictionaries in the customization file will be of the following types:
-			</p>
+				<p>
+					The base values stored in the dictionaries in the customization file will be of the following types:
+				</p>
 			
-				<ul>
-					<li><b>Data Types</b> This is a string that follows a standard hex string format with alpha.  It maybe be preceded by ‘0x’ or ‘#’ but the last 8 characters should represent the hex values  in red, green, blue, alpha order.  So the color white with full opacity would be represented as 0xFFFFFFFF and black, haf opacity would be represented as 0x0000007F.</li>
-				</ul>
-				
-<br>
-
-			<h5>
-				<b>Customization Categories</b>
-			</h5>
-			
-				<ul>
-					<li><b>ui</b></li>
 					<ul>
-						<li>the ui key contains a dictionary of key value pairs with the following keys:</li>
+						<li><b>Data Types</b> This is a string that follows a standard hex string format with alpha.  It maybe be preceded by ‘0x’ or ‘#’ but the last 8 characters should represent the hex values  in red, green, blue, alpha order.  So the color white with full opacity would be represented as 0xFFFFFFFF and black, haf opacity would be represented as 0x0000007F.</li>
 					</ul>
-				</ul>
-
-<br>
-
-	<div class="panel panel-default">
-		  <table class="table">
-		    <tr>
-				<td><b>Color Key</b></td>
-				<td><b>Use Case</b></td>
-			</tr>
-			<tr>
-				<td><code>primary-fg-color</code></td>
-				<td>Takes a color value and is used throughout the app as primary foreground color.</td>
-			</tr>
-			<tr>
-				<td><code>primary-bg-color</code></td>
-				<td>Takes a color value and is used throughout the app as the primary background color.</td>
-			</tr>
-			<tr>
-				<td><code>accent-bg-color</code></td>
-				<td>Takes a color value and is used throughout the app as an accent color. Most noticeably as the background of the locked Input Bar.</td>
-			</tr>
-			<tr>
-				<td><code>brand-bg-color</code></td>
-				<td>Takes a color value. Is used as the background for Sticky Messages when they are docked at the top of a Room.</td>
-			</tr>
-			<tr>
-				<td><code>attention-bg-color</code></td>
-				<td>Takes a color value. Is used in the custom activity indicators.</td>
-			</tr>
-		  </table>
-	</div>
 				
-<br>		
 <br>
 
-			<h4>
-				<b>Customizing the Android SDK</b>
-			</h4>
+				<h5>
+					<b>Customization Categories</b>
+				</h5>
 			
-			<p>
-				To assist with allowing apps to provide their own basic customizations to existing Frankly SDK Views, Activities, and Fragments, you can override the default styles in XML style files:
-			</p>
+					<ul>
+						<li><b>ui</b></li>
+						<ul>
+							<li>the ui key contains a dictionary of key value pairs with the following keys:</li>
+						</ul>
+					</ul>
+
+<br>
+
+				<div class="panel panel-default">
+					  <table class="table">
+					    <tr>
+							<td><b>Color Key</b></td>
+							<td><b>Use Case</b></td>
+						</tr>
+						<tr>
+							<td><code>primary-fg-color</code></td>
+							<td>Takes a color value and is used throughout the app as primary foreground color.</td>
+						</tr>
+						<tr>
+							<td><code>primary-bg-color</code></td>
+							<td>Takes a color value and is used throughout the app as the primary background color.</td>
+						</tr>
+						<tr>
+							<td><code>accent-bg-color</code></td>
+							<td>Takes a color value and is used throughout the app as an accent color. Most noticeably as the background of the locked Input Bar.</td>
+						</tr>
+						<tr>
+							<td><code>brand-bg-color</code></td>
+							<td>Takes a color value. Is used as the background for Sticky Messages when they are docked at the top of a Room.</td>
+						</tr>
+						<tr>
+							<td><code>attention-bg-color</code></td>
+							<td>Takes a color value. Is used in the custom activity indicators.</td>
+						</tr>
+					  </table>
+				</div>
+
+			</div>
+
+
+			<div class="section" id="Customizing_Android">
+				<h4>
+					<b>Customizing the Android SDK</b>
+				</h4>
+			
+				<p>
+					To assist with allowing apps to provide their own basic customizations to existing Frankly SDK Views, Activities, and Fragments, you can override the default styles in XML style files:
+				</p>
 			
 <pre class="prettyprint"><code class="lang-xml">
 &lt;?xml version="1.0" encoding="utf-8"?&gt;
@@ -567,42 +564,44 @@ userManager.update(user);
 <br>
 
 
-	<div class="panel panel-default">
-		  <table class="table">
-		    <tr>
-				<td><b>Color Key</b></td>
-				<td><b>Use Case</b></td>
-			</tr>
-			<tr>
-				<td><code>frankly_sdk_primary_background</code></td>
-				<td>Activity actionbar background</td>
-			</tr>
-			<tr>
-				<td><code>frankly_sdk_primary_foreground</code></td>
-				<td>Activity actionbar foreground</td>
-			</tr>
-			<tr>
-				<td><code>frankly_sdk_accent_background</code></td>
-				<td>Indicating a primed state such as send button active state, toggle checked, subscribed room, locked bar background for input message bar</td>
-			</tr>
-			<tr>
-				<td><code>frankly_sdk_accent_foreground</code></td>
-				<td>Foreground items color where the background has <code>frankly_sdk_accent_background</code> color such as locked bar forground items</td>
-			</tr>
-			<tr>
-				<td><code>frankly_sdk_brand_background</code></td>
-				<td>Denoting who and what explicitly belongs to the brand such as sticky messages cell background</td>
-			</tr>
-			<tr>
-				<td><code>frankly_sdk_brand_foreground</code></td>
-				<td>Foreground items color where the background has <code>frankly_sdk_brand_background</code> color such as sticky messages foreground items</td>
-			</tr>
-			<tr>
-				<td><code>frankly_sdk_attention</code>
-				<td>Indicating an attention to user such as new sticker pack indicator and activity indicator base color</td>
-			</tr>
-		  </table>
-	</div>
+				<div class="panel panel-default">
+					  <table class="table">
+					    <tr>
+							<td><b>Color Key</b></td>
+							<td><b>Use Case</b></td>
+						</tr>
+						<tr>
+							<td><code>frankly_sdk_primary_background</code></td>
+							<td>Activity actionbar background</td>
+						</tr>
+						<tr>
+							<td><code>frankly_sdk_primary_foreground</code></td>
+							<td>Activity actionbar foreground</td>
+						</tr>
+						<tr>
+							<td><code>frankly_sdk_accent_background</code></td>
+							<td>Indicating a primed state such as send button active state, toggle checked, subscribed room, locked bar background for input message bar</td>
+						</tr>
+						<tr>
+							<td><code>frankly_sdk_accent_foreground</code></td>
+							<td>Foreground items color where the background has <code>frankly_sdk_accent_background</code> color such as locked bar forground items</td>
+						</tr>
+						<tr>
+							<td><code>frankly_sdk_brand_background</code></td>
+							<td>Denoting who and what explicitly belongs to the brand such as sticky messages cell background</td>
+						</tr>
+						<tr>
+							<td><code>frankly_sdk_brand_foreground</code></td>
+							<td>Foreground items color where the background has <code>frankly_sdk_brand_background</code> color such as sticky messages foreground items</td>
+						</tr>
+						<tr>
+							<td><code>frankly_sdk_attention</code>
+							<td>Indicating an attention to user such as new sticker pack indicator and activity indicator base color</td>
+						</tr>
+					  </table>
+				</div>
+			
+			</div>
 			
 	</div>
 

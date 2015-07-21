@@ -36,7 +36,7 @@
 		'<li><a href="AdvancedIntegrations.html">Advanced Integrations</a>',
 		'<li><a href="APIReference.html">API Reference</a>',
 		'<li><a href="downloads.html">Downloads</a>',
-		'<li><a href="Support.html">Support</a>',
+		'<li><a href="Support.html">Contact & Support</a>',
 	'</ul>'
 	];
 	
@@ -70,7 +70,7 @@
          <span class="icon-bar"></span>
          <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="index.html"><div class="mobile-logo"></div></a>
+      <a class="navbar-brand" href="http://franklyinc.github.io"><div class="mobile-logo"></div></a>
    </div>
    <div class="collapse navbar-collapse" id="frankly-navbar-collapse">
       <!--Nav Bar List Goes Here-->
@@ -85,7 +85,7 @@
 
 <div class="sidebar-container">
 
-	<div class="sidebar-logo"><a href="index.html"></a></div>
+	<div class="sidebar-logo"><a href="http://franklyinc.github.io"></a></div>
 
 	<div class="sidebar-content sidebar-search">
 
@@ -119,7 +119,7 @@
 						<li><a href="#ios_auth">iOS SDK</a></li>
 						<li><a href="#android_auth">Android SDK</a></li>
 						<li><a href="#js_auth">JavaScript SDK</a></li>
-						<li><a href="webclient_auth">Web App</a></li>
+						<li><a href="#webclient_auth">Web App</a></li>
 					</ul>
 				<li><a href="#security">A Note on Security</a></li>
 			</ul>
@@ -131,58 +131,48 @@
 
 	<div class="doc">
 
-			<a id="overview">
+			<div class="section" id="overview">
 				<h3>
 					Overview
 				</h3>
-			</a>
 	
-			<p>
-				This document describes how the Frankly Authentication works and what components Frankly partners must build in order to support authentication of their users on Frankly’s platform.
-			</p>
+				<p>
+					This document describes how the Frankly Authentication works and what components Frankly partners must build in order to support authentication of their users on Frankly’s platform.
+				</p>
+			</div>
+			
 
-
-<br>
-<br>
-
-
-			<a id="jwt">
+			<div class="section" id="jwt">
 				<h3>
 					JWT
 				</h3>
-			</a>
 
-			<p>
-				Frankly Authentication mechanism is based on JWT (JSON Web Token), a web standard for sharing user authentication in a secure way. JWT libraries are provided for all popular programming languages and are referenced at <a href="http://jwt.io/">jwt.io</a>. The full JWT specifications can be found <a href="https://openid.net/specs/draft-jones-json-web-token-07.html">here</a>, the reader should consult and become familiar with how JWT works prior to continuing with this document.
-			</p>
-
-
-<br>
-<br>
+				<p>
+					Frankly Authentication mechanism is based on JWT (JSON Web Token), a web standard for sharing user authentication in a secure way. JWT libraries are provided for all popular programming languages and are referenced at <a href="http://jwt.io/">jwt.io</a>. The full JWT specifications can be found <a href="https://openid.net/specs/draft-jones-json-web-token-07.html">here</a>, the reader should consult and become familiar with how JWT works prior to continuing with this document.
+				</p>
+			</div>
 
 
-			<a id="auth_flow">
+			<div class="section" id="auth_flow">
 				<h3>
 					Server Authentication Flow
 				</h3>
-			</a>
 
 					<h4>
-						1. Generate a Nonce Value
-	
+						1. Generate a Nonce Value	
 					</h4>
 
-			<p>
-				JSON Web Tokens embed a unique value called nonce which is used to protect against man-in-the-middle attacks by adding a random component to the token in order to make it impossible to predict a valid token.
-			</p>
+					<p>
+						JSON Web Tokens embed a unique value called nonce which is used to protect against man-in-the-middle attacks by adding a random component to the token in order to make it impossible to predict a valid token.
+					</p>
 
-			<p>
-				Frankly’s infrastructure provides a public HTTP endpoint that must be queried to generate a nonce value as a first step of the authentication flow. The response contains the nonce value represented as a JSON string which can be used for only one authentication attempt.
-			</p>
+					<p>
+						Frankly’s infrastructure provides a public HTTP endpoint that must be queried to generate a nonce value as a first step of the authentication flow. The response contains the nonce value represented as a JSON string which can be used for only one authentication attempt.
+					</p>
 
-			<p>
-				Example: GET request to https://app.franklychat.com/auth/nonce to get a nonce value.
-			</p>
+					<p>
+						Example: GET request to https://app.franklychat.com/auth/nonce to get a nonce value.
+					</p>
 
 
 <pre class="prettyprint"><code>
@@ -196,17 +186,17 @@
 <br>
 
 
-			<h4>
-				2. Generate an Identity Token
-			</h4>
+					<h4>
+						2. Generate an Identity Token
+					</h4>
 
-			<p>
-				After getting a nonce value from Frankly’s infrastructure, the partner app has to generate an identity token that embeds user’s information and is signed using the secret key that can be found in the <a href="https://console.franklychat.com/">Frankly Console</a>.
-			</p>
+					<p>
+						After getting a nonce value from Frankly’s infrastructure, the partner app has to generate an identity token that embeds user’s information and is signed using the secret key that can be found in the <a href="https://console.franklychat.com/">Frankly Console</a>.
+					</p>
 
-			<p>
-				The JWT token must have the following structure:
-			</p>
+					<p>
+						The JWT token must have the following structure:
+					</p>
 
 
 <pre class="prettyprint"><code>
@@ -240,9 +230,9 @@
 
 <br>
 
-			<p>
-				Once encoded and signed with the authentication secret the app should have a value that looks like this:
-			</p>
+					<p>
+						Once encoded and signed with the authentication secret the app should have a value that looks like this:
+					</p>
 
 <br>
 
@@ -258,13 +248,13 @@ eyJ0eXAiOiJKV1MiLCJhbGciOiJIUzI1NiIsImN0eSI6ImZyYW5rbHktaXQ7djEifQ.eyJhYWsiOiIwM
 <br>
 <br>
 
-			<h4>
-				3. Generate a Session Token
-			</h4>
+					<h4>
+						3. Generate a Session Token
+					</h4>
 
-			<p>
-				After generating an identity token the app can then request a session token to be able to use Frankly’s API. Obtaining a session token can be done by querying https://app.franklychat.com/auth and setting the identity_token query string parameter to the value generated in step 2. This session token will come in the response as two cookies (token and xsrf) that the HTTP client should set whenever it attempts to use any of the Frankly API endpoints. Example: GET request on <a href="https://app.franklychat.com/auth">https://app.franklychat.com/auth</a>
-			</p>
+					<p>
+						After generating an identity token the app can then request a session token to be able to use Frankly’s API. Obtaining a session token can be done by querying https://app.franklychat.com/auth and setting the identity_token query string parameter to the value generated in step 2. This session token will come in the response as two cookies (token and xsrf) that the HTTP client should set whenever it attempts to use any of the Frankly API endpoints. Example: GET request on <a href="https://app.franklychat.com/auth">https://app.franklychat.com/auth</a>
+					</p>
 
 
 <pre class="prettyprint"><code>
@@ -284,24 +274,22 @@ eyJ0eXAiOiJKV1MiLCJhbGciOiJIUzI1NiIsImN0eSI6ImZyYW5rbHktaXQ7djEifQ.eyJhYWsiOiIwM
 <br>
 <br>
 
-		<a id="client_auth">
+		<div class="section" id="client_auth">
 			<h3>
 				Handling Authentication in the Client
 			</h3>
-		</a>
-	
-		<p>
-			Now that your server knows how to communicate with Frankly servers as an authenticated application, let's make sure you're client is able to get the right information to interact with the Frankly SDK. 
-		</p>
 
-<br>
-<br>
 	
-		<a id="ios_auth">
+			<p>
+				Now that your server knows how to communicate with Frankly servers as an authenticated application, let's make sure you're client is able to get the right information to interact with the Frankly SDK. 
+			</p>
+		</div>
+
+	
+		<div class="section" id="ios_auth">
 			<h4>
 				Authenticating the iOS SDK
 			</h4>
-		</a>
 	
 			<p>
 				Set the FranklySDK’s <code>authenticationDelegate</code> to an object that conforms to the <code>FranklySDKAuthenticationDelegate</code> protocol.
@@ -424,14 +412,14 @@ eyJ0eXAiOiJKV1MiLCJhbGciOiJIUzI1NiIsImN0eSI6ImZyYW5rbHktaXQ7djEifQ.eyJhYWsiOiIwM
 					If your delegate receives the <code>doUserAuthentication</code> callback then you should present a log in or sign up screen. When the user has completed logging in, you should call restart the authentication process by calling <code>initiateAuthentication</code> again. 
 				</p>
 
-<br>
-<br>
+		</div>
+		
+		
+		<div class="section" id="android_auth">
+			<h4>
+				Authenticating the Android SDK
+			</h4>
 
-			<a id="android_auth">
-				<h4>
-					Authenticating the Android SDK
-				</h4>
-			</a>
 	
 			<p>	
 				Partners must implement an <code>OnAuthenticationRequestListener</code> class to handle user authentication:
@@ -470,15 +458,13 @@ final Authenticator authenticator = Authenticator.getInstance(context);
 authenticator.setOnAuthenticationRequestListener(yourOnAuthenticationRequestListener);
 </code></pre>
 
+		</div>
 
-<br>
-<br>
 
-			<a id="js_auth">
-				<h4>
-					Authenticating the JavaScript SDK
-				</h4>
-			</a>
+		<div class="section" id="js_auth">
+			<h4>
+				Authenticating the JavaScript SDK
+			</h4>
 		
 			<p>
 				Here's how to perform authentication from a Node.js:
@@ -532,77 +518,76 @@ var client = new frankly.FranklyClient
 			<p>
 				The client instance automatically performs reconnection and reauthentication when necessary so the method passed to <a href="http://franklyinc.github.io/frankly-js/FranklyClient.html#open" target="_blank">FranklyClient#open</a> may be called multiple times.
 			</p>
-	
-<br>
-<br>
+		
+		</div>
+		
 
-		<a id="webclient_auth">
+		<div class="section" id="webclient_auth">
 			<h3>
 				Authenticating with the Web Client
 			</h3>
-		</a>
 		
-		<p>
-			The Frankly Web App supports authenticated users by providing a way to customize the login process. You can allow your users to log in using your custom interface by setting both the “Login URL” and the “Logout URL” in the <a href="https://console.franklychat.com/">Frankly Admin Console</a> > Settings > Web App.
-		</p>
+			<p>
+				The Frankly Web App supports authenticated users by providing a way to customize the login process. You can allow your users to log in using your custom interface by setting both the “Login URL” and the “Logout URL” in the <a href="https://console.franklychat.com/">Frankly Admin Console</a> > Settings > Web App.
+			</p>
 		
 <br>
 		
-		<h4>
-			Login vs Logout URL
-		</h4>
+			<h4>
+				Login vs Logout URL
+			</h4>
 		
-		<ul>
-			<li>The “Login URL” is a page of your design that users will either enter their credentials for your system, or enter Guest Mode credentials, in order to be authenticated by your system. This page is shown to your users within the app, as described below.</li>
-			<li>The “Logout URL” is the page where users are redirected to when they choose to log out of the system. This page is typically used to log the user out of your entire system, not just the Frankly Web App. An example of this behavior is given below.</li>
-		</ul>
+			<ul>
+				<li>The “Login URL” is a page of your design that users will either enter their credentials for your system, or enter Guest Mode credentials, in order to be authenticated by your system. This page is shown to your users within the app, as described below.</li>
+				<li>The “Logout URL” is the page where users are redirected to when they choose to log out of the system. This page is typically used to log the user out of your entire system, not just the Frankly Web App. An example of this behavior is given below.</li>
+			</ul>
 	
 <br>	
 		
-		<p>
-			In order to take advantage of this feature, your backend must follow the following directions.
-		</p>
+			<p>
+				In order to take advantage of this feature, your backend must follow the following directions.
+			</p>
 		
 <br>
 		
-		<h4>
-			1. Prepare Your Backend
-		</h4>
+			<h4>
+				1. Prepare Your Backend
+			</h4>
 	
-		<p>
-			If a “Login URL” is provided in the Admin Console, the user is shown this webpage (inside of an &lt;iframe&gt;) on top of the Frankly Web App when they select “LOG IN”.
-		</p>
+			<p>
+				If a “Login URL” is provided in the Admin Console, the user is shown this webpage (inside of an &lt;iframe&gt;) on top of the Frankly Web App when they select “LOG IN”.
+			</p>
 		
 <br>
 	
-		<figure>
-				<img src="images/webapp_auth_1.png" border="1" width="748px">
-				<figcaption><i>Figure 1: Frankly Web App Admin Console</i></figcaption>
-		</figure>
+			<figure>
+					<img src="images/webapp_auth_1.png" border="1" width="748px">
+					<figcaption><i>Figure 1: Frankly Web App Admin Console</i></figcaption>
+			</figure>
 			
 <br>
 
-		<figure>
-				<img src="images/webapp_auth_2.png" border="1" width="300px">
-				<figcaption><i>Figure 2: Example external login screen within Frankly Web App</i></figcaption>
-		</figure>
+			<figure>
+					<img src="images/webapp_auth_2.png" border="1" width="300px">
+					<figcaption><i>Figure 2: Example external login screen within Frankly Web App</i></figcaption>
+			</figure>
 
 <br>
 
-		<p>
-			Please note the following requirements when creating your login screen for the Web App:
-		</p>
+			<p>
+				Please note the following requirements when creating your login screen for the Web App:
+			</p>
 		
-		<ul>
-			<li>The &lt;iframe&gt; that holds the external login screen sits within a 335px × 550px container, and external login screens must render correctly within this space.</li>
-			<li>The external login screen must be served over a secure protocol (that is, using HTTPS) for security purposes. Pages served over plain HTTP will not be able to authenticate with the Web App.</li>
-		</ul>
+			<ul>
+				<li>The &lt;iframe&gt; that holds the external login screen sits within a 335px × 550px container, and external login screens must render correctly within this space.</li>
+				<li>The external login screen must be served over a secure protocol (that is, using HTTPS) for security purposes. Pages served over plain HTTP will not be able to authenticate with the Web App.</li>
+			</ul>
 		
 <br>
 		
-		<p>
-			The Frankly Web App appends <code>nonce</code> and <code>redirect_uri</code> query string parameters suffixed to the end of the “Login URL” within the &lt;iframe&gt; displayed to the user. The &lt;iframe&gt; will display the URL in the form of:
-		</p>
+			<p>
+				The Frankly Web App appends <code>nonce</code> and <code>redirect_uri</code> query string parameters suffixed to the end of the “Login URL” within the &lt;iframe&gt; displayed to the user. The &lt;iframe&gt; will display the URL in the form of:
+			</p>
 		
 <pre class="prettyprint"><code>
 {your_login_url}/?nonce={nonce_value}&redirect_uri=https://app.franklychat.com/auth/redirect
@@ -610,95 +595,95 @@ var client = new frankly.FranklyClient
 
 <br>
 
-		<p>
-			The nonce value is used to generate an identity token for the user’s session, which ensures that the generated identity token is only valid for one-time identity validation. The <code>redirect_uri</code> is a string for the Frankly Server endpoint which accepts the identity token. These details are described in further detail below.
-		</p>
+			<p>
+				The nonce value is used to generate an identity token for the user’s session, which ensures that the generated identity token is only valid for one-time identity validation. The <code>redirect_uri</code> is a string for the Frankly Server endpoint which accepts the identity token. These details are described in further detail below.
+			</p>
 		
-		<p>
-			It is important that the page located at the  “Login URL” does not return  “X-Frame-Options” in its response header.  X-Frame-Options are used to specify whether or not a web page can be rendered within an iframe of another web page. You can read more about X-Frame-Options and how they are configured <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/X-Frame-Options">here</a>. As the “ALLOW-FROM” option is not supported across browsers, we ask that you do not return “X-Frame-Options” in your headers at all. 
-		</p>
-		
-<br>
-		
-		<h4>
-			2. Authenticate Your Users
-		</h4>
-		
-		<p>
-			On your login page accessible via the “Login URL”, you need to allow users to sign in as “authenticated users” or “guest users” by either collecting their credentials or checking the status of their current session. An example user story is outlined below.
-		</p>
+			<p>
+				It is important that the page located at the  “Login URL” does not return  “X-Frame-Options” in its response header.  X-Frame-Options are used to specify whether or not a web page can be rendered within an iframe of another web page. You can read more about X-Frame-Options and how they are configured <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/X-Frame-Options">here</a>. As the “ALLOW-FROM” option is not supported across browsers, we ask that you do not return “X-Frame-Options” in your headers at all. 
+			</p>
 		
 <br>
-
-		<h5>
-			<b>User Story - Step 1</b>
-		</h5>
 		
-		<p>
-			A user reaches the login screen by selecting the “LOG IN” button or the locked status bar at the bottom of the Web App.
-		</p>
+			<h4>
+				2. Authenticate Your Users
+			</h4>
+		
+			<p>
+				On your login page accessible via the “Login URL”, you need to allow users to sign in as “authenticated users” or “guest users” by either collecting their credentials or checking the status of their current session. An example user story is outlined below.
+			</p>
 		
 <br>
 
-		<figure>
-			<img src="images/webapp_auth_3.png" border="1" width="500px">
-			<figcaption><i>Figure 3: Login points from Frankly Web App</i></figcaption>
-		</figure>
+			<h5>
+				<b>User Story - Step 1</b>
+			</h5>
+		
+			<p>
+				A user reaches the login screen by selecting the “LOG IN” button or the locked status bar at the bottom of the Web App.
+			</p>
 		
 <br>
 
-		<h5>
-			<b>User Story - Step 2</b>
-		</h5>
-		
-		<p>
-			The user is shown your login screen, as outlined in Section 1. This can either be a custom credential capturing screen (as seen in Figure 4) or b) a splash screen while the system authenticates from the user’s current session with other parts of your online ecosystem (as seen in Figure 5).
-		</p>
-		
-		<figure>
-			<img src="images/webapp_auth_2.png" border="1" width="300 px">
-			<figcaption><i>Figure 4: a) Custom Authentication Screen</i></figcaption>
-		</figure>
+			<figure>
+				<img src="images/webapp_auth_3.png" border="1" width="500px">
+				<figcaption><i>Figure 3: Login points from Frankly Web App</i></figcaption>
+			</figure>
 		
 <br>
 
-		<figure>
-			<img src="images/webapp_auth_4.png" border="1" width="300px">
-			<figcaption><i>Figure 5: b) Sample screen to display while system authenticates</i></figcaption>
-		</figure>
+			<h5>
+				<b>User Story - Step 2</b>
+			</h5>
+		
+			<p>
+				The user is shown your login screen, as outlined in Section 1. This can either be a custom credential capturing screen (as seen in Figure 4) or b) a splash screen while the system authenticates from the user’s current session with other parts of your online ecosystem (as seen in Figure 5).
+			</p>
+		
+			<figure>
+				<img src="images/webapp_auth_2.png" border="1" width="300 px">
+				<figcaption><i>Figure 4: a) Custom Authentication Screen</i></figcaption>
+			</figure>
+		
+<br>
+
+			<figure>
+				<img src="images/webapp_auth_4.png" border="1" width="300px">
+				<figcaption><i>Figure 5: b) Sample screen to display while system authenticates</i></figcaption>
+			</figure>
 
 <br>
 <br>
 
-		<h5>
-			<b>User Story - Step 3</b>
-		</h5>
+			<h5>
+				<b>User Story - Step 3</b>
+			</h5>
 		
-		<p>
-			Your system captures the user’s credentials or session information, and makes a decision about whether they need to be authenticated or not. Once this has been completed, your system must confirm authentication to the Frankly Web App and redirect the page to the provided <code>redirect_uri</code>, as described in Section 3.
-		</p>
+			<p>
+				Your system captures the user’s credentials or session information, and makes a decision about whether they need to be authenticated or not. Once this has been completed, your system must confirm authentication to the Frankly Web App and redirect the page to the provided <code>redirect_uri</code>, as described in Section 3.
+			</p>
 		
 <br>
 
-		<h4>
-			3. Confirm Authentication with Frankly
-		</h4>
+			<h4>
+				3. Confirm Authentication with Frankly
+			</h4>
 		
-		<p>
-			Once a user is authenticated on your backend, generate an identity token for the user using the “nonce” provided in Section 1.
-		</p>
+			<p>
+				Once a user is authenticated on your backend, generate an identity token for the user using the “nonce” provided in Section 1.
+			</p>
 		
-		<p>
-			The identity tokens used by the Frankly Web App are in the JSON Web Token (JWT) format. JWT is a compact URL-safe means of representing claims to be transferred between two parties. See <a href="#identity_token">above</a> for an example of an identity token. For more information, please see the <a href="#jwt">JWT section above</a>.
-		</p>
+			<p>
+				The identity tokens used by the Frankly Web App are in the JSON Web Token (JWT) format. JWT is a compact URL-safe means of representing claims to be transferred between two parties. See <a href="#identity_token">above</a> for an example of an identity token. For more information, please see the <a href="#jwt">JWT section above</a>.
+			</p>
 		
-		<p>
-			Once an identity token is generated, redirect the current request to the <code>redirect_uri</code> along with the generated identity token as part of the query string with field name <code>identity_token</code>.
-		</p>
+			<p>
+				Once an identity token is generated, redirect the current request to the <code>redirect_uri</code> along with the generated identity token as part of the query string with field name <code>identity_token</code>.
+			</p>
 		
-		<p>
-			You can redirect a page by getting the web server to set the HTTP Location header (read more about HTTP Location setting <a href="https://en.wikipedia.org/wiki/HTTP_location">here</a>). We recommend using the HTTP status code 302 for this redirect within the header. For example, if the <code>redicrect_uri</code> that is provided is “https://app.franklychat.com/auth/redirect” then an example server response would look something like:
-		</p>
+			<p>
+				You can redirect a page by getting the web server to set the HTTP Location header (read more about HTTP Location setting <a href="https://en.wikipedia.org/wiki/HTTP_location">here</a>). We recommend using the HTTP status code 302 for this redirect within the header. For example, if the <code>redicrect_uri</code> that is provided is “https://app.franklychat.com/auth/redirect” then an example server response would look something like:
+			</p>
 		
 <pre class="prettyprint"><code>
 HTTP/1.1 302 Found
@@ -707,28 +692,27 @@ Location: https://app.franklychat.com/auth/redirect?identity_token={user’s_ide
 		
 <br>
 
-		<p>
-			Be sure to append the identity token to the end of the <code>redirect_uri</code>, as demonstrated in the example above.
-		</p>
+			<p>
+				Be sure to append the identity token to the end of the <code>redirect_uri</code>, as demonstrated in the example above.
+			</p>
 		
-		<p>
-			Note that setting the Location header of a HTTP request is a secured mechanism, as JavaScript does not have access to the redirection and thus has no way of accessing the identity token.
-		</p>
+			<p>
+				Note that setting the Location header of a HTTP request is a secured mechanism, as JavaScript does not have access to the redirection and thus has no way of accessing the identity token.
+			</p>
 		
-<br>
-<br>
+		</div>
 
 
-		<a id="security">
+		<div class="section" id="security">
 			<h3>
 				A Note on Security
 			</h3>
-		</a>
+
 	
-		<p>
-			In all cases, your application's <code>appKey</code> and <code>appSecret</code> should NOT be stored on the client and your application's backend servers should be responsible for generating identity tokens, using the <code>appSecret</code> to return it to the client to successfully authenticate. Storing your application's <code>appKey</code> and <code>appSecret</code> exposes you to unnecessary security risks where an attacker could obtain these values to communicate with Frankly services on your behalf. Please note that some examples do highlight the ability to directly authenticate with Frankly services from your application's client, however these are also noted as examples meant for checking progress of early integration steps.
-		</p>
-	
+			<p>
+				In all cases, your application's <code>appKey</code> and <code>appSecret</code> should NOT be stored on the client and your application's backend servers should be responsible for generating identity tokens, using the <code>appSecret</code> to return it to the client to successfully authenticate. Storing your application's <code>appKey</code> and <code>appSecret</code> exposes you to unnecessary security risks where an attacker could obtain these values to communicate with Frankly services on your behalf. Please note that some examples do highlight the ability to directly authenticate with Frankly services from your application's client, however these are also noted as examples meant for checking progress of early integration steps.
+			</p>
+		</div>
 
 
 <br>

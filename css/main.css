@@ -89,6 +89,10 @@
 		transition: all 0.5s;
 		max-width: calc(100% - 315px);
 	}
+	
+	.container.container-body a {
+		color: #fd3c1c;
+	}
 }
 
 @media (max-width: 767px) {
@@ -105,6 +109,10 @@
 		margin-top:0px;
 		transition: all 0.5s;
 	}
+	
+	.container.container-body a {
+		color: #fd3c1c;
+	}
 }
 
 nav.navbar {
@@ -119,6 +127,11 @@ nav.navbar {
 	height: 40px;
 }
 
+/*For Jumbotron*/
+a.btn.btn-primary.btn-lg{
+	background-color: #4891f0;
+	border-color: #0068ff;
+}
 
 /*For Index Body*/
 .doc {
@@ -131,6 +144,7 @@ nav.navbar {
 
 .doc a {
 	text-decoration: none;
+	color: #fd3c1c;
 }
 
 .doc h {
@@ -139,6 +153,11 @@ nav.navbar {
 
 img {
 	max-width: 100%;
+}
+
+.section {
+	padding-top: 20px;
+	padding-bottom: 20px;
 }
 
 
@@ -199,6 +218,17 @@ body .fill {
 
 .gsc-table-result {
 	margin-left: 8px
+}
+
+/*For Email Signup Form*/
+.mc-field-group.input-group.email-signup input{
+	border-radius: 4px;
+}
+
+input.btn.btn-default {
+	color: #fff;
+	background-color: #4891f0;
+	border-color: #0068ff;	
 }
 
 
