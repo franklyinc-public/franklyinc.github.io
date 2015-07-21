@@ -33,7 +33,7 @@
 		'<li><a href="AdvancedIntegrations.html">Advanced Integrations</a>',
 		'<li><a href="APIReference.html">API Reference</a>',
 		'<li><a href="downloads.html">Downloads</a>',
-		'<li><a href="Support.html">Support</a>',
+		'<li><a href="Support.html">Contact & Support</a>',
 	'</ul>'
 	];
 	
@@ -67,7 +67,7 @@
          <span class="icon-bar"></span>
          <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="index.html"><div class="mobile-logo"></div></a>
+      <a class="navbar-brand" href="http://franklyinc.github.io"><div class="mobile-logo"></div></a>
    </div>
    <div class="collapse navbar-collapse" id="frankly-navbar-collapse">
       <!--Nav Bar List Goes Here-->
@@ -82,7 +82,7 @@
 
 <div class="sidebar-container">
 
-	<div class="sidebar-logo"><a href="index.html"></a></div>
+	<div class="sidebar-logo"><a href="http://franklyinc.github.io"></a></div>
 
 	<div class="sidebar-content sidebar-search">
 
@@ -123,21 +123,20 @@
 
 
 	<div class="doc">
-			<a id="Installing_iOS">
+			<div class="section" id="Installing_iOS">
 				<h3>
 					iOS SDK
 				</h3>
-			</a>
+			</div>
 
-			<a id="cocoapods">
+			<div class="section" id="cocoapods">
 				<h4>
 					Installing with CocoaPods (recommended)
 				</h4>
-			</a>
 
-			<p>
-				Adding FranklySDK to your project using CocoaPods is easy. Make sure to <a href="https://guides.cocoapods.org/using/getting-started.html" target="_blank">install CocoaPods</a> on your computer if you haven't already. Continue to the SDK install step once you have CocoaPods installed.
-			</p>
+				<p>
+					Adding FranklySDK to your project using CocoaPods is easy. Make sure to <a href="https://guides.cocoapods.org/using/getting-started.html" target="_blank">install CocoaPods</a> on your computer if you haven't already. Continue to the SDK install step once you have CocoaPods installed.
+				</p>
 	
 
 <pre class="prettyprint"><code>
@@ -147,25 +146,23 @@ $ sudo gem install cocoapods
 
 <br>
 
-			<p>
-				Once you've installed CocoaPods, just add the following to your Podfile and run pod install. You're done!
-			</p>
+				<p>
+					Once you've installed CocoaPods, just add the following to your Podfile and run pod install. You're done!
+				</p>
 
 
 <pre class="prettyprint"><code>
 pod 'FranklySDK', '~> 1.1'
 </pre></code>
 
+			</div>
 
 
-<br>
-
-
-			<a id="traditional">
+			<div class="section" id="traditional">
 				<h4>
 					Traditional Installation
 				</h4>
-			</a>
+
 			
 				<p>
 					Grab the SDK by going to the <a href="downloads.html">Downloads</a>, then add the FranklySDK Folder to your Xcode project.
@@ -184,12 +181,12 @@ pod 'FranklySDK', '~> 1.1'
 				</p>
 				
 				<ul>
-					<li><code>libicucore.dylib</code>
-					<li><code>CFNetwork.framework</code>
-					<li><code>Security.framework</code>
-					<li><code>Foundation.framework</code>
-					<li><code>CoreData.framework</code>
-					<li><code>SystemConfiguration.framework</code>
+					<li><code>libicucore.dylib</code></li>
+					<li><code>CFNetwork.framework</code></li>
+					<li><code>Security.framework</code></li>
+					<li><code>Foundation.framework</code></li>
+					<li><code>CoreData.framework</code></li>
+					<li><code>SystemConfiguration.framework</code></li>
 				</ul>
 		
 <br>
@@ -213,24 +210,18 @@ pod 'FranklySDK', '~> 1.1'
 <br>
 <br>
 
-			<p>			
-				Try Building your Project. If Building Succeeds, let’s move on to Initializing the SDK. If Building Fails, please check your steps and make sure you’ve completed all the steps.
-			</p>
+				<p>			
+					Try Building your Project. If Building Succeeds, let’s move on to Initializing the SDK. If Building Fails, please check your steps and make sure you’ve completed all the steps.
+				</p>
 		
-		
+			</div>
 
 
-
-<br>
-<br>
-
-
-
-			<a id="Installing_Android">
+			<div class="section" id="Installing_Android">
 				<h3>
 					Android SDK
 				</h3>
-			</a>
+
 
 				<h4>						
 					1. Place Frankly SDK in Project's <code>libs</code> Directory
@@ -249,7 +240,8 @@ pod 'FranklySDK', '~> 1.1'
 
 				<p>
 					Add dependencies to your app module's <code>build.gradle</code>:
-
+				</p>
+				
 
 <pre class="prettyprint"><code class="lang-java">
 repositories {
@@ -273,18 +265,14 @@ dependencies {
 }
 </code></pre>
 
+			</div>
 
 
-<br>
-<br>
-
-
-
-			<a id="Installing_JS">
+			<div class="section" id="Installing_JS">
 				<h3>
 					JavaScript SDK
 				</h3>
-			</a>
+
 
 				<h4>						
 					Installing with NPM
@@ -298,7 +286,7 @@ dependencies {
 					If prefered, you can also download the SDK via the <a href="http://franklyinc.github.io/frankly-js">public Frankly github repo</a>.
 				</p>
 
-	<br>
+<br>
 
 				<p>
 					To install via NPM:
@@ -308,35 +296,21 @@ dependencies {
 <pre class="prettyprint"><code>
 $ npm install frankly-js
 </code></pre>
-
-
-<br>
-<br>		
-			
-
-	</div>
-
-<br>
-<br>
-<br>
-<br>
-
-	<!--
-	<div class="well-bottom-nav">
-		<div class="panel panel-default">
-			<div class="panel-body">
-				<h4 align="right">
-					<a href="InitializeSDK.html">Next: Initializing the SDK <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></a>
-				</h4>
+	
 			</div>
-		</div>
+
 	</div>
-	-->
+
+<br>
+<br>
+<br>
+<br>
+
 
 	<div class="pager-container">
 	<nav>
 	  <ul class="pager">
-	    <li class="previous"><a href="index.html"><span aria-hidden="true">&larr;</span> Getting Started</a></li>
+	    <li class="previous"><a href="http://franklyinc.github.io"><span aria-hidden="true">&larr;</span> Getting Started</a></li>
 	    <li class="next"><a href="InitializeSDK.html">Initializing the SDK <span aria-hidden="true">&rarr;</span></a></li>
 	  </ul>
 	</nav>
