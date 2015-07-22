@@ -138,11 +138,15 @@
 				</p>
 			
 
-<pre class="prettyprint"><code class="lang-cpp">
+<pre class="prettyprint"><code class="lang-objc">
 	(BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 
-	// serverType is one of the FRSDKServerType enum values
-	[FranklySDK initializeSDKWithServerType: serverType];
+	// serverType is one of the following FRSDKServerType enum values
+	//
+    //		FRSDKServerTypeTest
+    //		FRSDKServerTypeProduction
+	//
+	[FranklySDK initializeSDKWithServerType: FRSDKServerTypeProduction];
 
 	return YES;
 

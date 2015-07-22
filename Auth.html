@@ -293,6 +293,11 @@ eyJ0eXAiOiJKV1MiLCJhbGciOiJIUzI1NiIsImN0eSI6ImZyYW5rbHktaXQ7djEifQ.eyJhYWsiOiIwM
 	
 			<p>
 				Set the FranklySDK’s <code>authenticationDelegate</code> to an object that conforms to the <code>FranklySDKAuthenticationDelegate</code> protocol.
+				Then call <code>initiateAuthenticationWithNewSession:</code>. Passing in YES will cause the SDK to go through the full authentication flow
+				including a request for <code>identifierWithNonce</code>. Passing in NO will attempt to use an existing session, that was stored from
+				a previous authentication. If that session exists, you will not recieve a request for <code>identifierWithNonce:</code> but will still
+				receive the <code>authenticationDidSucceedWithUserID:</code> or <code>authenticationDidFailWithError:</code> callbacks. 
+				
 			</p>
 		
 			<p>
@@ -323,7 +328,9 @@ eyJ0eXAiOiJKV1MiLCJhbGciOiJIUzI1NiIsImN0eSI6ImZyYW5rbHktaXQ7djEifQ.eyJhYWsiOiIwM
 
 	[FranklySDK sharedInstance].authenticationDelegate = self;
 
-	[[FranklySDK sharedInstance] initiateAuthentication];
+	// passing YES is necessary for a role upgrade but, for an existing user, who has already 
+	// authenticated, passing NO will authenticate more quickly using the existing session
+	[[FranklySDK sharedInstance] initiateAuthenticationWithNewSession:YES];
 
 }
 </code></pre>
@@ -340,10 +347,15 @@ eyJ0eXAiOiJKV1MiLCJhbGciOiJIUzI1NiIsImN0eSI6ImZyYW5rbHktaXQ7djEifQ.eyJhYWsiOiIwM
 						<ul>
 							<li><code>identifierWithNonce:completion:</code><br>
 
-			This method is where you should utilize your back end server as detailed in Frankly Server Authentication document to create a valid identifier. The user ID sent to the server is optional, however, if you choose not to include a user ID then the user will only be allowed in Spectator Mode.  If a user in Spectator Mode attempts to participate it will trigger a call to the delegate’s doUserAuthentication method at which point you should present a login screen. When your server responds with the identifier, call completion to finish the authentication process.
+				This method is where you should utilize your back end server as detailed in Frankly Server Authentication document to create a valid identifier. 
+				The user ID sent to the server is optional, however, if you choose not to include a user ID then the user will only be allowed in Spectator Mode.  
+				If a user in Spectator Mode attempts to participate it will trigger a call to the delegate’s doUserAuthentication method at which point you should 
+				present a login screen. When your server responds with the identifier, call completion to finish the authentication process.
 
 							<li><strong>You must call completion or the process will never finish.</strong>
-							<li>We have included a test function in <code>FranklySDK.h, retrieveIdentitifierWithUserID:Nonce:authKey:authSecret:completionBlock,</code> that will allow you to bypass your server and retrieve an identifier from Frankly’s servers.  Because it requires putting in your auth key and secret, <strong>it is only for testing.</strong>
+							<li>We have included a test function in <code>FranklySDK.h, retrieveIdentitifierWithUserID:Nonce:authKey:authSecret:role:completionBlock,</code> 
+							that will allow you to bypass your server and retrieve an identifier from Frankly’s servers.  Because it requires putting in your auth key and secret, 
+							<strong>it is only for testing.</strong>
 
 							<ul>
 								<li>Your Auth Key and Auth Secret can be found within the <a href="https://console.franklychat.com/">Admin Console</a> under Settings
@@ -368,6 +380,7 @@ eyJ0eXAiOiJKV1MiLCJhbGciOiJIUzI1NiIsImN0eSI6ImZyYW5rbHktaXQ7djEifQ.eyJhYWsiOiIwM
                                          Nonce:nonce
                                        authKey:self.authKey
                                     authSecret:self.authSecret
+                                    	  role:FRSDKAuthenticationRoleUser
                                completionBlock:^(NSString *identifier, NSError *error) {
         if (identifier != nil) {
             completion(identifier);
@@ -409,7 +422,8 @@ eyJ0eXAiOiJKV1MiLCJhbGciOiJIUzI1NiIsImN0eSI6ImZyYW5rbHktaXQ7djEifQ.eyJhYWsiOiIwM
 <br>
 				
 				<p>
-					If your delegate receives the <code>doUserAuthentication</code> callback then you should present a log in or sign up screen. When the user has completed logging in, you should call restart the authentication process by calling <code>initiateAuthentication</code> again. 
+					If your delegate receives the <code>doUserAuthentication</code> callback then you should present a log in or sign up screen. When the user has completed logging in, you should restart the authentication process by calling <code>initiateAuthenticationWithNewSession:</code>
+					and passing in YES to create a new session. 
 				</p>
 
 		</div>
