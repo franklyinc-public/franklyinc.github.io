@@ -157,7 +157,10 @@
 				<h3>
 					Server Authentication Flow
 				</h3>
-
+			</div>
+			
+			
+			<div class="section" id="Generate_Nonce">
 					<h4>
 						1. Generate a Nonce Value	
 					</h4>
@@ -180,12 +183,10 @@
 	"054afc088ea94717aa6121768f13a57a"
 </code></pre>
 
+			</div>
+		
 
-
-<br>
-<br>
-
-
+			<div class="section" id="Generate_Identity_Token">
 					<h4>
 						2. Generate an Identity Token
 					</h4>
@@ -244,10 +245,9 @@ eyJ0eXAiOiJKV1MiLCJhbGciOiJIUzI1NiIsImN0eSI6ImZyYW5rbHktaXQ7djEifQ.eyJhYWsiOiIwM
 </code></pre>
 </a>
 
-
-<br>
-<br>
-
+			</div>
+			
+			<div class="section" id="Generate_Session_Token">
 					<h4>
 						3. Generate a Session Token
 					</h4>
@@ -269,20 +269,126 @@ eyJ0eXAiOiJKV1MiLCJhbGciOiJIUzI1NiIsImN0eSI6ImZyYW5rbHktaXQ7djEifQ.eyJhYWsiOiIwM
 	< ...
 	<
 </code></pre>
+			
+			</div>
 
-
-<br>
-<br>
 
 		<div class="section" id="client_auth">
 			<h3>
 				Handling Authentication in the Client
 			</h3>
 
-	
 			<p>
 				Now that your server knows how to communicate with Frankly servers as an authenticated application, let's make sure you're client is able to get the right information to interact with the Frankly SDK. 
 			</p>
+
+
+		<div class="section" id="Authentication_Behavior">
+			<h4>
+				Understanding Authentication Behavior
+			</h4>
+			
+			<p>
+				In order to best understand how to integrate the optimal authentication flow for your app's experience, you should understand how the Frankly Chat Platform 
+				defines the various user roles along with the permissions each role is given. This, along with the authentication information below, will also help you understand 
+				how your app should respond to facilitate users being able to take the desired actions at the appropriate times.
+			</p>
+			
+			
+<br>
+
+
+			<p>
+				The Frankly Chat Platform supports various authentication flows to best support your app's user onboarding strategy. 
+				Below, the client SDK authentication guides will illustrate how to define this behavior for your app's experience, but before 
+				getting to that, here's a breakdown of the supported authentication flows along with the related user permissions based on each role.
+			</p>
+			
+			<ul>
+				<li><b>Guest Mode Only</b></li>
+				<ul>
+					<li>This is the option you would choose if your app doesn't have its own secured authetication method.</li>
+					<li>In this scenario, here's a breakdown of the permissions each role is allowed:</li>
+					<ul>
+						<li>Spectator/Anonymous User</li>
+						<ul>
+							<li><i>Is able to...</i></li>
+							<ol>
+								<li>Read the Room List and any content in a public Room.</li>
+							</ol>
+						</ul>
+						<li>Guest User</li>
+						<ul>
+							<li><i>Is able to...</i></li>
+							<ol>
+								<li>Read the Room List and any content in a public Room.</li>
+								<li>Send chat messages and define a Display Name.</li>
+								<li>Define a custom Profile Avatar.</li>
+							</ol>
+						</ul>
+					</ul>
+				</ul>
+				<li><b>Partner Authentication Only</b></li>
+				<ul>
+					<li>This is the option you would choose if you would not like a progressive authentication flow by not providing Guest Mode as an option to users in your app.</li>
+					<li>In this scenario, here's a breakdown of the permissions each role is allowed:</li>
+					<ul>
+						<li>Spectator/Anonymous User</li>
+						<ul>
+							<li><i>Is able to...</i></li>
+							<ol>
+								<li>Read the Room List and any content in a public Room.</li>
+							</ol>
+						</ul>
+						<li>Regular/Secured User</li>
+						<ul>
+							<li><i>Is able to...</i></li>
+							<ol>
+								<li>Read the Room List and any content in a public Room.</li>
+								<li>Send chat messages and define a Display Name.</li>
+								<li>Define a custom Profile Avatar.</li>
+							</ol>
+						</ul>
+					</ul>
+				</ul>
+				<li><b>Guest Mode + Partner Authentication</b></li>
+				<ul>
+					<li>This is the option you would choose if you would like a progressive authentication flow by providing Guest Mode as an option to users in your app.</li>
+					<li>In this scenario, here's a breakdown of the permissions each role is allowed:</li>
+					<ul>
+						<li>Spectator/Anonymous User</li>
+						<ul>
+							<li><i>Is able to...</i></li>
+							<ol>
+								<li>Read the Room List and any content in a public Room.</li>
+							</ol>
+						</ul>
+						<li>Guest User</li>
+						<ul>
+							<li><i>Is able to...</i></li>
+							<ol>
+								<li>Read the Room List and any content in a public Room.</li>
+								<li>Send chat messages and define a Display Name.</li>
+							</ol>
+						</ul>
+						<li>Regular/Secured User</li>
+						<ul>
+							<li><i>Is able to...</i></li>
+							<ol>
+								<li>Read the Room List and any content in a public Room.</li>
+								<li>Send chat messages and define a Display Name.</li>
+								<li>Define a custom Profile Avatar.</li>
+							</ol>
+						</ul>
+					</ul>
+					<li>With this option, you're able to choose which option, Guest Mose vs Partner Authentication Mode, you'd like to appear as 
+						the primary experience when the user initiates an action that requires a greater permission level.</li>
+					<li>Because, in this scenario, a user can log in as a Guest, if they attempt to define a custom Profile Avatar, for example, 
+						the client SDK will ask your client how you'd like to respond which is where your client would logically prompt the user 
+						to secure their account to complete the desired action.</li>
+				</ul>
+			</ul>
+			
 		</div>
 
 	
@@ -294,8 +400,8 @@ eyJ0eXAiOiJKV1MiLCJhbGciOiJIUzI1NiIsImN0eSI6ImZyYW5rbHktaXQ7djEifQ.eyJhYWsiOiIwM
 			<p>
 				Set the FranklySDK’s <code>authenticationDelegate</code> to an object that conforms to the <code>FranklySDKAuthenticationDelegate</code> protocol.
 				Then call <code>initiateAuthenticationWithNewSession:</code>. Passing in YES will cause the SDK to go through the full authentication flow
-				including a request for <code>identifierWithNonce</code>. Passing in NO will attempt to use an existing session, that was stored from
-				a previous authentication. If that session exists, you will not recieve a request for <code>identifierWithNonce:</code> but will still
+				including a request for <code>identifierWithNonce:preferredRole:completion:</code>. Passing in NO will attempt to use an existing session, that was stored from
+				a previous authentication. If that session exists, you will not recieve a request for <code>identifierWithNonce:preferredRole:completion:</code> but will still
 				receive the <code>authenticationDidSucceedWithUserID:</code> or <code>authenticationDidFailWithError:</code> callbacks. 
 				
 			</p>
@@ -328,6 +434,9 @@ eyJ0eXAiOiJKV1MiLCJhbGciOiJIUzI1NiIsImN0eSI6ImZyYW5rbHktaXQ7djEifQ.eyJhYWsiOiIwM
 
 	[FranklySDK sharedInstance].authenticationDelegate = self;
 
+	// set the log in behavior here - see above for more information
+	[FranklySDK sharedInstance].loginBehavior = FRSDKLoginBehaviorPartner
+
 	// passing YES is necessary for a role upgrade but, for an existing user, who has already 
 	// authenticated, passing NO will authenticate more quickly using the existing session
 	[[FranklySDK sharedInstance] initiateAuthenticationWithNewSession:YES];
@@ -343,22 +452,29 @@ eyJ0eXAiOiJKV1MiLCJhbGciOiJIUzI1NiIsImN0eSI6ImZyYW5rbHktaXQ7djEifQ.eyJhYWsiOiIwM
 	
 			
 				<ul>
-					<li><code>FranklyAuthenticationDelegate</code> requires the following functions:
+					<li><code>FranklyAuthenticationDelegate</code> requires the following functions:</li>
 						<ul>
-							<li><code>identifierWithNonce:completion:</code><br>
+							<li><code>(void)identifierWithNonce:(NSString *)nonce preferredRole:(FRSDKAuthenticationRole)preferredRole completion:(void (^)(NSString *identifier))completion</code></li>
 
-				This method is where you should utilize your back end server as detailed in Frankly Server Authentication document to create a valid identifier. 
-				The user ID sent to the server is optional, however, if you choose not to include a user ID then the user will only be allowed in Spectator Mode.  
-				If a user in Spectator Mode attempts to participate it will trigger a call to the delegate’s doUserAuthentication method at which point you should 
-				present a login screen. When your server responds with the identifier, call completion to finish the authentication process.
+<br>
+							
+							<p>
+								This method is where you should utilize your back end server as detailed in <a href="#Generate_Identity_Token">Frankly Server Authentication document</a> to create a valid identifier. 
+								The <code>uid</code> field in the identifier is optional, however, the identifier is still necessary. If you choose not to include a <code>uid</code> then the user will only be allowed  
+								in Spectator Mode.  If a user in Spectator Mode attempts to participate it will trigger a call to the delegate’s <code>doUserAuthentication</code> method at which point you should 
+								present a login screen. When your server responds with the identifier, call completion to finish the authentication process. The preferred role is a suggestion from
+								the client SDK but your server, as long it includes a valid <code>uid</code>, may choose to put any role in the <code>role</code> and the SDK will honor that.
+							</p>
 
-							<li><strong>You must call completion or the process will never finish.</strong>
+<br>
+
+							<li><strong>You must call completion or the process will never finish.</strong></li>
 							<li>We have included a test function in <code>FranklySDK.h, retrieveIdentitifierWithUserID:Nonce:authKey:authSecret:role:completionBlock,</code> 
 							that will allow you to bypass your server and retrieve an identifier from Frankly’s servers.  Because it requires putting in your auth key and secret, 
-							<strong>it is only for testing.</strong>
+							<strong>it is only for testing.</strong></li>
 
 							<ul>
-								<li>Your Auth Key and Auth Secret can be found within the <a href="https://console.franklychat.com/">Admin Console</a> under Settings
+								<li>Your Auth Key and Auth Secret can be found within the <a href="https://console.franklychat.com/">Admin Console</a> under Settings.
 							</ul>
 						</ul>
 						<li><code>authenticationDidSucceedWithUserID:(NSNumber*)</code> - After this message is received, you may use the SDK.
@@ -371,7 +487,8 @@ eyJ0eXAiOiJKV1MiLCJhbGciOiJIUzI1NiIsImN0eSI6ImZyYW5rbHktaXQ7djEifQ.eyJhYWsiOiIwM
 
 
 <pre class="prettyprint"><code class="lang-cpp">
-- (void)identifierWithNonce:(NSString *)nonce completion:(void (^)(NSString *identifier))completion {
+- (void)identifierWithNonce:(NSString *)nonce preferredRole:(FRSDKAuthenticationRole)preferredRole completion:(void (^)(NSString *identifier))completion;
+
 
     FranklySDK *franklySDK = [FranklySDK sharedInstance];
 
@@ -434,43 +551,98 @@ eyJ0eXAiOiJKV1MiLCJhbGciOiJIUzI1NiIsImN0eSI6ImZyYW5rbHktaXQ7djEifQ.eyJhYWsiOiIwM
 				Authenticating the Android SDK
 			</h4>
 
-	
+<br>
+
+			<h5>
+				<b>Setting up an Authentication Listener</b>
+			</h5>
+			
+			
 			<p>	
-				Partners must implement an <code>OnAuthenticationRequestListener</code> class to handle user authentication:
+				Frankly SDK needs a user's identity token for user authentication. So, you should implement <code>IdentityTokenGenerator</code> class to do so.
 			</p>
 
 
 <pre class="prettyprint"><code class="lang-java">
-private class YourOnAuthenticationRequestListener implements Authenticator.OnAuthenticationRequestListener {
-    @Override
-    public void onAuthenticationRequest(final Authenticator authenticator, final String nonce) throws IOException {
+private class YourIdentityTokenGenerator extends BaseIdentityTokenGenerator {
+    public boolean supported(Role role) {
+        ...
+    }
+
+    public String generateIdentityToken(Context context, String nonce) throws IOException {
         // For security, post nonce to your backend to retrieve an identity token.
-        // For testing purposes, you can integrate using Frankly's identity token generation method
-        // `FranklySDK.IntegrationHelper.getIdentityToken(...)`.
+        ...
 
-        final String identityToken = YourService.getIdentityToken(nonce, userId);
-
-        authenticator.authenticate(identityToken);
+        return identityToken;
     }
 }
 </code></pre>
 
 
 			<p>
-				<strong>Note:</strong> The identity token is meant to be retrieved from the partner’s servers rather than being hardcoded into the app.
+				<strong>Note:</strong> The identity token is meant to be retrieved from the your servers rather than being hardcoded into the app.
 			</p>
 
 			<p>
-				After defining the <code>OnAuthenticationRequestListener</code> class, Partners must create an instance of the class and pass it into the Frankly Android SDK’s Authenticator class:
+				After defining the <code>IdentityTokenGenerator</code> class, you must create an instance of the class and pass it into the Frankly SDK’s Authenticator class:
 			</p>
 
 
-<pre class="prettyprint"><code class="lang-java">
-final YourOnAuthenticationRequestListener yourOnAuthenticationRequestListener = new YourOnAuthenticationRequestListener();
-final Authenticator authenticator = Authenticator.getInstance(context);
+<br>
 
-authenticator.setOnAuthenticationRequestListener(yourOnAuthenticationRequestListener);
+
+<pre class="prettyprint"><code class="lang-java">
+IdentityTokenGenerator identityTokenGenerator = new YourIdentityTokenGenerator();
+Authenticator authenticator = Authenticator.getInstance(context);
+
+authenticator.setIdentityTokenGenerator(identityTokenGenerator);
 </code></pre>
+
+
+<br>
+
+
+			<h5>
+				<b>Requesting Callbacks</b>
+			</h5>
+			
+			<p>
+				<b>Login Callback</b> For user login, you should provide a login request callback by using <code>FranklySdk.setLoginRequestCallback()</code>.
+			</p>
+			
+
+<br>
+
+			
+<pre class="prettyprint"><code class="lang-java">
+private static final FranklySdk.RequestCallback loginRequestCallback = new FranklySdk.RequestCallback() {
+    @Override
+    public void onRequest(final Context context) {
+        final Intent intent = new Intent(context, LoginActivity.class);
+
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
+        context.startActivity(intent);
+    }
+};
+
+@Override
+public void onCreate() {
+    super.onCreate();
+
+    FranklySdk.initialize(this);
+    FranklySdk.setVerbose(true);
+    FranklySdk.setLoginRequestCallback(loginRequestCallback);
+}
+</code></pre>
+
+
+<br>
+
+
+			<p>
+				<b>Show Login Dialog Callback</b> Frankly SDK provides a default login dialog for easy integration by using <code>FranklySdk.setShowLoginDialogCallback()</code>, but you can replace it with your own implementation as well.
+			</p>
 
 		</div>
 
@@ -713,6 +885,8 @@ Location: https://app.franklychat.com/auth/redirect?identity_token={user’s_ide
 			<p>
 				Note that setting the Location header of a HTTP request is a secured mechanism, as JavaScript does not have access to the redirection and thus has no way of accessing the identity token.
 			</p>
+		
+		</div>
 		
 		</div>
 
