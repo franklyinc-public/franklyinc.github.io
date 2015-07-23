@@ -127,11 +127,37 @@ nav.navbar {
 	height: 40px;
 }
 
-/*For Jumbotron*/
-a.btn.btn-primary.btn-lg{
+/*For Jumbotron & Action Buttons*/
+button.btn.btn-primary.btn-lg{
 	background-color: #4891f0;
 	border-color: #0068ff;
 	color: #fff;
+}
+
+a.frankly_button.frankly_action_button {
+	color: #fff;
+}
+
+.panel.panel-default.platform_update {
+	width:auto;
+	margin-top: 20px;
+	text-align:center;
+	background-color:#f5f5f5;
+}
+
+.platform_update {
+	overflow: hidden;
+	margin:auto;
+}
+
+.platform_update_text {
+	float:center;
+}
+
+.platform_update_button {
+	float:center;
+	padding-top: 20px;
+	padding-bottom: 20px;
 }
 
 /*For Index Body*/

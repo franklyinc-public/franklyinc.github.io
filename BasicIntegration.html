@@ -162,16 +162,30 @@ context.startActivity(intent);
 
 	</div>
 
+
 <br>
+
 
 	<div class="doc">
 			<div class="section" id="Set_DisplayName_Avatar">
 				<h3>
 					Setting the Display Name & Profile Avatar
 				</h3>
-		
+
+
+				<p>
+					A couple thigns to note about these setting these properties for a user's Frankly profile:
+				</p>
+				
+				<ul>
+					<li>The maximum length of a Frankly Display Name is 18 characters</li>
+					<li>For best results, we recommend uploaded Profile Avatars to be 250x250px compressed JPGs</li>
+				</ul>
+
 <br>
 
+
+			<div class="section" id="Set_iOS_Info">
 				<h4>
 					Setting User Info via the iOS SDK
 				</h4>
@@ -207,13 +221,14 @@ context.startActivity(intent);
 <br>
 
 				<p>
-					The profile delegate will get called every time the user profile image or display name changes.  Also, you can enable or disable user editing of their profile data within the FranklySDK UI by allowing your delegate respond appropriately to the <code>-(BOOL)shouldAllowProfileEditing</code> delegate request.
+					The profile delegate will get called every time the user profile image or display name changes.  Also, you can enable or disable user editing 
+					of their profile data within the FranklySDK UI by allowing your delegate respond appropriately to the <code>-(BOOL)shouldAllowProfileEditing</code> delegate request.
 				</p>
 			
 <br>
 
 				<p>
-					Setting the user's display name and avatar can be done via the calls through the FranklySDK object:
+					Setting the user's <code>UserName</code> and <code>profileImage</code> can be done via the calls through the FranklySDK object:
 				</p>
 
 
@@ -223,17 +238,23 @@ context.startActivity(intent);
 
 		
 				<p>	
-					When the user name and image have been updated and synced with the server the profileDelegate will get a called back that they have been changed.
+					When the user's <code>UserName</code> and <code>profileImage</code> have been updated and synced with Frankly servers, the <code>profileDelegate</code> will get the callbacks 
+					<code>didUpdateDisplayName</code> and <code>didUpdateProfileImage</code>, confirming that these properties have been set. At the moment, the <code>profileDelegate</code>
+					does not return a failure callback, so please handle accordingly. Please also keep in mind, that in the event that you want to set <code>UserName</code> or <code>profileImage</code>,
+					you can pass in <code>nil</code> for whichever property you do not wish to update. Also note that the call to set these properties does nothing if called before receiving 
+					<code>authenticationSucceeded</code> delegate message.
 				</p>
-		
-<br>
+		</div>
 
+
+		<div class="section" id="Set_Android_Info">
 				<h4>
 					Setting User Info via the Android SDK
 				</h4>
 		
 				<p>
-					Developers can upload new avatars for users to the Frankly servers as follows:
+					Developers can upload new Profile Avatars for users to the Frankly servers where the Intent contains either the data URI of the Intent, or an extra called "data" which stores 
+					a Bitmap (the Android Gallery app currently returns the data in this format in <code>onActivityResult()</code>) as follows:
 				</p>
 			
 
@@ -243,8 +264,11 @@ final String userAvatarUrlString = userManager.uploadUserAvatar(context, intent)
 </code></pre>
 
 
+<br>
+
+
 				<p>
-					where the Intent contains either the data URI of the Intent, or an extra called "data" which stores a Bitmap. (The Android Gallery app currently returns the data in this format in onActivityResult().) Note that simply uploading the image does not tie the image to any particular user. The returned URL string must be set on a User object and passed to UserManager for persisting as follows:
+					Note that simply uploading the image does not tie the image to any particular user. The returned URL string must be set on a User object and passed to <code>UserManager</code> for persisting as follows:
 				</p>
 
 
@@ -252,6 +276,9 @@ final String userAvatarUrlString = userManager.uploadUserAvatar(context, intent)
 user.setAvatarImageUrlString(userAvatarUrlString);
 userManager.update(user);
 </code></pre>
+
+
+<br>
 
 
 				<p>
@@ -265,12 +292,16 @@ userManager.update(user);
 </code></pre>
 
 
-				<p>
-					<b>WARNING:</b> All UserManager calls must be done on a non-UI thread.
-				</p>
-
 <br>
 
+
+				<p>
+					<b>WARNING:</b> All <code>UserManager</code> calls must be done on a non-UI thread.
+				</p>
+		</div>
+		
+		
+		<div class="section" id="Set_JS_Info">
 				<h4>
 					Setting User Info via the JavaScript SDK
 				</h4>
@@ -278,6 +309,7 @@ userManager.update(user);
 				<p>
 					<i>Coming soon!</i>
 				</p>
+		</div>
 
 	</div>
 
