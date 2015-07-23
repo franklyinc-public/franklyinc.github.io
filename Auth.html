@@ -586,6 +586,17 @@ private class YourIdentityTokenGenerator extends BaseIdentityTokenGenerator {
 			</p>
 
 			<p>
+				The <code>supportedRole(Role)</code> method should be written to return <code>true</code> for all roles that are supported and <code>false</code> for all other roles. 
+				The available roles in the system are defined in the <code>Role</code> enum as follows:
+			</p>
+			
+<pre class="prettyprint"><code class="lang-java">
+public enum Role {
+    ADMIN, ANONYMOUS, GUEST, REGULAR
+}
+</code></pre>
+
+			<p>
 				After defining the <code>IdentityTokenGenerator</code> class, you must create an instance of the class and pass it into the Frankly SDK’s Authenticator class:
 			</p>
 
