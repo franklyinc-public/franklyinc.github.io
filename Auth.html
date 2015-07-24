@@ -7,7 +7,6 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1"/>
     <link type="text/css" rel="stylesheet" href="css/main.css">
     <link type="text/css" rel="stylesheet" href="css/bootstrap.css">	
-    <link rel="stylesheet" type="text/css">
 	<link rel="icon" 
 	      type="image/png" 
 	      href="frankly_favicon_32x32_no_bg.png">
@@ -62,10 +61,12 @@
 	
 </head>
 
+
+<body>
+
 <nav class="navbar navbar-inverse" role="navigation" style="z-index:100">
    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" 
-         data-target="#frankly-navbar-collapse">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#frankly-navbar-collapse">
          <span class="sr-only">Toggle navigation</span>
          <span class="icon-bar"></span>
          <span class="icon-bar"></span>
@@ -103,7 +104,7 @@
 </div>
 
 
-<body>
+
 <div class="container container-body">
 
 
@@ -119,14 +120,15 @@
 				<li><a href="#jwt">JWT</a></li>
 				<li><a href="#auth_flow">Server Authentication Flow</a></li>
 				<li><a href="#Authentication_Behavior">Authentication Behavior</a></li>
-				<li><a href="#client_auth">Handling Authentication in the Client</a></li>
+				<li><a href="#client_auth">Handling Authentication in the Client</a>
 					<ul>
 						<li><a href="#ios_auth">iOS SDK</a></li>
 						<li><a href="#android_auth">Android SDK</a></li>
 						<li><a href="#js_auth">JavaScript SDK</a></li>
 						<li><a href="#logging_out">Logging Out</a></li>
 					</ul>
-				<li><a href="#webclient_auth">Web App Authentication</a></li>					
+				</li>
+				<li><a href="#webclient_auth">Web App Authentication</a></li>		
 				<li><a href="#security">A Note on Security</a></li>
 			</ul>
 	
@@ -310,7 +312,7 @@ eyJ0eXAiOiJKV1MiLCJhbGciOiJIUzI1NiIsImN0eSI6ImZyYW5rbHktaXQ7djEifQ.eyJhYWsiOiIwM
 			</p>
 			
 			<ul>
-				<li><b>Guest Mode Only</b></li>
+				<li><b>Guest Mode Only</b>
 				<ul>
 					<li>This is the option you would choose if your app doesn't have its own secured authetication method.</li>
 					<li>In this scenario, here's a breakdown of the permissions each role is allowed:</li>
@@ -333,7 +335,8 @@ eyJ0eXAiOiJKV1MiLCJhbGciOiJIUzI1NiIsImN0eSI6ImZyYW5rbHktaXQ7djEifQ.eyJhYWsiOiIwM
 						</ul>
 					</ul>
 				</ul>
-				<li><b>Partner Authentication Only</b></li>
+				</li>
+				<li><b>Partner Authentication Only</b>
 				<ul>
 					<li>This is the option you would choose if you would not like a progressive authentication flow by not providing Guest Mode as an option to users in your app.</li>
 					<li>In this scenario, here's a breakdown of the permissions each role is allowed:</li>
@@ -356,7 +359,8 @@ eyJ0eXAiOiJKV1MiLCJhbGciOiJIUzI1NiIsImN0eSI6ImZyYW5rbHktaXQ7djEifQ.eyJhYWsiOiIwM
 						</ul>
 					</ul>
 				</ul>
-				<li><b>Guest Mode + Partner Authentication</b></li>
+				</li>
+				<li><b>Guest Mode + Partner Authentication</b>
 				<ul>
 					<li>This is the option you would choose if you would like a progressive authentication flow by providing Guest Mode as an option to users in your app.</li>
 					<li>In this scenario, here's a breakdown of the permissions each role is allowed:</li>
@@ -392,6 +396,7 @@ eyJ0eXAiOiJKV1MiLCJhbGciOiJIUzI1NiIsImN0eSI6ImZyYW5rbHktaXQ7djEifQ.eyJhYWsiOiIwM
 						the client SDK will ask your client how you'd like to respond which is where your client would logically prompt the user 
 						to secure their account to complete the desired action.</li>
 				</ul>
+				</li>
 			</ul>
 			
 		</div>
@@ -470,7 +475,7 @@ eyJ0eXAiOiJKV1MiLCJhbGciOiJIUzI1NiIsImN0eSI6ImZyYW5rbHktaXQ7djEifQ.eyJhYWsiOiIwM
 				</p>	
 			
 					<ul>
-						<li><code>FranklyAuthenticationDelegate</code> requires the following functions:</li>
+						<li><code>FranklyAuthenticationDelegate</code> requires the following functions:
 							<ul>
 								<li><code>(void)identifierWithNonce:(NSString *)nonce preferredRole:(FRSDKAuthenticationRole)preferredRole completion:(void (^)(NSString *identifier))completion</code></li>
 
@@ -489,12 +494,14 @@ eyJ0eXAiOiJKV1MiLCJhbGciOiJIUzI1NiIsImN0eSI6ImZyYW5rbHktaXQ7djEifQ.eyJhYWsiOiIwM
 								<li><strong>You must call completion or the process will never finish.</strong></li>
 								<li>We have included a test function in <code>FranklySDK.h, retrieveIdentitifierWithUserID:Nonce:authKey:authSecret:role:completionBlock,</code> 
 								that will allow you to bypass your server and retrieve an identifier from Frankly’s servers.  Because it requires putting in your auth key and secret, 
-								<strong>it is only for testing.</strong></li>
+								<strong>it is only for testing.</strong>
 
 								<ul>
 									<li>Your Auth Key and Auth Secret can be found within the <a href="https://console.franklychat.com/">Admin Console</a> under Settings.</li>
 								</ul>
+								</li>
 							</ul>
+							</li>
 							<li><code>authenticationDidSucceedWithUserID:(NSNumber*)</code> - After this message is received, you may use the SDK.</li>
 							<li><code>authenticationDidFailWithError:(NSError*)</code> - If this message is received, you need to start authentication process over before you may use the SDK.</li>
 					</ul>
@@ -564,20 +571,20 @@ eyJ0eXAiOiJKV1MiLCJhbGciOiJIUzI1NiIsImN0eSI6ImZyYW5rbHktaXQ7djEifQ.eyJhYWsiOiIwM
 		
 		
 			<div class="section" id="android_auth">
-			<h4>
-				Authenticating the Android SDK
-			</h4>
+				<h4>
+					Authenticating the Android SDK
+				</h4>
 
 <br>
 
-			<h5>
-				<b>Setting up an Authentication Listener</b>
-			</h5>
+				<h5>
+					<b>Setting up an Authentication Listener</b>
+				</h5>
 			
 			
-			<p>	
-				Frankly SDK needs a user's identity token for user authentication. So, you should implement <code>IdentityTokenGenerator</code> class to do so.
-			</p>
+				<p>	
+					Frankly SDK needs a user's identity token for user authentication. So, you should implement <code>IdentityTokenGenerator</code> class to do so.
+				</p>
 
 
 <pre class="prettyprint"><code class="lang-java">
@@ -596,14 +603,14 @@ private class YourIdentityTokenGenerator extends BaseIdentityTokenGenerator {
 </code></pre>
 
 
-			<p>
-				<strong>Note:</strong> The identity token is meant to be retrieved from the your servers rather than being hardcoded into the app.
-			</p>
+				<p>
+					<strong>Note:</strong> The identity token is meant to be retrieved from the your servers rather than being hardcoded into the app.
+				</p>
 
-			<p>
-				The <code>supportedRole(Role)</code> method should be written to return <code>true</code> for all roles that are supported and <code>false</code> for all other roles. 
-				The available roles in the system are defined in the <code>Role</code> enum as follows:
-			</p>
+				<p>
+					The <code>supportedRole(Role)</code> method should be written to return <code>true</code> for all roles that are supported and <code>false</code> for all other roles. 
+					The available roles in the system are defined in the <code>Role</code> enum as follows:
+				</p>
 			
 <pre class="prettyprint"><code class="lang-java">
 public enum Role {
@@ -611,9 +618,9 @@ public enum Role {
 }
 </code></pre>
 
-			<p>
-				After defining the <code>IdentityTokenGenerator</code> class, you must create an instance of the class and pass it into the Frankly SDK’s Authenticator class:
-			</p>
+				<p>
+					After defining the <code>IdentityTokenGenerator</code> class, you must create an instance of the class and pass it into the Frankly SDK’s Authenticator class:
+				</p>
 
 
 <br>
@@ -630,13 +637,13 @@ authenticator.setIdentityTokenGenerator(identityTokenGenerator);
 <br>
 
 
-			<h5>
-				<b>Requesting Callbacks</b>
-			</h5>
+				<h5>
+					<b>Requesting Callbacks</b>
+				</h5>
 			
-			<p>
-				<b>Login Callback</b> For user login, you should provide a login request callback by using <code>FranklySdk.setLoginRequestCallback()</code>.
-			</p>
+				<p>
+					<b>Login Callback</b> For user login, you should provide a login request callback by using <code>FranklySdk.setLoginRequestCallback()</code>.
+				</p>
 			
 
 <br>
@@ -795,14 +802,14 @@ var client = new frankly.FranklyClient
 <br>
 	
 			<figure>
-					<img src="images/webapp_auth_1.png" border="1" width="748px">
+					<img src="images/webapp_auth_1.png" style="border:1px" width="748">
 					<figcaption><i>Figure 1: Frankly Web App Admin Console</i></figcaption>
 			</figure>
 			
 <br>
 
 			<figure>
-					<img src="images/webapp_auth_2.png" border="1" width="300px">
+					<img src="images/webapp_auth_2.png" style="border:1px" width="300">
 					<figcaption><i>Figure 2: Example external login screen within Frankly Web App</i></figcaption>
 			</figure>
 
@@ -824,7 +831,7 @@ var client = new frankly.FranklyClient
 			</p>
 		
 <pre class="prettyprint"><code>
-{your_login_url}/?nonce={nonce_value}&redirect_uri=https://app.franklychat.com/auth/redirect
+{your_login_url}/?nonce={nonce_value}&amp;redirect_uri=https://app.franklychat.com/auth/redirect
 </code></pre>
 
 <br>
@@ -860,7 +867,7 @@ var client = new frankly.FranklyClient
 <br>
 
 			<figure>
-				<img src="images/webapp_auth_3.png" border="1" width="500px">
+				<img src="images/webapp_auth_3.png" style="border:1px" width="500">
 				<figcaption><i>Figure 3: Login points from Frankly Web App</i></figcaption>
 			</figure>
 		
@@ -875,14 +882,14 @@ var client = new frankly.FranklyClient
 			</p>
 		
 			<figure>
-				<img src="images/webapp_auth_2.png" border="1" width="300 px">
+				<img src="images/webapp_auth_2.png" style="border:1px" width="300">
 				<figcaption><i>Figure 4: a) Custom Authentication Screen</i></figcaption>
 			</figure>
 		
 <br>
 
 			<figure>
-				<img src="images/webapp_auth_4.png" border="1" width="300px">
+				<img src="images/webapp_auth_4.png" style="border:1px" width="300">
 				<figcaption><i>Figure 5: b) Sample screen to display while system authenticates</i></figcaption>
 			</figure>
 
@@ -918,13 +925,16 @@ var client = new frankly.FranklyClient
 			<p>
 				You can redirect a page by getting the web server to set the HTTP Location header (read more about HTTP Location setting <a href="https://en.wikipedia.org/wiki/HTTP_location">here</a>). We recommend using the HTTP status code 302 for this redirect within the header. For example, if the <code>redicrect_uri</code> that is provided is “https://app.franklychat.com/auth/redirect” then an example server response would look something like:
 			</p>
-		
+
+	
 <pre class="prettyprint"><code>
 HTTP/1.1 302 Found
 Location: https://app.franklychat.com/auth/redirect?identity_token={user’s_identity_token}
 </code></pre>		
-		
+
+	
 <br>
+
 
 			<p>
 				Be sure to append the identity token to the end of the <code>redirect_uri</code>, as demonstrated in the example above.
@@ -933,8 +943,6 @@ Location: https://app.franklychat.com/auth/redirect?identity_token={user’s_ide
 			<p>
 				Note that setting the Location header of a HTTP request is a secured mechanism, as JavaScript does not have access to the redirection and thus has no way of accessing the identity token.
 			</p>
-		
-		</div>
 		
 		</div>
 
@@ -957,7 +965,6 @@ Location: https://app.franklychat.com/auth/redirect?identity_token={user’s_ide
 <br>
 
 
-
 		<div class="pager-container">
 			<nav>
 			  <ul class="pager">
@@ -966,15 +973,18 @@ Location: https://app.franklychat.com/auth/redirect?identity_token={user’s_ide
 			  </ul>
 			</nav>
 		</div>
-
-
+		
 	</div>
+
+</div>
+
 	
-	
+
+<br>
+<br>
+
 </body>
 
-<br>
-<br>
 
 
 </html>
