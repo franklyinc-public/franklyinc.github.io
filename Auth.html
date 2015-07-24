@@ -27,8 +27,8 @@
 				'<li><a href="#overview">Overview</a></li>',
 				'<li><a href="#jwt">JWT</a></li>',
 				'<li><a href="#auth_flow">Server Authentication</a></li>',
-				'<li><a href="#client_auth">Client Authentication</a></li>',
 				'<li><a href="#Authentication_Behavior">Authentication Behavior</a></li>',
+				'<li><a href="#client_auth">Client Authentication</a></li>',
 				'<li><a href="#webclient_auth">Web App Authentication</a></li>',
 				'<li><a href="#security">A Note on Security</a></li>',
 			'</ul>',
@@ -103,10 +103,13 @@
 </div>
 
 
+<body>
 <div class="container container-body">
+
+
 	<div class="header">
 		<h1 class="noborder">
-			Authenticating
+			Authentication
 		</h1>
 
 <br>
@@ -115,54 +118,59 @@
 				<li><a href="#overview">Overview</a></li>
 				<li><a href="#jwt">JWT</a></li>
 				<li><a href="#auth_flow">Server Authentication Flow</a></li>
+				<li><a href="#Authentication_Behavior">Authentication Behavior</a></li>
 				<li><a href="#client_auth">Handling Authentication in the Client</a></li>
 					<ul>
-						<li><a href="#Authentication_Behavior">Authentication Behavior</a></li>
 						<li><a href="#ios_auth">iOS SDK</a></li>
 						<li><a href="#android_auth">Android SDK</a></li>
 						<li><a href="#js_auth">JavaScript SDK</a></li>
-						<li><a href="#webclient_auth">Web App</a></li>
+						<li><a href="#logging_out">Logging Out</a></li>
 					</ul>
+				<li><a href="#webclient_auth">Web App Authentication</a></li>					
 				<li><a href="#security">A Note on Security</a></li>
 			</ul>
 	
 	</div>
 
+
 <br>
 <br>
+
 
 	<div class="doc">
 
-			<div class="section" id="overview">
-				<h3>
-					Overview
-				</h3>
-	
-				<p>
-					This document describes how the Frankly Authentication works and what components Frankly partners must build in order to support authentication of their users on Frankly’s platform.
-				</p>
-			</div>
+		<div class="section" id="overview">
+			<h3>
+				Overview
+			</h3>
+
+			<p>
+				This document describes how the Frankly Authentication works and what components Frankly partners must build in order to support authentication of their users on Frankly’s platform.
+			</p>
+		</div>
 			
 
-			<div class="section" id="jwt">
-				<h3>
-					JWT
-				</h3>
+		<div class="section" id="jwt">
+			<h3>
+				JWT
+			</h3>
 
-				<p>
-					Frankly Authentication mechanism is based on JWT (JSON Web Token), a web standard for sharing user authentication in a secure way. JWT libraries are provided for all popular programming languages and are referenced at <a href="http://jwt.io/">jwt.io</a>. The full JWT specifications can be found <a href="https://openid.net/specs/draft-jones-json-web-token-07.html">here</a>, the reader should consult and become familiar with how JWT works prior to continuing with this document.
-				</p>
-			</div>
+			<p>
+				Frankly Authentication mechanism is based on JWT (JSON Web Token), a web standard for sharing user authentication in a secure way. JWT libraries are provided for all popular programming languages and are referenced at <a href="http://jwt.io/">jwt.io</a>. The full JWT specifications can be found <a href="https://openid.net/specs/draft-jones-json-web-token-07.html">here</a>, the reader should consult and become familiar with how JWT works prior to continuing with this document.
+			</p>
+		</div>
 
 
-			<div class="section" id="auth_flow">
-				<h3>
-					Server Authentication Flow
-				</h3>
-			</div>
+		<div class="section" id="auth_flow">
+			<h3>
+				Server Authentication Flow
+			</h3>
 			
 			
-			<div class="section" id="Generate_Nonce">
+<br>
+
+
+				<div class="section" id="Generate_Nonce">
 					<h4>
 						1. Generate a Nonce Value	
 					</h4>
@@ -185,16 +193,17 @@
 	"054afc088ea94717aa6121768f13a57a"
 </code></pre>
 
-			</div>
+				</div>
 		
 
-			<div class="section" id="Generate_Identity_Token">
+				<div class="section" id="Generate_Identity_Token">
 					<h4>
 						2. Generate an Identity Token
 					</h4>
 
 					<p>
-						After getting a nonce value from Frankly’s infrastructure, the partner app has to generate an identity token that embeds user’s information and is signed using the secret key that can be found in the <a href="https://console.franklychat.com/">Frankly Console</a>.
+						After getting a nonce value from Frankly’s infrastructure, the partner app has to generate an identity token that embeds user’s information 
+						and is signed using the secret key that can be found in the <a href="https://console.franklychat.com/">Frankly Console</a>.
 					</p>
 
 					<p>
@@ -214,11 +223,11 @@
 	Claims
 
 	{
-	  “aak”: <authentication key obtained from frankly console>,
-	  “uid”: <unique user identifier> (optional),
-	  “iat”: <token generation time as a unix timestamp>,
-	  “exp”: <token expiration time as a unix timestamp>,
-	  “nce”: <nonce value obtained in step 1>,
+	  “aak”: &lt;authentication key obtained from frankly console&gt;,
+	  “uid”: &lt;unique user identifier&gt; (optional),
+	  “iat”: &lt;token generation time as a unix timestamp&gt;,
+	  “exp”: &lt;token expiration time as a unix timestamp&gt;,
+	  “nce”: &lt;nonce value obtained in step 1&gt;,
 	  “role”: ”admin” (optional)
 	}
 
@@ -247,48 +256,42 @@ eyJ0eXAiOiJKV1MiLCJhbGciOiJIUzI1NiIsImN0eSI6ImZyYW5rbHktaXQ7djEifQ.eyJhYWsiOiIwM
 </code></pre>
 </a>
 
-			</div>
-			
-			<div class="section" id="Generate_Session_Token">
+				</div>
+
+
+				<div class="section" id="Generate_Session_Token">
 					<h4>
 						3. Generate a Session Token
 					</h4>
 
 					<p>
-						After generating an identity token the app can then request a session token to be able to use Frankly’s API. Obtaining a session token can be done by querying https://app.franklychat.com/auth and setting the identity_token query string parameter to the value generated in step 2. This session token will come in the response as two cookies (token and xsrf) that the HTTP client should set whenever it attempts to use any of the Frankly API endpoints. Example: GET request on <a href="https://app.franklychat.com/auth">https://app.franklychat.com/auth</a>
+						After generating an identity token the app can then request a session token to be able to use Frankly’s API. Obtaining a session token can be done by querying https://app.franklychat.com/auth and setting the identity_token query string parameter to the value generated in step 2. This session token will come in the response as two cookies (token and xsrf) that the HTTP client should set whenever it attempts to use any of the Frankly API endpoints. Example: GET request on <a href="https://app.franklychat.com/auth">https://app.franklychat.com/auth</a>.
 					</p>
 
 
 <pre class="prettyprint"><code>
 	$ curl -v -X GET https://app.franklychat.com/auth?identity_token=...
-	> GET /auth?identity_token=... HTTP/1.1
-	> Host: app.franklychat.com
-	> ...
-	> 
-	< HTTP/1.1 200 OK
-	< Set-Cookie: token=<session token>
-	< Set-Cookie: xsrf=<xsrf token>
-	< ...
-	<
+	&gt; GET /auth?identity_token=... HTTP/1.1
+	&gt; Host: app.franklychat.com
+	&gt; ...
+	&gt; 
+	&lt; HTTP/1.1 200 OK
+	&lt; Set-Cookie: token=&lt;session token&gt;
+	&lt; Set-Cookie: xsrf=&lt;xsrf token&gt;
+	&lt; ...
+	&lt;
 </code></pre>
 			
-			</div>
+				</div>
 
 
-		<div class="section" id="client_auth">
-			<h3>
-				Handling Authentication in the Client
-			</h3>
-
-			<p>
-				Now that your server knows how to communicate with Frankly servers as an authenticated application, let's make sure you're client is able to get the right information to interact with the Frankly SDK. 
-			</p>
-
+		</div>
+		
 
 		<div class="section" id="Authentication_Behavior">
-			<h4>
+			<h3>
 				Understanding Authentication Behavior
-			</h4>
+			</h3>
 			
 			<p>
 				In order to best understand how to integrate the optimal authentication flow for your app's experience, you should understand how the Frankly Chat Platform 
@@ -393,24 +396,36 @@ eyJ0eXAiOiJKV1MiLCJhbGciOiJIUzI1NiIsImN0eSI6ImZyYW5rbHktaXQ7djEifQ.eyJhYWsiOiIwM
 			
 		</div>
 
-	
-		<div class="section" id="ios_auth">
-			<h4>
-				Authenticating the iOS SDK
-			</h4>
-	
+
+		<div class="section" id="client_auth">
+			<h3>
+				Handling Authentication in the Client
+			</h3>
+
 			<p>
-				Set the FranklySDK’s <code>authenticationDelegate</code> to an object that conforms to the <code>FranklySDKAuthenticationDelegate</code> protocol.
-				Then call <code>initiateAuthenticationWithNewSession:</code>. Passing in YES will cause the SDK to go through the full authentication flow
-				including a request for <code>identifierWithNonce:preferredRole:completion:</code>. Passing in NO will attempt to use an existing session, that was stored from
-				a previous authentication. If that session exists, you will not recieve a request for <code>identifierWithNonce:preferredRole:completion:</code> but will still
-				receive the <code>authenticationDidSucceedWithUserID:</code> or <code>authenticationDidFailWithError:</code> callbacks. 
-				
+				Now that your server knows how to communicate with Frankly servers as an authenticated application, let's make sure you're client is able to get the right information to interact with the Frankly SDK. 
 			</p>
+
+		</div>
+	
+	
+			<div class="section" id="ios_auth">
+				<h4>
+					Authenticating the iOS SDK
+				</h4>
+	
+				<p>
+					Set the FranklySDK’s <code>authenticationDelegate</code> to an object that conforms to the <code>FranklySDKAuthenticationDelegate</code> protocol.
+					Then call <code>initiateAuthenticationWithNewSession:</code>. Passing in YES will cause the SDK to go through the full authentication flow
+					including a request for <code>identifierWithNonce:preferredRole:completion:</code>. Passing in NO will attempt to use an existing session, that was stored from
+					a previous authentication. If that session exists, you will not recieve a request for <code>identifierWithNonce:preferredRole:completion:</code> but will still
+					receive the <code>authenticationDidSucceedWithUserID:</code> or <code>authenticationDidFailWithError:</code> callbacks. 
+				</p>
 		
-			<p>
-				In our example code, we’ve made our <code>ViewController</code> conform to the protocol:
-			</p>
+				<p>
+					In our example code, we’ve made our <code>ViewController</code> conform to the protocol:
+				</p>
+
 
 <br>
 
@@ -422,9 +437,10 @@ eyJ0eXAiOiJKV1MiLCJhbGciOiJIUzI1NiIsImN0eSI6ImZyYW5rbHktaXQ7djEifQ.eyJhYWsiOiIwM
 
 <br>
 
-			<p>
-				You set the FranklySDK authenticationDelegate and initiate authentication as follows:
-			</p>
+				<p>
+					You set the FranklySDK authenticationDelegate and initiate authentication as follows:
+				</p>
+
 
 <br>
 
@@ -449,41 +465,40 @@ eyJ0eXAiOiJKV1MiLCJhbGciOiJIUzI1NiIsImN0eSI6ImZyYW5rbHktaXQ7djEifQ.eyJhYWsiOiIwM
 
 <br>
 
-			<p>
-				Next you will need to set up the following:
-	
+				<p>
+					Next you will need to set up the following:
+				</p>	
 			
-				<ul>
-					<li><code>FranklyAuthenticationDelegate</code> requires the following functions:</li>
-						<ul>
-							<li><code>(void)identifierWithNonce:(NSString *)nonce preferredRole:(FRSDKAuthenticationRole)preferredRole completion:(void (^)(NSString *identifier))completion</code></li>
+					<ul>
+						<li><code>FranklyAuthenticationDelegate</code> requires the following functions:</li>
+							<ul>
+								<li><code>(void)identifierWithNonce:(NSString *)nonce preferredRole:(FRSDKAuthenticationRole)preferredRole completion:(void (^)(NSString *identifier))completion</code></li>
 
 <br>
 							
-							<p>
-								This method is where you should utilize your back end server as detailed in <a href="#Generate_Identity_Token">Frankly Server Authentication document</a> to create a valid identifier. 
-								The <code>uid</code> field in the identifier is optional, however, the identifier is still necessary. If you choose not to include a <code>uid</code> then the user will only be allowed  
-								in Spectator Mode.  If a user in Spectator Mode attempts to participate it will trigger a call to the delegate’s <code>doUserAuthentication</code> method at which point you should 
-								present a login screen. When your server responds with the identifier, call completion to finish the authentication process. The preferred role is a suggestion from
-								the client SDK but your server, as long it includes a valid <code>uid</code>, may choose to put any role in the <code>role</code> and the SDK will honor that.
-							</p>
+								<p>
+									This method is where you should utilize your back end server as detailed in <a href="#Generate_Identity_Token">Frankly Server Authentication document</a> to create a valid identifier. 
+									The <code>uid</code> field in the identifier is optional, however, the identifier is still necessary. If you choose not to include a <code>uid</code> then the user will only be allowed  
+									in Spectator Mode.  If a user in Spectator Mode attempts to participate it will trigger a call to the delegate’s <code>doUserAuthentication</code> method at which point you should 
+									present a login screen. When your server responds with the identifier, call completion to finish the authentication process. The preferred role is a suggestion from
+									the client SDK but your server, as long it includes a valid <code>uid</code>, may choose to put any role in the <code>role</code> and the SDK will honor that.
+								</p>
 
 <br>
 
-							<li><strong>You must call completion or the process will never finish.</strong></li>
-							<li>We have included a test function in <code>FranklySDK.h, retrieveIdentitifierWithUserID:Nonce:authKey:authSecret:role:completionBlock,</code> 
-							that will allow you to bypass your server and retrieve an identifier from Frankly’s servers.  Because it requires putting in your auth key and secret, 
-							<strong>it is only for testing.</strong></li>
+								<li><strong>You must call completion or the process will never finish.</strong></li>
+								<li>We have included a test function in <code>FranklySDK.h, retrieveIdentitifierWithUserID:Nonce:authKey:authSecret:role:completionBlock,</code> 
+								that will allow you to bypass your server and retrieve an identifier from Frankly’s servers.  Because it requires putting in your auth key and secret, 
+								<strong>it is only for testing.</strong></li>
 
-							<ul>
-								<li>Your Auth Key and Auth Secret can be found within the <a href="https://console.franklychat.com/">Admin Console</a> under Settings.
+								<ul>
+									<li>Your Auth Key and Auth Secret can be found within the <a href="https://console.franklychat.com/">Admin Console</a> under Settings.</li>
+								</ul>
 							</ul>
-						</ul>
-						<li><code>authenticationDidSucceedWithUserID:(NSNumber*)</code> - After this message is received, you may use the SDK.
-						<li><code>authenticationDidFailWithError:(NSError*)</code> - If this message is received, you need to start authentication process over before you may use the SDK. 
-				</ul>
+							<li><code>authenticationDidSucceedWithUserID:(NSNumber*)</code> - After this message is received, you may use the SDK.</li>
+							<li><code>authenticationDidFailWithError:(NSError*)</code> - If this message is received, you need to start authentication process over before you may use the SDK.</li>
+					</ul>
 
-			</p>
 
 <br>
 
@@ -534,21 +549,21 @@ eyJ0eXAiOiJKV1MiLCJhbGciOiJIUzI1NiIsImN0eSI6ImZyYW5rbHktaXQ7djEifQ.eyJhYWsiOiIwM
 
 <br>
 
-				<p>
-					Once you're done setting up those pieces, try running the build.
-				</p>
+					<p>
+						Once you're done setting up those pieces, try running the build.
+					</p>
 				
 <br>
 				
-				<p>
-					If your delegate receives the <code>doUserAuthentication</code> callback then you should present a log in or sign up screen. When the user has completed logging in, you should restart the authentication process by calling <code>initiateAuthenticationWithNewSession:</code>
-					and passing in YES to create a new session. 
-				</p>
+					<p>
+						If your delegate receives the <code>doUserAuthentication</code> callback then you should present a log in or sign up screen. When the user has completed logging in, you should restart the authentication process by calling <code>initiateAuthenticationWithNewSession:</code>
+						and passing in YES to create a new session. 
+					</p>
 
 		</div>
 		
 		
-		<div class="section" id="android_auth">
+			<div class="section" id="android_auth">
 			<h4>
 				Authenticating the Android SDK
 			</h4>
@@ -660,14 +675,14 @@ public void onCreate() {
 		</div>
 
 
-		<div class="section" id="js_auth">
-			<h4>
-				Authenticating the JavaScript SDK
-			</h4>
+			<div class="section" id="js_auth">
+				<h4>
+					Authenticating the JavaScript SDK
+				</h4>
 		
-			<p>
-				Here's how to perform authentication from a Node.js:
-			</p>
+				<p>
+					Here's how to perform authentication from a Node.js:
+				</p>
 
 
 <pre class="prettyprint"><code class="lang-js">
@@ -681,13 +696,16 @@ public void onCreate() {
 </code></pre>
 
 
-			<p>
-				When authenticating from a client application running in the browser the <code>appKey</code> and <code>appSecret</code> values shouldn't be exposed and the application's backend servers must generate the identity token using the secret and return it to the client to successfully authenticate.
-			</p>
+<br>
+
+
+				<p>
+					When authenticating from a client application running in the browser the <code>appKey</code> and <code>appSecret</code> values shouldn't be exposed and the application's backend servers must generate the identity token using the secret and return it to the client to successfully authenticate.
+				</p>
 		
-			<p>
-				Here's how to perform authentication form a browser application:
-			</p>
+				<p>
+					Here's how to perform authentication form a browser application:
+				</p>
 		
 
 <pre class="prettyprint"><code class="lang-js">
@@ -714,10 +732,21 @@ var client = new frankly.FranklyClient
 </code></pre>
 
 
-			<p>
-				The client instance automatically performs reconnection and reauthentication when necessary so the method passed to <a href="http://franklyinc.github.io/frankly-js/FranklyClient.html#open" target="_blank">FranklyClient#open</a> may be called multiple times.
-			</p>
+<br>
+
+
+				<p>
+					The client instance automatically performs reconnection and reauthentication when necessary so the method passed to 
+					<code><a href="http://franklyinc.github.io/frankly-js/FranklyClient.html#open" target="_blank">FranklyClient#open</a></code> may be called multiple times.
+				</p>
 		
+		</div>
+		
+		
+			<div class="section" id="logging_out">
+			
+			</div>
+			
 		</div>
 		
 
@@ -729,19 +758,25 @@ var client = new frankly.FranklyClient
 			<p>
 				The Frankly Web App supports authenticated users by providing a way to customize the login process. You can allow your users to log in using your custom interface by setting both the “Login URL” and the “Logout URL” in the <a href="https://console.franklychat.com/">Frankly Admin Console</a> > Settings > Web App.
 			</p>
+
 		
 <br>
-		
+
+
 			<h4>
 				Login vs Logout URL
 			</h4>
 		
 			<ul>
-				<li>The “Login URL” is a page of your design that users will either enter their credentials for your system, or enter Guest Mode credentials, in order to be authenticated by your system. This page is shown to your users within the app, as described below.</li>
-				<li>The “Logout URL” is the page where users are redirected to when they choose to log out of the system. This page is typically used to log the user out of your entire system, not just the Frankly Web App. An example of this behavior is given below.</li>
+				<li>The “Login URL” is a page of your design that users will either enter their credentials for your system, or enter Guest Mode credentials, 
+					in order to be authenticated by your system. This page is shown to your users within the app, as described below.</li>
+				<li>The “Logout URL” is the page where users are redirected to when they choose to log out of the system. This page is typically used to log 
+					the user out of your entire system, not just the Frankly Web App. An example of this behavior is given below.</li>
 			</ul>
+
 	
 <br>	
+
 		
 			<p>
 				In order to take advantage of this feature, your backend must follow the following directions.
@@ -923,15 +958,20 @@ Location: https://app.franklychat.com/auth/redirect?identity_token={user’s_ide
 
 
 
-	<div class="pager-container">
-	<nav>
-	  <ul class="pager">
-	    <li class="previous"><a href="InitializeSDK.html"><span aria-hidden="true">&larr;</span> Initializing the SDK</a></li>
-	    <li class="next"><a href="BasicIntegration.html">Basic Integration <span aria-hidden="true">&rarr;</span></a></li>
-	  </ul>
-	</nav>
+		<div class="pager-container">
+			<nav>
+			  <ul class="pager">
+			    <li class="previous"><a href="InitializeSDK.html"><span aria-hidden="true">&larr;</span> Initializing the SDK</a></li>
+			    <li class="next"><a href="BasicIntegration.html">Basic Integration <span aria-hidden="true">&rarr;</span></a></li>
+			  </ul>
+			</nav>
+		</div>
+
+
 	</div>
-</div>
+	
+	
+</body>
 
 <br>
 <br>
