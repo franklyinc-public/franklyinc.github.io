@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+<!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
+
+<url>
+  <loc>http://franklyinc.github.io/</loc>
+  <lastmod>2015-07-25T00:59:10+00:00</lastmod>
+  <changefreq>daily</changefreq>
+  <priority>1.00</priority>
+</url>
+<url>
+  <loc>http://franklyinc.github.io/InstallSDK.html</loc>
+  <lastmod>2015-07-25T00:59:10+00:00</lastmod>
+  <changefreq>daily</changefreq>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>http://franklyinc.github.io/InitializeSDK.html</loc>
+  <lastmod>2015-07-25T00:59:10+00:00</lastmod>
+  <changefreq>daily</changefreq>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>http://franklyinc.github.io/Auth.html</loc>
+  <lastmod>2015-07-25T00:59:10+00:00</lastmod>
+  <changefreq>daily</changefreq>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>http://franklyinc.github.io/BasicIntegration.html</loc>
+  <lastmod>2015-07-25T00:59:10+00:00</lastmod>
+  <changefreq>daily</changefreq>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>http://franklyinc.github.io/AdvancedIntegrations.html</loc>
+  <lastmod>2015-07-25T00:59:10+00:00</lastmod>
+  <changefreq>daily</changefreq>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>http://franklyinc.github.io/APIReference.html</loc>
+  <lastmod>2015-07-25T00:59:10+00:00</lastmod>
+  <changefreq>daily</changefreq>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>http://franklyinc.github.io/downloads.html</loc>
+  <lastmod>2015-07-25T00:59:10+00:00</lastmod>
+  <changefreq>daily</changefreq>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>http://franklyinc.github.io/Support.html</loc>
+  <lastmod>2015-07-25T00:59:10+00:00</lastmod>
+  <changefreq>daily</changefreq>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>http://franklyinc.github.io/frankly-js/</loc>
+  <lastmod>2015-07-25T00:59:10+00:00</lastmod>
+  <changefreq>daily</changefreq>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>http://franklyinc.github.io/frankly-js/FranklyClient.html</loc>
+  <lastmod>2015-07-25T00:59:10+00:00</lastmod>
+  <changefreq>daily</changefreq>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>http://franklyinc.github.io/APIReference-JavaScript.html</loc>
+  <lastmod>2015-07-25T00:59:10+00:00</lastmod>
+  <changefreq>daily</changefreq>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>http://franklyinc.github.io/APIReference-Ruby.html</loc>
+  <lastmod>2015-07-25T00:59:10+00:00</lastmod>
+  <changefreq>daily</changefreq>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>http://franklyinc.github.io/APIReference-Python.html</loc>
+  <lastmod>2015-07-25T00:59:10+00:00</lastmod>
+  <changefreq>daily</changefreq>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>http://franklyinc.github.io/frankly-js/index.html</loc>
+  <lastmod>2015-07-25T00:59:10+00:00</lastmod>
+  <changefreq>daily</changefreq>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>http://franklyinc.github.io/frankly-js/FranklyError.html</loc>
+  <lastmod>2015-07-25T00:59:10+00:00</lastmod>
+  <changefreq>daily</changefreq>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>http://franklyinc.github.io/frankly-js/global.html</loc>
+  <lastmod>2015-07-25T00:59:10+00:00</lastmod>
+  <changefreq>daily</changefreq>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>http://franklyinc.github.io/frankly-js/client.js.html</loc>
+  <lastmod>2015-07-25T00:59:10+00:00</lastmod>
+  <changefreq>daily</changefreq>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>http://franklyinc.github.io/frankly-ruby/index.html</loc>
+  <lastmod>2015-07-25T00:59:10+00:00</lastmod>
+  <changefreq>daily</changefreq>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>http://franklyinc.github.io/frankly-python/index.html</loc>
+  <lastmod>2015-07-25T00:59:10+00:00</lastmod>
+  <changefreq>daily</changefreq>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>http://franklyinc.github.io/frankly-js/error.js.html</loc>
+  <lastmod>2015-07-25T00:59:10+00:00</lastmod>
+  <changefreq>daily</changefreq>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>http://franklyinc.github.io/frankly-js/jwt.js.html</loc>
+  <lastmod>2015-07-25T00:59:10+00:00</lastmod>
+  <changefreq>daily</changefreq>
+  <priority>0.41</priority>
+</url>
+</urlset>
