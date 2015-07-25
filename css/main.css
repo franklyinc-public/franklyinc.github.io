@@ -134,6 +134,14 @@ button.btn.btn-primary.btn-lg{
 	color: #fff;
 }
 
+button.btn.btn-primary.btn-lg:hover{
+	background-color: #0068ff;
+}
+
+input.btn.btn-default:hover{
+	background-color: #0068ff;
+}
+
 a.frankly_button.frankly_action_button {
 	color: #fff;
 }
