@@ -205,8 +205,16 @@
 
 					<p>
 						After getting a nonce value from Frankly’s infrastructure, the partner app has to generate an identity token that embeds user’s information 
-						and is signed using the secret key that can be found in the <a href="https://console.franklychat.com/">Frankly Console</a>.
+						and is signed using the <code>appSecret</code>.
 					</p>
+
+
+					<div class="panel panel-default note">
+					  <div class="panel-body">
+					    <b>Note</b>  Your app's <code>appKey</code> and <code>appSecret</code> can be found in the <a href="https://console.franklychat.com/">Frankly Admin Console</a>.
+					  </div>
+					</div>
+
 
 					<p>
 						The JWT token must have the following structure:
@@ -225,7 +233,7 @@
 	Claims
 
 	{
-	  “aak”: &lt;authentication key obtained from frankly console&gt;,
+	  “aak”: &lt;authentication key obtained from frankly admin console&gt;,
 	  “uid”: &lt;unique user identifier&gt; (optional),
 	  “iat”: &lt;token generation time as a unix timestamp&gt;,
 	  “exp”: &lt;token expiration time as a unix timestamp&gt;,
@@ -237,7 +245,7 @@
 
 	HMACSHA256(
 	base64UrlEncode(Header) + "." +	base64UrlEncode(Claims),
-	&lt;authentication secret obtained from frankly console&gt;
+	&lt;authentication secret obtained from frankly admin console&gt;
 	)
 </code></pre>
 
@@ -474,13 +482,15 @@ eyJ0eXAiOiJKV1MiLCJhbGciOiJIUzI1NiIsImN0eSI6ImZyYW5rbHktaXQ7djEifQ.eyJhYWsiOiIwM
 					Next you will need to set up the following:
 				</p>	
 			
-					<ul>
+					<ol>
 						<li><code>FranklyAuthenticationDelegate</code> requires the following functions:
 							<ul>
 								<li><code>(void)identifierWithNonce:(NSString *)nonce preferredRole:(FRSDKAuthenticationRole)preferredRole completion:(void (^)(NSString *identifier))completion</code></li>
 
+
 <br>
-							
+
+
 								<p>
 									This method is where you should utilize your back end server as detailed in <a href="#Generate_Identity_Token">Frankly Server Authentication document</a> to create a valid identifier. 
 									The <code>uid</code> field in the identifier is optional, however, the identifier is still necessary. If you choose not to include a <code>uid</code> then the user will only be allowed  
@@ -489,9 +499,17 @@ eyJ0eXAiOiJKV1MiLCJhbGciOiJIUzI1NiIsImN0eSI6ImZyYW5rbHktaXQ7djEifQ.eyJhYWsiOiIwM
 									the client SDK but your server, as long it includes a valid <code>uid</code>, may choose to put any role in the <code>role</code> and the SDK will honor that.
 								</p>
 
+
 <br>
 
-								<li><strong>You must call completion or the process will never finish.</strong></li>
+							
+								<div class="panel panel-default" style="margin-right:100px">
+								  <div class="panel-body">
+								    <b>Note</b> You must call completion or the process will never finish.
+								  </div>
+								</div>
+
+								
 								<li>We have included a test function in <code>FranklySDK.h, retrieveIdentitifierWithUserID:Nonce:authKey:authSecret:role:completionBlock,</code> 
 								that will allow you to bypass your server and retrieve an identifier from Frankly’s servers.  Because it requires putting in your auth key and secret, 
 								<strong>it is only for testing.</strong>
@@ -502,9 +520,6 @@ eyJ0eXAiOiJKV1MiLCJhbGciOiJIUzI1NiIsImN0eSI6ImZyYW5rbHktaXQ7djEifQ.eyJhYWsiOiIwM
 								</li>
 							</ul>
 							</li>
-							<li><code>authenticationDidSucceedWithUserID:(NSNumber*)</code> - After this message is received, you may use the SDK.</li>
-							<li><code>authenticationDidFailWithError:(NSError*)</code> - If this message is received, you need to start authentication process over before you may use the SDK.</li>
-					</ul>
 
 
 <br>
@@ -534,6 +549,9 @@ eyJ0eXAiOiJKV1MiLCJhbGciOiJIUzI1NiIsImN0eSI6ImZyYW5rbHktaXQ7djEifQ.eyJhYWsiOiIwM
 <br>
 
 
+							<li><code>authenticationDidSucceedWithUserID:(NSNumber*)</code> - After this message is received, you may use the SDK.</li>
+
+
 <pre class="prettyprint"><code class="lang-cpp">
 - (void)authenticationDidSucceedWithUserID:(NSNumber *)userID {
 
@@ -543,7 +561,7 @@ eyJ0eXAiOiJKV1MiLCJhbGciOiJIUzI1NiIsImN0eSI6ImZyYW5rbHktaXQ7djEifQ.eyJhYWsiOiIwM
 </code></pre>
 
 
-<br>
+							<li><code>authenticationDidFailWithError:(NSError*)</code> - If this message is received, you need to start authentication process over before you may use the SDK.</li>
 
 
 <pre class="prettyprint"><code class="lang-cpp">
@@ -553,14 +571,19 @@ eyJ0eXAiOiJKV1MiLCJhbGciOiJIUzI1NiIsImN0eSI6ImZyYW5rbHktaXQ7djEifQ.eyJhYWsiOiIwM
 }
 </code></pre>
 
+					</ol>
+
 
 <br>
+
 
 					<p>
 						Once you're done setting up those pieces, try running the build.
 					</p>
+
 				
 <br>
+
 				
 					<p>
 						If your delegate receives the <code>doUserAuthentication</code> callback then you should present a log in or sign up screen. When the user has completed logging in, you should restart the authentication process by calling <code>initiateAuthenticationWithNewSession:</code>

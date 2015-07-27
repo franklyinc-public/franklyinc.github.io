@@ -192,7 +192,14 @@ img {
 
 .section {
 	padding-top: 20px;
-	padding-bottom: 20px;
+	padding-bottom: 40px;
+}
+
+.panel.panel-default.note {
+	margin-top: 50px;
+	margin-bottom: 50px;
+	margin-left: 50px;
+	margin-right: 100px;
 }
 
 /*For Wells*/

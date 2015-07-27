@@ -39,6 +39,7 @@
 				        '<li><a href="#Files">Files</a></li>',
 				        '<li><a href="#Moderation">Moderation</a></li>',
 			        '</ul>',
+				'<li><a href="#JS_SDK_Meteor">JavaScript SDK + Meteor</a></li>',
 			'</ul>',
 		'</li>',
 		'<li><a href="APIReference.html">API Reference</a>',
@@ -132,6 +133,7 @@
 				        <li><a href="#Files">Files</a></li>
 				        <li><a href="#Moderation">Moderation</a></li>
 			        </ul>
+				<li><a href="#JS_SDK_Meteor">Using the JS SDK with Meteor</a></li>
 			</ul>
 
 	</div>
@@ -554,7 +556,7 @@ require 'frankly-ruby'
 <br>
 
 			<p>
-				As we can see here, the announcement is created with the same structure than a regular message. The content of the announcement well be set as the message content when it is published to the room and the contents field obeys the rules about inline and remote content that were described in the <em>Messages</em> section.
+				As we can see here, the announcement is created with the same structure than a regular message. The content of the announcement well be set as the message content when it is published to the room and the contents field obeys the rules about inline and remote content that were described in the <i>Messages</i> section.
 			</p>
 
 		</div>
@@ -566,7 +568,7 @@ require 'frankly-ruby'
 			</h4>
 
 			<p>
-				A central concept of the <b>Frankly API</b> is the <em>USer</em>. Users represent people using the chat platform within an app. They are created during authentication and one using in the <b>Frankly API</b> should be to a one user on the host application.
+				A central concept of the <b>Frankly API</b> is the <i>User</i>. Users represent people using the chat platform within an app. They are created during authentication and one using in the <b>Frankly API</b> should be to a one user on the host application.
 			</p>
 
 		</div>
@@ -685,6 +687,56 @@ ban = client.read_user_ban(user_id)
 </code></pre>
 
 		</div>
+		
+		
+		<div class="section" id="JS_SDK_Meteor">
+			<h3>
+				Using the JavaScript SDK with Meteor
+			</h3>
+			
+			<p>
+				For backend frameworks that simulate synchronicity, such as <a href="https://www.meteor.com/">Meteor</a> which simulates synchronicity using Fibers, you will need to put a 
+				wrapper around the asynchronous calls made within the Frankly JavaScript SDK. The Frankly JavaScript SDK makes use of the Promise design 
+				pattern, putting asynchronous callbacks in the <code>.then()</code> and <code>.catch()</code> functions of a call.
+			</p>
+			
+			<p>
+				In order to make asynchronous callbacks within a Meteor environment, you must run the code within a Fiber. This can be achieved by 
+				utilising the <code>Meteor.bindEnvironment</code> call, and passing the argument returned by the initial call.
+			</p>
+
+			<div class="panel panel-default note">
+			  <div class="panel-body">
+			    <b>Note</b> This is only applicable for using the Frankly JavaScript SDK on the server, it is not necessary for running the SDK on the client.
+			  </div>
+			</div>
+			
+			<p>
+				Both traditional callbacks and Promise callbacks will need to be wrapped in order for Meteor process the code. See the example below:
+			</p>
+
+			
+<pre class="prettyprint"><code class="lang-js">
+client = new FranklySdk.Client(Meteor.settings.FranklyServerProtocol);
+client.open(app.authKey, app.authSecret);
+
+client.on('connect', <strong>Meteor.bindEnvironment</strong>(function() {
+    client.readRoomList()
+        .then(<strong>Meteor.bindEnvironment</strong>(function(roomList) {  
+            // Example code
+        }))
+        .catch(<strong>Meteor.bindEnvironment</strong>(function(error) {
+            client.close();
+            console.log("An error occurred: ", error);
+        }));
+}));
+</code></pre>
+
+
+<br>		
+
+
+		</div>
 
 
 <br>
@@ -692,14 +744,14 @@ ban = client.read_user_ban(user_id)
 <br>
 <br>
 
-<div class="pager-container">
-<nav>
-  <ul class="pager">
-    <li class="previous"><a href="BasicIntegration.html"><span aria-hidden="true">&larr;</span> Basic Integration</a></li>
-    <li class="next"><a href="APIReference.html">API Reference <span aria-hidden="true">&rarr;</span></a></li>
-  </ul>
-</nav>
-</div>
+	<div class="pager-container">
+		<nav>
+		  <ul class="pager">
+		    <li class="previous"><a href="BasicIntegration.html"><span aria-hidden="true">&larr;</span> Basic Integration</a></li>
+		    <li class="next"><a href="APIReference.html">API Reference <span aria-hidden="true">&rarr;</span></a></li>
+		  </ul>
+		</nav>
+	</div>
 
 </div>
 
