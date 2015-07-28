@@ -262,6 +262,10 @@ body .fill {
 }
 
 /*For Email Signup Form*/
+.input-group {
+   width: 300px
+}
+
 .mc-field-group.input-group.email-signup input{
 	border-radius: 4px;
 }
