@@ -39,6 +39,7 @@
 			'<ul>',
 				'<li><a href="#Open_Room">Directly Opening a Room</a></li>',
 				'<li><a href="#activity_indicator">Activity Indicator</a></li>',
+				'<li><a href="#partial_view">Partial View Rooms</a></li>',
 				'<li><a href="#Server_APIs">Server API Access</a></li>',
 				'<li><a href="#Installing_ServerSDKs">Server SDKs</a></li>',
 				'<li><a href="#Indepth_Usage">Indepth Usage</a></li>',
@@ -134,6 +135,7 @@
 			<ul>
 				<li><a href="#Open_Room">Directly Opening a Room</a>
 				<li><a href="#activity_indicator">Activity Indicator</a></li>
+				<li><a href="#partial_view">Partial View Rooms</a></li>
 				<li><a href="#Server_APIs">Server API Access</a>
 				<li><a href="#Installing_ServerSDKs">Server SDKs</a></li>
 				<li><a href="#In-depth_Usage">In-depth Usage</a>
@@ -332,10 +334,278 @@ context.startActivity(intent);
 			<h4>
 				Android Activity Indicator
 			</h4>
+
+
+			<p>
+				User activity statistics can be retrieved for a single Room, for all Rooms individually, or for the app as a whole.
+			</p>
+			
+			
+<br>
+
+
+			<p>
+				<b>Single Room</b> To retrieve the statistics for a single Room, you can do the following:
+			</p>
+			
+			
+<pre class="prettyprint"><code class="lang-java">
+final RoomManager roomManager = RoomManager.get(context);
+final Room room = roomManager.get(roomId);
+final StatisticManager statisticManager = StatisticManager.getInstance(context);
+final List&lt;Statistic&gt; statistics = statisticManager.get(room);
+</code></pre>
+
+
+<br>
+
+
+			<p>
+				<b>All Rooms Individually</b> To retrieve the statistics for all rooms individually, you can do the following:
+			</p>
+
+
+<pre class="prettyprint"><code class="lang-java">
+final StatisticManager statisticManager = StatisticManager.getInstance(context);
+final Map&lt;Room, List&lt;Statistic&gt;&gt; roomToStatistics = statisticManager.get();
+</code></pre>
+
+
+<br>
+
+
+			<p>
+				<b>App-level</b> To retrieve the statistics for the app as a whole, you can do the following:
+			</p>
+			
+			
+<pre class="prettyprint"><code class="lang-java">
+final StatisticManager statisticManager = StatisticManager.getInstance(context);
+final List&lt;Statistic&gt; statistics = statisticManager.getAppStatistics();
+</code></pre>
+
+
+<br>
+
+
+			<p>
+				<b>Realtime Updates</b> In order to listen to realtime app-level user activity statistics, you must create an 
+				<code>OnChangeListener</code> and register/unregister in <code>onResume()</code>/<code>onPause()</code>, respectively, 
+				in your <code>Fragment</code> or <code>Activity</code>:
+			</p>
+			
+			
+<pre class="prettyprint"><code class="lang-java">
+private class StatisticOnChangeListener implements Manager.OnChangeListener&lt;Statistic&gt; {
+    @Override
+    public void onChange(final List&lt;Statistic&gt; statistics) {
+        // Put your statistics update handling logic here.
+    }
+
+    @Override
+    public void onChange(final Statistic statistic) {
+        // This method is not currently used by the Frankly SDK for statistics.
+    }
+
+    @Override
+    public void onDelete(final long id) {
+        // This method is not currently used by the Frankly SDK for statistics.
+    }
+}
+
+private final StatisticOnChangeListener statisticOnChangeListener = new StatisticOnChangeListener();
+
+@Override
+public void onPause() {
+    super.onPause();
+
+    final StatisticManager statisticManager = StatisticManager.getInstance(context);
+
+    this.statisticManager.unregisterForChanges(this.statisticOnChangeListener);
+    ...
+}
+
+@Override
+public void onResume() {
+    super.onResume();
+
+    final StatisticManager statisticManager = StatisticManager.getInstance(context);
+
+    this.statisticManager.registerForChanges(this.statisticOnChangeListener);
+    ...
+}
+</code></pre>
+
+
+			<div class="panel panel-default note">
+			  <div class="panel-body">
+			    <b>Note</b> Currently the <code>onChange(Statistic)</code> and <code>onDelete(long)</code> methods are not used for user activity statistic updates.
+			  </div>
+			</div>
+
+			
+		</div>
+
+
+		<div class="section" id="partial_view">
+			<h3>
+				Partial View Rooms
+			</h3>
+
+
+			<p>
+				The concept of a Partial View Room allows developers to place the Frankly chat Room UI in the same view as another piece of content, such as a photo or video.
+			</p>
+
+		</div>
+
+
+		<div class="section" id="ios_partial_view">
+			<h4>
+				iOS Partial View Rooms
+			</h4>
+
+
+			<p>
+				<i>Coming soon!</i>
+			</p>
+
+		</div>
+
+
+		<div class="section" id="android_partial_view">
+			<h4>
+				Android Partial View Rooms
+			</h4>
+
+
+			<p>
+				The Frankly Android SDK allows developers to embed the Frankly Room UI in their UI by using <a href="http://developer.android.com/guide/components/fragments.html">
+					Android's concept of Fragments</a>. Below are the Fragments made available in the Frankly SDK.
+			</p>
+			
+			
+<br>
+
+
+			<h5>
+				<b><code>MessageListFragment</code></b>
+			</h5>
+			
 			
 			<p>
-				<i>Coming shortly!</i>
+				The <code>MessageListFragment</code> class contains everything needed to show the message list, and it can be used in a custom activity/layout that you create. 
+				All message list-related functionality that can be seen in the provided <code>RoomActivity</code>, which uses this fragment class, is available in this fragment.
 			</p>
+
+
+<br>
+
+
+			<h5>
+				<b><code>MessageInputFragment</code></b>
+			</h5>
+			
+			
+			<p>
+				The <code>MessageInputFragment</code> class contains everything needed to send messages into a Room, and it can be used in a custom activity/layout that you create. 
+				All message input field-related functionality that can be seen in the provided <code>RoomActivity</code>, which uses this fragment class, is available in this fragment.
+			</p>
+
+		</div>
+
+
+		<div class="section" id="push_notifications">
+			<h3>
+				Push Notifications
+			</h3>
+			
+			<p>
+				If configured, the Frankly Chat Service augments the re-engagement abilities of Sticky Messages by sending users push notifications whenever 
+				there is a Sticky Message sent in a Room they have subscribed to.
+			</p>
+			
+		</div>
+
+
+		<div class="section" id="ios_push_notifications">
+			<h3>
+				Enabling Push Notifications for Your iOS App
+			</h3>
+			
+			<p>
+				<i>Coming soon!</i>
+			</p>
+			
+		</div>
+		
+		
+		<div class="section" id="android_push_notifications">
+			<h3>
+				Enabling Push Notifications for Your Android App
+			</h3>
+			
+			<p>
+				To enable push notifications for the Frankly Android SDK, you must first generate a GCM token. Details on how to do that can be found 
+				under "<a href="https://developers.google.com/cloud-messaging/android/client">Implementing GCM Client on Android</a>" on the Google Developers portal.
+			</p>
+			
+			
+			<p>
+				The generated GCM token should then be passed into the Frankly SDK:
+			</p>
+			
+			
+<pre class="prettyprint"><code class="lang-java">
+final InstanceID instanceId = InstanceID.getInstance(this);
+final String token = instanceId.getToken(senderId, GoogleCloudMessaging.INSTANCE_ID_SCOPE);
+...
+FranklySdk.setupGcm(token);
+</code></pre>
+
+
+<br>
+
+
+			<p>
+				You will also have to declare the Frankly GCM Listener Service in your <code>AndroidManifest.xml</code>, where <code>&lt;notification_icon&gt;</code> 
+				is the icon that should be used in the Android status bar:
+			</p>
+			
+			
+<pre class="prettyprint"><code class="lang-xml">
+&lt;service
+        android:exported="false"
+        android:icon="&lt;notification_icon&gt;"
+        android:name="com.frankly.franklysdk.gcm.FranklyGcmListenerService"&gt;
+    &lt;intent-filter&gt;
+        &lt;action android:name="com.google.android.c2dm.intent.RECEIVE" /&gt;
+	&lt;/intent-filter&gt;
+&lt;/service&gt;
+</code></pre>
+
+
+<br>
+
+
+			<p>
+				When notification is clicked, action <code>com.frankly.franklysdk.OPEN_ROOM</code> will be performed and the action contains 
+				<code>com.frankly.franklysdk.room_id</code> extra long value. You can configure the action to appropriate <code>Activity</code> in your <code>AndroidManifest.xml</code>:
+			</p>
+
+
+<pre class="prettyprint"><code class="lang-xml">
+&lt;activity
+    android:name="com.frankly.franklysdk.app.RoomActivity"
+    ...&gt;
+    &lt;intent-filter&gt;
+        &lt;action android:name="com.frankly.franklysdk.OPEN_ROOM"/&gt;
+        &lt;category android:name="android.intent.category.DEFAULT"/&gt;
+	&lt;/intent-filter&gt;
+&lt;/activity&gt;
+</code></pre>
+
+
 			
 		</div>
 
