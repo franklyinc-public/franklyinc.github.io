@@ -433,21 +433,32 @@ userManager.update(user);
 				</p>
 
 
+<br>
+
+
 				<p>
 					Set the <code>displayName</code> and <code>avatarImageURL</code> properties of the <code>options</code> parameter within the <code>updateUser</code> function:
 				</p>
 
 
 <pre class="prettyprint"><code class="lang-js">
-var frankly = require('frankly-js').Client('https');
+var frankly = require('frankly-js').Client('wss');
 
 …
 frankly.updateUser(userId, {
    displayName: "Example Name",
-   avatarImageURL: "http://www.example.com/users/1234/profile.jpg"
+<!--   avatarImageURL: "http://www.example.com/users/1234/profile.jpg"-->
 });
 </code></pre>
 
+
+				<div class="panel panel-default note">
+				  <div class="panel-body">
+				    <b>Note</b> <i>08/17/2015</i> The property to set the user's Profile Avatar will be updated soon to specify the process for uploading the image asset to Frankly Servers 
+					then setting it as the user's Profile Avatar once upload is complete. Please contact us at 
+					<a href="mailto:platform-support@franklychat.com">platform-support@franklychat.com</a> for more information if this is critical to your implementation.
+				  </div>
+				</div>
 
 		</div>
 
