@@ -36,7 +36,7 @@
 		'<li><a href="Auth.html">Authenticating</a>',
 		'<li><a href="BasicIntegration.html">Basic Integration</a>',
 			'<ul>',
-				'<li><a href="#First_Room">First Room List</a></li>',
+				'<li><a href="#Room_List">Room List</a></li>',
 				'<li><a href="#Set_DisplayName_Avatar">Profile Info</a></li>',
 				'<li><a href="#JS_Room_Embed">Embeddable Rooms</a></li>',
 				'<li><a href="#UI_Customization">Customizing UI</a></li>',
@@ -119,7 +119,7 @@
 <br>
 
 			<ul>
-				<li><a href="#First_Room">Setting Up Your First Room List</a>
+				<li><a href="#Room_List">Setting Up Your Room List</a>
 				<li><a href="#Set_DisplayName_Avatar">Setting the Display Name & Profile Avatar</a>
 				<li><a href="#JS_Room_Embed">Embedding a Room on Web</a></li>
 				<li><a href="#UI_Customization">Customizing UI</a></li>
@@ -130,42 +130,150 @@
 <br>
 
 	<div class="doc">
-		<div class="section" id="First_Room">
+		<div class="section" id="Room_List">
 			<h3>
-				Setting Up Your First Room List
+				Setting Up Your Room List
 			</h3>
+
 
 			<p>
 				<i>Important Note</i> Please make sure you've set up at least one Room in the Admin Console before proceeding. 
 				If you're unsure of how to do this or if you don't have Admin Console access, please see <i><a href="http://franklyinc.github.io">Getting Started</a></i> for next steps.
 			</p>
-	
+
+
 <br>
+
 
 			<h4>
 				Calling the Room List via the iOS SDK
 			</h4>
 
+
 <br>
 
+
 			<p>
-				To call the Room List, retrieve the room list controller, <code>[FranklySDK roomListViewController]</code>, and present it in your app or push it on your navigation controller.
+				To call the Room List, retrieve the room list controller and present it in your app or push it on your navigation controller. You have two options for room list 
+				controller to call, depending on your app's configuration:
+				
+				<ol>
+					<li><code>[FranklySDK indexViewController]</code> - Retrieves a view controller that returns only the Room List.</li>
+					<li><code>[FranklySDK indexNavigationController]</code> - Retrieves a view controller that returns the Room List with the Frankly navbar.</li>
+				</ol>	
 			</p>
-		
+
+
+<br>
+
+
+			<p>
+				For partners wanting to use Conditional Rooms, calling either <code>indexViewController</code> or <code>indexNavigationController</code> will present the user
+				with Conditional Rooms you have already configured in the Frankly Admin Console.
+			</p>
+
+
+			<div class="panel panel-default note">
+			  <div class="panel-body">
+			    <b>Note</b> <code>[FranklySDK roomListViewController]</code> and <code>[FranklySDK roomListNavigationController]</code> are being deprecated by the end of August, 2015.
+			  </div>
+			</div>
+
+
 <br>
 <br>
+
 
 			<h4>
 				Calling the Room List via the Android SDK
 			</h4>
 		
 			<p>	
-				The Frankly SDK contains a <code>RoomListActivity</code> class which contains everything needed to show the chatroom list and allow the user to join chatrooms:
+				The Frankly SDK contains two classes which contain everything needed to show the Room List and allow the user to participate in chat:
+				
+				<ul>
+					<li><code>RoomListActivity</code></li>
+					<li><code>ConditionalRoomListActivity</code></li>
+				</ul>
+			</p>
+
+			
+<br>
+
+
+			<h5>
+				<b><code>RoomListActivity</code></b>
+			</h5>
+			
+			
+			<p>
+				If you are not using the Conditional Rooms feature, you will need to use the <code>RoomListActivity</code> class which contains everything needed 
+				to show the regular Room List and allow the user to join any Room. To use this class you will need to declare it in your <code>AndroidManifest.xml</code> 
+				(as described under <a href="InitializeSDK.html#Initializing_Android">Initializing the Android SDK</a>) where <code>&lt;room_list_title&gt;</code> is the 
+				title to show in the activity:
 			</p>
 
 
+<pre class="prettyprint"><code>
+&lt;activity
+    android:name="com.frankly.franklysdk.app.RoomListActivity"
+    android:theme="@style/FranklySdk.Theme"
+    android:configChanges="keyboardHidden|orientation|screenSize"
+    android:label="&lt;room_list_title&gt;"
+    android:screenOrientation="portrait" /&gt;
+</code></pre>
+
+
+<br>
+
+
+			<p>
+				The activity can then be started just like any other activity:
+			</p>
+
 <pre class="prettyprint"><code class="lang-java">
 Intent intent = new Intent(context, RoomListActivity.class);
+
+context.startActivity(intent);
+</code></pre>
+
+
+<br>
+
+
+			<h5>
+				<b><code>ConditionalRoomListActivity</code></b>
+			</h5>
+			
+			
+			<p>
+				If you are using the Conditional Rooms feature, you will need to use the <code>ConditionalRoomListActivity</code> class which contains everything needed 
+				to show the Room List with the Conditional Room Selector which allow users to specify the conditions (which you have set up in the Frankly Admin Console) 
+				that apply to them, and allow users to join any unlocked Rooms. To use this class, you will need to declare it in your <code>AndroidManifest.xml</code> 
+				(as described under <a href="InitializeSDK.html#Initializing_Android">Initializing the Android SDK</a>) where <code>&lt;room_list_title&gt;</code> is the 
+				title to show in the activity:
+			</p>
+			
+			
+<pre class="prettyprint"><code>
+&lt;activity
+    android:name="com.frankly.franklysdk.app.ConditionalRoomListActivity"
+    android:theme="@style/FranklySdk.Theme"
+    android:configChanges="keyboardHidden|orientation|screenSize"
+    android:label="&lt;room_list_title&gt;"
+    android:screenOrientation="portrait" /&gt;
+</code></pre>
+
+
+<br>
+
+
+			<p>
+				The activity can then be started just like any other activity:
+			</p>
+
+<pre class="prettyprint"><code class="lang-java">
+Intent intent = new Intent(context, ConditionalRoomListActivity.class);
 
 context.startActivity(intent);
 </code></pre>
@@ -280,7 +388,8 @@ final String userAvatarUrlString = userManager.uploadUserAvatar(context, intent)
 
 
 				<p>
-					Note that simply uploading the image does not tie the image to any particular user. The returned URL string must be set on a User object and passed to <code>UserManager</code> for persisting as follows:
+					Note that simply uploading the image does not tie the image to any particular user. The returned URL string must be set on a User object 
+					and passed to <code>UserManager</code> for persisting as follows:
 				</p>
 
 
@@ -319,8 +428,27 @@ userManager.update(user);
 				</h4>
 		
 				<p>
-					<i>Coming soon!</i>
+					A user can have a Display Name and Profile Avatar specified by using the <code>updateUser</code> function within the Frankly JavaScript SDK. 
+					Note that the Profile Image must have a publicly accessible URL in order to be used within Frankly.
 				</p>
+
+
+				<p>
+					Set the <code>displayName</code> and <code>avatarImageURL</code> properties of the <code>options</code> parameter within the <code>updateUser</code> function:
+				</p>
+
+
+<pre class="prettyprint"><code class="lang-js">
+var frankly = require('frankly-js').Client('https');
+
+…
+frankly.updateUser(userId, {
+   displayName: "Example Name",
+   avatarImageURL: "http://www.example.com/users/1234/profile.jpg"
+});
+</code></pre>
+
+
 		</div>
 
 	</div>
@@ -578,13 +706,13 @@ userManager.update(user);
 <pre class="prettyprint"><code class="lang-xml">
 &lt;?xml version="1.0" encoding="utf-8"?&gt;
 &lt;resources&gt;
-    &lt;color name="frankly_sdk_primary_background"&gt;#151515&lt;/color&gt;
-    &lt;color name="frankly_sdk_primary_foreground"&gt;#FFFFFF&lt;/color&gt;
+    &lt;color name="frankly_sdk_attention"&gt;#4891F0&lt;/color&gt;
     &lt;color name="frankly_sdk_accent_background"&gt;#FD3C1C&lt;/color&gt;
     &lt;color name="frankly_sdk_accent_foreground"&gt;#FFFFFF&lt;/color&gt;
     &lt;color name="frankly_sdk_brand_background"&gt;#252525&lt;/color&gt;
     &lt;color name="frankly_sdk_brand_foreground"&gt;#FFFFFF&lt;/color&gt;
-    &lt;color name="frankly_sdk_attention"&gt;#4891F0&lt;/color&gt;
+    &lt;color name="frankly_sdk_primary_background"&gt;#151515&lt;/color&gt;
+    &lt;color name="frankly_sdk_primary_foreground"&gt;#FFFFFF&lt;/color&gt;
 &lt;/resources&gt;
 </code></pre>			
 			
@@ -599,12 +727,8 @@ userManager.update(user);
 							<td><b>Use Case</b></td>
 						</tr>
 						<tr>
-							<td><code>frankly_sdk_primary_background</code></td>
-							<td>Activity actionbar background</td>
-						</tr>
-						<tr>
-							<td><code>frankly_sdk_primary_foreground</code></td>
-							<td>Activity actionbar foreground</td>
+							<td><code>frankly_sdk_attention</code>
+							<td>Indicating an attention to user such as new sticker pack indicator and activity indicator base color</td>
 						</tr>
 						<tr>
 							<td><code>frankly_sdk_accent_background</code></td>
@@ -623,8 +747,12 @@ userManager.update(user);
 							<td>Foreground items color where the background has <code>frankly_sdk_brand_background</code> color such as sticky messages foreground items</td>
 						</tr>
 						<tr>
-							<td><code>frankly_sdk_attention</code>
-							<td>Indicating an attention to user such as new sticker pack indicator and activity indicator base color</td>
+							<td><code>frankly_sdk_primary_background</code></td>
+							<td>Activity actionbar background</td>
+						</tr>
+						<tr>
+							<td><code>frankly_sdk_primary_foreground</code></td>
+							<td>Activity actionbar foreground</td>
 						</tr>
 					  </table>
 				</div>

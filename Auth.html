@@ -629,36 +629,55 @@ eyJ0eXAiOiJKV1MiLCJhbGciOiJIUzI1NiIsImN0eSI6ImZyYW5rbHktaXQ7djEifQ.eyJhYWsiOiIwM
 <br>
 
 				<h5>
-					<b>Setting up an Authentication Listener</b>
+					<b>Setting up an IdentityTokenGenerator</b>
 				</h5>
 			
 			
 				<p>	
-					Frankly SDK needs a user's identity token for user authentication. So, you should implement <code>IdentityTokenGenerator</code> class to do so.
+					The Frankly SDK needs a user's identity token for user authentication. To do this, you need to implement an <code>IdentityTokenGenerator</code> class.
 				</p>
 
 
 <pre class="prettyprint"><code class="lang-java">
 private class YourIdentityTokenGenerator extends BaseIdentityTokenGenerator {
-    public boolean supported(Role role) {
-        ...
+    private static final User.Role DEFAULT_ROLE = ...
+
+    protected YourIdentityTokenGenerator() {
+        super(DEFAULT_ROLE);
     }
 
-    public String generateIdentityToken(Context context, String nonce) throws IOException {
-        // For security, post nonce to your backend to retrieve an identity token.
-        ...
+    @Override
+    public String generateIdentityToken(final Context context, final String nonce) throws IOException {
+        final User.Role suggestedRole = this.getRole();
+        final String partnerUsername = this.getPartnerUsername();
+
+        // Using the nonce, the suggested role, and the partner username (which is simply the
+        // username of the current user that is unique to your app), retrieve an identity token
+        // from your server.
+        final String identityToken = [Server network request];
 
         return identityToken;
+    }
+
+    @Override
+    public boolean supported(final User.Role role) {
+        ...
     }
 }
 </code></pre>
 
 
+<br>
+
+
 				<div class="panel panel-default" style="margin-right:100px">
 				  <div class="panel-body">
-					<b>Note</b> The identity token is meant to be retrieved from the your servers rather than being hardcoded into the app.
+					<b>Note</b> The identity token is meant to be retrieved from the your servers rather than being generated within the app.
 				  </div>
 				</div>
+
+
+<br>
 
 
 				<p>
@@ -675,7 +694,9 @@ public enum Role {
 
 
 				<p>
-					After defining the <code>IdentityTokenGenerator</code> class, you must create an instance of the class and pass it into the Frankly SDK’s Authenticator class:
+					After defining the <code>IdentityTokenGenerator</code> class, you must create an instance of the class and pass it into the 
+					Frankly SDK’s <code>Authenticator</code> class. User information should be initialized before login. When the <code>suggestedRole</code> 
+					or <code>partnerUsername</code> differs from what was previously passed in, the Frankly SDK immediately triggers a logout for the previous user:
 				</p>
 
 
@@ -684,10 +705,25 @@ public enum Role {
 
 <pre class="prettyprint"><code class="lang-java">
 IdentityTokenGenerator identityTokenGenerator = new YourIdentityTokenGenerator();
-Authenticator authenticator = Authenticator.getInstance(context);
 
-authenticator.setIdentityTokenGenerator(identityTokenGenerator);
+FranklySdk.setIdentityTokenGenerator(insecureIdentityTokenGenerator);
+FranklySdk.initAuthentication(suggestedRole, partnerUsername);
 </code></pre>
+
+
+<br>
+
+
+				<h5>
+					<b>Activity Declaration</b>
+				</h5>
+				
+				<p>
+					In order to make use of the activities provided by the Frankly SDK, you will need to add them to your <code>AndroidManifest.xml</code>. 
+					In particular, you will need to add either the <code>ConditionalRoomListActivity</code> definition or the <code>RoomListActivity</code> definition, depending on whether 
+					you are using Conditional Rooms or not, as well as the <code>RoomActivity</code> definition. The <code>AndroidManifest.xml</code> definitions for all of these classes, as 
+					well as other details about them, can be found under <a href="InitializeSDK.html#Initializing_Android">Basic Integration > Room List</a>.
+				</p>
 
 
 <br>
@@ -698,7 +734,8 @@ authenticator.setIdentityTokenGenerator(identityTokenGenerator);
 				</h5>
 			
 				<p>
-					<b>Login Callback</b> For user login, you should provide a login request callback by using <code>FranklySdk.setLoginRequestCallback()</code>.
+					<b>Login Request Callback</b> In order to handle user logins, you need to implement a <code>RequestCallback</code> and pass an instance of it 
+					to <code>FranklySdk.setLoginRequestCallback(FranklySdk.RequestCallback)</code>:
 				</p>
 			
 
@@ -706,16 +743,18 @@ authenticator.setIdentityTokenGenerator(identityTokenGenerator);
 
 			
 <pre class="prettyprint"><code class="lang-java">
-private static final FranklySdk.RequestCallback loginRequestCallback = new FranklySdk.RequestCallback() {
+private static class LoginRequestCallback implements FranklySdk.RequestCallback {
     @Override
     public void onRequest(final Context context) {
-        final Intent intent = new Intent(context, LoginActivity.class);
+        final Intent intent = new Intent(context, YourLoginActivity.class);
 
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
         context.startActivity(intent);
     }
-};
+}
+
+private static final LoginRequestCallback LOGIN_REQUEST_CALLBACK = new LoginRequestCallback();
 
 @Override
 public void onCreate() {
@@ -723,7 +762,7 @@ public void onCreate() {
 
     FranklySdk.initialize(this);
     FranklySdk.setVerbose(true);
-    FranklySdk.setLoginRequestCallback(loginRequestCallback);
+    FranklySdk.setLoginRequestCallback(LOGIN_REQUEST_CALLBACK);
 }
 </code></pre>
 
@@ -732,8 +771,31 @@ public void onCreate() {
 
 
 			<p>
-				<b>Show Login Dialog Callback</b> Frankly SDK provides a default login dialog for easy integration by using <code>FranklySdk.setShowLoginDialogCallback()</code>, but you can replace it with your own implementation as well.
+				<b>Show Login Dialog Request Callback</b> The Frankly SDK provides a default login dialog for easy integration support of Guest Users by using 
+				<code>FranklySdk.setShowLoginDialogCallback(FranklySdk.RequestCallback)</code>, but you can replace it with a custom implementation as well.
 			</p>
+
+
+<br>
+
+
+			<h5>
+				<b>Explicit Login</b>
+			</h5>
+
+			
+			<p>
+				If you setup a custom <code>IdentityTokenGenerator</code> with user information, the Frankly SDK will trigger a login automatically as soon as 
+				it is needed. However, you can also explicitly trigger a login manually at any time by calling:
+			</p>
+			
+			
+<pre class="prettyprint"><code class="lang-java">
+FranklySdk.login();
+</code></pre>
+
+
+<br>
 
 		</div>
 
