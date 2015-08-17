@@ -207,7 +207,33 @@
 			</h4>
 	
 			<p>
-				<code>RoomActivity</code> allows the user to join a specified chatroom directly.
+				If you want to directly enter a specific Room from your code, you will need to use the <code>RoomActivity</code> class which contains 
+				everything needed to allow the user to join a specific room.
+			</p>
+			
+			
+			<p>
+				To use this class, you will need to declare it in your <code>AndroidManifest.xml</code>:
+			</p>
+			
+			
+<pre class="prettyprint"><code class="lang-java">
+&lt;activity
+    android:name="com.frankly.franklysdk.app.RoomActivity"
+    android:configChanges="keyboardHidden|orientation|screenSize"
+    android:label="@string/frankly_sdk_title_activity_room"
+    android:launchMode="singleTop"
+    android:screenOrientation="portrait"
+    android:theme="@style/FranklySdk.Theme"
+    android:windowSoftInputMode="stateHidden|adjustResize"/&gt;
+</code></pre>
+
+
+<br>
+
+
+			<p>
+				The activity can be started just like any other activity, but the ID of the Room must be specified in the extras:
 			</p>
 
 
@@ -217,8 +243,9 @@ Intent intent = new Intent(this, RoomActivity.class);
 intent.putExtra(RoomActivity.EXTRA_ROOM_ID, roomId);
 
 context.startActivity(intent);
-</code></pre>	
-		
+</code></pre>
+
+
 		</div>
 		
 		
