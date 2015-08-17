@@ -223,6 +223,7 @@
 					<div class="panel panel-default note">
 					  <div class="panel-body">
 					    <b>Note</b>  Your app's <code>appKey</code> and <code>appSecret</code> can be found in the <a href="https://console.franklychat.com/">Frankly Admin Console</a>.
+						To request an account, please contact us at <a href="mailto:platform-support@franklychat.com">platform-support@franklychat.com</a>.
 					  </div>
 					</div>
 
@@ -263,11 +264,14 @@
 
 <br>
 
+
 					<p>
 						Once encoded and signed with the authentication secret the app should have a value that looks like this:
 					</p>
 
+
 <br>
+
 
 <a id="identity_token">
 <pre class="prettyprint"><code>
@@ -443,7 +447,7 @@ eyJ0eXAiOiJKV1MiLCJhbGciOiJIUzI1NiIsImN0eSI6ImZyYW5rbHktaXQ7djEifQ.eyJhYWsiOiIwM
 					Then call <code>initiateAuthenticationWithNewSession:</code>. Passing in YES will cause the SDK to go through the full authentication flow
 					including a request for <code>identifierWithNonce:preferredRole:completion:</code>. Passing in NO will attempt to use an existing session, that was stored from
 					a previous authentication. If that session exists, you will not recieve a request for <code>identifierWithNonce:preferredRole:completion:</code> but will still
-					receive the <code>authenticationDidSucceedWithUserID:</code> or <code>authenticationDidFailWithError:</code> callbacks. 
+					receive the <code>authenticationDidSucceedWithUserID:</code> or <code>authenticationDidFailWithError:</code> callback. 
 				</p>
 		
 				<p>
@@ -462,7 +466,7 @@ eyJ0eXAiOiJKV1MiLCJhbGciOiJIUzI1NiIsImN0eSI6ImZyYW5rbHktaXQ7djEifQ.eyJhYWsiOiIwM
 <br>
 
 				<p>
-					You set the FranklySDK authenticationDelegate and initiate authentication as follows:
+					Set the Frankly SDK <code>authenticationDelegate</code> and initiate authentication as follows:
 				</p>
 
 
@@ -481,13 +485,25 @@ eyJ0eXAiOiJKV1MiLCJhbGciOiJIUzI1NiIsImN0eSI6ImZyYW5rbHktaXQ7djEifQ.eyJhYWsiOiIwM
 
 	// passing YES is necessary for a role upgrade but, for an existing user, who has already 
 	// authenticated, passing NO will authenticate more quickly using the existing session
-	[[FranklySDK sharedInstance] initiateAuthenticationWithNewSession:YES];
+	[[FranklySDK sharedInstance] initiateAuthenticationWithUserID:&lt;partner user id&gt; role:FRSDKAuthenticationRoleUser];
 
 }
 </code></pre>
 
 
 <br>
+
+
+			<div class="panel panel-default note">
+			  <div class="panel-body">
+			    <b>Note</b> Roles determine which features the user can access, based on the authentication behavior your app supports. 
+				Please see <a href="#Authentication_Behavior">Understanding Authentication Behavior</a> for more information.
+			  </div>
+			</div>
+			
+			
+<br>
+
 
 				<p>
 					Next you will need to set up the following:
@@ -496,18 +512,19 @@ eyJ0eXAiOiJKV1MiLCJhbGciOiJIUzI1NiIsImN0eSI6ImZyYW5rbHktaXQ7djEifQ.eyJhYWsiOiIwM
 					<ol>
 						<li><code>FranklyAuthenticationDelegate</code> requires the following functions:
 							<ul>
-								<li><code>(void)identifierWithNonce:(NSString *)nonce preferredRole:(FRSDKAuthenticationRole)preferredRole completion:(void (^)(NSString *identifier))completion</code></li>
+								<li><code>(- (void)identityTokenWithNonce:(NSString *)nonce preferredRole:(FRSDKAuthenticationRole)preferredRole completion:(void (^)(NSString *identityToken, NSString *partnerUserId))completion</code></li>
 
 
 <br>
 
 
 								<p>
-									This method is where you should utilize your back end server as detailed in <a href="#Generate_Identity_Token">Frankly Server Authentication document</a> to create a valid identifier. 
-									The <code>uid</code> field in the identifier is optional, however, the identifier is still necessary. If you choose not to include a <code>uid</code> then the user will only be allowed  
-									in Spectator Mode.  If a user in Spectator Mode attempts to participate it will trigger a call to the delegate’s <code>doUserAuthentication</code> method at which point you should 
-									present a login screen. When your server responds with the identifier, call completion to finish the authentication process. The preferred role is a suggestion from
-									the client SDK but your server, as long it includes a valid <code>uid</code>, may choose to put any role in the <code>role</code> and the SDK will honor that.
+									This method is where you should utilize your back end server as detailed above, under <a href="#auth_flow">Server Authentication Flow</a>, to create a valid identifier. 
+									The <code>uid</code> field in the identifier is optional, however, the identifier is still necessary. If you choose not to include a <code>uid</code> then the user will 
+									only be allowed in Spectator Mode. If a user in Spectator Mode attempts to participate it will trigger a call to the delegate’s
+									 <code>doUserAuthentication</code> method at which point you should present a login screen. When your server responds with the identity token, 
+									 call completion to finish the authentication process. The preferred role is a suggestion from the client SDK but your server, as long it 
+									 includes a valid <code>uid</code>, may choose to put any role in the role field of the <code>identityToken</code> and the SDK will honor that.
 								</p>
 
 
@@ -516,19 +533,18 @@ eyJ0eXAiOiJKV1MiLCJhbGciOiJIUzI1NiIsImN0eSI6ImZyYW5rbHktaXQ7djEifQ.eyJhYWsiOiIwM
 							
 								<div class="panel panel-default" style="margin-right:100px">
 								  <div class="panel-body">
-								    <b>Note</b> You must call completion or the process will never finish.
+								    <b>Note</b>
+									<ol>
+										<li>You must call completion or the process will never finish.</li>
+										<li>The <code>partnerUserId</code> string is an identifier that the partner app uses to identify the user. Frankly SDK will correlate it with a Frankly identifier.</li>
+									</ol>
 								  </div>
 								</div>
 
 								
-								<li>We have included a test function in <code>FranklySDK.h, retrieveIdentitifierWithUserID:Nonce:authKey:authSecret:role:completionBlock,</code> 
-								that will allow you to bypass your server and retrieve an identifier from Frankly’s servers.  Because it requires putting in your auth key and secret, 
-								<strong>it is only for testing.</strong>
-
-								<ul>
-									<li>Your Auth Key and Auth Secret can be found within the <a href="https://console.franklychat.com/">Admin Console</a> under Settings.</li>
-								</ul>
-								</li>
+								<li>We have included a test function in <code>FranklySDK.h</code>, <code>retrieveIdentityTokenWithUserID:Nonce:authKey:authSecret:role:completionBlock</code>, 
+									that will allow you to bypass your server and retrieve an identifier from Frankly’s servers. Because it requires putting in your 
+									<code>appKey</code> and <code>appSecret</code>, it is only for testing.</li>
 							</ul>
 							</li>
 
@@ -543,14 +559,14 @@ eyJ0eXAiOiJKV1MiLCJhbGciOiJIUzI1NiIsImN0eSI6ImZyYW5rbHktaXQ7djEifQ.eyJhYWsiOiIwM
     FranklySDK *franklySDK = [FranklySDK sharedInstance];
 
     // ONLY FOR TESTING - REQUEST IDENTIFIER FROM YOUR SERVER 
-    [franklySDK retrieveIdentitifierWithUserID:self.userId
+    [franklySDK retrieveIdentityTokenWithUserID:self.userId
                                          Nonce:nonce
                                        authKey:self.authKey
                                     authSecret:self.authSecret
                                     	  role:FRSDKAuthenticationRoleUser
                                completionBlock:^(NSString *identifier, NSError *error) {
         if (identifier != nil) {
-            completion(identifier);
+            completion(identifier, nil);
         }
     }];
 }
@@ -597,11 +613,12 @@ eyJ0eXAiOiJKV1MiLCJhbGciOiJIUzI1NiIsImN0eSI6ImZyYW5rbHktaXQ7djEifQ.eyJhYWsiOiIwM
 
 				
 					<p>
-						If your delegate receives the <code>doUserAuthentication</code> callback then you should present a log in or sign up screen. When the user has completed logging in, you should restart the authentication process by calling <code>initiateAuthenticationWithNewSession:</code>
-						and passing in YES to create a new session. 
+						If your delegate receives the <code>doUserAuthentication</code> callback then you should present a login screen. 
+						When the user has completed logging in, you should restart the authentication process by calling <code>initiateAuthenticationWithNewSession:</code>
+						and passing in <code>YES</code> to create a new session. 
 					</p>
 
-		</div>
+			</div>
 		
 		
 			<div class="section" id="android_auth">
@@ -637,20 +654,25 @@ private class YourIdentityTokenGenerator extends BaseIdentityTokenGenerator {
 </code></pre>
 
 
-				<p>
-					<strong>Note:</strong> The identity token is meant to be retrieved from the your servers rather than being hardcoded into the app.
-				</p>
+				<div class="panel panel-default" style="margin-right:100px">
+				  <div class="panel-body">
+					<b>Note</b> The identity token is meant to be retrieved from the your servers rather than being hardcoded into the app.
+				  </div>
+				</div>
+
 
 				<p>
 					The <code>supportedRole(Role)</code> method should be written to return <code>true</code> for all roles that are supported and <code>false</code> for all other roles. 
 					The available roles in the system are defined in the <code>Role</code> enum as follows:
 				</p>
+
 			
 <pre class="prettyprint"><code class="lang-java">
 public enum Role {
     ADMIN, ANONYMOUS, GUEST, REGULAR
 }
 </code></pre>
+
 
 				<p>
 					After defining the <code>IdentityTokenGenerator</code> class, you must create an instance of the class and pass it into the Frankly SDK’s Authenticator class:

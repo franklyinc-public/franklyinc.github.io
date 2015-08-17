@@ -159,7 +159,10 @@
 			</h3>
 	
 			<p>
-				While the Frankly client SDKs do provide UI for the Frankly Room List and Frankly Rooms, we understand that displaying a Frankly Room List won't always make sense in the context of many developers' applications. For that reason, we're providing a client API meant for directly accessing any Room, already created for your application, simply by passing a Room ID. Please note of course that you have the option of simply hardcoding the Room ID in your client or using our server API to fetch the desired Room ID.
+				While the Frankly client SDKs do provide UI for the Frankly Room List and Frankly Rooms, we understand that displaying a Frankly Room List won't 
+				always make sense in the context of many developers' applications. For that reason, we're providing a client API meant for directly accessing any 
+				Room, already created for your application, simply by passing a Room ID. Please note of course that you have the option of simply hardcoding the 
+				Room ID in your client or using our server API to fetch the desired Room ID.
 			</p>
 		</div>
 	
@@ -170,7 +173,9 @@
 			</h4>
 	
 			<p>
-				In order to open a Frankly Room in the SDK while bypassing the Frankly Room List UI you must specify the <code>roomId</code> for the Room you'd like to open, as well as the Room <code>title</code> that you'd like to show to the end user while the Frankly SDK is retrieving the Room's metadata from Frankly servers. Calling the following will retrieve a view controller for the given <code>roomId</code> if non-nil, otherwise it will return nil.
+				In order to open a Frankly Room in the SDK while bypassing the Frankly Room List UI you must specify the <code>roomId</code> for the Room you'd 
+				like to open, as well as the Room <code>title</code> that you'd like to show to the end user while the Frankly SDK is retrieving the Room's metadata 
+				from Frankly servers. Calling the following will retrieve a view controller for the given <code>roomId</code> if non-nil, otherwise it will return nil.
 			</p>
 		
 
@@ -182,7 +187,8 @@
 <br>
 
 			<p>
-				Calling the following will retrieve a Frankly-styled navigation controller which contains a view controller for the given <code>roomId</code> if non-nil, otherwise it will return nil.
+				Calling the following will retrieve a Frankly-styled navigation controller which contains a view controller for the given <code>roomId</code> 
+				if non-nil, otherwise it will return nil.
 			</p>
 
 
@@ -211,6 +217,97 @@ intent.putExtra(RoomActivity.EXTRA_ROOM_ID, roomId);
 context.startActivity(intent);
 </code></pre>	
 		
+		</div>
+		
+		
+		<div class="section" id="activity_indicator">
+			<h3>
+				Displaying a Room Activity Badge
+			</h3>
+			
+			<p>
+				Because in some apps it will make more sense to link directly to a Room, rather than use the Frankly Room List UI, we want to provide you with a 
+				way of alerting users of new activity that has happened in the Room so that they'll be compelled to continue returning to chat and continuously engage. 
+				Below we've outlined how to use the Activity Indicator API which will return a value of in-Room activity the user has to respond to.
+			</p>
+		</div>
+
+
+		<div class="section" id="ios_activity">
+			<h4>
+				iOS Activity Indicator
+			</h4>
+
+
+			<p>
+				<code>FranklySDKActivityDelegate</code> requires the following function:
+				<ul>
+					<li><code>- (void)didReceiveActivityOfType:(FRSDKActivityType)type forEntity:(NSNumber *)entityId displayValue:(NSString *)displayValue;</code> 
+						with the following message parameters:
+					<ul>
+						<li><code>type</code>: One of the <code>FRSDKActivityType</code> <code>enum</code> values to determine what type of activity occurred.</li>
+						<li><code>entityId</code>: Is an <code>NSNumber</code> that is the ID of the entity with which the activity is associated.
+						<ul>
+							<li>If type is <code>FRSDKActivityTypeApplication</code> then this will be the <code>application Id</code>.</li>
+							<li>If type is <code>FRSDKActivityTypeRoom</code> then this will be the <code>room Id</code>.</li>
+						</ul>
+						</li>
+						<li><code>displayValue</code>: Is an <code>NSString</code> that represents the activity. The partner's app should determine whether or not to display 
+							this. Currently, it is a count that would be displayed in a badge. If this is an empty string, then it means the previous 
+							value should be cleared.</li>
+					</ul>
+					</li>
+				</ul>
+			</p>
+			
+			
+<br>
+
+
+			<p>
+				<code>didReceiveActivityOfType</code> will be called at various times by the SDK when activity occurs or you can trigger it manually to get 
+				the current state. When the delegate receives this message, it is up to the partner app to determine whether to update the UI to display the <code>displayValue</code> 
+				or ignore it. If the value is an empty string, then clear the previous value if it was displayed.
+			</p>
+			
+			
+<br>
+
+
+			<p>
+				To manually trigger a <code>didReceiveActivityOfType:</code> call, send either of the  <code>requestActivityUpdateForApplication</code>, or 
+				<code>requestActivityUpdateForRoomWithId:</code> messages to the <code>FranklySDK</code> object.
+
+				<ul>
+					<li><code>[[FranklySDK sharedInstance] requestActivityUpdateForApplication];</code> will cause the SDK to request updated activity data from the server. 
+						If there is data then it will send the <code>didReceiveActivityOfType:</code> to the delegate, otherwise it will not.</li>
+<!--				<li><code>[[FranklySDK sharedInstance] requestActivityUpdateForRoomWithId:&lt;roomId&gt;];</code> will request activity for that room from the server.  
+						Currently, this functionality is not enabled on the server so it will never trigger a message to the delegate.</li> -->
+				</ul>
+			</p>
+			
+
+<br>
+
+
+			<p>
+				To use this functionality, create an object that conforms to the <code>FranklySDKActivityDelegate</code> protocol and then assign that to the FranklySDK object's 
+				<code>activityDelegate</code> property, <code>[[FranklySDK sharedInstance] setActivityDelegate:&lt;delegate object&gt;];</code>. This object will start to receive 
+				updates as the server sends them and will receive updates from manual requests if they updates contain data.
+			</p>
+			
+		</div>
+		
+		
+		<div class="section" id="android_activity">
+			<h4>
+				Android Activity Indicator
+			</h4>
+			
+			<p>
+				<i>Coming shortly!</i>
+			</p>
+			
 		</div>
 
 
