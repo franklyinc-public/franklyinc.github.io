@@ -955,7 +955,7 @@ var client = new frankly.FranklyClient
 <br>
 
 			<p>
-				The nonce value is used to generate an identity token for the user’s session, which ensures that the generated identity token is only valid for one-time identity validation. The <code>redirect_uri</code> is a string for the Frankly Server endpoint which accepts the identity token. These details are described in further detail below.
+				The nonce value is used to generate an identity token for the user’s session, which ensures that the generated identity token is only valid for one-time identity validation. Note that the nonce expires <strong>5 minutes</strong> after it is generated, and therefore the Frankly Web App will refresh the contents of the login window if it has been opened for more than 5 minutes without a submission. The <code>redirect_uri</code> is a string for the Frankly Server endpoint which accepts the identity token. These details are described in further detail below.
 			</p>
 		
 			<p>
