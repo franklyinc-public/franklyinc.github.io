@@ -591,8 +591,9 @@ FranklySdk.setupGcm(token);
 
 
 			<p>
-				When notification is clicked, action <code>com.frankly.franklysdk.OPEN_ROOM</code> will be performed and the action contains 
-				<code>com.frankly.franklysdk.room_id</code> extra long value. You can configure the action to appropriate <code>Activity</code> in your <code>AndroidManifest.xml</code>:
+				When a notification is clicked, an <code>Intent</code> with the action name <code>com.frankly.franklysdk.OPEN_ROOM</code> is created and sent to the Android OS. 
+				That <code>Intent</code> will contain the ID of the Room requested for opening under the key <code>com.frankly.franklysdk.room_id</code>. In order to have the 
+				appropriate <code>Activity</code> open up, you must add the following <code>&lt;intent-filter&gt;</code> within the <code>Activity</code> configuration in your <code>AndroidManifest.xml</code>:
 			</p>
 
 
