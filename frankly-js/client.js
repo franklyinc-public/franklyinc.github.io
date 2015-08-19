@@ -1,44 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <title>client.js - Documentation</title>
-
-    <script src="scripts/prettify/prettify.js"></script>
-    <script src="scripts/prettify/lang-css.js"></script>
-    <!--[if lt IE 9]>
-      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-    <link type="text/css" rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
-    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
-</head>
-<body>
-
-<input type="checkbox" id="nav-trigger" class="nav-trigger" />
-<label for="nav-trigger" class="navicon-button x">
-  <div class="navicon"></div>
-</label>
-
-<label for="nav-trigger" class="overlay"></label>
-
-<nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Client.html">Client</a><ul class='methods'><li data-type='method'><a href="Client.html#close">close</a></li><li data-type='method'><a href="Client.html#create">create</a></li><li data-type='method'><a href="Client.html#createAnnouncement">createAnnouncement</a></li><li data-type='method'><a href="Client.html#createRoom">createRoom</a></li><li data-type='method'><a href="Client.html#createRoomAnnouncer">createRoomAnnouncer</a></li><li data-type='method'><a href="Client.html#createRoomListener">createRoomListener</a></li><li data-type='method'><a href="Client.html#createRoomMessage">createRoomMessage</a></li><li data-type='method'><a href="Client.html#createRoomMessageFlag">createRoomMessageFlag</a></li><li data-type='method'><a href="Client.html#createRoomParticipant">createRoomParticipant</a></li><li data-type='method'><a href="Client.html#createRoomSubscriber">createRoomSubscriber</a></li><li data-type='method'><a href="Client.html#del">del</a></li><li data-type='method'><a href="Client.html#deleteAnnouncement">deleteAnnouncement</a></li><li data-type='method'><a href="Client.html#deleteRoom">deleteRoom</a></li><li data-type='method'><a href="Client.html#deleteRoomListener">deleteRoomListener</a></li><li data-type='method'><a href="Client.html#deleteRoomParticipant">deleteRoomParticipant</a></li><li data-type='method'><a href="Client.html#deleteRoomSubscriber">deleteRoomSubscriber</a></li><li data-type='method'><a href="Client.html#open">open</a></li><li data-type='method'><a href="Client.html#read">read</a></li><li data-type='method'><a href="Client.html#readAnnouncement">readAnnouncement</a></li><li data-type='method'><a href="Client.html#readAnnouncementList">readAnnouncementList</a></li><li data-type='method'><a href="Client.html#readAnnouncementRoomList">readAnnouncementRoomList</a></li><li data-type='method'><a href="Client.html#readApp">readApp</a></li><li data-type='method'><a href="Client.html#readAppActivity">readAppActivity</a></li><li data-type='method'><a href="Client.html#readRoom">readRoom</a></li><li data-type='method'><a href="Client.html#readRoomActivity">readRoomActivity</a></li><li data-type='method'><a href="Client.html#readRoomAnnouncerList">readRoomAnnouncerList</a></li><li data-type='method'><a href="Client.html#readRoomCount">readRoomCount</a></li><li data-type='method'><a href="Client.html#readRoomList">readRoomList</a></li><li data-type='method'><a href="Client.html#readRoomMessage">readRoomMessage</a></li><li data-type='method'><a href="Client.html#readRoomMessageList">readRoomMessageList</a></li><li data-type='method'><a href="Client.html#readRoomParticipantList">readRoomParticipantList</a></li><li data-type='method'><a href="Client.html#readRoomSubscriberList">readRoomSubscriberList</a></li><li data-type='method'><a href="Client.html#readUser">readUser</a></li><li data-type='method'><a href="Client.html#readUserBan">readUserBan</a></li><li data-type='method'><a href="Client.html#update">update</a></li><li data-type='method'><a href="Client.html#updateRoom">updateRoom</a></li><li data-type='method'><a href="Client.html#updateUser">updateUser</a></li></ul></li></ul><h3>Events</h3><ul><li><a href="Client.html#event:authenticate">authenticate</a></li><li><a href="Client.html#event:close">close</a></li><li><a href="Client.html#event:connect">connect</a></li><li><a href="Client.html#event:create">create</a></li><li><a href="Client.html#event:delete">delete</a></li><li><a href="Client.html#event:disconnect">disconnect</a></li><li><a href="Client.html#event:error">error</a></li><li><a href="Client.html#event:open">open</a></li><li><a href="Client.html#event:read">read</a></li><li><a href="Client.html#event:update">update</a></li></ul><h3>Global</h3><ul><li><a href="global.html#generateIdentityToken">generateIdentityToken</a></li><li><a href="global.html#identityTokenGenerator">identityTokenGenerator</a></li></ul>
-</nav>
-
-<div id="main">
-    
-    <h1 class="page-title">client.js</h1>
-    
-
-    
-
-
-
-    
-    <section>
-        <article>
-            <pre class="prettyprint source linenums"><code>/*
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2015 Frankly Inc.
@@ -279,15 +239,15 @@ Client.prototype.readRoomList = function () {
 
 /**
  * Retrieves the number of online/subscribed/active users in the room.
- * &lt;br/>
+ * <br/>
  * The fetched object is an object with three fields set:
- * &lt;ul>
- * &lt;li>&lt;code>online&lt;/code>The number of users currently in the room.
- * &lt;li>&lt;code>subscribed&lt;/code>The number of users who have subscribed to the room.
- * &lt;li>&lt;code>active&lt;/code>The number of users who are either onlin or subscribed.
- * &lt;/ul>
- * &lt;em>Currently room counters are not computed on demand but refresh at regular
- * intervals.&lt;/em>
+ * <ul>
+ * <li><code>online</code>The number of users currently in the room.
+ * <li><code>subscribed</code>The number of users who have subscribed to the room.
+ * <li><code>active</code>The number of users who are either onlin or subscribed.
+ * </ul>
+ * <em>Currently room counters are not computed on demand but refresh at regular
+ * intervals.</em>
  *
  * @params {integer} roomId
  *   The id of the room to fetch counters from.
@@ -582,7 +542,7 @@ Client.prototype.createRoom = function (options) {
 
 /**
  * Creates a new message object in the room with id specified as first argument.
- * &lt;br/>
+ * <br/>
  * The properties of that new message are given as an object to the method.
  *
  * @param {integer} roomId
@@ -635,7 +595,7 @@ Client.prototype.createRoomMessageFlag = function (roomId, messageId) {
 }
 
 /**
- * Sets user to be listening for real-time signals on a room.&lt;br/>
+ * Sets user to be listening for real-time signals on a room.<br/>
  * After a successful call to this method the client will start emitting events
  * for real-time changes to the room but it will not be counted as online and
  * will not be listed as one of the participants.
@@ -832,10 +792,10 @@ Client.prototype.del = function (path, params, payload) {
 /**
  * Deletes an announcement object with id sepecified as first argument from the app.
  *
- * &lt;p>
- * &lt;em>Note that deleting an announcement doesn't remove messages from rooms it
- * has already been published to.&lt;/em>
- * &lt;/p>
+ * <p>
+ * <em>Note that deleting an announcement doesn't remove messages from rooms it
+ * has already been published to.</em>
+ * </p>
  *
  * This operation cannot be undone!
  *
@@ -855,11 +815,11 @@ Client.prototype.deleteAnnouncement = function (announcementId) {
 /**
  * Deletes a room object with id specified as first argument from the app.
  *
- * &lt;p>
- * &lt;em>Note that this will cause all messages sent to this room to be deleted
+ * <p>
+ * <em>Note that this will cause all messages sent to this room to be deleted
  * as well, a safer approach could be to change the room status to 'unpublished'
- * to hide it without erasing data.&lt;/em>
- * &lt;/p>
+ * to hide it without erasing data.</em>
+ * </p>
  *
  * This operation cannot be undone!
  *
@@ -1115,22 +1075,3 @@ function assertDefined(args) {
  * @property {boolean} hasError
  *   Set to true if the client was closed due to an error.
  */
-</code></pre>
-        </article>
-    </section>
-
-
-
-
-</div>
-
-<br class="clear">
-
-<footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.2</a> on Wed Aug 19 2015 13:23:02 GMT-0700 (PDT) using the Minami theme.
-</footer>
-
-<script>prettyPrint();</script>
-<script src="scripts/linenumber.js"></script>
-</body>
-</html>
