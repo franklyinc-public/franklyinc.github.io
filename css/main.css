@@ -87,7 +87,7 @@
 	.container.container-body {
 		margin-left: 315px;
 		transition: all 0.5s;
-		max-width: calc(100% - 315px);
+		max-width: calc(100vw - 315px);
 	}
 	
 	.container.container-body a {
@@ -103,6 +103,7 @@
 	}
 	.container.container-body {
 		margin-left: 0px;
+		max-width: 100vw;
 		transition: all 0.5s;
 	}
 	nav.navbar {
