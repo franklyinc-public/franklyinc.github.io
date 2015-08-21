@@ -448,6 +448,64 @@ public void onResume() {
 			
 		</div>
 
+	<div class="section" id="js_activity">
+		<h4>
+			JavaScript Activity Indicator
+		</h4>
+
+		<p>
+			If you wish to use the Activity Indicator information with your web app, this value can be accessed using the JS SDK. You can access the activity information at an individual room level, or for the app as a whole. The returned value is in the format:
+		</p>
+
+<pre class="prettyprint"><code>
+{
+    unreadSimpleMessageCount: {
+        displayValue: "12,345",
+        value: 12345
+    },
+    unreadStickyMessageCount: {
+        displayValue: "6,789",
+        value: 6789
+    }
+}
+</code></pre>
+
+		<p>
+			This value is passed down through the Promise pattern. In order to get this value for the app as a whole, the syntax is:
+		</p>
+
+<pre class="prettyprint"><code>
+var frankly = require('frankly-js').Client('wss');
+…
+frankly.readAppActivity(appId)
+    .then(function(result){
+        console.log("Unread simple message count for app: " + result.unreadSimpleMessageCount.displayValue);
+        console.log("Unread sticky message count for app: " + result.unreadStickyMessageCount.displayValue);
+    })
+    .catch(function(error){
+        //Handle error
+    });
+</code></pre>
+
+		<p>
+			In order to get this value for an individual room, the syntax is:
+		</p>
+
+<pre class="prettyprint"><code>
+var frankly = require('frankly-js').Client('wss');
+…
+frankly.readRoomActivity(roomId)
+    .then(function(result){
+        console.log("Unread simple message count for room: " + result.unreadSimpleMessageCount.displayValue);
+        console.log("Unread sticky message count for room: " + result.unreadStickyMessageCount.displayValue);
+    })
+    .catch(function(error){
+        //Handle error
+    });
+</code></pre>
+
+	</div>
+
 
 		<div class="section" id="partial_view">
 			<h3>
