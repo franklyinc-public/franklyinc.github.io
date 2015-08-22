@@ -259,9 +259,10 @@ context.startActivity(intent);
 			</h3>
 			
 			<p>
-				Because in some apps it will make more sense to link directly to a Room, rather than use the Frankly Room List UI, we want to provide you with a 
-				way of alerting users of new activity that has happened in the Room so that they'll be compelled to continue returning to chat and continuously engage. 
-				Below we've outlined how to use the Activity Indicator API which will return a value of in-Room activity the user has to respond to.
+				Because in some apps it will make more sense to link directly to a Room, rather than use the Frankly Room List UI, we want to provide you 
+				with a way of alerting users of new activity that has happened in the Room so that they'll be compelled to continue returning to chat and 
+				continuously engage. Below we've outlined how to use the Activity Indicator API which will return a value of in-Room activity the user 
+				has to respond to.
 			</p>
 		</div>
 
@@ -275,19 +276,19 @@ context.startActivity(intent);
 			<p>
 				<code>FranklySDKActivityDelegate</code> requires the following function:
 				<ul>
-					<li><code>- (void)didReceiveActivityOfType:(FRSDKActivityType)type forEntity:(NSNumber *)entityId displayValue:(NSString *)displayValue;</code> 
-						with the following message parameters:
+					<li><code>- (void)didReceiveActivityOfType:(FRSDKActivityType)type forEntity:(NSNumber *)entityId displayValue:(NSString *)displayValue;</code> with the following message parameters:
 					<ul>
-						<li><code>type</code>: One of the <code>FRSDKActivityType</code> <code>enum</code> values to determine what type of activity occurred.</li>
+						<li><code>type</code>: One of the <code>FRSDKActivityType</code> <code>enum</code> values to determine what type of activity
+							 occurred.</li>
 						<li><code>entityId</code>: Is an <code>NSNumber</code> that is the ID of the entity with which the activity is associated.
 						<ul>
 							<li>If type is <code>FRSDKActivityTypeApplication</code> then this will be the <code>application Id</code>.</li>
 							<li>If type is <code>FRSDKActivityTypeRoom</code> then this will be the <code>room Id</code>.</li>
 						</ul>
 						</li>
-						<li><code>displayValue</code>: Is an <code>NSString</code> that represents the activity. The partner's app should determine whether or not to display 
-							this. Currently, it is a count that would be displayed in a badge. If this is an empty string, then it means the previous 
-							value should be cleared.</li>
+						<li><code>displayValue</code>: Is an <code>NSString</code> that represents the activity. The partner's app should determine whether 
+							or not to display this. Currently, it is a count that would be displayed in a badge. If this is an empty string, then it means 
+							the previous value should be cleared.</li>
 					</ul>
 					</li>
 				</ul>
@@ -299,8 +300,8 @@ context.startActivity(intent);
 
 			<p>
 				<code>didReceiveActivityOfType</code> will be called at various times by the SDK when activity occurs or you can trigger it manually to get 
-				the current state. When the delegate receives this message, it is up to the partner app to determine whether to update the UI to display the <code>displayValue</code> 
-				or ignore it. If the value is an empty string, then clear the previous value if it was displayed.
+				the current state. When the delegate receives this message, it is up to the partner app to determine whether to update the UI to display the
+				 <code>displayValue</code> or ignore it. If the value is an empty string, then clear the previous value if it was displayed.
 			</p>
 			
 			
@@ -312,10 +313,11 @@ context.startActivity(intent);
 				<code>requestActivityUpdateForRoomWithId:</code> messages to the <code>FranklySDK</code> object.
 
 				<ul>
-					<li><code>[[FranklySDK sharedInstance] requestActivityUpdateForApplication];</code> will cause the SDK to request updated activity data from the server. 
-						If there is data then it will send the <code>didReceiveActivityOfType:</code> to the delegate, otherwise it will not.</li>
-<!--				<li><code>[[FranklySDK sharedInstance] requestActivityUpdateForRoomWithId:&lt;roomId&gt;];</code> will request activity for that room from the server.  
-						Currently, this functionality is not enabled on the server so it will never trigger a message to the delegate.</li> -->
+					<li><code>[[FranklySDK sharedInstance] requestActivityUpdateForApplication];</code> will cause the SDK to request updated activity data
+						 from the server. If there is data then it will send the <code>didReceiveActivityOfType:</code> to the delegate, otherwise it will 
+						 not.</li>
+<!--				<li><code>[[FranklySDK sharedInstance] requestActivityUpdateForRoomWithId:&lt;roomId&gt;];</code> will request activity for that room 
+						 from the server. Currently, this functionality is not enabled on the server so it will never trigger a message to the delegate.</li> -->
 				</ul>
 			</p>
 			
@@ -324,9 +326,10 @@ context.startActivity(intent);
 
 
 			<p>
-				To use this functionality, create an object that conforms to the <code>FranklySDKActivityDelegate</code> protocol and then assign that to the FranklySDK object's 
-				<code>activityDelegate</code> property, <code>[[FranklySDK sharedInstance] setActivityDelegate:&lt;delegate object&gt;];</code>. This object will start to receive 
-				updates as the server sends them and will receive updates from manual requests if they updates contain data.
+				To use this functionality, create an object that conforms to the <code>FranklySDKActivityDelegate</code> protocol and then assign that to 
+				the FranklySDK object's <code>activityDelegate</code> property, <code>[[FranklySDK sharedInstance] setActivityDelegate:&lt;delegate 
+				object&gt;];</code>. This object will start to receive updates as the server sends them and will receive updates from manual requests if 
+				they updates contain data.
 			</p>
 			
 		</div>
@@ -448,14 +451,18 @@ public void onResume() {
 			
 		</div>
 
-	<div class="section" id="js_activity">
-		<h4>
-			JavaScript Activity Indicator
-		</h4>
 
-		<p>
-			If you wish to use the Activity Indicator information with your web app, this value can be accessed using the JS SDK. You can access the activity information at an individual room level, or for the app as a whole. The returned value is in the format:
-		</p>
+		<div class="section" id="js_activity">
+			<h4>
+				JavaScript Activity Indicator
+			</h4>
+
+
+			<p>
+				If you wish to use the Activity Indicator information with your web app, this value can be accessed using the JS SDK. You can access the 
+				activity information at an individual room level, or for the app as a whole. The returned value is in the format:
+			</p>
+
 
 <pre class="prettyprint"><code>
 {
@@ -470,9 +477,14 @@ public void onResume() {
 }
 </code></pre>
 
+
+<br>
+
+
 		<p>
 			This value is passed down through the Promise pattern. In order to get this value for the app as a whole, the syntax is:
 		</p>
+
 
 <pre class="prettyprint"><code>
 var frankly = require('frankly-js').Client('wss');
@@ -487,9 +499,14 @@ frankly.readAppActivity(appId)
     });
 </code></pre>
 
+
+<br>
+
+
 		<p>
 			In order to get this value for an individual room, the syntax is:
 		</p>
+
 
 <pre class="prettyprint"><code>
 var frankly = require('frankly-js').Client('wss');
@@ -504,7 +521,8 @@ frankly.readRoomActivity(roomId)
     });
 </code></pre>
 
-	</div>
+
+		</div>
 
 
 		<div class="section" id="partial_view">
@@ -514,7 +532,8 @@ frankly.readRoomActivity(roomId)
 
 
 			<p>
-				The concept of a Partial View Room allows developers to place the Frankly chat Room UI in the same view as another piece of content, such as a photo or video.
+				The concept of a Partial View Room allows developers to place the Frankly chat Room UI in the same view as another piece of content, such as a 
+				photo or video.
 			</p>
 
 		</div>
@@ -540,8 +559,9 @@ frankly.readRoomActivity(roomId)
 
 
 			<p>
-				The Frankly Android SDK allows developers to embed the Frankly Room UI in their UI by using <a href="http://developer.android.com/guide/components/fragments.html">
-					Android's concept of Fragments</a>. Below are the Fragments made available in the Frankly SDK.
+				The Frankly Android SDK allows developers to embed the Frankly Room UI in their UI by using <a 
+				href="http://developer.android.com/guide/components/fragments.html">Android's concept of Fragments</a>. 
+				Below are the Fragments made available in the Frankly SDK.
 			</p>
 			
 			
@@ -554,8 +574,10 @@ frankly.readRoomActivity(roomId)
 			
 			
 			<p>
-				The <code>MessageListFragment</code> class contains everything needed to show the message list, and it can be used in a custom activity/layout that you create. 
-				All message list-related functionality that can be seen in the provided <code>RoomActivity</code>, which uses this fragment class, is available in this fragment.
+				The <code>MessageListFragment</code> class contains everything needed to show the message list, and it can be used in a custom activity/layout 
+				that you create. 
+				All message list-related functionality that can be seen in the provided <code>RoomActivity</code>, which uses this fragment class, is available 
+				in this fragment.
 			</p>
 
 
@@ -568,8 +590,10 @@ frankly.readRoomActivity(roomId)
 			
 			
 			<p>
-				The <code>MessageInputFragment</code> class contains everything needed to send messages into a Room, and it can be used in a custom activity/layout that you create. 
-				All message input field-related functionality that can be seen in the provided <code>RoomActivity</code>, which uses this fragment class, is available in this fragment.
+				The <code>MessageInputFragment</code> class contains everything needed to send messages into a Room, and it can be used in a custom 
+				activity/layout that you create. 
+				All message input field-related functionality that can be seen in the provided <code>RoomActivity</code>, which uses this fragment class, is 
+				available in this fragment.
 			</p>
 
 		</div>
@@ -607,7 +631,8 @@ frankly.readRoomActivity(roomId)
 			
 			<p>
 				To enable push notifications for the Frankly Android SDK, you must first generate a GCM token. Details on how to do that can be found 
-				under "<a href="https://developers.google.com/cloud-messaging/android/client">Implementing GCM Client on Android</a>" on the Google Developers portal.
+				under "<a href="https://developers.google.com/cloud-messaging/android/client">Implementing GCM Client on Android</a>" on the Google Developers 
+				portal.
 			</p>
 			
 			
@@ -628,8 +653,8 @@ FranklySdk.setupGcm(token);
 
 
 			<p>
-				You will also have to declare the Frankly GCM Listener Service in your <code>AndroidManifest.xml</code>, where <code>&lt;notification_icon&gt;</code> 
-				is the icon that should be used in the Android status bar:
+				You will also have to declare the Frankly GCM Listener Service in your <code>AndroidManifest.xml</code>, where 
+				<code>&lt;notification_icon&gt;</code> is the icon that should be used in the Android status bar:
 			</p>
 			
 			
@@ -649,9 +674,10 @@ FranklySdk.setupGcm(token);
 
 
 			<p>
-				When a notification is clicked, an <code>Intent</code> with the action name <code>com.frankly.franklysdk.OPEN_ROOM</code> is created and sent to the Android OS. 
-				That <code>Intent</code> will contain the ID of the Room requested for opening under the key <code>com.frankly.franklysdk.room_id</code>. In order to have the 
-				appropriate <code>Activity</code> open up, you must add the following <code>&lt;intent-filter&gt;</code> within the <code>Activity</code> configuration in your <code>AndroidManifest.xml</code>:
+				When a notification is clicked, an <code>Intent</code> with the action name <code>com.frankly.franklysdk.OPEN_ROOM</code> is created and sent 
+				to the Android OS. That <code>Intent</code> will contain the ID of the Room requested for opening under the key 
+				<code>com.frankly.franklysdk.room_id</code>. In order to have the appropriate <code>Activity</code> open up, you must add the following 
+				<code>&lt;intent-filter&gt;</code> within the <code>Activity</code> configuration in your <code>AndroidManifest.xml</code>:
 			</p>
 
 
@@ -677,7 +703,11 @@ FranklySdk.setupGcm(token);
 			</h3>
 	
 			<p>
-				The sections below describes how developers are able to interact direction with Frankly's server APIs to create more custom integrations on the Frankly Chat Platform. To provide a clean interface for develoeprs to interact with Frankly's server APIs, we're providing a Python module and Ruby gem that are meant to easily be integrated with your existing backend stack. In the event that you need access to Frankly's server APIs in a language that is better compatible with your backend or that you are more comfortable with, please let us know by sending an email to <a href="mailto:platform-support@franklychat.com">platform-support@franklychat.com</a>.
+				The sections below describes how developers are able to interact direction with Frankly's server APIs to create more custom integrations on the 
+				Frankly Chat Platform. To provide a clean interface for develoeprs to interact with Frankly's server APIs, we're providing a Python module and 
+				Ruby gem that are meant to easily be integrated with your existing backend stack. In the event that you need access to Frankly's server APIs in 
+				a language that is better compatible with your backend or that you are more comfortable with, please let us know by sending an email to <a 
+				href="mailto:platform-support@franklychat.com">platform-support@franklychat.com</a>.
 			</p>
 
 		</div>
@@ -723,7 +753,8 @@ $ pip install frankly-python
 			</h5>
 			
 			<p>
-				The test suite relies on environment variables to figure out where to connect to for tests that make API calls. You should set these three environment variables before running the tests:
+				The test suite relies on environment variables to figure out where to connect to for tests that make API calls. You should set these three 
+				environment variables before running the tests:
 			</p>
 
 			
@@ -805,19 +836,23 @@ require 'frankly-ruby'
 			</h3>
 
 			<p>
-				The sections below explain how to use the module to authenticate and query the <b>Frankly API</b> using other SDKs that can be embedded other types of applications (servers, automation workers, desktop applications, etc...).
+				The sections below explain how to use the module to authenticate and query the <b>Frankly API</b> using other SDKs that can be embedded other 
+				types of applications (servers, automation workers, desktop applications, etc...).
 			</p>
 
 <br>
 
 			<p>
-			  <em>We'll be using Ruby for code examples, please consult the API reference for the language you're interested in to get more details of language-specific syntaxes.</em>
+			  <em>We'll be using Ruby for code examples, please consult the API reference for the language you're interested in to get more details of 
+				  language-specific syntaxes.</em>
 			</p>
 
 <br>
 
 			<p>
-				All operations to the API are made from instances of the <b>FranklyClient</b> class. Those objects expose methods to the application which map to remote procedure calls (RPC) on the <b>Frankly</b> servers, they also negotiate and maintain the state required by the API's security policies.
+				All operations to the API are made from instances of the <b>FranklyClient</b> class. Those objects expose methods to the application which map 
+				to remote procedure calls (RPC) on the <b>Frankly</b> servers, they also negotiate and maintain the state required by the API's security 
+				policies.
 			</p>
 
 			<p>
@@ -840,11 +875,13 @@ require 'frankly-ruby'
 
 
 			<p>
-				Before performing any operation (calling any method) the client instance needs to authenticate against Frankly API. The API supports different permission levels but this module is designed to only allow <em>admin</em> authentication.
+				Before performing any operation (calling any method) the client instance needs to authenticate against Frankly API. The API supports different 
+				permission levels but this module is designed to only allow <em>admin</em> authentication.
 			</p>
 
 			<p>
-				In order to authenticate as an <em>admin</em> user, the client needs to be given the <code>app_key</code> and <code>app_secret</code> values obtained from the <a href="https://console.franklychat.com/">Frankly Admin Console</a>.
+				In order to authenticate as an <em>admin</em> user, the client needs to be given the <code>app_key</code> and <code>app_secret</code> values 
+				obtained from the <a href="https://console.franklychat.com/">Frankly Admin Console</a>.
 			</p>
 
 			<p>
@@ -864,11 +901,13 @@ require 'frankly-ruby'
 <br>
 
 			<p>
-				The call to <b>open</b> returns a session object if the authentication was successful. The application can now use this instance of <b>FranklyClient</b> to perform other operations.
+				The call to <b>open</b> returns a session object if the authentication was successful. The application can now use this instance of 
+				<b>FranklyClient</b> to perform other operations.
 			</p>
 
 			<p>
-				<em>Please do not publish your</em> <b>app_secret</b> <em>value to the public. This can have security implications and could be used by an attacker to alter the content of your application.</em>
+				<em>Please do not publish your</em> <b>app_secret</b> <em>value to the public. This can have security implications and could be used by an 
+				attacker to alter the content of your application.</em>
 			</p>
 
 		</div>
@@ -881,7 +920,9 @@ require 'frankly-ruby'
 
 
 			<p>
-				One of the central concepts in the <b>Frankly API</b> is the chat room. A chat room is a collection of messageswith some associated meta-data, like the title, description, or avatar image, that can be displayed when the end users access a mobile or web app that uses the <b>Frankly SDK</b>. With the <b>Frankly API</b>, you can create, update, and delete chat rooms.
+				One of the central concepts in the <b>Frankly API</b> is the chat room. A chat room is a collection of messageswith some associated meta-data, 
+				like the title, description, or avatar image, that can be displayed when the end users access a mobile or web app that uses the <b>Frankly 
+				SDK</b>. With the <b>Frankly API</b>, you can create, update, and delete chat rooms.
 			</p>
 
 			<p>
@@ -906,15 +947,21 @@ require 'frankly-ruby'
 			</p>
 
 			<ul>
-				<li><b>unpublished</b> In this state, the room will not be shown to clients fetching the list of available rooms in the app. This is useful if the application needs to create rooms that shouldn't be available yet because they still need to be modified.</li>
-				<li><b>active</b> In this state, the room will be fetched by clients and will be displayed in the list of available Rooms that end users can join to start chatting with each other.</li>
-				<li><b>inactive</b> This last state is an intermediary state between the first two. The room will be part of fetching operations but it will not be displayed in the mobile or web app UI. This state is useful for testing purposes.</li>
+				<li><b>unpublished</b> In this state, the room will not be shown to clients fetching the list of available rooms in the app. This is useful if 
+				the application needs to create rooms that shouldn't be available yet because they still need to be modified.</li>
+				<li><b>active</b> In this state, the room will be fetched by clients and will be displayed in the list of available Rooms that end users can 
+				join to start chatting with each other.</li>
+				<li><b>inactive</b> This last state is an intermediary state between the first two. The room will be part of fetching operations but it will 
+				not be displayed in the mobile or web app UI. This state is useful for testing purposes.</li>
 			</ul>
 
 <br>
 
 			<p>
-				In addition to the data available in the room object, you can also fetch data about the number of users that are in that room. The room count function returns a hash that lists the <b>active</b>, <b>online</b>, and <b>subscribed</b> user counts. <b>Online</b> represents the users that are currently in the room, <b>subscribed</b> represents the users that have subscribed to the room, and <b>active</b> is the union of the online and subscribed users.
+				In addition to the data available in the room object, you can also fetch data about the number of users that are in that room. The room count 
+				function returns a hash that lists the <b>active</b>, <b>online</b>, and <b>subscribed</b> user counts. <b>Online</b> represents the users that 
+				are currently in the room, <b>subscribed</b> represents the users that have subscribed to the room, and <b>active</b> is the union of the 
+				online and subscribed users.
 			</p>
 
 <br>
@@ -938,7 +985,8 @@ require 'frankly-ruby'
 			</h4>
 
 			<p>
-				Frankly, being a chat platform, allows applications to send and receive messages. Naturally, <b>FranklyClient</b> instances can fetch messages and publish them to chat rooms.
+				Frankly, being a chat platform, allows applications to send and receive messages. Naturally, <b>FranklyClient</b> instances can fetch messages 
+				and publish them to chat rooms.
 			</p>
 
 			<p>
@@ -968,21 +1016,30 @@ require 'frankly-ruby'
 <br>
 
 			<p>
-				Let's explain what's happening here: messages published to chat rooms can contain multiple parts; they could contain a few text enries, text an an image, several images, etc. The contents property of the message is actually a list of objects, the fields of the <em>contents</em> objects are:
+				Let's explain what's happening here: messages published to chat rooms can contain multiple parts; they could contain a few text enries, text an 
+				an image, several images, etc. The contents property of the message is actually a list of objects, the fields of the <em>contents</em> objects 
+				are:
 			</p>
 
 			<ul>
-				<li><b>type</b> This is the mime type of the actual content it represents, it gives the application information about how to render the content. This field is mandatory.</li>
-				<li><b>value</b> This is used for inline resources directly embedded into the message. One of <em>value</em> or <em>url</em> must be specified.</li>
-				<li><b>url</b> This is the inline resource that is directly imbedded into the message. One of <em>value</em> or <em>url</em> must be specified.</li>
+				<li><b>type</b> This is the mime type of the actual content it represents, it gives the application information about how to render the 
+				content. This field is mandatory.</li>
+				<li><b>value</b> This is used for inline resources directly embedded into the message. One of <em>value</em> or <em>url</em> must be 
+				specified.</li>
+				<li><b>url</b> This is the inline resource that is directly imbedded into the message. One of <em>value</em> or <em>url</em> must be 
+				specified.</li>
 			</ul>
 
 			<p>
-				Typically, text messages are inlined because they are small enough resources that they can be embedded into the message without having an impact on the user experience. Images, on the other hand, may take a while to download and caching mechanisms can be used to optimize rendering by preventing large resources from downloading too often. This is why we provide the <em>value</em> as a remote resouce (we'll see later in the <em>Files</em> section how to generate remote resource URLs).
+				Typically, text messages are inlined because they are small enough resources that they can be embedded into the message without having an 
+				impact on the user experience. Images, on the other hand, may take a while to download and caching mechanisms can be used to optimize rendering 
+				by preventing large resources from downloading too often. This is why we provide the <em>value</em> as a remote resouce (we'll see later in the 
+				<em>Files</em> section how to generate remote resource URLs).
 			</p>
 
 			<p>
-				<em>Keep in mind that when a message is created, it will be broadcasted to every client application that is currently listening for messages in that chat room.</em>
+				<em>Keep in mind that when a message is created, it will be broadcasted to every client application that is currently listening for messages in 
+				that chat room.</em>
 			</p>
 
 		</div>
@@ -994,11 +1051,14 @@ require 'frankly-ruby'
 			</h4>
 
 			<p>
-				Announcements are a type of message that is only available to admin users. A client authenticated with admin priviledges can create announcements in the app which can be published to one or more rooms at a later time.
+				Announcements are a type of message that is only available to admin users. A client authenticated with admin priviledges can create 
+				Announcements in the app which can be published to one or more rooms at a later time.
 			</p>
 
 			<p>
-				Currently, the only type of Announcement is the Sticky Message. Once the most recent Sticky Message sent reaches the top of the Chat Room UI, it will anchor to the top until a new Sticky Message replaces it. This provides context to the end users about what has recently happened or what is currently happening to make it easier for them to jump in and chat.
+				Currently, the only type of Announcement is the Sticky Message. Once the most recent Sticky Message sent reaches the top of the Chat Room UI, 
+				it will anchor to the top until a new Sticky Message replaces it. This provides context to the end users about what has recently happened or 
+				what is currently happening to make it easier for them to jump in and chat.
 			</p>
 
 			<p>
@@ -1024,7 +1084,9 @@ require 'frankly-ruby'
 <br>
 
 			<p>
-				As we can see here, the announcement is created with the same structure than a regular message. The content of the announcement well be set as the message content when it is published to the room and the contents field obeys the rules about inline and remote content that were described in the <i>Messages</i> section.
+				As we can see here, the Announcement is created with the same structure than a regular message. The content of the Announcement well be set as 
+				the message content when it is published to the Room and the contents field obeys the rules about inline and remote content that were described 
+				in the <i>Messages</i> section.
 			</p>
 
 		</div>
@@ -1036,7 +1098,8 @@ require 'frankly-ruby'
 			</h4>
 
 			<p>
-				A central concept of the <b>Frankly API</b> is the <i>User</i>. Users represent people using the chat platform within an app. They are created during authentication and one using in the <b>Frankly API</b> should be to a one user on the host application.
+				A central concept of the <b>Frankly API</b> is the <i>User</i>. Users represent people using the chat platform within an app. They are created 
+				during authentication and one using in the <b>Frankly API</b> should be to a one user on the host application.
 			</p>
 
 		</div>
@@ -1047,31 +1110,44 @@ require 'frankly-ruby'
 			</h5>
 
 			<p>
-				Users may be granted different roles which allows or denies them access to certain operations. The Frankly API currently defines four roles that can be assigned to users:
+				Users may be granted different roles which allows or denies them access to certain operations. The Frankly API currently defines four roles 
+				that can be assigned to users:
 			</p> 
 
 			<ol>
 				<li><b>Admin</b>
 					<p>
-						Admin users have the highest level of permissions, they can perform all available operations on the Frankly API. Each application is given one default admin user when created. To authenticate as the default admin user a client must set the Role parameter to 'admin' and the Partner User ID to null when generating the identity token. This is usually only done when using the Frankly API from your own backend as giving such power to a mobile or web client may expose your application to security issues. Among the extra operations that admin users can perform are managing other users' accounts, banning and unbanning specific users, etc...
+						Admin users have the highest level of permissions, they can perform all available operations on the Frankly API. Each application is 
+						given one default admin user when created. To authenticate as the default admin user a client must set the Role parameter to 'admin' 
+						and the Partner User ID to null when generating the identity token. This is usually only done when using the Frankly API from your own 
+						backend as giving such power to a mobile or web client may expose your application to security issues. Among the extra operations that 
+						admin users can perform are managing other users' accounts, banning and unbanning specific users, etc...
 					</p>
 				</li>
    
 				<li><b>Regular</b>
 					<p>
-						This is the default role for users that have been authenticated with a Partner User ID when generating an identity token. Regular users can perform all operations required to take full advantage of the Frankly features, like creating new chat rooms, sending and receiving messages, modifying their Display Name and Profile Avatar, etc... Unlike Admin Users, regular users cannot affect other users' accounts, they only operate on their own data.
+						This is the default role for users that have been authenticated with a Partner User ID when generating an identity token. Regular users 
+						can perform all operations required to take full advantage of the Frankly features, like creating new chat rooms, sending and receiving 
+						messages, modifying their Display Name and Profile Avatar, etc... Unlike Admin Users, regular users cannot affect other users' 
+						accounts, they only operate on their own data.
 					</p>
 				</li>
    
 				<li><b>Guest</b>
 					<p>
-						Guest Users can be used to remove barriers in product adoption. They have access to basic operations which let them experience chat without requiring a fully authenticated account. Guest Users can be converted to regular users later on if needed.
+						Guest Users can be used to remove barriers in product adoption. They have access to basic operations which let them experience chat 
+						without requiring a fully authenticated account. Guest Users can be converted to regular users later on if needed.
 					</p>
 				</li>
    
 				<li><b>Anonymous</b>
 					<p>
-						This is the role offering the least amount of permissions to a user as it doesn't require any form of authentication (the Partner User ID can be set to null when generating the identity token) but is only allowed to perform read operations. Anonymous Users can view chat Rooms and messages sent by others but cannot send messages themselves, edit their Display Name or Profile Avatar either, etc... Anonymous Users can be seen simply as observers, providing an overview of the product experience before creating an account or logging in.
+						This is the role offering the least amount of permissions to a user as it doesn't require any form of authentication (the Partner User 
+						ID can be set to null when generating the identity token) but is only allowed to perform read operations. Anonymous Users can view chat 
+						Rooms and messages sent by others but cannot send messages themselves, edit their Display Name or Profile Avatar either, etc... 
+						Anonymous Users can be seen simply as observers, providing an overview of the product experience before creating an account or logging 
+						in.
 					</p>
 				</li>
 			</ol>
@@ -1084,11 +1160,14 @@ require 'frankly-ruby'
 			</h4>
 
 			<p>
-				Objects of the <b>Frankly API</b> can have URL properties set to reference remote resources like images. All these URLs must be within the <b>+https://app.franklychat.com+</b> domain, which means an application must upload these resources to Frankly servers.
+				Objects of the <b>Frankly API</b> can have URL properties set to reference remote resources like images. All these URLs must be within the 
+				<b>+https://app.franklychat.com+</b> domain, which means an application must upload these resources to Frankly servers.
 			</p>
 
 			<p>
-				Uploading a file happens in two steps, first the application needs to request a new file URL to the <b>Frankly API</b>, then it can use that URL to upload a resource to Frankly servers. Lukily the frankly module abstracts this nicely in a single operation, here's an example of how to set an image for a chat room:
+				Uploading a file happens in two steps, first the application needs to request a new file URL to the <b>Frankly API</b>, then it can use that 
+				URL to upload a resource to Frankly servers. Lukily the frankly module abstracts this nicely in a single operation, here's an example of how to 
+				set an image for a chat Room:
 			</p>
 
  
@@ -1107,7 +1186,10 @@ require 'frankly-ruby'
 <br>
 
 			<p>
-				The object returned by a call to <b>upload_file_from_path</b> and other upload methods is created in the first step described above. The <b>category</b> parameter shown here is used by the <b>Frankly API</b> to determine which formatting rules should be applied to the resource. Since the files will be optimized for different situations based on their category, it will be easier to integrate with Frankly and this will create a better user experience.
+				The object returned by a call to <b>upload_file_from_path</b> and other upload methods is created in the first step described above. The 
+				<b>category</b> parameter shown here is used by the <b>Frankly API</b> to determine which formatting rules should be applied to the resource. 
+				Since the files will be optimized for different situations based on their category, it will be easier to integrate with Frankly and this will 
+				create a better user experience.
 			</p>
 
 			<p>
@@ -1144,7 +1226,8 @@ require 'frankly-ruby'
 			</h5>
  
 			<p>
-				With the <b>Frankly API</b>, you can read the ban status of a given user. A banned user will not be able to send messages so it will be useful to determine programmatically if a user has been banned. Here's an example of how you can read the ban status of a user:
+				With the <b>Frankly API</b>, you can read the ban status of a given user. A banned user will not be able to send messages so it will be useful 
+				to determine programmatically if a user has been banned. Here's an example of how you can read the ban status of a user:
 			</p>
 
 <pre class="prettyprint"><code>
@@ -1163,14 +1246,14 @@ ban = client.read_user_ban(user_id)
 			</h3>
 			
 			<p>
-				For backend frameworks that simulate synchronicity, such as <a href="https://www.meteor.com/">Meteor</a> which simulates synchronicity using Fibers, you will need to put a 
-				wrapper around the asynchronous calls made within the Frankly JavaScript SDK. The Frankly JavaScript SDK makes use of the Promise design 
-				pattern, putting asynchronous callbacks in the <code>.then()</code> and <code>.catch()</code> functions of a call.
+				For backend frameworks that simulate synchronicity, such as <a href="https://www.meteor.com/">Meteor</a> which simulates synchronicity using 
+				Fibers, you will need to put a wrapper around the asynchronous calls made within the Frankly JavaScript SDK. The Frankly JavaScript SDK makes 
+				use of the Promise design pattern, putting asynchronous callbacks in the <code>.then()</code> and <code>.catch()</code> functions of a call.
 			</p>
 			
 			<p>
 				In order to make asynchronous callbacks within a Meteor environment, you must run the code within a Fiber. This can be achieved by 
-				utilising the <code>Meteor.bindEnvironment</code> call, and passing the argument returned by the initial call.
+				utilizing the <code>Meteor.bindEnvironment</code> call, and passing the argument returned by the initial call.
 			</p>
 
 			<div class="panel panel-default note">

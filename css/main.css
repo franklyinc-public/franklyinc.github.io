@@ -27,6 +27,7 @@
    background-color: #2a2e33;
    color: #ffffff;
    font-family: 'Roboto', sans-serif;
+   overflow: auto;
 }
 
 .sidebar-logo {
