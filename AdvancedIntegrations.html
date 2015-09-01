@@ -546,8 +546,44 @@ frankly.readRoomActivity(roomId)
 
 
 			<p>
-				<i>Coming soon!</i>
+				In addition to simply presenting <code>FRSDKRoomViewController</code> or pushing it onto your existing navigation controller, 
+				you can use its view as a subview of your own views. In order to do this, make sure to follow standard procedure
+				for view controller containment. The following snippet illustrates how you might add a Room view controller's view
+				to your own view controller's view.
 			</p>
+			
+			
+<br>
+
+
+<pre class="prettyprint"><code class="lang-cpp">
+- (void)viewDidLoad {
+	FRSDKRoomViewController *roomVC = [[FranklySDK sharedInstance] roomViewControllerWithRoomId:kYourCoolRoomId title:@"Nice!"];
+	roomVC.delegate = self; // more on this below
+	[self.view addSubview:roomVC.view];
+	[self addChildViewController:roomVC];
+}
+</code></pre>
+
+
+<br>
+
+
+			<p>
+				<code>FRSDKRoomViewController</code> can provide a delegate with information about changes to its editing state. If you're interested
+				in this information, make sure your delegate conforms to <code>&lt;FRSDKRoomViewControllerDelegate&gt;</code>. 
+				<code>FRSDKRoomViewController</code> will send the following messages to its delegate:
+			</p>
+			
+			
+<br>
+
+
+<pre class="prettyprint"><code class="lang-cpp">
+- (void)roomViewControllerWillBeginEditing:(FRSDKRoomViewController *)roomViewController animated:(BOOL)animated keyboardFrame:(CGRect)keyboardFrame;
+- (void)roomViewControllerWillEndEditing:(FRSDKRoomViewController *)roomViewController animated:(BOOL)animated;
+</code></pre>
+
 
 		</div>
 
