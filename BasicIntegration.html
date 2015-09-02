@@ -450,36 +450,26 @@ var frankly = require('frankly-js').Client('https'),
     userDisplayName = "Example Name";
 
 frankly
-    .createFile({
+    <strong>.createFile({
         category: 'useravatar', type: 'image'
-    })
+    })</strong>
     .then(function (res) {
-        frankly
-            .updateFile(res.url, fs.readFileSync('images/profile_pic_123.png'))
+	frankly<strong>
+	    .updateFile(res.url, fs.readFileSync('images/profile_pic_123.png'))</strong>
             .then(function (res) {
-                frankly
+                frankly<strong>
                     .updateUser(userId, {
                         displayName: userDisplayName,
                         avatarImageUrl: res.url
-                    })
+                    })</strong>
+	            .catch(failure)
             })
             .catch(failure)
     })
     .catch(failure);
 </code></pre>
-
-
-				<div class="panel panel-default note">
-				  <div class="panel-body">
-				    <b>Note</b> <i>08/17/2015</i> The property to set the user's Profile Avatar will be updated soon to specify the process for uploading the image asset to Frankly Servers 
-					then setting it as the user's Profile Avatar once upload is complete. Please contact us at 
-					<a href="mailto:platform-support@franklychat.com">platform-support@franklychat.com</a> for more information if this is critical to your implementation.
-				  </div>
-				</div>
-
 		</div>
-
-	</div>
+			</div>
 
 
 	<div class="doc">
