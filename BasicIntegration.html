@@ -428,27 +428,44 @@ userManager.update(user);
 				</h4>
 		
 				<p>
-					A user can have a Display Name and Profile Avatar specified by using the <code>updateUser</code> function within the Frankly JavaScript SDK. 
-					Note that the Profile Image must have a publicly accessible URL in order to be used within Frankly.
+					A user can have a display name and profile image specified by using the <code>updateUser</code> function within the Frankly JavaScript SDK. Note that the profile image must first be uploaded to Frankly’s file server in order to be used as a profile avatar.
 				</p>
 
-
-<br>
-
+				<p>
+					Currently the Frankly JavaScript SDK only supports <code>http</code> or <code>https</code> connections on the backend for file uploads, as demonstrated in the following snippet. File uploads via the browser are not currently supported, however this functionality is being actively developed.
+				</p>
 
 				<p>
-					Set the <code>displayName</code> and <code>avatarImageURL</code> properties of the <code>options</code> parameter within the <code>updateUser</code> function:
+					To upload an image to be used as a profile avatar, use the <code>createFile</code> function to create a bucket that the image can be loaded into, then use the <code>updateFile</code> function to set the contents of the picture.
+				</p>
+
+				<p>
+					Once the file has been uploaded, set the <code>displayName</code> and <code>avatarImageUrl</code> properties of the <code>options</code> parameter within the <code>updateUser</code> function:
 				</p>
 
 
 <pre class="prettyprint"><code class="lang-js">
-var frankly = require('frankly-js').Client('wss');
+var frankly = require('frankly-js').Client('https'),
+    fs = require('fs'),
+    userDisplayName = "Example Name";
 
-…
-frankly.updateUser(userId, {
-   displayName: "Example Name",
-<!--   avatarImageURL: "http://www.example.com/users/1234/profile.jpg"-->
-});
+frankly
+    .createFile({
+        category: 'useravatar', type: 'image'
+    })
+    .then(function (res) {
+        frankly
+            .updateFile(res.url, fs.readFileSync('images/profile_pic_123.png'))
+            .then(function (res) {
+                frankly
+                    .updateUser(userId, {
+                        displayName: userDisplayName,
+                        avatarImageUrl: res.url
+                    })
+            })
+            .catch(failure)
+    })
+    .catch(failure);
 </code></pre>
 
 
