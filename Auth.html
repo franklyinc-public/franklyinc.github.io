@@ -443,11 +443,12 @@ eyJ0eXAiOiJKV1MiLCJhbGciOiJIUzI1NiIsImN0eSI6ImZyYW5rbHktaXQ7djEifQ.eyJhYWsiOiIwM
 				</h4>
 	
 				<p>
-					Set the FranklySDK’s <code>authenticationDelegate</code> to an object that conforms to the <code>FranklySDKAuthenticationDelegate</code> protocol.
-					Then call <code>initiateAuthenticationWithNewSession:</code>. Passing in YES will cause the SDK to go through the full authentication flow
-					including a request for <code>identifierWithNonce:preferredRole:completion:</code>. Passing in NO will attempt to use an existing session, that was stored from
-					a previous authentication. If that session exists, you will not recieve a request for <code>identifierWithNonce:preferredRole:completion:</code> but will still
-					receive the <code>authenticationDidSucceedWithUserID:</code> or <code>authenticationDidFailWithError:</code> callback. 
+					Set the FranklySDK’s <code>authenticationDelegate</code> to an object that conforms to the <code>FranklySDKAuthenticationDelegate</code> 
+					protocol. Then call <code>initiateAuthenticationWithNewSession:</code>. Passing in YES will cause the SDK to go through the full 
+					authentication flow including a request for <code>identifierWithNonce:preferredRole:completion:</code>. Passing in NO will attempt to use 
+					an existing session, that was stored from a previous authentication. If that session exists, you will not recieve a request for 
+					<code>identifierWithNonce:preferredRole:completion:</code> but will still receive the <code>authenticationDidSucceedWithUserID:</code> or 
+					<code>authenticationDidFailWithError:</code> callback. 
 				</p>
 		
 				<p>
@@ -519,12 +520,14 @@ eyJ0eXAiOiJKV1MiLCJhbGciOiJIUzI1NiIsImN0eSI6ImZyYW5rbHktaXQ7djEifQ.eyJhYWsiOiIwM
 
 
 								<p>
-									This method is where you should utilize your back end server as detailed above, under <a href="#auth_flow">Server Authentication Flow</a>, to create a valid identifier. 
-									The <code>uid</code> field in the identifier is optional, however, the identifier is still necessary. If you choose not to include a <code>uid</code> then the user will 
-									only be allowed in Spectator Mode. If a user in Spectator Mode attempts to participate it will trigger a call to the delegate’s
-									 <code>doUserAuthentication</code> method at which point you should present a login screen. When your server responds with the identity token, 
-									 call completion to finish the authentication process. The preferred role is a suggestion from the client SDK but your server, as long it 
-									 includes a valid <code>uid</code>, may choose to put any role in the role field of the <code>identityToken</code> and the SDK will honor that.
+									This method is where you should utilize your back end server as detailed above, under <a href="#auth_flow">Server 
+									Authentication Flow</a>, to create a valid identifier. The <code>uid</code> field in the identifier is optional, however, 
+									the identifier is still necessary. If you choose not to include a <code>uid</code> then the user will only be allowed in 
+									Spectator Mode. If a user in Spectator Mode attempts to participate it will trigger a call to the delegate’s 
+									<code>doUserAuthentication</code> method at which point you should present a login screen. When your server responds with 
+									the identity token, call completion to finish the authentication process. The preferred role is a suggestion from the 
+									client SDK but your server, as long it includes a valid <code>uid</code>, may choose to put any role in the role field of 
+									the <code>identityToken</code> and the SDK will honor that.
 								</p>
 
 
@@ -536,15 +539,17 @@ eyJ0eXAiOiJKV1MiLCJhbGciOiJIUzI1NiIsImN0eSI6ImZyYW5rbHktaXQ7djEifQ.eyJhYWsiOiIwM
 								    <b>Note</b>
 									<ol>
 										<li>You must call completion or the process will never finish.</li>
-										<li>The <code>partnerUserId</code> string is an identifier that the partner app uses to identify the user. Frankly SDK will correlate it with a Frankly identifier.</li>
+										<li>The <code>partnerUserId</code> string is an identifier that the partner app uses to identify the user. Frankly SDK 
+											will correlate it with a Frankly identifier.</li>
 									</ol>
 								  </div>
 								</div>
 
 								
-								<li>We have included a test function in <code>FranklySDK.h</code>, <code>retrieveIdentityTokenWithUserID:Nonce:authKey:authSecret:role:completionBlock</code>, 
-									that will allow you to bypass your server and retrieve an identifier from Frankly’s servers. Because it requires putting in your 
-									<code>appKey</code> and <code>appSecret</code>, it is only for testing.</li>
+								<li>We have included a test function in <code>FranklySDK.h</code>, 
+									<code>retrieveIdentityTokenWithUserID:Nonce:authKey:authSecret:role:completionBlock</code>, that will allow you to bypass  
+									your server and retrieve an identifier from Frankly’s servers. Because it requires putting in your <code>appKey</code> and 
+									<code>appSecret</code>, it is only for testing.</li>
 							</ul>
 							</li>
 
@@ -588,7 +593,8 @@ eyJ0eXAiOiJKV1MiLCJhbGciOiJIUzI1NiIsImN0eSI6ImZyYW5rbHktaXQ7djEifQ.eyJhYWsiOiIwM
 </code></pre>
 
 
-							<li><code>authenticationDidFailWithError:(NSError*)</code> - If this message is received, you need to start authentication process over before you may use the SDK.</li>
+							<li><code>authenticationDidFailWithError:(NSError*)</code> - If this message is received, you need to start authentication process 
+								over before you may use the SDK.</li>
 
 
 <pre class="prettyprint"><code class="lang-cpp">
@@ -614,9 +620,29 @@ eyJ0eXAiOiJKV1MiLCJhbGciOiJIUzI1NiIsImN0eSI6ImZyYW5rbHktaXQ7djEifQ.eyJhYWsiOiIwM
 				
 					<p>
 						If your delegate receives the <code>doUserAuthentication</code> callback then you should present a login screen. 
-						When the user has completed logging in, you should restart the authentication process by calling <code>initiateAuthenticationWithNewSession:</code>
-						and passing in <code>YES</code> to create a new session. 
+						When the user has completed logging in, you should restart the authentication process by calling 
+						<code>initiateAuthenticationWithNewSession:</code> and passing in <code>YES</code> to create a new session. 
 					</p>
+					
+					
+<br>
+
+
+					<h5>
+						<b>Logging Out</b>
+					</h5>
+					
+					
+					<p>
+						The Frankly SDK will automatically trigger a logout at appropriate times, such as when it detects a new user is attempting to log in. 
+						However, you can also manually trigger a logout at any time by calling:
+					</p>
+					
+					
+<pre class="prettyprint"><code class="lang-cpp">
+- (void)logOut;
+</code></pre>
+
 
 			</div>
 		
@@ -634,7 +660,8 @@ eyJ0eXAiOiJKV1MiLCJhbGciOiJIUzI1NiIsImN0eSI6ImZyYW5rbHktaXQ7djEifQ.eyJhYWsiOiIwM
 			
 			
 				<p>	
-					The Frankly SDK needs a user's identity token for user authentication. To do this, you need to implement an <code>IdentityTokenGenerator</code> class.
+					The Frankly SDK needs a user's identity token for user authentication. To do this, you need to implement an 
+					<code>IdentityTokenGenerator</code> class.
 				</p>
 
 
@@ -720,9 +747,10 @@ FranklySdk.initAuthentication(suggestedRole, partnerUsername);
 				
 				<p>
 					In order to make use of the activities provided by the Frankly SDK, you will need to add them to your <code>AndroidManifest.xml</code>. 
-					In particular, you will need to add either the <code>ConditionalRoomListActivity</code> definition or the <code>RoomListActivity</code> definition, depending on whether 
-					you are using Conditional Rooms or not, as well as the <code>RoomActivity</code> definition. The <code>AndroidManifest.xml</code> definitions for all of these classes, as 
-					well as other details about them, can be found under <a href="InitializeSDK.html#Initializing_Android">Basic Integration > Room List</a>.
+					In particular, you will need to add either the <code>ConditionalRoomListActivity</code> definition or the <code>RoomListActivity</code> 
+					definition, depending on whether you are using Conditional Rooms or not, as well as the <code>RoomActivity</code> definition. The 
+					<code>AndroidManifest.xml</code> definitions for all of these classes, as well as other details about them, can be found under 
+					<a href="InitializeSDK.html#Initializing_Android">Basic Integration > Room List</a>.
 				</p>
 
 
@@ -734,8 +762,8 @@ FranklySdk.initAuthentication(suggestedRole, partnerUsername);
 				</h5>
 			
 				<p>
-					<b>Login Request Callback</b> In order to handle user logins, you need to implement a <code>RequestCallback</code> and pass an instance of it 
-					to <code>FranklySdk.setLoginRequestCallback(FranklySdk.RequestCallback)</code>:
+					<b>Login Request Callback</b> In order to handle user logins, you need to implement a <code>RequestCallback</code> and pass an instance of 
+					it to <code>FranklySdk.setLoginRequestCallback(FranklySdk.RequestCallback)</code>:
 				</p>
 			
 
@@ -780,7 +808,7 @@ public void onCreate() {
 
 
 			<h5>
-				<b>Explicit Login</b>
+				<b>Explicit Login & Logout</b>
 			</h5>
 
 			
@@ -796,6 +824,21 @@ FranklySdk.login();
 
 
 <br>
+
+
+			<p>
+				Similarly, the Frankly SDK will automatically trigger a logout at appropriate times, such as when it detects a new user is attempting to log 
+				in. However, you can also manually trigger a logout at any time by calling:
+			</p>
+			
+			
+<pre class="prettyprint"><code class="lang-java">
+FranklySdk.logout();
+</code></pre>
+
+
+<br>
+
 
 		</div>
 
@@ -825,7 +868,9 @@ FranklySdk.login();
 
 
 				<p>
-					When authenticating from a client application running in the browser the <code>appKey</code> and <code>appSecret</code> values shouldn't be exposed and the application's backend servers must generate the identity token using the secret and return it to the client to successfully authenticate.
+					When authenticating from a client application running in the browser the <code>appKey</code> and <code>appSecret</code> values shouldn't be 
+					exposed and the application's backend servers must generate the identity token using the secret and return it to the client to successfully 
+					authenticate.
 				</p>
 		
 				<p>
@@ -881,7 +926,9 @@ var client = new frankly.FranklyClient
 			</h3>
 		
 			<p>
-				The Frankly Web App supports authenticated users by providing a way to customize the login process. You can allow your users to log in using your custom interface by setting both the “Login URL” and the “Logout URL” in the <a href="https://console.franklychat.com/">Frankly Admin Console</a> > Settings > Web App.
+				The Frankly Web App supports authenticated users by providing a way to customize the login process. You can allow your users to log in using 
+				your custom interface by setting both the “Login URL” and the “Logout URL” in the <a href="https://console.franklychat.com/">Frankly Admin 
+				Console</a> > Settings > Web App.
 			</p>
 
 		
@@ -914,7 +961,8 @@ var client = new frankly.FranklyClient
 			</h4>
 	
 			<p>
-				If a “Login URL” is provided in the Admin Console, the user is shown this webpage (inside of an &lt;iframe&gt;) on top of the Frankly Web App when they select “LOG IN”.
+				If a “Login URL” is provided in the Admin Console, the user is shown this webpage (inside of an &lt;iframe&gt;) on top of the Frankly Web App 
+				when they select “LOG IN”.
 			</p>
 		
 <br>
@@ -923,53 +971,75 @@ var client = new frankly.FranklyClient
 					<img src="images/webapp_auth_1.png" style="border:1px" width="748">
 					<figcaption><i>Figure 1: Frankly Web App Admin Console</i></figcaption>
 			</figure>
+
 			
 <br>
+
 
 			<figure>
 					<img src="images/webapp_auth_2.png" style="border:1px" width="300">
 					<figcaption><i>Figure 2: Example external login screen within Frankly Web App</i></figcaption>
 			</figure>
 
+
 <br>
+
 
 			<p>
 				Please note the following requirements when creating your login screen for the Web App:
 			</p>
 		
 			<ul>
-				<li>The &lt;iframe&gt; that holds the external login screen sits within a 335px × 550px container, and external login screens must render correctly within this space.</li>
-				<li>The external login screen must be served over a secure protocol (that is, using HTTPS) for security purposes. Pages served over plain HTTP will not be able to authenticate with the Web App.</li>
+				<li>The &lt;iframe&gt; that holds the external login screen sits within a 335px × 550px container, and external login screens must render 
+					correctly within this space.</li>
+				<li>The external login screen must be served over a secure protocol (that is, using HTTPS) for security purposes. Pages served over plain HTTP 
+					will not be able to authenticate with the Web App.</li>
 			</ul>
+
 		
 <br>
+
 		
 			<p>
-				The Frankly Web App appends <code>nonce</code> and <code>redirect_uri</code> query string parameters suffixed to the end of the “Login URL” within the &lt;iframe&gt; displayed to the user. The &lt;iframe&gt; will display the URL in the form of:
+				The Frankly Web App appends <code>nonce</code> and <code>redirect_uri</code> query string parameters suffixed to the end of the “Login URL” 
+				within the &lt;iframe&gt; displayed to the user. The &lt;iframe&gt; will display the URL in the form of:
 			</p>
+
 		
 <pre class="prettyprint"><code>
 {your_login_url}/?nonce={nonce_value}&amp;redirect_uri=https://app.franklychat.com/auth/redirect
 </code></pre>
 
+
 <br>
 
+
 			<p>
-				The nonce value is used to generate an identity token for the user’s session, which ensures that the generated identity token is only valid for one-time identity validation. Note that the nonce expires <strong>5 minutes</strong> after it is generated, and therefore the Frankly Web App will refresh the contents of the login window if it has been opened for more than 5 minutes without a submission. The <code>redirect_uri</code> is a string for the Frankly Server endpoint which accepts the identity token. These details are described in further detail below.
+				The nonce value is used to generate an identity token for the user’s session, which ensures that the generated identity token is only valid for 
+				one-time identity validation. Note that the nonce expires <strong>5 minutes</strong> after it is generated, and therefore the Frankly Web App 
+				will refresh the contents of the login window if it has been opened for more than 5 minutes without a submission. The <code>redirect_uri</code> 
+				is a string for the Frankly Server endpoint which accepts the identity token. These details are described in further detail below.
 			</p>
-		
+
+
 			<p>
-				It is important that the page located at the  “Login URL” does not return  “X-Frame-Options” in its response header.  X-Frame-Options are used to specify whether or not a web page can be rendered within an iframe of another web page. You can read more about X-Frame-Options and how they are configured <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/X-Frame-Options">here</a>. As the “ALLOW-FROM” option is not supported across browsers, we ask that you do not return “X-Frame-Options” in your headers at all. 
+				It is important that the page located at the  “Login URL” does not return  “X-Frame-Options” in its response header.  X-Frame-Options are used 
+				to specify whether or not a web page can be rendered within an iframe of another web page. You can read more about X-Frame-Options and how they 
+				are configured <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/X-Frame-Options">here</a>. As the “ALLOW-FROM” option is not 
+				supported across browsers, we ask that you do not return “X-Frame-Options” in your headers at all. 
 			</p>
-		
+
+
 <br>
-		
+
+
 			<h4>
 				2. Authenticate Your Users
 			</h4>
 		
 			<p>
-				On your login page accessible via the “Login URL”, you need to allow users to sign in as “authenticated users” or “guest users” by either collecting their credentials or checking the status of their current session. An example user story is outlined below.
+				On your login page accessible via the “Login URL”, you need to allow users to sign in as “authenticated users” or “guest users” by either 
+				collecting their credentials or checking the status of their current session. An example user story is outlined below.
 			</p>
 		
 <br>
@@ -1033,15 +1103,21 @@ var client = new frankly.FranklyClient
 			</p>
 		
 			<p>
-				The identity tokens used by the Frankly Web App are in the JSON Web Token (JWT) format. JWT is a compact URL-safe means of representing claims to be transferred between two parties. See <a href="#identity_token">above</a> for an example of an identity token. For more information, please see the <a href="#jwt">JWT section above</a>.
+				The identity tokens used by the Frankly Web App are in the JSON Web Token (JWT) format. JWT is a compact URL-safe means of representing claims 
+				to be transferred between two parties. See <a href="#identity_token">above</a> for an example of an identity token. For more information, 
+				please see the <a href="#jwt">JWT section above</a>.
 			</p>
 		
 			<p>
-				Once an identity token is generated, redirect the current request to the <code>redirect_uri</code> along with the generated identity token as part of the query string with field name <code>identity_token</code>.
+				Once an identity token is generated, redirect the current request to the <code>redirect_uri</code> along with the generated identity token as 
+				part of the query string with field name <code>identity_token</code>.
 			</p>
 		
 			<p>
-				You can redirect a page by getting the web server to set the HTTP Location header (read more about HTTP Location setting <a href="https://en.wikipedia.org/wiki/HTTP_location">here</a>). We recommend using the HTTP status code 302 for this redirect within the header. For example, if the <code>redicrect_uri</code> that is provided is “https://app.franklychat.com/auth/redirect” then an example server response would look something like:
+				You can redirect a page by getting the web server to set the HTTP Location header (read more about HTTP Location setting 
+				<a href="https://en.wikipedia.org/wiki/HTTP_location">here</a>). We recommend using the HTTP status code 302 for this redirect within the 
+				header. For example, if the <code>redicrect_uri</code> that is provided is “https://app.franklychat.com/auth/redirect” then an example server 
+				response would look something like:
 			</p>
 
 	
@@ -1059,7 +1135,8 @@ Location: https://app.franklychat.com/auth/redirect?identity_token={user’s_ide
 			</p>
 		
 			<p>
-				Note that setting the Location header of a HTTP request is a secured mechanism, as JavaScript does not have access to the redirection and thus has no way of accessing the identity token.
+				Note that setting the Location header of a HTTP request is a secured mechanism, as JavaScript does not have access to the redirection and thus 
+				has no way of accessing the identity token.
 			</p>
 		
 		</div>
@@ -1072,7 +1149,12 @@ Location: https://app.franklychat.com/auth/redirect?identity_token={user’s_ide
 
 	
 			<p>
-				In all cases, your application's <code>appKey</code> and <code>appSecret</code> should NOT be stored on the client and your application's backend servers should be responsible for generating identity tokens, using the <code>appSecret</code> to return it to the client to successfully authenticate. Storing your application's <code>appKey</code> and <code>appSecret</code> exposes you to unnecessary security risks where an attacker could obtain these values to communicate with Frankly services on your behalf. Please note that some examples do highlight the ability to directly authenticate with Frankly services from your application's client, however these are also noted as examples meant for checking progress of early integration steps.
+				In all cases, your application's <code>appKey</code> and <code>appSecret</code> should NOT be stored on the client and your application's 
+				backend servers should be responsible for generating identity tokens, using the <code>appSecret</code> to return it to the client to 
+				successfully authenticate. Storing your application's <code>appKey</code> and <code>appSecret</code> exposes you to unnecessary security risks 
+				where an attacker could obtain these values to communicate with Frankly services on your behalf. Please note that some examples do highlight 
+				the ability to directly authenticate with Frankly services from your application's client, however these are also noted as examples meant for 
+				checking progress of early integration steps.
 			</p>
 		</div>
 

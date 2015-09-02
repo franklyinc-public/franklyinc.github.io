@@ -642,8 +642,32 @@ frankly.readRoomActivity(roomId)
 			
 			<p>
 				If configured, the Frankly Chat Service augments the re-engagement abilities of Sticky Messages by sending users push notifications whenever 
-				there is a Sticky Message sent in a Room they have subscribed to.
+				there is a Sticky Message sent in a Room they have subscribed to. Below are the guides for enabling push notifications for Frankly Chat Service 
+				in your app, please work with your Frankly point of contact to submit the relevant push notificationc certificates and tokens, based on the 
+				platforms you're integrating on.
 			</p>
+			
+		<!--	
+			<p>
+				Here are the supported platforms for push notifications along with the needed information for configuring your app:
+			</p>
+			
+			
+			<ul>
+				<li>iOS APNS
+				<ul>
+					<li>APNS SSL Certificate</li>
+					<li>Frankly appKey</li>
+				</ul>
+				</li>
+				<li>Android GCM
+				<ul>
+					<li>GCM Token</li>
+				</ul>		
+				</li>
+			</ul>
+		-->
+			
 			
 		</div>
 
@@ -654,8 +678,30 @@ frankly.readRoomActivity(roomId)
 			</h4>
 			
 			<p>
-				<i>Coming soon!</i>
+				To configure FranklySDK for use with APNS, you just need to pass us the device token you receive in 
+				<code>didRegisterForRemoteNotificationsWithDeviceToken:</code>. You'll use <code>-[FranklySDK registerForNotificationsWithDeviceToken:]</code>
+				to do this. If you already use push notifications, this setup will be very familiar to you. A quick implementation might look something like 
+				the following:
 			</p>
+
+
+<br>
+
+
+<pre class="prettyprint"><code class="lang-cpp">
+- (void)applicationDidFinishLaunchingWithOptions:(NSDictionary *)options {
+	UIUserNotificationType notificationType = UIUserNotificationTypeAlert | UIUserNotificationTypeSound;
+    UIUserNotificationSettings *notificationSettings = [UIUserNotificationSettings settingsForTypes:notificationType categories:nil];
+	[[UIApplication sharedApplication] registerUserNotificationSettings:notificationSettings];
+}
+- (void)application:(UIApplication *)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings {
+    [application registerForRemoteNotifications];
+}
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
+    [[FranklySDK sharedInstance] registerForNotificationsWithDeviceToken:deviceToken];
+}
+</code></pre>
+
 			
 		</div>
 		
@@ -666,7 +712,8 @@ frankly.readRoomActivity(roomId)
 			</h4>
 			
 			<p>
-				To enable push notifications for the Frankly Android SDK, you must first generate a GCM token. Details on how to do that can be found 
+				To enable push notifications for the Frankly Android SDK, you must first generate a GCM token. If you already have push notifications 
+				configured for your Android app then this setup will be very familiar to you. Details on how to do that can be found 
 				under "<a href="https://developers.google.com/cloud-messaging/android/client">Implementing GCM Client on Android</a>" on the Google Developers 
 				portal.
 			</p>
