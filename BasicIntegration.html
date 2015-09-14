@@ -439,9 +439,8 @@ userManager.update(user);
 				</p>
 
 				<p>
-					Currently the Frankly JavaScript SDK only supports <code>http</code> or <code>https</code> connections on the backend for file uploads, as 
-					demonstrated in the following snippet. File uploads via the browser are not currently supported, however this functionality is being 
-					actively developed.
+					Currently the Frankly JavaScript SDK supports <code>http</code> or <code>https</code> connections on the backend for file uploads, and
+					<code>ws</code> or <code>wss</code> connections for browser file uploads.
 				</p>
 
 				<p>
@@ -451,7 +450,7 @@ userManager.update(user);
 
 				<p>
 					Once the file has been uploaded, set the <code>displayName</code> and <code>avatarImageUrl</code> properties of the <code>options</code> 
-					parameter within the <code>updateUser</code> function:
+					parameter within the <code>updateUser</code> function. The following snippet demonstrates how you might upload an image on the backend:
 				</p>
 
 
@@ -478,6 +477,43 @@ frankly
             .catch(failure)
     })
     .catch(failure);
+</code></pre>
+
+			<p>
+				The following snippet demonstrates how you might upload an image in the browser environment:
+			</p>
+
+<pre class="prettyprint"><code class="lang-html">
+<<span>input</span> type="file" />
+</code></pre>
+
+
+<pre class="prettyprint"><code class="lang-js">
+var frankly = require('frankly-js').Client('wss'),
+    displayName = "Example Name";
+
+$('input').on('change', function(e){
+    var file = e.target.files[0];
+
+    frankly.createFile({
+        category: 'useravatar',
+        type: 'image'
+    })
+    .then(function(res){
+        frankly.updateFile(res.url, file)
+        .then(function(){
+            frankly
+            .updateUser(userId, {
+                displayName: displayName,
+                avatarImageUrl: res.url
+            })
+            .catch(failure)
+        })
+        .catch(function(failure){
+            console.log(failure);
+        })
+    });
+});
 </code></pre>
 		</div>
 			</div>
