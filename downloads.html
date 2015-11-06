@@ -1,735 +1,804 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8">
     <title>Downloads</title>
     <meta name="keywords" content="Frankly Chat Service Platform" />
-	<meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link type="text/css" rel="stylesheet" href="css/main.css">
     <link type="text/css" rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" type="text/css">
-	<link rel="icon"
-	      type="image/png"
-	      href="frankly_favicon_32x32_no_bg.png">
-	<script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js?skin=sunburst"></script>
-	<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-	<script src="js/load_frankly_menus.js"></script>
+    <link rel="icon" type="image/png" href="frankly_favicon_32x32_no_bg.png">
+    <script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js?skin=sunburst"></script>
+    <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="js/load_frankly_menus.js"></script>
 
-	<script>
-	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    <script>
+        (function(i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r;
+            i[r] = i[r] || function() {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+            a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
 
-	  ga('create', 'UA-65350925-1', 'auto');
-	  ga('send', 'pageview');
+        ga('create', 'UA-65350925-1', 'auto');
+        ga('send', 'pageview');
+    </script>
 
-	</script>
-
-	<script>
-	var frankly_menu = [
-	'<ul>',
-		'<li><a href="http://franklyinc.github.io/">Getting Started</a></li>',
-		'<li><a href="InstallSDK.html">Installing the SDK</a></li>',
-		'<li><a href="InitializeSDK.html">Initializing the SDK</a>',
-		'<li><a href="Auth.html">Authenticating</a>',
-		'<li><a href="BasicIntegration.html">Basic Integration</a>',
-		'<li><a href="AdvancedIntegrations.html">Advanced Integrations</a>',
-		'<li><a href="APIReference.html">API Reference</a>',
-		'<li><a href="downloads.html">Downloads</a>',
-		'<li><a href="Support.html">Contact & Support</a>',
-	'</ul>'
-	];
+    <script>
+        var frankly_menu = [
+            '<ul>',
+            '<li><a href="http://franklyinc.github.io/">Getting Started</a></li>',
+            '<li><a href="InstallSDK.html">Installing the SDK</a></li>',
+            '<li><a href="InitializeSDK.html">Initializing the SDK</a>',
+            '<li><a href="Auth.html">Authenticating</a>',
+            '<li><a href="BasicIntegration.html">Basic Integration</a>',
+            '<li><a href="AdvancedIntegrations.html">Advanced Integrations</a>',
+            '<li><a href="APIReference.html">API Reference</a>',
+            '<li><a href="downloads.html">Downloads</a>',
+            '<li><a href="Support.html">Contact & Support</a>',
+            '</ul>'
+        ];
 
 
-	jQuery(document).ready(function($){
-  		set_menu_array(frankly_menu);
-  	});
-	</script>
+        jQuery(document).ready(function($) {
+            set_menu_array(frankly_menu);
+        });
+    </script>
 
-	<script>
-		(function() {
-			var cx = '007928927613488122909:hbugzpc0lua';
-			var gcse = document.createElement('script');
-			gcse.type = 'text/javascript';
-			gcse.async = true;
-			gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
-				'//cse.google.com/cse.js?cx=' + cx;
-			var s = document.getElementsByTagName('script')[0];
-			s.parentNode.insertBefore(gcse, s);
-		})();
-	</script>
+    <script>
+        (function() {
+            var cx = '007928927613488122909:hbugzpc0lua';
+            var gcse = document.createElement('script');
+            gcse.type = 'text/javascript';
+            gcse.async = true;
+            gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+                '//cse.google.com/cse.js?cx=' + cx;
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(gcse, s);
+        })();
+    </script>
 
 </head>
 
 <nav class="navbar navbar-inverse" role="navigation" style="z-index:100">
-   <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse"
-         data-target="#frankly-navbar-collapse">
-         <span class="sr-only">Toggle navigation</span>
-         <span class="icon-bar"></span>
-         <span class="icon-bar"></span>
-         <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="http://franklyinc.github.io"><div class="mobile-logo"></div></a>
-   </div>
-   <div class="collapse navbar-collapse" id="frankly-navbar-collapse">
-      <!--Nav Bar List Goes Here-->
-   </div>
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#frankly-navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="http://franklyinc.github.io">
+            <div class="mobile-logo"></div>
+        </a>
+    </div>
+    <div class="collapse navbar-collapse" id="frankly-navbar-collapse">
+        <!--Nav Bar List Goes Here-->
+    </div>
 </nav>
 
 <script>
-	jQuery(document).ready(function($){
-		load_menus();
-	});
+    jQuery(document).ready(function($) {
+        load_menus();
+    });
 </script>
 
 <div class="sidebar-container">
 
-	<div class="sidebar-logo"><a href="http://franklyinc.github.io"></a></div>
+    <div class="sidebar-logo">
+        <a href="http://franklyinc.github.io"></a>
+    </div>
 
-	<div class="sidebar-content sidebar-search">
+    <div class="sidebar-content sidebar-search">
 
-		<form action="search.html">
-			<input type="text" class="form-control" name="q" placeholder="Search Frankly docs" aria-describedby="basic-addon2">
-		</form>
+        <form action="search.html">
+            <input type="text" class="form-control" name="q" placeholder="Search Frankly docs" aria-describedby="basic-addon2">
+        </form>
 
-	</div>
+    </div>
 
-	<div class="sidebar-content" id="side-nav-container">
-		<!--Side Bar List Goes Here-->
-	</div>
+    <div class="sidebar-content" id="side-nav-container">
+        <!--Side Bar List Goes Here-->
+    </div>
 
 </div>
 
 <div class="container container-body">
-	<div class="header">
-		<h1 class="noborder">
-			Downloads
-		</h1>
+    <div class="header">
+        <h1 class="noborder">
+            Downloads
+        </h1>
 
-		<p>
-			Download the latest of any of Frankly's SDKs, modules, and gems below!
-		</p>
+        <p>
+            Download the latest of any of Frankly's SDKs, modules, and gems below!
+        </p>
 
-	</div>
+    </div>
 
-	<div class="doc">
+    <div class="doc">
 
-		<div class="section" id="downloads">
-			<div class="list-group">
-			  <a href="https://s3.amazonaws.com/downloads.franklychat.com/releases/ios/fat/frankly-sdk-ios-1.2.9-fat.zip" download class="list-group-item">Frankly iOS SDK v1.2.9 (fat)</a>
-			  <a href="InstallSDK.html#cocoapods" class="list-group-item">Frankly iOS SDK v1.2.9 (CocoaPods) <i>Please see 'Installing the SDK' for more
+        <div class="section" id="downloads">
+            <div class="list-group">
+                <a href="https://s3.amazonaws.com/downloads.franklychat.com/releases/ios/fat/frankly-sdk-ios-1.3.0-fat.zip" download class="list-group-item">Frankly iOS SDK v1.3.0 (fat)</a>
+                <a href="InstallSDK.html#cocoapods" class="list-group-item">Frankly iOS SDK v1.3.0 (CocoaPods) <i>Please see 'Installing the SDK' for more
 				  info</i></a>
-			  <a href="https://s3.amazonaws.com/downloads.franklychat.com/releases/android/frankly-sdk-android-1.2.4.zip" download class="list-group-item">Frankly Android SDK v1.2.4 (Android Studio)</a>
-			  <a href="https://github.com/franklyinc/frankly-js" target="_blank" class="list-group-item">Frankly JavaScript SDK v1.0.0</a>
-			  <a href="https://github.com/franklyinc/frankly-python" target="_blank" class="list-group-item">Frankly Python SDK v1.0.0</a>
-			  <a href="https://github.com/franklyinc/frankly-ruby" target="_blank" class="list-group-item">Frankly Ruby SDK v1.0.0</a>
-			</div>
-		</div>
+                <a href="https://s3.amazonaws.com/downloads.franklychat.com/releases/android/frankly-sdk-android-1.3.0.zip" download class="list-group-item">Frankly Android SDK v1.3.0 (Android Studio)</a>
+                <a href="https://github.com/franklyinc/frankly-js" target="_blank" class="list-group-item">Frankly JavaScript SDK v1.0.0</a>
+                <a href="https://github.com/franklyinc/frankly-python" target="_blank" class="list-group-item">Frankly Python SDK v1.0.0</a>
+                <a href="https://github.com/franklyinc/frankly-ruby" target="_blank" class="list-group-item">Frankly Ruby SDK v1.0.0</a>
+            </div>
+        </div>
 
 
-		<div class="panel panel-default platform_update">
-			<div class="platform_update">
-				<div class="panel-body platform_update_text">
-					<h3><b>Interested in the latest Frankly Chat Platform News?</b></h3>
-				</div>
+        <div class="panel panel-default platform_update">
+            <div class="platform_update">
+                <div class="panel-body platform_update_text">
+                    <h3><b>Interested in the latest Frankly Chat Platform News?</b></h3>
+                </div>
 
-				<div class="platform_update_button">
-			 		<a class="frankly_button frankly_action_button" href="Support.html#mc_embed_signup" role="button">
-						<button type="button" class="btn btn-primary btn-lg">
-							  Sign Up for Updates
-						</button>
-					</a>
-			  	</div>
-			</div>
-		</div>
-
-
-		<div class="section" id="release_notes">
-			<h2>
-				Release Notes
-			</h2>
+                <div class="platform_update_button">
+                    <a class="frankly_button frankly_action_button" href="Support.html#mc_embed_signup" role="button">
+                        <button type="button" class="btn btn-primary btn-lg">
+                            Sign Up for Updates
+                        </button>
+                    </a>
+                </div>
+            </div>
+        </div>
 
 
-			<p>
-				Here's a breakdown of the latest Frankly Chat Service updates. We're also constantly updating and improving the Frankly Developer Portal.
-				If you're interested in seeing changes or contributing some of your own, check out <a href="https://github.com/franklyinc/franklyinc.github.io">our public Github repo</a>!
-			</p>
+        <div class="section" id="release_notes">
+            <h2>
+                Release Notes
+            </h2>
 
 
-<br>
+            <p>
+                Here's a breakdown of the latest Frankly Chat Service updates. We're also constantly updating and improving the Frankly Developer Portal. If you're interested in seeing changes or contributing some of your own, check out <a href="https://github.com/franklyinc/franklyinc.github.io">our public Github repo</a>!
+            </p>
 
 
-			<div class="panel panel-default">
-				<div class="section panel-heading" id="ios_v1.2.8">
-				    <h3 class="panel-title">
-						iOS SDK v1.2.9 Released
-					</h3>
-					<h5>
-						<i>October 23, 2015</i>
-					</h5>
-				</div>
-
-				<div class="panel-body">
-					<h5>
-						Changes
-					</h5>
-
-					<p>
-					<ol>
-						<li>Fixed several issues related to sticky messages</li>
-					</ol>
-					</p>
-				</div>
-			</div>
-
-
-<br>
+            <br>
 
             <div class="panel panel-default">
-                    <div class="section panel-heading" id="android_v1.2.4">
-                        <h3 class="panel-title">
-                                    Android SDK v1.2.4 Released
-                            </h3>
-                            <h5>
-                                    <i>September 29, 2015</i>
-                            </h5>
-                    </div>
+                <div class="section panel-heading" id="ios_v1.2.8">
+                    <h3 class="panel-title">
+                        iOS and Android SDK v1.3.0 Released
+                    </h3>
+                    <h5>
+                        <i>November 06, 2015</i>
+                    </h5>
+                </div>
 
-                    <div class="panel-body">
-                            <h5>
-                                    Changes
-                            </h5>
+                <div class="panel-body">
+                    <h5>
+                        Changes
+                    </h5>
 
-                            <p>
-                            <ol>
-                                    <li>Fixed outstanding issues</li>
-                            </ol>
-                            </p>
-                    </div>
+                    <p>
+                        <ol>
+                            <li>Improving discoverability of Flagging functionality:
+                                <ol>
+                                    <li>Message cells now open on tap, as opposed to a long press, enabling users to quickly and easily flag offensive messages</li>
+                                </ol>
+                            </li>
+                            <li>Sticky Messages:
+                                <ol>
+                                    <li>The sticky message toggle now only appears after the first sticky message is sent, only appearing after it is relevant</li>
+                                </ol>
+                            </li>
+                            <li>User Class Tags:
+                                <ol>
+                                    <li>A label has been added to the profile card that distinguishes administrators and announcers.</li>
+                                </ol>
+                            </li>
+                            <li>Timestamps:
+                                <ol>
+                                    <li>Timestamps are now much more apparent, appearing under messages after specific conditions are met, such as a message being the first after a certain amount of time has passed.</li>
+                                </ol>
+                            </li>
+                        </ol>
+                    </p>
+                </div>
             </div>
 
-<br>
-
-
-			<div class="panel panel-default">
-				<div class="section panel-heading" id="ios_v1.2.8">
-				    <h3 class="panel-title">
-						iOS SDK v1.2.8 Released
-					</h3>
-					<h5>
-						<i>September 11, 2015</i>
-					</h5>
-				</div>
-
-				<div class="panel-body">
-					<h5>
-						Changes
-					</h5>
-
-					<p>
-					<ol>
-						<li>Updated build scheme to comply with Xcode 7 upload policies.</li>
-					</ol>
-					</p>
-				</div>
-			</div>
-
-
-<br>
-
-
-			<div class="panel panel-default">
-				<div class="section panel-heading" id="ios_v1.2.7">
-				    <h3 class="panel-title">
-						iOS SDK v1.2.7 Released
-					</h3>
-					<h5>
-						<i>September 10, 2015</i>
-					</h5>
-				</div>
-
-				<div class="panel-body">
-					<h5>
-						Changes
-					</h5>
-
-					<p>
-					<ol>
-						<li>Fixed an issue that was causing validation to fail when submitting app bundles to Apple. This appears to have been caused by a rule
-							change in Apple's validation scheme which we were in violation of.</li>
-					</ol>
-					</p>
-				</div>
-			</div>
-
-
-<br>
-
-
-			<div class="panel panel-default">
-				<div class="section panel-heading" id="android_v1.2.3">
-				    <h3 class="panel-title">
-						Android SDK v1.2.3 Released
-					</h3>
-					<h5>
-						<i>September 9, 2015</i>
-					</h5>
-				</div>
-
-				<div class="panel-body">
-					<h5>
-						Changes & Improvements
-					</h5>
-
-					<p>
-					<ol>
-						<li>Exposed an easier way for developers to query a user's ID.</li>
-					</ol>
-					</p>
-				</div>
-			</div>
-
-
-<br>
-
-
-			<div class="panel panel-default">
-				<div class="section panel-heading" id="ios_v1.2.6">
-				    <h3 class="panel-title">
-						iOS SDK v1.2.6 Released
-					</h3>
-					<h5>
-						<i>September 4, 2015</i>
-					</h5>
-				</div>
-
-				<div class="panel-body">
-					<h5>
-						Changes & Improvements
-					</h5>
-
-					<p>
-					<ol>
-						<li>Made many improvements for supporting various scenarios of Partial View Rooms use.</li>
-					</ol>
-					</p>
-
-					<h5>
-						Bug Fixes
-					</h5>
-
-					<p>
-					<ol>
-						<li>Small issues related to tappable URLs</li>
-						<li>Crashes related to excessive text input via dictation</li>
-						<li>Issues with iOS 7 compatibility</li>
-						<li>And more!</li>
-					</ol>
-					</p>
-				</div>
-			</div>
-
-
-<br>
-
-
-			<div class="panel panel-default">
-				<div class="section panel-heading" id="android_v1.2.2">
-				    <h3 class="panel-title">
-						Android SDK v1.2.2 Released
-					</h3>
-					<h5>
-						<i>September 3, 2015</i>
-					</h5>
-				</div>
-
-				<div class="panel-body">
-					<h5>
-						Changes
-					</h5>
-
-					<p>
-					<ol>
-						<li>More bug fixes!</li>
-					</ol>
-					</p>
-				</div>
-			</div>
-
-
-<br>
-
-
-			<div class="panel panel-default">
-				<div class="section panel-heading" id="android_v1.2.1">
-				    <h3 class="panel-title">
-						Android SDK v1.2.1 Released
-					</h3>
-					<h5>
-						<i>August 21, 2015</i>
-					</h5>
-				</div>
-
-				<div class="panel-body">
-					<h5>
-						Changes
-					</h5>
-
-					<p>
-					<ol>
-						<li>Lots of bug fixes!</li>
-					</ol>
-					</p>
-				</div>
-			</div>
-
-
-<br>
-
-
-			<div class="panel panel-default">
-				<div class="section panel-heading" id="android_v1.2.0">
-				    <h3 class="panel-title">
-						Android SDK v1.2.0 Released
-					</h3>
-					<h5>
-						<i>August 16, 2015</i>
-					</h5>
-				</div>
-
-				<div class="panel-body">
-					<h5>
-						New Features
-					</h5>
-
-					<p>
-					<ol>
-						<li>Announcers
-						<ul>
-							<li>You can specify people in a Room that can send Sticky Messages.</li>
-							<li>Messages sent by Announcers will be easily identifiable and they are able to send both text and photo Sticky Messages.</li>
-						</ul>
-						</li>
-						<li>Conditional Rooms
-						<ul>
-							<li>Define a set of conditions that your users can identify with in order to customize which Rooms they see.
-							<ul>
-								<li><code>ConditionalRoomListActivity</code> has been added to FranklySDK. This <code>Activity</code> provides access to
-									Conditional Rooms.</li>
-							</ul>
-							</li>
-						</ul>
-						</li>
-						<li>Push Notification Support
-						<ul>
-							<li>Now users can receive Push Notifications for any Sticky Messages sent in Rooms they've subscribed to.</li>
-						</ul>
-						</li>
-						<li>Tappable URLs
-						<ul>
-							<li>URLs are now hyperlinked.</li>
-						</ul>
-						</li>
-					</ol>
-					</p>
-				</div>
-			</div>
-
-
-<br>
-
-
-			<div class="panel panel-default">
-				<div class="section panel-heading" id="ios_v1.2.5">
-				    <h3 class="panel-title">
-						iOS SDK v1.2.5 Released
-					</h3>
-					<h5>
-						<i>August 10, 2015</i>
-					</h5>
-				</div>
-
-				<div class="panel-body">
-					<h5>
-						Changes
-					</h5>
-
-					<p>
-					<ol>
-						<li>More bug fixes!</li>
-					</ol>
-					</p>
-				</div>
-			</div>
-
-
-<br>
-
-
-			<div class="panel panel-default">
-				<div class="section panel-heading" id="ios_v1.2.4">
-				    <h3 class="panel-title">
-						iOS SDK v1.2.4 Released
-					</h3>
-					<h5>
-						<i>August 9, 2015</i>
-					</h5>
-				</div>
-
-				<div class="panel-body">
-					<h5>
-						Changes
-					</h5>
-
-					<p>
-					<ol>
-						<li>So many bug fixes!</li>
-						<li>NEW! Activity Indicator
-						<ul>
-							<li>For developers that link to Rooms from their custom UI, show users a badge to communicate activity happening in the Room.</li>
-						</ul>
-						</li>
-					</ol>
-					</p>
-				</div>
-			</div>
-
-
-<br>
-
-
-			<div class="panel panel-default">
-				<div class="section panel-heading" id="ios_v1.2.3">
-				    <h3 class="panel-title">
-						iOS SDK v1.2.3 Released
-					</h3>
-					<h5>
-						<i>August 7, 2015</i>
-					</h5>
-				</div>
-
-				<div class="panel-body">
-					<h5>
-						Changes
-					</h5>
-
-					<p>
-					<ol>
-						<li>Bug fix that addresses ability to set the user's Display Name and Profile Avatar.</li>
-					</ol>
-					</p>
-				</div>
-			</div>
-
-
-<br>
-
-
-			<div class="panel panel-default">
-				<div class="section panel-heading" id="ios_v1.2.2">
-				    <h3 class="panel-title">
-						iOS SDK v1.2.2 Released
-					</h3>
-					<h5>
-						<i>August 5, 2015</i>
-					</h5>
-				</div>
-
-				<div class="panel-body">
-					<h5>
-						Changes
-					</h5>
-
-					<p>
-					<ol>
-						<li>Bug fixes</li>
-					</ol>
-					</p>
-				</div>
-			</div>
-
-
-<br>
-
-
-			<div class="panel panel-default">
-				<div class="section panel-heading" id="ios_v1.2.1">
-				    <h3 class="panel-title">
-						iOS SDK v1.2.1 Released
-					</h3>
-					<h5>
-						<i>August 4, 2015</i>
-					</h5>
-				</div>
-
-				<div class="panel-body">
-					<h5>
-						Changes
-					</h5>
-
-					<p>
-					<ol>
-						<li>Minor bug fixes</li>
-					</ol>
-					</p>
-				</div>
-			</div>
-
-
-<br>
-
-
-			<div class="panel panel-default" id="ios_v1.2.0">
-				<div class="section panel-heading">
-				    <h3 class="panel-title">
-						iOS SDK v1.2.0 Released
-					</h3>
-					<h5>
-						<i>August 3, 2015</i>
-					</h5>
-				</div>
-
-				<div class="panel-body">
-					<h5>
-						Changes
-					</h5>
-
-					<p>
-					<ol>
-						<li>Simplified approach to authentication on the client which makes it easier to handle support for Guest Users and upgrading Guest Users to Secured Users.
-						<ul>
-							<li><code>identifierWithNonce:preferredRole:completion:</code>'s method signature has changed to <code>identityTokenWithNonce:preferredRole:completion:</code></li>
-							<li><code>identityTokenWithNonce:preferredRole:completion</code>'s completion handler now expects to be passed your with <code>userId</code> as the second parameter.
-								This is so we can properly determine whether or not to re-use stored session credentials in the future.</li>
-							<li><code>initiateAuthenticationWithNewSession:</code> has been deprecated in favor of <code>initiateAuthenticationWithUserID:role:</code>
-								to provide us with a better mechanism for caching session credentials.</li>
-							<li><code>logOut</code> has been added to FranklySDK. <code>logOut</code> will clear any cached session credentials and disconnect from Frankly real-time services.</li>
-						</ul>
-						</li>
-					</ol>
-					</p>
-
-					<h5>
-						New Features
-					</h5>
-
-					<p>
-					<ol>
-						<li>Announcers
-						<ul>
-							<li>You can specify people in a Room that can send Sticky Messages.</li>
-							<li>Messages sent by Announcers will be easily identifiable and they are able to send both text and photo Sticky Messages.</li>
-							<li><i>Keep on the look out for updates to the Admin Console and our Server SDKs for more information on how to add a user as an Announcer.</i></li>
-						</ul>
-						</li>
-						<li>Conditional Rooms
-						<ul>
-							<li>Via the Frankly Admin Console, define a set of conditions that your users can identify with in order to customize which Rooms they see.
-							<ul>
-								<li><code>indexViewController</code> and <code>indexNavigationController</code> have been added to FranklySDK. These provide access to Conditional Rooms.</li>
-								<li>These will replace <code>roomListViewController</code> and <code>roomListNavigationController</code> in the near future.
-									<i>Sign up for email updates above to be notified of a more concrete timeline.</i></li>
-							</ul>
-							</li>
-						</ul>
-						</li>
-						<li>Push Notification Support
-						<ul>
-							<li>Now users can receive Push Notifications for any Sticky Messages sent in Rooms they've subscribed to.
-							<ul>
-								<li><code>registerForNotificationsWithDeviceToken</code> has been added to FranklySDK. You may pass either the concatenated device token string or the
-									<code>NSData</code> object you are passed in <code>application:didRegisterForRemoteNotificationsWithDeviceToken:</code>. Registering with the Frankly
-									servers will allow users to receive notifications when new Sticky Messages are posted in Rooms they are subscribed to.</li>
-								<li>If you you would like to make use of this feature, please reach out to your Frankly contact to facilitate adding this to your account.
-									Our plan is to add this support to the Franky Admin Console in the near future.</li>
-								<li><code>handleNotification:</code> has been added to FranklySDK. You may pass your entire notification payload to this method, which FranklySDK will
-									parse to determine if it has a relevant view and return it. Currently, this will return either the Room view associated with the notification payload
-									or nil if there is no Frankly slug in the payload.</li>
-							</ul>
-							</li>
-						</ul>
-						</li>
-						<li>Tappable URLs
-						<ul>
-							<li>URLs are now hyperlinked.</li>
-						</ul>
-						</li>
-					</ol>
-					</p>
-				</div>
-			</div>
-
-
-<br>
-
-
-
-			<div class="panel panel-default" id="android_v1.1.1">
-				<div class="section panel-heading">
-				    <h3 class="panel-title">
-						Android SDK v1.1.1 Released
-					</h3>
-					<h5>
-						<i>July 22, 2015</i>
-					</h5>
-				</div>
-
-				<div class="panel-body">
-					<h5>
-						Changes
-					</h5>
-
-					<p>
-					<ol>
-						<li>Minor bug fixes related to inappropriately obfuscated classes</li>
-					</ol>
-					</p>
-				</div>
-			</div>
-
-
-<br>
-
-
-			<div class="panel panel-default" id="ios_v1.1.4">
-			  <div class="section panel-heading">
-			    <h3 class="panel-title">iOS SDK v1.1.4 Released</h3>
-				<h5><i>July 15, 2015</i></h5>
-			  </div>
-			  <div class="panel-body">
-			    <h5>
-					Changes
-				</h5>
-
-				<p>
-				<ol>
-					<li>Small bug fix related to missing resources that caused warnings</li>
-				</ol>
-				</p>
-			  </div>
-			</div>
-
-		</div>
-
-	</div>
-
-
-<br>
-<br>
-<br>
-<br>
-
-
-	<div class="pager-container">
-	<nav>
-	  <ul class="pager">
-	    <li class="previous"><a href="APIReference.html"><span aria-hidden="true">&larr;</span> API Ref</a></li>
-	    <li class="next"><a href="Support.html">Contact & Support <span aria-hidden="true">&rarr;</span></a></li>
-	  </ul>
-	</nav>
-	</div>
+
+            <br>
+            <div class="panel panel-default">
+                <div class="section panel-heading" id="ios_v1.2.8">
+                    <h3 class="panel-title">
+                        iOS SDK v1.2.9 Released
+                    </h3>
+                    <h5>
+                        <i>October 23, 2015</i>
+                    </h5>
+                </div>
+
+                <div class="panel-body">
+                    <h5>
+                        Changes
+                    </h5>
+
+                    <p>
+                        <ol>
+                            <li>Fixed several issues related to sticky messages</li>
+                        </ol>
+                    </p>
+                </div>
+            </div>
+
+
+            <br>
+
+            <div class="panel panel-default">
+                <div class="section panel-heading" id="android_v1.2.4">
+                    <h3 class="panel-title">
+                        Android SDK v1.2.4 Released
+                    </h3>
+                    <h5>
+                        <i>September 29, 2015</i>
+                    </h5>
+                </div>
+
+                <div class="panel-body">
+                    <h5>
+                        Changes
+                    </h5>
+
+                    <p>
+                        <ol>
+                            <li>Fixed outstanding issues</li>
+                        </ol>
+                    </p>
+                </div>
+            </div>
+
+            <br>
+
+
+            <div class="panel panel-default">
+                <div class="section panel-heading" id="ios_v1.2.8">
+                    <h3 class="panel-title">
+                        iOS SDK v1.2.8 Released
+                    </h3>
+                    <h5>
+                        <i>September 11, 2015</i>
+                    </h5>
+                </div>
+
+                <div class="panel-body">
+                    <h5>
+                        Changes
+                    </h5>
+
+                    <p>
+                        <ol>
+                            <li>Updated build scheme to comply with Xcode 7 upload policies.</li>
+                        </ol>
+                    </p>
+                </div>
+            </div>
+
+
+            <br>
+
+
+            <div class="panel panel-default">
+                <div class="section panel-heading" id="ios_v1.2.7">
+                    <h3 class="panel-title">
+                        iOS SDK v1.2.7 Released
+                    </h3>
+                    <h5>
+                        <i>September 10, 2015</i>
+                    </h5>
+                </div>
+
+                <div class="panel-body">
+                    <h5>
+                        Changes
+                    </h5>
+
+                    <p>
+                        <ol>
+                            <li>Fixed an issue that was causing validation to fail when submitting app bundles to Apple. This appears to have been caused by a rule change in Apple's validation scheme which we were in violation of.</li>
+                        </ol>
+                    </p>
+                </div>
+            </div>
+
+
+            <br>
+
+
+            <div class="panel panel-default">
+                <div class="section panel-heading" id="android_v1.2.3">
+                    <h3 class="panel-title">
+                        Android SDK v1.2.3 Released
+                    </h3>
+                    <h5>
+                        <i>September 9, 2015</i>
+                    </h5>
+                </div>
+
+                <div class="panel-body">
+                    <h5>
+                        Changes & Improvements
+                    </h5>
+
+                    <p>
+                        <ol>
+                            <li>Exposed an easier way for developers to query a user's ID.</li>
+                        </ol>
+                    </p>
+                </div>
+            </div>
+
+
+            <br>
+
+
+            <div class="panel panel-default">
+                <div class="section panel-heading" id="ios_v1.2.6">
+                    <h3 class="panel-title">
+                        iOS SDK v1.2.6 Released
+                    </h3>
+                    <h5>
+                        <i>September 4, 2015</i>
+                    </h5>
+                </div>
+
+                <div class="panel-body">
+                    <h5>
+                        Changes & Improvements
+                    </h5>
+
+                    <p>
+                        <ol>
+                            <li>Made many improvements for supporting various scenarios of Partial View Rooms use.</li>
+                        </ol>
+                    </p>
+
+                    <h5>
+                        Bug Fixes
+                    </h5>
+
+                    <p>
+                        <ol>
+                            <li>Small issues related to tappable URLs</li>
+                            <li>Crashes related to excessive text input via dictation</li>
+                            <li>Issues with iOS 7 compatibility</li>
+                            <li>And more!</li>
+                        </ol>
+                    </p>
+                </div>
+            </div>
+
+
+            <br>
+
+
+            <div class="panel panel-default">
+                <div class="section panel-heading" id="android_v1.2.2">
+                    <h3 class="panel-title">
+                        Android SDK v1.2.2 Released
+                    </h3>
+                    <h5>
+                        <i>September 3, 2015</i>
+                    </h5>
+                </div>
+
+                <div class="panel-body">
+                    <h5>
+                        Changes
+                    </h5>
+
+                    <p>
+                        <ol>
+                            <li>More bug fixes!</li>
+                        </ol>
+                    </p>
+                </div>
+            </div>
+
+
+            <br>
+
+
+            <div class="panel panel-default">
+                <div class="section panel-heading" id="android_v1.2.1">
+                    <h3 class="panel-title">
+                        Android SDK v1.2.1 Released
+                    </h3>
+                    <h5>
+                        <i>August 21, 2015</i>
+                    </h5>
+                </div>
+
+                <div class="panel-body">
+                    <h5>
+                        Changes
+                    </h5>
+
+                    <p>
+                        <ol>
+                            <li>Lots of bug fixes!</li>
+                        </ol>
+                    </p>
+                </div>
+            </div>
+
+
+            <br>
+
+
+            <div class="panel panel-default">
+                <div class="section panel-heading" id="android_v1.2.0">
+                    <h3 class="panel-title">
+                        Android SDK v1.2.0 Released
+                    </h3>
+                    <h5>
+                        <i>August 16, 2015</i>
+                    </h5>
+                </div>
+
+                <div class="panel-body">
+                    <h5>
+                        New Features
+                    </h5>
+
+                    <p>
+                        <ol>
+                            <li>Announcers
+                                <ul>
+                                    <li>You can specify people in a Room that can send Sticky Messages.</li>
+                                    <li>Messages sent by Announcers will be easily identifiable and they are able to send both text and photo Sticky Messages.</li>
+                                </ul>
+                            </li>
+                            <li>Conditional Rooms
+                                <ul>
+                                    <li>Define a set of conditions that your users can identify with in order to customize which Rooms they see.
+                                        <ul>
+                                            <li>
+                                                <code>ConditionalRoomListActivity</code> has been added to FranklySDK. This
+                                                <code>Activity</code> provides access to Conditional Rooms.</li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>Push Notification Support
+                                <ul>
+                                    <li>Now users can receive Push Notifications for any Sticky Messages sent in Rooms they've subscribed to.</li>
+                                </ul>
+                            </li>
+                            <li>Tappable URLs
+                                <ul>
+                                    <li>URLs are now hyperlinked.</li>
+                                </ul>
+                            </li>
+                        </ol>
+                    </p>
+                </div>
+            </div>
+
+
+            <br>
+
+
+            <div class="panel panel-default">
+                <div class="section panel-heading" id="ios_v1.2.5">
+                    <h3 class="panel-title">
+                        iOS SDK v1.2.5 Released
+                    </h3>
+                    <h5>
+                        <i>August 10, 2015</i>
+                    </h5>
+                </div>
+
+                <div class="panel-body">
+                    <h5>
+                        Changes
+                    </h5>
+
+                    <p>
+                        <ol>
+                            <li>More bug fixes!</li>
+                        </ol>
+                    </p>
+                </div>
+            </div>
+
+
+            <br>
+
+
+            <div class="panel panel-default">
+                <div class="section panel-heading" id="ios_v1.2.4">
+                    <h3 class="panel-title">
+                        iOS SDK v1.2.4 Released
+                    </h3>
+                    <h5>
+                        <i>August 9, 2015</i>
+                    </h5>
+                </div>
+
+                <div class="panel-body">
+                    <h5>
+                        Changes
+                    </h5>
+
+                    <p>
+                        <ol>
+                            <li>So many bug fixes!</li>
+                            <li>NEW! Activity Indicator
+                                <ul>
+                                    <li>For developers that link to Rooms from their custom UI, show users a badge to communicate activity happening in the Room.</li>
+                                </ul>
+                            </li>
+                        </ol>
+                    </p>
+                </div>
+            </div>
+
+
+            <br>
+
+
+            <div class="panel panel-default">
+                <div class="section panel-heading" id="ios_v1.2.3">
+                    <h3 class="panel-title">
+                        iOS SDK v1.2.3 Released
+                    </h3>
+                    <h5>
+                        <i>August 7, 2015</i>
+                    </h5>
+                </div>
+
+                <div class="panel-body">
+                    <h5>
+                        Changes
+                    </h5>
+
+                    <p>
+                        <ol>
+                            <li>Bug fix that addresses ability to set the user's Display Name and Profile Avatar.</li>
+                        </ol>
+                    </p>
+                </div>
+            </div>
+
+
+            <br>
+
+
+            <div class="panel panel-default">
+                <div class="section panel-heading" id="ios_v1.2.2">
+                    <h3 class="panel-title">
+                        iOS SDK v1.2.2 Released
+                    </h3>
+                    <h5>
+                        <i>August 5, 2015</i>
+                    </h5>
+                </div>
+
+                <div class="panel-body">
+                    <h5>
+                        Changes
+                    </h5>
+
+                    <p>
+                        <ol>
+                            <li>Bug fixes</li>
+                        </ol>
+                    </p>
+                </div>
+            </div>
+
+
+            <br>
+
+
+            <div class="panel panel-default">
+                <div class="section panel-heading" id="ios_v1.2.1">
+                    <h3 class="panel-title">
+                        iOS SDK v1.2.1 Released
+                    </h3>
+                    <h5>
+                        <i>August 4, 2015</i>
+                    </h5>
+                </div>
+
+                <div class="panel-body">
+                    <h5>
+                        Changes
+                    </h5>
+
+                    <p>
+                        <ol>
+                            <li>Minor bug fixes</li>
+                        </ol>
+                    </p>
+                </div>
+            </div>
+
+
+            <br>
+
+
+            <div class="panel panel-default" id="ios_v1.2.0">
+                <div class="section panel-heading">
+                    <h3 class="panel-title">
+                        iOS SDK v1.2.0 Released
+                    </h3>
+                    <h5>
+                        <i>August 3, 2015</i>
+                    </h5>
+                </div>
+
+                <div class="panel-body">
+                    <h5>
+                        Changes
+                    </h5>
+
+                    <p>
+                        <ol>
+                            <li>Simplified approach to authentication on the client which makes it easier to handle support for Guest Users and upgrading Guest Users to Secured Users.
+                                <ul>
+                                    <li>
+                                        <code>identifierWithNonce:preferredRole:completion:</code>'s method signature has changed to
+                                        <code>identityTokenWithNonce:preferredRole:completion:</code>
+                                    </li>
+                                    <li>
+                                        <code>identityTokenWithNonce:preferredRole:completion</code>'s completion handler now expects to be passed your with
+                                        <code>userId</code> as the second parameter. This is so we can properly determine whether or not to re-use stored session credentials in the future.</li>
+                                    <li>
+                                        <code>initiateAuthenticationWithNewSession:</code> has been deprecated in favor of
+                                        <code>initiateAuthenticationWithUserID:role:</code>
+                                        to provide us with a better mechanism for caching session credentials.</li>
+                                    <li>
+                                        <code>logOut</code> has been added to FranklySDK.
+                                        <code>logOut</code> will clear any cached session credentials and disconnect from Frankly real-time services.</li>
+                                </ul>
+                            </li>
+                        </ol>
+                    </p>
+
+                    <h5>
+                        New Features
+                    </h5>
+
+                    <p>
+                        <ol>
+                            <li>Announcers
+                                <ul>
+                                    <li>You can specify people in a Room that can send Sticky Messages.</li>
+                                    <li>Messages sent by Announcers will be easily identifiable and they are able to send both text and photo Sticky Messages.</li>
+                                    <li><i>Keep on the look out for updates to the Admin Console and our Server SDKs for more information on how to add a user as an Announcer.</i></li>
+                                </ul>
+                            </li>
+                            <li>Conditional Rooms
+                                <ul>
+                                    <li>Via the Frankly Admin Console, define a set of conditions that your users can identify with in order to customize which Rooms they see.
+                                        <ul>
+                                            <li>
+                                                <code>indexViewController</code> and
+                                                <code>indexNavigationController</code> have been added to FranklySDK. These provide access to Conditional Rooms.</li>
+                                            <li>These will replace
+                                                <code>roomListViewController</code> and
+                                                <code>roomListNavigationController</code> in the near future.
+                                                <i>Sign up for email updates above to be notified of a more concrete timeline.</i></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>Push Notification Support
+                                <ul>
+                                    <li>Now users can receive Push Notifications for any Sticky Messages sent in Rooms they've subscribed to.
+                                        <ul>
+                                            <li>
+                                                <code>registerForNotificationsWithDeviceToken</code> has been added to FranklySDK. You may pass either the concatenated device token string or the
+                                                <code>NSData</code> object you are passed in
+                                                <code>application:didRegisterForRemoteNotificationsWithDeviceToken:</code>. Registering with the Frankly servers will allow users to receive notifications when new Sticky Messages are posted in Rooms they are
+                                                subscribed to.</li>
+                                            <li>If you you would like to make use of this feature, please reach out to your Frankly contact to facilitate adding this to your account. Our plan is to add this support to the Franky Admin Console in the near
+                                                future.
+                                            </li>
+                                            <li>
+                                                <code>handleNotification:</code> has been added to FranklySDK. You may pass your entire notification payload to this method, which FranklySDK will parse to determine if it has a relevant view and return it. Currently,
+                                                this will return either the Room view associated with the notification payload or nil if there is no Frankly slug in the payload.</li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>Tappable URLs
+                                <ul>
+                                    <li>URLs are now hyperlinked.</li>
+                                </ul>
+                            </li>
+                        </ol>
+                    </p>
+                </div>
+            </div>
+
+
+            <br>
+
+
+
+            <div class="panel panel-default" id="android_v1.1.1">
+                <div class="section panel-heading">
+                    <h3 class="panel-title">
+                        Android SDK v1.1.1 Released
+                    </h3>
+                    <h5>
+                        <i>July 22, 2015</i>
+                    </h5>
+                </div>
+
+                <div class="panel-body">
+                    <h5>
+                        Changes
+                    </h5>
+
+                    <p>
+                        <ol>
+                            <li>Minor bug fixes related to inappropriately obfuscated classes</li>
+                        </ol>
+                    </p>
+                </div>
+            </div>
+
+
+            <br>
+
+
+            <div class="panel panel-default" id="ios_v1.1.4">
+                <div class="section panel-heading">
+                    <h3 class="panel-title">iOS SDK v1.1.4 Released</h3>
+                    <h5><i>July 15, 2015</i></h5>
+                </div>
+                <div class="panel-body">
+                    <h5>
+                        Changes
+                    </h5>
+
+                    <p>
+                        <ol>
+                            <li>Small bug fix related to missing resources that caused warnings</li>
+                        </ol>
+                    </p>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <br>
+    <br>
+    <br>
+    <br>
+
+
+    <div class="pager-container">
+        <nav>
+            <ul class="pager">
+                <li class="previous">
+                    <a href="APIReference.html">
+                        <span aria-hidden="true">&larr;</span> API Ref</a>
+                </li>
+                <li class="next"><a href="Support.html">Contact & Support <span aria-hidden="true">&rarr;</span></a></li>
+            </ul>
+        </nav>
+    </div>
 </div>
+
 </html>
