@@ -745,7 +745,7 @@
                     If you want to provide the option to go to the built-in guest login screen from your custom login Activity, the following will show the guest login screen:
                     <pre class="prettyprint">
                         <code class="lang-java">
-                            LoginDialog.show(activity);
+LoginDialog.show(activity);
                         </code>
                     </pre>
                 </p>
@@ -767,7 +767,7 @@
 
                 <pre class="prettyprint">
                     <code class="lang-js">
-                        var FranklyClient = require ( 'frankly-js' ) .FranklyClient var appKey = 'appKey from Frankly Console' var appSecret = 'appSecret from Frankly Console' var client = new FranklyClient() client.open (appKey, appSecret)
+var FranklyClient = require ( 'frankly-js' ) .FranklyClient var appKey = 'appKey from Frankly Console' var appSecret = 'appSecret from Frankly Console' var client = new FranklyClient() client.open (appKey, appSecret)
                     </code>
                 </pre>
 
@@ -788,8 +788,23 @@
 
                 <pre class="prettyprint">
                     <code class="lang-js">
-                        var client = new frankly.FranklyClient client.open(function (nonce) { return new Promise(function (resolve, reject) { var req = new XMLHttpRequest() req.onreadystatechange = function () { if (req.readyState === 4) { if (req.status === 200) { resolve(req.responseText)
-                        } else { reject('something went wrong') } } } req.open('https://partner.domain.com/identity-token?nonce=' + nonce) req.send() }) })
+var client = new frankly.FranklyClient
+client.open(function (nonce) {
+    return new Promise(function (resolve, reject) {
+        var req = new XMLHttpRequest()
+        req.onreadystatechange = function () {
+            if (req.readyState === 4) {
+                if (req.status === 200) {
+                    resolve(req.responseText)
+                } else {
+                    reject('something went wrong')
+                }
+            }
+        }
+        req.open('https://partner.domain.com/identity-token?nonce=' + nonce)
+        req.send()
+    })
+})
                     </code>
                 </pre>
 
@@ -897,7 +912,7 @@
 
             <pre class="prettyprint">
                 <code>
-                    {your_login_url}/?nonce={nonce_value}&amp;redirect_uri=https://app.franklychat.com/auth/redirect
+{your_login_url}/?nonce={nonce_value}&amp;redirect_uri=https://app.franklychat.com/auth/redirect
                 </code>
             </pre>
 
@@ -1014,7 +1029,7 @@
 
             <pre class="prettyprint">
                 <code>
-                    HTTP/1.1 302 Found Location: https://app.franklychat.com/auth/redirect?identity_token={user’s_identity_token}
+HTTP/1.1 302 Found Location: https://app.franklychat.com/auth/redirect?identity_token={user’s_identity_token}
                 </code>
             </pre>
 
