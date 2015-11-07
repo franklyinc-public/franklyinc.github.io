@@ -214,7 +214,7 @@
 
                     <pre class="prettyprint">
                         <code>
-                            $ curl -X GET https://app.franklychat.com/auth/nonce "054afc088ea94717aa6121768f13a57a"
+$ curl -X GET https://app.franklychat.com/auth/nonce "054afc088ea94717aa6121768f13a57a"
                         </code>
                     </pre>
 
@@ -248,9 +248,18 @@
 
                     <pre class="prettyprint">
                         <code>
-                            Header { “typ”: “JWS”, “alg”: “HS256”, “cty”: “frankly-it;v1” } Claims { “aak”: &lt;authentication key obtained from frankly admin console&gt;, “uid”: &lt;unique user identifier&gt; (optional), “iat”: &lt;token generation time as a unix timestamp&gt;,
-                            “exp”: &lt;token expiration time as a unix timestamp&gt;, “nce”: &lt;nonce value obtained in step 1&gt;, “role”: ”admin” (optional) } Signature HMACSHA256( base64UrlEncode(Header) + "." + base64UrlEncode(Claims), &lt;authentication
-                            secret obtained from frankly admin console&gt; )
+Header {
+    “typ”: “JWS”,
+    “alg”: “HS256”,
+    “cty”: “frankly-it;v1”
+}
+Claims {
+    “aak”: &lt;authentication key obtained from frankly admin console&gt;,
+    “uid”: &lt;unique user identifier&gt; (optional),
+    “iat”: &lt;token generation time as a unix timestamp&gt;,
+    “exp”: &lt;token expiration time as a unix timestamp&gt;,
+    “nce”: &lt;nonce value obtained in step 1&gt;,
+    “role”: ”admin” (optional) } Signature HMACSHA256( base64UrlEncode(Header) + "." + base64UrlEncode(Claims), &lt;authentication secret obtained from frankly admin console&gt; )
                         </code>
                     </pre>
 
@@ -269,7 +278,7 @@
                     <a id="identity_token">
                         <pre class="prettyprint">
                             <code>
-                                Identity Token eyJ0eXAiOiJKV1MiLCJhbGciOiJIUzI1NiIsImN0eSI6ImZyYW5rbHktaXQ7djEifQ.eyJhYWsiOiIwMTIzNDU2Nzg5IiwidWlkIjoxMjM0NTY3ODkwLCJpYXQiOjEyMzQ1Njc4OTAsImV4cCI6MTIzNDU2Nzg5MCwibmNlIjoiMDU0YWZjMDg4ZWE5NDcxN2FhNjEyMTc2OGYxM2E1N2EifQ.BawHATknj5vTB5GF8yz0b-pAVidGF9enV0WBU6dirPo
+Identity Token eyJ0eXAiOiJKV1MiLCJhbGciOiJIUzI1NiIsImN0eSI6ImZyYW5rbHktaXQ7djEifQ.eyJhYWsiOiIwMTIzNDU2Nzg5IiwidWlkIjoxMjM0NTY3ODkwLCJpYXQiOjEyMzQ1Njc4OTAsImV4cCI6MTIzNDU2Nzg5MCwibmNlIjoiMDU0YWZjMDg4ZWE5NDcxN2FhNjEyMTc2OGYxM2E1N2EifQ.BawHATknj5vTB5GF8yz0b-pAVidGF9enV0WBU6dirPo
                             </code>
                         </pre>
                     </a>
@@ -292,8 +301,7 @@
 
                     <pre class="prettyprint">
                         <code>
-                            $ curl -v -X GET https://app.franklychat.com/auth?identity_token=... &gt; GET /auth?identity_token=... HTTP/1.1 &gt; Host: app.franklychat.com &gt; ... &gt; &lt; HTTP/1.1 200 OK &lt; Set-Cookie: token=&lt;session token&gt; &lt; Set-Cookie: xsrf=&lt;xsrf
-                            token&gt; &lt; ... &lt;
+$ curl -v -X GET https://app.franklychat.com/auth?identity_token=... &gt; GET /auth?identity_token=... HTTP/1.1 &gt; Host: app.franklychat.com &gt; ... &gt; &lt; HTTP/1.1 200 OK &lt; Set-Cookie: token=&lt;session token&gt; &lt; Set-Cookie: xsrf=&lt;xsrf token&gt; &lt; ... &lt;
                         </code>
                     </pre>
 
@@ -451,7 +459,7 @@
 
                 <pre class="prettyprint">
                     <code class="lang-cpp">
-                        @interface ViewController : UIViewController &lt;FranklySDKAuthenticationDelegate&gt;
+@interface ViewController : UIViewController &lt;FranklySDKAuthenticationDelegate&gt;
                     </code>
                 </pre>
 
@@ -469,9 +477,12 @@
 
                 <pre class="prettyprint">
                     <code class="lang-cpp">
-                        - (void)viewDidLoad { [super viewDidLoad]; [FranklySDK sharedInstance].authenticationDelegate = self; // set the log in behavior here - see above for more information [FranklySDK sharedInstance].loginBehavior = FRSDKLoginBehaviorPartner // passing YES
-                        is necessary for a role upgrade but, for an existing user, who has already // authenticated, passing NO will authenticate more quickly using the existing session [[FranklySDK sharedInstance] initiateAuthenticationWithUserID:&lt;partner
-                        user id&gt; role:FRSDKAuthenticationRoleUser]; }
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    [FranklySDK sharedInstance].authenticationDelegate = self; // set the log in behavior here - see above for more information
+    [FranklySDK sharedInstance].loginBehavior = FRSDKLoginBehaviorPartner // passing YES is necessary for a role upgrade but, for an existing user, who has already authenticated, passing NO will authenticate more quickly using the existing session
+    [[FranklySDK sharedInstance] initiateAuthenticationWithUserID:&lt;partner user id&gt; role:FRSDKAuthenticationRoleUser];
+}
                     </code>
                 </pre>
 
@@ -546,9 +557,14 @@
 
                     <pre class="prettyprint">
                         <code class="lang-cpp">
-                            - (void)identifierWithNonce:(NSString *)nonce preferredRole:(FRSDKAuthenticationRole)preferredRole completion:(void (^)(NSString *identifier))completion; FranklySDK *franklySDK = [FranklySDK sharedInstance]; // ONLY FOR TESTING - REQUEST IDENTIFIER FROM
-                            YOUR SERVER [franklySDK retrieveIdentityTokenWithUserID:self.userId Nonce:nonce authKey:self.authKey authSecret:self.authSecret role:FRSDKAuthenticationRoleUser completionBlock:^(NSString *identifier, NSError *error) { if (identifier
-                            != nil) { completion(identifier, nil); } }]; }
+- (void)identifierWithNonce:(NSString *)nonce preferredRole:(FRSDKAuthenticationRole)preferredRole completion:(void (^)(NSString *identifier))completion;
+    FranklySDK *franklySDK = [FranklySDK sharedInstance]; // ONLY FOR TESTING - REQUEST IDENTIFIER FROM YOUR SERVER
+    [franklySDK retrieveIdentityTokenWithUserID:self.userId Nonce:nonce authKey:self.authKey authSecret:self.authSecretrole:FRSDKAuthenticationRoleUser completionBlock:^(NSString *identifier, NSError *error) {
+        if (identifier != nil) {
+            completion(identifier, nil);
+        }
+    }];
+}
                         </code>
                     </pre>
 
@@ -573,7 +589,9 @@
 
                     <pre class="prettyprint">
                         <code class="lang-cpp">
-                            - (void)authenticationDidFailWithError:(NSError *)error { NSLog(@"authentication did fail"); }
+- (void)authenticationDidFailWithError:(NSError *)error {
+    NSLog(@"authentication did fail");
+}
                         </code>
                     </pre>
 
@@ -614,7 +632,7 @@
 
                 <pre class="prettyprint">
                     <code class="lang-cpp">
-                        - (void)logOut;
+- (void)logOut;
                     </code>
                 </pre>
 
@@ -642,10 +660,23 @@
 
                 <pre class="prettyprint">
                     <code class="lang-java">
-                        public class MyIdentityTokenGenerator extends BaseIdentityTokenGenerator { private static final User.Role DEFAULT_ROLE = ... public YourIdentityTokenGenerator(final Context context) { super(context, DEFAULT_ROLE); } @Override protected String onGenerateIdentityToken(final
-                        String nonce, final Bundle state) throws IOException { final User.Role suggestedRole = this.getRole(); final String partnerUsername = this.getPartnerUsername(); // Using the nonce, the suggested role, and the partner username (which
-                        is simply the // username of the current user that is unique to your app), retrieve an identity token // from your server. final String identityToken = [Server network request]; return identityToken; } @Override public boolean
-                        supported(final User.Role role) { ... } }
+public class MyIdentityTokenGenerator extends BaseIdentityTokenGenerator {
+    private static final User.Role DEFAULT_ROLE = ...
+    public YourIdentityTokenGenerator(final Context context) {
+        super(context, DEFAULT_ROLE);
+    }
+    @Override
+    protected String onGenerateIdentityToken(final String nonce, final Bundle state) throws IOException {
+        final User.Role suggestedRole = this.getRole();
+        final String partnerUsername = this.getPartnerUsername(); // Using the nonce, the suggested role, and the partner username (which is simply the // username of the current user that is unique to your app), retrieve an identity token from your server.
+        final String identityToken = [Server network request];
+        return identityToken;
+    }
+    @Override
+    public boolean supported(final User.Role role) {
+        ...
+    }
+}
                     </code>
                 </pre>
 
@@ -674,7 +705,7 @@
 
                 <pre class="prettyprint">
                     <code class="lang-java">
-                        public enum Role { ADMIN, ANONYMOUS, GUEST, REGULAR }
+public enum Role { ADMIN, ANONYMOUS, GUEST, REGULAR }
                     </code>
                 </pre>
 
@@ -694,8 +725,17 @@
 
                 <pre class="prettyprint">
                     <code class="lang-java">
-                        public class YourApplication extends Application { @Override public void onCreate() { super.onCreate(); ... FranklySdk.initialize(this); final MyIdentityTokenGenerator myIdentityTokenGenerator = new MyIdentityTokenGenerator(this); FranklySdk.setIdentityTokenGenerator(myIdentityTokenGenerator);
-                        ... } }
+public class YourApplication extends Application {
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        ...
+        FranklySdk.initialize(this);
+        final MyIdentityTokenGenerator myIdentityTokenGenerator = new MyIdentityTokenGenerator(this);
+        FranklySdk.setIdentityTokenGenerator(myIdentityTokenGenerator);
+        ...
+    }
+}
                     </code>
                 </pre>
 
@@ -704,7 +744,7 @@
                 </p>
                 <pre class="prettyprint">
                     <code class="lang-java">
-                        FranklySdk.initAuthentication(suggestedRole, partnerUsername);
+FranklySdk.initAuthentication(suggestedRole, partnerUsername);
                     </code>
                 </pre>
                 <br>
@@ -737,8 +777,8 @@
                     The Frankly SDK allows for the use of a custom login Activity. You can specify which custom Activity to use by doing the following:
                     <pre class="prettyprint">
                         <code class="lang-java">
-                            final boolean prioritizeOverGuestLogin = <prioritize-custom-activity>;
-                            FranklySdk.setCustomLoginActivity(MyCustomLoginActivity.class, prioritizeOverGuestLogin);
+final boolean prioritizeOverGuestLogin = <prioritize-custom-activity>;
+FranklySdk.setCustomLoginActivity(MyCustomLoginActivity.class, prioritizeOverGuestLogin);
                         </code>
                     </pre>
                     where <prioritize-custom-activity> is false if the built-in login screen should be shown first, which provides guest login first and foremost but does allow the user to navigate to the custom login Activity, or true if the custom login Activity should be shown first.
