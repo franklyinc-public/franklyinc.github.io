@@ -1,0 +1,664 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+
+        <!-- Always force latest IE rendering engine or request Chrome Frame -->
+        <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+        <link rel="icon"
+              type="image/png"
+              href="../../images/frankly_favicon_32x32_no_bg.png">
+        <!-- Use title if it's in the page YAML frontmatter -->
+        <title>Advanced Features
+            - Frankly Developer Portal</title>
+        <script src="/bower_components/webcomponentsjs/webcomponents-lite.min-01242ae0.js"></script>
+        <link href="/stylesheets/normalize-14170e97.css" rel="stylesheet" /><link href="/stylesheets/all-f2dad6dc.css" rel="stylesheet" />
+        <link href="/stylesheets/highlight-6793ce8e.css" rel="stylesheet" /><link href="/stylesheets/all-f2dad6dc.css" rel="stylesheet" />
+        <style is="custom-style">
+                    :root {
+                        --paper-toolbar-background: #2A2E33;
+                        --paper-input-container-focus-color: #fa3b1b;
+                        --paper-input-container-underline-focus: {
+                            display:none;
+                        };
+                    }
+                    .paper-header-panel {
+                        background-color: #2A2E33;
+                        padding-right: 20px;
+                        color: white;
+                    }
+                    .page-content {
+                        padding-left: 30px;
+                        padding-right: 30px;
+                        overflow: scroll;
+                    }
+
+                    .nav-tree li {
+                        list-style-type: none;
+                    }
+
+                    .nav-tree li a {
+                            color: white;
+                    }
+                    .logo {
+                        margin-left: 5px;
+                        margin-top: 20px;
+                        width: 180px;
+                    }
+                    .search {
+                        --paper-input-container-input-color: white;
+                        padding-left: 20px;
+                        padding-right: 20px;
+                    }
+                    .version-dropdown {
+                        width:90px;
+                        --paper-input-container-underline: {
+                            display:none;
+                        };
+                    }
+
+                    .version-dropdown a {
+                        color: black;
+                    }
+
+                    .previous {
+
+                    }
+
+                    .next {
+
+                    }
+
+                    .floating-toc {
+                        margin-left: -20px;
+                    }
+
+                    .floating-toc a {
+                        color:black;
+                    }
+
+                    .customization-table {
+                        table, th, td {
+                            border: 1px solid black;
+                            text-align: left;
+                        }
+                    }
+
+                    p {
+                        line-height: 150%;
+                    }
+                </style>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js" type="text/javascript"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/lunr.js/0.5.9/lunr.min.js" type="text/javascript"></script>
+        <script src="/javascripts/all-b1933d9a.js"></script>
+        <script src="/javascripts/anchorify-9f550341.js"></script>
+
+        <link href="/bower_components/paper-header-panel/paper-header-panel.html" rel="import">
+        <link href="/bower_components/paper-drawer-panel/paper-drawer-panel.html" rel="import">
+        <link href="/bower_components/paper-toolbar/paper-toolbar.html" rel="import">
+        <link href="/bower_components/paper-icon-button/paper-icon-button.html" rel="import">
+        <link href="/bower_components/iron-icons/iron-icons.html" rel="import">
+        <link href="/bower_components/iron-flex-layout/iron-flex-layout.html" rel="import">
+        <link href="/bower_components/paper-input/paper-input.html" rel="import">
+        <link href="/bower_components/paper-dropdown-menu/paper-dropdown-menu.html" rel="import">
+        <link href="/bower_components/paper-menu/paper-menu.html" rel="import">
+        <link href="/bower_components/paper-item/paper-item.html" rel="import">
+        <link rel="icon"
+              type="image/png"
+              href="images/frankly_favicon_32x32_no_bg.png">
+    </head>
+
+    <body class="android android_latest android_latest_doc android_latest_doc_04-advanced-features">
+        <paper-drawer-panel class="flex" mode="seamed">
+            <div class="flex page-content" main>
+                <div class="horizontal layout">
+                    <paper-icon-button icon="menu" on-tap="menuAction" paper-drawer-toggle></paper-icon-button>
+                    <h1 class="flex">
+                        Advanced Features
+                    </h1>
+                    <span class="flex">
+                    </span>
+                    <paper-dropdown-menu noink no-animation class="version-dropdown">
+                        <paper-menu class="dropdown-content version-dropdown" selected="0">
+                                <paper-item>
+                                    <a href="/android/latest">latest</a>
+                                </paper-item>
+                        </paper-menu>
+                    </paper-dropdown-menu>
+
+                </div>
+                <div style="max-width:70%">
+                    <h2 id="provided-activities">Provided Activities</h2>
+
+<h3 id="conditionalroomlistactivity"><code>ConditionalRoomListActivity</code></h3>
+
+<p>If you are using the &ldquo;conditional rooms&rdquo; feature, you will need to use the <code>ConditionalRoomListActivity</code> class which contains everything needed to show the conditional room list, allow the user to specify the conditions that apply to them, and allow the user to join any unlocked rooms.  To use this class, you will need to declare it in your <code>AndroidManifest.xml</code>:</p>
+<div class="highlight xml"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5
+6</pre></td><td class="code"><pre><span class="nt">&lt;activity</span>
+    <span class="na">android:name=</span><span class="s">"com.frankly.franklysdk.app.ConditionalRoomListActivity"</span>
+    <span class="na">android:theme=</span><span class="s">"@style/FranklySdk.Theme"</span>
+    <span class="na">android:configChanges=</span><span class="s">"keyboardHidden|orientation|screenSize"</span>
+    <span class="na">android:label=</span><span class="s">"&lt;room-list-title&gt;"</span>
+    <span class="na">android:screenOrientation=</span><span class="s">"portrait"</span> <span class="nt">/&gt;</span>
+</pre></td></tr></tbody></table>
+</div>
+
+<p>where <code>&lt;room-list-title&gt;</code> is the title to show in the activity.</p>
+
+<p>The activity can then be started just like any other activity:</p>
+<div class="highlight java"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3</pre></td><td class="code"><pre><span class="n">Intent</span> <span class="n">intent</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Intent</span><span class="o">(</span><span class="n">context</span><span class="o">,</span> <span class="n">ConditionalRoomListActivity</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+
+<span class="n">context</span><span class="o">.</span><span class="na">startActivity</span><span class="o">(</span><span class="n">intent</span><span class="o">);</span>
+</pre></td></tr></tbody></table>
+</div>
+
+<h3 id="roomlistactivity"><code>RoomListActivity</code></h3>
+
+<p>If you are not using the &ldquo;conditional rooms&rdquo; feature, you will need to use the <code>RoomListActivity</code> class which contains everything needed to show the regular room list and allow the user to join any rooms.  To use this class you will need to declare it in your <code>AndroidManifest.xml</code>:</p>
+<div class="highlight xml"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5
+6</pre></td><td class="code"><pre><span class="nt">&lt;activity</span>
+    <span class="na">android:name=</span><span class="s">"com.frankly.franklysdk.app.RoomListActivity"</span>
+    <span class="na">android:theme=</span><span class="s">"@style/FranklySdk.Theme"</span>
+    <span class="na">android:configChanges=</span><span class="s">"keyboardHidden|orientation|screenSize"</span>
+    <span class="na">android:label=</span><span class="s">"&lt;room-list-title&gt;"</span>
+    <span class="na">android:screenOrientation=</span><span class="s">"portrait"</span> <span class="nt">/&gt;</span>
+</pre></td></tr></tbody></table>
+</div>
+
+<p>where <code>&lt;room-list-title&gt;</code> is the title to show in the activity.</p>
+
+<p>The activity can then be started just like any other activity:</p>
+<div class="highlight java"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3</pre></td><td class="code"><pre><span class="n">Intent</span> <span class="n">intent</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Intent</span><span class="o">(</span><span class="n">context</span><span class="o">,</span> <span class="n">RoomListActivity</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+
+<span class="n">context</span><span class="o">.</span><span class="na">startActivity</span><span class="o">(</span><span class="n">intent</span><span class="o">);</span>
+</pre></td></tr></tbody></table>
+</div>
+
+<h3 id="roomactivity"><code>RoomActivity</code></h3>
+
+<p>If you want to directly enter a specific chatroom from your code, you will need to use the <code>RoomActivity</code> class which contains everything needed to allow the user to join a specific room.</p>
+
+<p>To use this class, you will need to declare it in your AndroidManifest.xml:</p>
+<div class="highlight xml"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8</pre></td><td class="code"><pre><span class="nt">&lt;activity</span>
+    <span class="na">android:name=</span><span class="s">"com.frankly.franklysdk.app.RoomActivity"</span>
+    <span class="na">android:configChanges=</span><span class="s">"keyboardHidden|orientation|screenSize"</span>
+    <span class="na">android:label=</span><span class="s">"@string/frankly_sdk_title_activity_room"</span>
+    <span class="na">android:launchMode=</span><span class="s">"singleTop"</span>
+    <span class="na">android:screenOrientation=</span><span class="s">"portrait"</span>
+    <span class="na">android:theme=</span><span class="s">"@style/FranklySdk.Theme"</span>
+    <span class="na">android:windowSoftInputMode=</span><span class="s">"stateHidden|adjustResize"</span> <span class="nt">/&gt;</span>
+</pre></td></tr></tbody></table>
+</div>
+
+<p>The activity can be started just like any other activity, but the ID of the room must be specified in the extras:</p>
+<div class="highlight java"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5</pre></td><td class="code"><pre><span class="n">Intent</span> <span class="n">intent</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Intent</span><span class="o">(</span><span class="k">this</span><span class="o">,</span> <span class="n">RoomActivity</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+
+<span class="n">intent</span><span class="o">.</span><span class="na">putExtra</span><span class="o">(</span><span class="n">RoomActivity</span><span class="o">.</span><span class="na">EXTRA_ROOM_ID</span><span class="o">,</span> <span class="n">roomId</span><span class="o">);</span>
+
+<span class="n">context</span><span class="o">.</span><span class="na">startActivity</span><span class="o">(</span><span class="n">intent</span><span class="o">);</span>
+</pre></td></tr></tbody></table>
+</div>
+
+<p>&nbsp;</p>
+
+<h3 id="defining-a-parent-activity">Defining a Parent Activity</h3>
+
+<p>To support proper &ldquo;up&rdquo; navigation in the Android app, you must define which <code>Activity</code> is shown when navigating &ldquo;up&rdquo; from the <code>RoomActivity</code> (whether it is the built-in <code>RoomActivity</code> or a custom one) and which is shown when navigating &ldquo;up&rdquo; from the <code>SingleMessageActivity</code>.  To do this, you must do the following:</p>
+<div class="highlight java"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18</pre></td><td class="code"><pre><span class="o">&lt;</span><span class="n">activity</span>
+        <span class="nl">android:</span><span class="n">name</span><span class="o">=</span><span class="s">"&lt;room-activity&gt;"</span>
+        <span class="nl">android:</span><span class="n">parentActivityName</span><span class="o">=</span><span class="s">"&lt;room-activity-parent&gt;"</span>
+        <span class="o">...&gt;</span>
+    <span class="o">...</span>
+    <span class="o">&lt;</span><span class="n">meta</span><span class="o">-</span><span class="n">data</span>
+            <span class="nl">android:</span><span class="n">name</span><span class="o">=</span><span class="s">"android.support.PARENT_ACTIVITY"</span>
+            <span class="nl">android:</span><span class="n">value</span><span class="o">=</span><span class="s">"&lt;room-activity-parent&gt;"</span> <span class="o">/&gt;</span>
+<span class="o">&lt;/</span><span class="n">activity</span><span class="o">&gt;</span>
+
+<span class="o">&lt;</span><span class="n">activity</span>
+        <span class="nl">android:</span><span class="n">name</span><span class="o">=</span><span class="s">"com.frankly.franklysdk.app.SingleMessageActivity"</span>
+        <span class="nl">android:</span><span class="n">parentActivityName</span><span class="o">=</span><span class="s">"&lt;room-activity&gt;"</span>
+        <span class="o">...&gt;</span>
+        <span class="o">&lt;</span><span class="n">meta</span><span class="o">-</span><span class="n">data</span>
+                <span class="nl">android:</span><span class="n">name</span><span class="o">=</span><span class="s">"android.support.PARENT_ACTIVITY"</span>
+                <span class="nl">android:</span><span class="n">value</span><span class="o">=</span><span class="s">"&lt;room-activity&gt;"</span> <span class="o">/&gt;</span>
+<span class="o">&lt;/</span><span class="n">activity</span><span class="o">&gt;</span>
+</pre></td></tr></tbody></table>
+</div>
+
+<p>where <code>&lt;room-activity&gt;</code> is the package and filename of the room activity used (the default being <code>com.frankly.franklysdk.app.RoomActivity</code>) and <code>&lt;room-activity-parent&gt;</code> is either <code>com.frankly.franklysdk.app.ConditionalRoomListActivity</code> or <code>com.frankly.franklysdk.app.RoomListActivity</code>.</p>
+
+<p>&nbsp;</p>
+
+<h2 id="provided-fragments">Provided Fragments</h2>
+
+<h3 id="messagelistfragment"><code>MessageListFragment</code></h3>
+
+<p>The <code>MessageListFragment</code> class contains everything needed to show the message list, and it can be used in a custom activity/layout that you create.  All message list-related functionality that can be seen in the provided <code>RoomActivity</code>, which uses this fragment class, is available in this fragment.</p>
+
+<h3 id="messageinputfragment"><code>MessageInputFragment</code></h3>
+
+<p>The <code>MessageInputFragment</code> class contains everything needed to send messages into a room, and it can be used in a custom activity/layout that you create.  All message input field-related functionality that can be seen in the provided <code>RoomActivity</code>, which uses this fragment class, is available in this fragment.</p>
+
+<p>&nbsp;</p>
+
+<h2 id="optional-configurations">Optional Configurations</h2>
+
+<h3 id="push-notifications">Push Notifications</h3>
+
+<p>To enable push notifications for the Frankly SDK, you must first generate a GCM token. Details on how to do that can be found at https://developers.google.com/cloud-messaging/android/client</p>
+
+<p>The generated GCM token should then be passed into the Frankly SDK:</p>
+<div class="highlight java"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4</pre></td><td class="code"><pre><span class="kd">final</span> <span class="n">InstanceID</span> <span class="n">instanceId</span> <span class="o">=</span> <span class="n">InstanceID</span><span class="o">.</span><span class="na">getInstance</span><span class="o">(</span><span class="k">this</span><span class="o">);</span>
+<span class="kd">final</span> <span class="n">String</span> <span class="n">token</span> <span class="o">=</span> <span class="n">instanceId</span><span class="o">.</span><span class="na">getToken</span><span class="o">(</span><span class="n">senderId</span><span class="o">,</span> <span class="n">GoogleCloudMessaging</span><span class="o">.</span><span class="na">INSTANCE_ID_SCOPE</span><span class="o">);</span>
+
+<span class="n">FranklySdk</span><span class="o">.</span><span class="na">setupGcm</span><span class="o">(</span><span class="n">token</span><span class="o">);</span>
+</pre></td></tr></tbody></table>
+</div>
+
+<p>You will also have to declare permissions and the Frankly GCM Listener Service in your AndroidManifest.xml:</p>
+<div class="highlight xml"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19</pre></td><td class="code"><pre><span class="nt">&lt;uses-permission</span> <span class="na">android:name=</span><span class="s">"&lt;app-package-name&gt;.permission.C2D_MESSAGE"</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;uses-permission</span> <span class="na">android:name=</span><span class="s">"com.google.android.c2dm.permission.RECEIVE"</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;uses-permission</span> <span class="na">android:name=</span><span class="s">"android.permission.GET_ACCOUNTS"</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;uses-permission</span> <span class="na">android:name=</span><span class="s">"android.permission.WAKE_LOCK"</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;uses-permission</span> <span class="na">android:name=</span><span class="s">"android.permission.VIBRATE"</span><span class="nt">/&gt;</span>
+
+...
+
+<span class="nt">&lt;application</span>
+        <span class="err">...</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;service</span>
+            <span class="na">android:exported=</span><span class="s">"false"</span>
+            <span class="na">android:icon=</span><span class="s">"&lt;notification-icon&gt;"</span>
+            <span class="na">android:name=</span><span class="s">"com.frankly.franklysdk.gcm.FranklyGcmListenerService"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;intent-filter&gt;</span>
+            <span class="nt">&lt;action</span> <span class="na">android:name=</span><span class="s">"com.google.android.c2dm.intent.RECEIVE"</span> <span class="nt">/&gt;</span>
+        <span class="nt">&lt;/intent-filter&gt;</span>
+    <span class="nt">&lt;/service&gt;</span>
+<span class="nt">&lt;/application&gt;</span>
+</pre></td></tr></tbody></table>
+</div>
+
+<p>where <code>&lt;app-package-name&gt;</code> is the package name of your app and <code>&lt;notification-icon&gt;</code> is the icon that should be used in the Android status bar.</p>
+
+<p>When a notification is clicked, an <code>Intent</code> is sent with one of the following:
+1. the action name <code>com.frankly.franklysdk.action.OPEN_ROOM</code> and a room ID tied to the bundle key <code>com.frankly.franklysdk.room_id</code>, or
+2. the action name <code>com.frankly.franklysdk.action.OPEN_MESSAGE</code> and a <code>Message</code> tied to the bundle key <code>com.frankly.franklysdk.message</code>.
+In order to have the appropriate <code>Activity</code> open up, you must add the following to your <code>AndroidManifest.xml</code>:</p>
+<div class="highlight xml"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17</pre></td><td class="code"><pre><span class="nt">&lt;activity</span>
+        <span class="na">android:name=</span><span class="s">"com.frankly.franklysdk.app.RoomActivity"</span>
+        <span class="err">...</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;intent-filter&gt;</span>
+        <span class="nt">&lt;action</span> <span class="na">android:name=</span><span class="s">"com.frankly.franklysdk.action.OPEN_ROOM"</span> <span class="nt">/&gt;</span>
+        <span class="nt">&lt;category</span> <span class="na">android:name=</span><span class="s">"android.intent.category.DEFAULT"</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/intent-filter&gt;</span>
+<span class="nt">&lt;/activity&gt;</span>
+
+<span class="nt">&lt;activity</span>
+        <span class="na">android:name=</span><span class="s">"com.frankly.franklysdk.app.SingleMessageActivity"</span>
+        <span class="err">...</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;intent-filter&gt;</span>
+        <span class="nt">&lt;action</span> <span class="na">android:name=</span><span class="s">"com.frankly.franklysdk.action.OPEN_MESSAGE"</span> <span class="nt">/&gt;</span>
+        <span class="nt">&lt;category</span> <span class="na">android:name=</span><span class="s">"android.intent.category.DEFAULT"</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/intent-filter&gt;</span>
+<span class="nt">&lt;/activity&gt;</span>
+</pre></td></tr></tbody></table>
+</div>
+
+<p>&nbsp;</p>
+
+<h3 id="disable-profile-card-editing">Disable Profile Card Editing</h3>
+
+<p>To disable the ability for the user to edit their display name and avatar image in the built-in profile card <code>Activity</code>, the following must be done:</p>
+<div class="highlight java"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1</pre></td><td class="code"><pre><span class="n">FranklySdk</span><span class="o">.</span><span class="na">setProfileEditingEnabled</span><span class="o">(</span><span class="kc">false</span><span class="o">);</span>
+</pre></td></tr></tbody></table>
+</div>
+
+<p>&nbsp;</p>
+
+<h3 id="user-activity-statistics">User Activity Statistics</h3>
+
+<p>User activity statistics can be retrieved for a single room, for all rooms individually, or for the app as a whole.</p>
+
+<h4 id="single-room">Single Room</h4>
+
+<p>To retrieve the statistics for a single room, you can do the following:</p>
+<div class="highlight java"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4</pre></td><td class="code"><pre><span class="kd">final</span> <span class="n">RoomManager</span> <span class="n">roomManager</span> <span class="o">=</span> <span class="n">RoomManager</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">context</span><span class="o">);</span>
+<span class="kd">final</span> <span class="n">Room</span> <span class="n">room</span> <span class="o">=</span> <span class="n">roomManager</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">roomId</span><span class="o">);</span>
+<span class="kd">final</span> <span class="n">StatisticManager</span> <span class="n">statisticManager</span> <span class="o">=</span> <span class="n">StatisticManager</span><span class="o">.</span><span class="na">getInstance</span><span class="o">(</span><span class="n">context</span><span class="o">);</span>
+<span class="kd">final</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Statistic</span><span class="o">&gt;</span> <span class="n">statistics</span> <span class="o">=</span> <span class="n">statisticManager</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">room</span><span class="o">);</span>
+</pre></td></tr></tbody></table>
+</div>
+
+<h4 id="all-rooms-individually">All Rooms Individually</h4>
+
+<p>To retrieve the statistics for all rooms individually, you can do the following:</p>
+<div class="highlight java"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2</pre></td><td class="code"><pre><span class="kd">final</span> <span class="n">StatisticManager</span> <span class="n">statisticManager</span> <span class="o">=</span> <span class="n">StatisticManager</span><span class="o">.</span><span class="na">getInstance</span><span class="o">(</span><span class="n">context</span><span class="o">);</span>
+<span class="kd">final</span> <span class="n">Map</span><span class="o">&lt;</span><span class="n">Room</span><span class="o">,</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Statistic</span><span class="o">&gt;&gt;</span> <span class="n">roomToStatistics</span> <span class="o">=</span> <span class="n">statisticManager</span><span class="o">.</span><span class="na">get</span><span class="o">();</span>
+</pre></td></tr></tbody></table>
+</div>
+
+<h4 id="app-level">App-level</h4>
+
+<p>To retrieve the statistics for the app as a whole, you can do the following:</p>
+<div class="highlight java"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2</pre></td><td class="code"><pre><span class="kd">final</span> <span class="n">StatisticManager</span> <span class="n">statisticManager</span> <span class="o">=</span> <span class="n">StatisticManager</span><span class="o">.</span><span class="na">getInstance</span><span class="o">(</span><span class="n">context</span><span class="o">);</span>
+<span class="kd">final</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Statistic</span><span class="o">&gt;</span> <span class="n">statistics</span> <span class="o">=</span> <span class="n">statisticManager</span><span class="o">.</span><span class="na">getAppStatistics</span><span class="o">();</span>
+</pre></td></tr></tbody></table>
+</div>
+
+<h3 id="realtime-updates">Realtime Updates</h3>
+
+<p>In order to listen to realtime app-level user activity statistics, you must create an <code>OnChangeListener</code> and register/unregister in <code>onResume()</code>/<code>onPause()</code>, respectively, in your <code>Fragment</code> or <code>Activity</code>:</p>
+<div class="highlight java"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38</pre></td><td class="code"><pre><span class="kd">private</span> <span class="kd">class</span> <span class="nc">StatisticOnChangeListener</span> <span class="kd">implements</span> <span class="n">Manager</span><span class="o">.</span><span class="na">OnChangeListener</span><span class="o">&lt;</span><span class="n">Statistic</span><span class="o">&gt;</span> <span class="o">{</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="n">onChange</span><span class="o">(</span><span class="kd">final</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Statistic</span><span class="o">&gt;</span> <span class="n">statistics</span><span class="o">)</span> <span class="o">{</span>
+        <span class="c1">// Put your statistics update handling logic here.</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="n">onChange</span><span class="o">(</span><span class="kd">final</span> <span class="n">Statistic</span> <span class="n">statistic</span><span class="o">)</span> <span class="o">{</span>
+        <span class="c1">// This method is not currently used by the Frankly SDK for statistics.</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="n">onDelete</span><span class="o">(</span><span class="kd">final</span> <span class="kt">long</span> <span class="n">id</span><span class="o">)</span> <span class="o">{</span>
+        <span class="c1">// This method is not currently used by the Frankly SDK for statistics.</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="kd">private</span> <span class="kd">final</span> <span class="n">StatisticOnChangeListener</span> <span class="n">statisticOnChangeListener</span> <span class="o">=</span> <span class="k">new</span> <span class="n">StatisticOnChangeListener</span><span class="o">();</span>
+
+<span class="nd">@Override</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">onPause</span><span class="p">(</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">super</span><span class="o">.</span><span class="na">onPause</span><span class="o">();</span>
+
+    <span class="kd">final</span> <span class="n">StatisticManager</span> <span class="n">statisticManager</span> <span class="o">=</span> <span class="n">StatisticManager</span><span class="o">.</span><span class="na">getInstance</span><span class="o">(</span><span class="n">context</span><span class="o">);</span>
+
+    <span class="k">this</span><span class="o">.</span><span class="na">statisticManager</span><span class="o">.</span><span class="na">unregisterForChanges</span><span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">statisticOnChangeListener</span><span class="o">);</span>
+    <span class="o">...</span>
+<span class="o">}</span>
+
+<span class="nd">@Override</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">onResume</span><span class="p">(</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">super</span><span class="o">.</span><span class="na">onResume</span><span class="o">();</span>
+
+    <span class="kd">final</span> <span class="n">StatisticManager</span> <span class="n">statisticManager</span> <span class="o">=</span> <span class="n">StatisticManager</span><span class="o">.</span><span class="na">getInstance</span><span class="o">(</span><span class="n">context</span><span class="o">);</span>
+
+    <span class="k">this</span><span class="o">.</span><span class="na">statisticManager</span><span class="o">.</span><span class="na">registerForChanges</span><span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">statisticOnChangeListener</span><span class="o">);</span>
+    <span class="o">...</span>
+<span class="o">}</span>
+</pre></td></tr></tbody></table>
+</div>
+
+<p><em>Note</em>: Currently the <code>onChange(Statistic)</code> and <code>onDelete(long)</code> methods are not used for user activity statistic updates.</p>
+
+<h4 id="user-avatar-and-display-name-updating">User Avatar and Display Name Updating</h4>
+
+<p>Integration developers can upload new avatars for users to the Frankly servers as follows:</p>
+<div class="highlight java"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2</pre></td><td class="code"><pre><span class="kd">final</span> <span class="n">UserManager</span> <span class="n">userManager</span> <span class="o">=</span> <span class="n">UserManager</span><span class="o">.</span><span class="na">getInstance</span><span class="o">(</span><span class="n">context</span><span class="o">);</span>
+<span class="kd">final</span> <span class="n">String</span> <span class="n">userAvatarUrlString</span> <span class="o">=</span> <span class="n">userManager</span><span class="o">.</span><span class="na">uploadUserAvatar</span><span class="o">(</span><span class="n">context</span><span class="o">,</span> <span class="n">intent</span><span class="o">);</span>
+</pre></td></tr></tbody></table>
+</div>
+
+<p>where the <code>Intent</code> contains either the data URI of the Intent, or an extra called &ldquo;data&rdquo; which stores a Bitmap. (The Android Gallery app currently returns the data in this format in <code>onActivityResult()</code>.)
+Note that simply uploading the image does not tie the image to any particular user. The returned URL string must be set on a <code>User</code> and passed to <code>UserManager</code> for persisting as follows:</p>
+<div class="highlight java"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2</pre></td><td class="code"><pre><span class="n">user</span><span class="o">.</span><span class="na">setAvatarImageUrlString</span><span class="o">(</span><span class="n">userAvatarUrlString</span><span class="o">);</span>
+<span class="n">userManager</span><span class="o">.</span><span class="na">update</span><span class="o">(</span><span class="n">user</span><span class="o">);</span>
+</pre></td></tr></tbody></table>
+</div>
+
+<p>Similarly, to update the display name of a user, simply do the following:</p>
+<div class="highlight java"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2</pre></td><td class="code"><pre><span class="n">user</span><span class="o">.</span><span class="na">setDisplayName</span><span class="o">(</span><span class="n">displayName</span><span class="o">);</span>
+<span class="n">userManager</span><span class="o">.</span><span class="na">update</span><span class="o">(</span><span class="n">user</span><span class="o">);</span>
+</pre></td></tr></tbody></table>
+</div>
+
+<p><strong>WARNING</strong>: All <code>UserManager</code> calls must be done on a non-UI thread.</p>
+
+<h3 id="configure-application-server">Configure Application Server</h3>
+
+<p>Integration developers can choose to specify whether the Frankly SDK should connect to test servers or production servers, or have the SDK automatically decide which servers to connect to during development.  This can be accomplished by specifiying the following <code>meta-data</code> tag in the <code>AndroidManifest.xml</code> file:</p>
+<div class="highlight xml"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3</pre></td><td class="code"><pre><span class="nt">&lt;meta-data</span>
+    <span class="na">android:name=</span><span class="s">"com.frankly.franklysdk.ServerGroup"</span>
+    <span class="na">android:value=</span><span class="s">"prod|test|auto"</span> <span class="nt">/&gt;</span>
+</pre></td></tr></tbody></table>
+</div>
+
+<table><thead>
+<tr>
+<th>ServerGroup Value</th>
+<th>Meaning</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>prod</code></td>
+<td>Connect the app to the production servers (<em>default</em>).</td>
+</tr>
+<tr>
+<td><code>test</code></td>
+<td>Connect the app to the test servers.</td>
+</tr>
+<tr>
+<td><code>auto</code></td>
+<td>Apps with the debug flag set to true will connect to the test servers, while apps with the debug flag set to false will connect to the production servers.</td>
+</tr>
+</tbody></table>
+
+<h3 id="design-customization">Design Customization</h3>
+
+<p>To assist with allowing apps to provide their own basic customizations to existing Frankly SDK Views, Activities, and Fragments, the following styles can be overridden and specified by integration developers in XML style files:</p>
+<div class="highlight xml"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11</pre></td><td class="code"><pre><span class="cp">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span>
+<span class="nt">&lt;resources&gt;</span>
+    <span class="nt">&lt;color</span> <span class="na">name=</span><span class="s">"frankly_sdk_attention_background"</span><span class="nt">&gt;</span>#4891F0<span class="nt">&lt;/color&gt;</span>
+    <span class="nt">&lt;color</span> <span class="na">name=</span><span class="s">"frankly_sdk_attention_foreground"</span><span class="nt">&gt;</span>#FFFFFF<span class="nt">&lt;/color&gt;</span>
+    <span class="nt">&lt;color</span> <span class="na">name=</span><span class="s">"frankly_sdk_accent_background"</span><span class="nt">&gt;</span>#FD3C1C<span class="nt">&lt;/color&gt;</span>
+    <span class="nt">&lt;color</span> <span class="na">name=</span><span class="s">"frankly_sdk_accent_foreground"</span><span class="nt">&gt;</span>#FFFFFF<span class="nt">&lt;/color&gt;</span>
+    <span class="nt">&lt;color</span> <span class="na">name=</span><span class="s">"frankly_sdk_brand_background"</span><span class="nt">&gt;</span>#252525<span class="nt">&lt;/color&gt;</span>
+    <span class="nt">&lt;color</span> <span class="na">name=</span><span class="s">"frankly_sdk_brand_foreground"</span><span class="nt">&gt;</span>#FFFFFF<span class="nt">&lt;/color&gt;</span>
+    <span class="nt">&lt;color</span> <span class="na">name=</span><span class="s">"frankly_sdk_primary_background"</span><span class="nt">&gt;</span>#151515<span class="nt">&lt;/color&gt;</span>
+    <span class="nt">&lt;color</span> <span class="na">name=</span><span class="s">"frankly_sdk_primary_foreground"</span><span class="nt">&gt;</span>#FFFFFF<span class="nt">&lt;/color&gt;</span>
+<span class="nt">&lt;/resources&gt;</span>
+</pre></td></tr></tbody></table>
+</div>
+
+<p>&nbsp;</p>
+
+<table><thead>
+<tr>
+<th>Color Key</th>
+<th>Used for</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>frankly_sdk_attention_background</code></td>
+<td>Indicating an attention to user such as new sticker pack indicator, activity indicator base color and user badge text background color</td>
+</tr>
+<tr>
+<td><code>frankly_sdk_attention_foreground</code></td>
+<td>Foreground items color where the background has <code>frankly_sdk_attention_background</code> color such as user badge text</td>
+</tr>
+<tr>
+<td><code>frankly_sdk_accent_background</code></td>
+<td>Indicating a primed state such as send button active state, toggle checked, subscribed room, locked bar background for input message bar</td>
+</tr>
+<tr>
+<td><code>frankly_sdk_accent_foreground</code></td>
+<td>Foreground items color where the background has <code>frankly_sdk_accent_background</code> color such as locked bar foreground items</td>
+</tr>
+<tr>
+<td><code>frankly_sdk_brand_background</code></td>
+<td>Denoting who and what explicitly belongs to the brand such as sticky messages cell background</td>
+</tr>
+<tr>
+<td><code>frankly_sdk_brand_foreground</code></td>
+<td>Foreground items color where the background has <code>frankly_sdk_brand_background</code> color such as sticky messages foreground items</td>
+</tr>
+<tr>
+<td><code>frankly_sdk_primary_background</code></td>
+<td>Activity actionbar background</td>
+</tr>
+<tr>
+<td><code>frankly_sdk_primary_foreground</code></td>
+<td>Activity actionbar foreground</td>
+</tr>
+</tbody></table>
+
+                    <div style="height:20px"></div>
+                </div>
+
+            </div>
+            <div class="flex" drawer>
+                <paper-header-panel class="flex paper-header-panel layout vertical" drawer mode="seamed">
+                    <paper-toolbar>
+<a href="/">                            <img class="logo" src="/images/franklyinc_logo_color_large-044d426f.png" />
+</a>                    </paper-toolbar>
+                    <paper-input label="Search Documentation" class="search" type="search"></paper-input>
+                    <div class="side-panel">
+                        <ul class="nav-tree">
+                            <li class='child '><a href="00-quick-start.html">Quick Start</a></li><li class='child '><a href="01-getting-started.html">Getting Started</a></li><li class='child '><a href="02-authentication.html">Authentication</a></li><li class='child '><a href="03-the-basics.html">The Basics</a></li><li class='child active'><a href="04-advanced-features.html">Advanced Features</a></li><li class='child '><a href="05-troubleshooting.html">Troubleshooting</a></li><li class='child '><a href="06-downloads.html">Downloads</a></li>
+                        </ul>
+                    </div>
+                </paper-header-panel>
+            </div>
+        </paper-drawer-panel>
+    </body>
+    <script>
+    $('li:contains("Advanced Features")').replaceWith("<nav class='anchorific floating-toc'></nav>");
+    $('.page-content').anchorific({
+        anchorText: ''
+    });
+    </script>
+</html>

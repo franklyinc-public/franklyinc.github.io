@@ -1,0 +1,210 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+
+        <!-- Always force latest IE rendering engine or request Chrome Frame -->
+        <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+        <link rel="icon"
+              type="image/png"
+              href="../../images/frankly_favicon_32x32_no_bg.png">
+        <!-- Use title if it's in the page YAML frontmatter -->
+        <title>Getting Started
+            - Frankly Developer Portal</title>
+        <script src="/bower_components/webcomponentsjs/webcomponents-lite.min-01242ae0.js"></script>
+        <link href="/stylesheets/normalize-14170e97.css" rel="stylesheet" /><link href="/stylesheets/all-f2dad6dc.css" rel="stylesheet" />
+        <link href="/stylesheets/highlight-6793ce8e.css" rel="stylesheet" /><link href="/stylesheets/all-f2dad6dc.css" rel="stylesheet" />
+        <style is="custom-style">
+                    :root {
+                        --paper-toolbar-background: #2A2E33;
+                        --paper-input-container-focus-color: #fa3b1b;
+                        --paper-input-container-underline-focus: {
+                            display:none;
+                        };
+                    }
+                    .paper-header-panel {
+                        background-color: #2A2E33;
+                        padding-right: 20px;
+                        color: white;
+                    }
+                    .page-content {
+                        padding-left: 30px;
+                        padding-right: 30px;
+                        overflow: scroll;
+                    }
+
+                    .nav-tree li {
+                        list-style-type: none;
+                    }
+
+                    .nav-tree li a {
+                            color: white;
+                    }
+                    .logo {
+                        margin-left: 5px;
+                        margin-top: 20px;
+                        width: 180px;
+                    }
+                    .search {
+                        --paper-input-container-input-color: white;
+                        padding-left: 20px;
+                        padding-right: 20px;
+                    }
+                    .version-dropdown {
+                        width:90px;
+                        --paper-input-container-underline: {
+                            display:none;
+                        };
+                    }
+
+                    .version-dropdown a {
+                        color: black;
+                    }
+
+                    .previous {
+
+                    }
+
+                    .next {
+
+                    }
+
+                    .floating-toc {
+                        margin-left: -20px;
+                    }
+
+                    .floating-toc a {
+                        color:black;
+                    }
+
+                    .customization-table {
+                        table, th, td {
+                            border: 1px solid black;
+                            text-align: left;
+                        }
+                    }
+
+                    p {
+                        line-height: 150%;
+                    }
+                </style>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js" type="text/javascript"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/lunr.js/0.5.9/lunr.min.js" type="text/javascript"></script>
+        <script src="/javascripts/all-b1933d9a.js"></script>
+        <script src="/javascripts/anchorify-9f550341.js"></script>
+
+        <link href="/bower_components/paper-header-panel/paper-header-panel.html" rel="import">
+        <link href="/bower_components/paper-drawer-panel/paper-drawer-panel.html" rel="import">
+        <link href="/bower_components/paper-toolbar/paper-toolbar.html" rel="import">
+        <link href="/bower_components/paper-icon-button/paper-icon-button.html" rel="import">
+        <link href="/bower_components/iron-icons/iron-icons.html" rel="import">
+        <link href="/bower_components/iron-flex-layout/iron-flex-layout.html" rel="import">
+        <link href="/bower_components/paper-input/paper-input.html" rel="import">
+        <link href="/bower_components/paper-dropdown-menu/paper-dropdown-menu.html" rel="import">
+        <link href="/bower_components/paper-menu/paper-menu.html" rel="import">
+        <link href="/bower_components/paper-item/paper-item.html" rel="import">
+        <link rel="icon"
+              type="image/png"
+              href="images/frankly_favicon_32x32_no_bg.png">
+    </head>
+
+    <body class="js js_latest js_latest_doc js_latest_doc_01-getting-started">
+        <paper-drawer-panel class="flex" mode="seamed">
+            <div class="flex page-content" main>
+                <div class="horizontal layout">
+                    <paper-icon-button icon="menu" on-tap="menuAction" paper-drawer-toggle></paper-icon-button>
+                    <h1 class="flex">
+                        Getting Started
+                    </h1>
+                    <span class="flex">
+                    </span>
+                    <paper-dropdown-menu noink no-animation class="version-dropdown">
+                        <paper-menu class="dropdown-content version-dropdown" selected="0">
+                                <paper-item>
+                                    <a href="/js/latest">latest</a>
+                                </paper-item>
+                        </paper-menu>
+                    </paper-dropdown-menu>
+
+                </div>
+                <div style="max-width:70%">
+                    <h2 id="before-implementing-the-frankly-sdk">Before Implementing the Frankly SDK</h2>
+
+<ol>
+<li>You&rsquo;ll need to obtain an <code>appKey</code> and <code>appSecret</code> before implementing the Frankly SDK. These are required for authenticating with our server. If you don&rsquo;t have these, please contact us at <a href="mailto:platform-support@franklychat.com"><a href="mailto:platform-support@franklychat.com">platform-support@franklychat.com</a></a>.</li>
+<li>Your server will need to be able to generate a JSON Web Token (JWT). To learn more about how to generate a JWT, click here.</li>
+</ol>
+
+<h2 id="basic-concepts">Basic Concepts</h2>
+
+<p>At the center of Frankly&rsquo;s conceptual model is the Room, where chat happens.
+Rooms belong to Roomlists, and Users can subscribe to Rooms.</p>
+
+<p>Inside of a room, a user can send three kinds of messages depending on their role:</p>
+
+<ul>
+<li>  A standard chat message.</li>
+<li>  An Announcement, which is sent by the brand.</li>
+<li>  A Sticky Message, a message sent by the brand which pins to the top of the room
+once it reaches the top of the screen.
+
+<ul>
+<li> Sticky Messages are shown with the brand&rsquo;s App Avatar.</li>
+<li> New Sticky Messages will replace the last pinned Sticky Message after reaching the top.</li>
+</ul></li>
+</ul>
+
+<h2 id="installing-with-npm">Installing with NPM</h2>
+
+<p>The recommended way to access the Frankly JavaScript SDK is via the
+<a href="&quot;https://www.npmjs.com/package/frankly-js&quot;">public NPM repo named frankly-js</a>.</p>
+
+<p>If preferred, you can also download the SDK via the
+<a href="&quot;http://franklyinc.github.io/frankly-js&quot;">public Frankly github repo</a>.</p>
+
+<p>To install via NPM:</p>
+<div class="highlight shell"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1</pre></td><td class="code"><pre>npm install frankly-js
+</pre></td></tr></tbody></table>
+</div>
+
+<h2 id="initializing-the-javascript-sdk">Initializing the JavaScript SDK</h2>
+
+<p>All operations to the API are made from instances of the
+<code>FranklyClient</code>
+class. Those objects expose methods to the application which map to remote procedure calls (RPCs) on the Frankly servers and they also negotiate and maintain the state required by the API&rsquo;s security policies.</p>
+
+<p>Here&rsquo;s how
+<code>FranklyClient</code>
+instances are created:</p>
+<div class="highlight javascript"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2</pre></td><td class="code"><pre>            <span class="kd">var</span> <span class="nx">FranklyClient</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span> <span class="s1">'frankly-js'</span> <span class="p">)</span>
+            <span class="kd">var</span> <span class="nx">client</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">FranklyClient</span><span class="p">()</span>
+</pre></td></tr></tbody></table>
+</div>
+
+                    <div style="height:20px"></div>
+                </div>
+
+            </div>
+            <div class="flex" drawer>
+                <paper-header-panel class="flex paper-header-panel layout vertical" drawer mode="seamed">
+                    <paper-toolbar>
+<a href="/">                            <img class="logo" src="/images/franklyinc_logo_color_large-044d426f.png" />
+</a>                    </paper-toolbar>
+                    <paper-input label="Search Documentation" class="search" type="search"></paper-input>
+                    <div class="side-panel">
+                        <ul class="nav-tree">
+                            <li class='child active'><a href="01-getting-started.html">Getting Started</a></li><li class='child '><a href="02-authentication.html">Authentication</a></li><li class='child '><a href="03-the-basics.html">The Basics</a></li><li class='child '><a href="06-downloads.html">Downloads</a></li>
+                        </ul>
+                    </div>
+                </paper-header-panel>
+            </div>
+        </paper-drawer-panel>
+    </body>
+    <script>
+    $('li:contains("Getting Started")').replaceWith("<nav class='anchorific floating-toc'></nav>");
+    $('.page-content').anchorific({
+        anchorText: ''
+    });
+    </script>
+</html>

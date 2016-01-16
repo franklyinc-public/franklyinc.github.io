@@ -1,0 +1,315 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+
+        <!-- Always force latest IE rendering engine or request Chrome Frame -->
+        <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+        <link rel="icon"
+              type="image/png"
+              href="../../images/frankly_favicon_32x32_no_bg.png">
+        <!-- Use title if it's in the page YAML frontmatter -->
+        <title>The Basics
+            - Frankly Developer Portal</title>
+        <script src="/bower_components/webcomponentsjs/webcomponents-lite.min-01242ae0.js"></script>
+        <link href="/stylesheets/normalize-14170e97.css" rel="stylesheet" /><link href="/stylesheets/all-f2dad6dc.css" rel="stylesheet" />
+        <link href="/stylesheets/highlight-6793ce8e.css" rel="stylesheet" /><link href="/stylesheets/all-f2dad6dc.css" rel="stylesheet" />
+        <style is="custom-style">
+                    :root {
+                        --paper-toolbar-background: #2A2E33;
+                        --paper-input-container-focus-color: #fa3b1b;
+                        --paper-input-container-underline-focus: {
+                            display:none;
+                        };
+                    }
+                    .paper-header-panel {
+                        background-color: #2A2E33;
+                        padding-right: 20px;
+                        color: white;
+                    }
+                    .page-content {
+                        padding-left: 30px;
+                        padding-right: 30px;
+                        overflow: scroll;
+                    }
+
+                    .nav-tree li {
+                        list-style-type: none;
+                    }
+
+                    .nav-tree li a {
+                            color: white;
+                    }
+                    .logo {
+                        margin-left: 5px;
+                        margin-top: 20px;
+                        width: 180px;
+                    }
+                    .search {
+                        --paper-input-container-input-color: white;
+                        padding-left: 20px;
+                        padding-right: 20px;
+                    }
+                    .version-dropdown {
+                        width:90px;
+                        --paper-input-container-underline: {
+                            display:none;
+                        };
+                    }
+
+                    .version-dropdown a {
+                        color: black;
+                    }
+
+                    .previous {
+
+                    }
+
+                    .next {
+
+                    }
+
+                    .floating-toc {
+                        margin-left: -20px;
+                    }
+
+                    .floating-toc a {
+                        color:black;
+                    }
+
+                    .customization-table {
+                        table, th, td {
+                            border: 1px solid black;
+                            text-align: left;
+                        }
+                    }
+
+                    p {
+                        line-height: 150%;
+                    }
+                </style>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js" type="text/javascript"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/lunr.js/0.5.9/lunr.min.js" type="text/javascript"></script>
+        <script src="/javascripts/all-b1933d9a.js"></script>
+        <script src="/javascripts/anchorify-9f550341.js"></script>
+
+        <link href="/bower_components/paper-header-panel/paper-header-panel.html" rel="import">
+        <link href="/bower_components/paper-drawer-panel/paper-drawer-panel.html" rel="import">
+        <link href="/bower_components/paper-toolbar/paper-toolbar.html" rel="import">
+        <link href="/bower_components/paper-icon-button/paper-icon-button.html" rel="import">
+        <link href="/bower_components/iron-icons/iron-icons.html" rel="import">
+        <link href="/bower_components/iron-flex-layout/iron-flex-layout.html" rel="import">
+        <link href="/bower_components/paper-input/paper-input.html" rel="import">
+        <link href="/bower_components/paper-dropdown-menu/paper-dropdown-menu.html" rel="import">
+        <link href="/bower_components/paper-menu/paper-menu.html" rel="import">
+        <link href="/bower_components/paper-item/paper-item.html" rel="import">
+        <link rel="icon"
+              type="image/png"
+              href="images/frankly_favicon_32x32_no_bg.png">
+    </head>
+
+    <body class="android android_latest android_latest_doc android_latest_doc_03-the-basics">
+        <paper-drawer-panel class="flex" mode="seamed">
+            <div class="flex page-content" main>
+                <div class="horizontal layout">
+                    <paper-icon-button icon="menu" on-tap="menuAction" paper-drawer-toggle></paper-icon-button>
+                    <h1 class="flex">
+                        The Basics
+                    </h1>
+                    <span class="flex">
+                    </span>
+                    <paper-dropdown-menu noink no-animation class="version-dropdown">
+                        <paper-menu class="dropdown-content version-dropdown" selected="0">
+                                <paper-item>
+                                    <a href="/android/latest">latest</a>
+                                </paper-item>
+                        </paper-menu>
+                    </paper-dropdown-menu>
+
+                </div>
+                <div style="max-width:70%">
+                    <h2 id="setting-up-your-room-list">Setting Up Your Room List</h2>
+
+<p><em>Important Note</em> Please make sure you&rsquo;ve set up at least one Room in the Admin Console before proceeding. If you&rsquo;re unsure of how to do this or if you don&rsquo;t have Admin Console access, please see <em><a href="http://franklyinc.github.io">Getting Started</a></em> for next steps.</p>
+
+<p>The Frankly SDK contains two classes which contain everything needed to show the Room List and allow the user to participate in chat:</p>
+
+<ul>
+<li>  <code>RoomListActivity</code></li>
+<li>  <code>ConditionalRoomListActivity</code></li>
+</ul>
+
+<h3 id="roomlistactivity"><strong><code>RoomListActivity</code></strong></h3>
+
+<p>If you are not using the Conditional Rooms feature, you will need to use the <code>RoomListActivity</code> class which contains everything needed to show the regular Room List and allow the user to join any Room. To use this class you will need to declare it in your <code>AndroidManifest.xml</code> where <code>&lt;room_list_title&gt;</code> is the title to show in the activity:</p>
+<div class="highlight xml"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5
+6</pre></td><td class="code"><pre>    <span class="nt">&lt;activity</span>
+        <span class="na">android:name=</span><span class="s">"com.frankly.franklysdk.app.RoomListActivity"</span>
+        <span class="na">android:theme=</span><span class="s">"@style/FranklySdk.Theme"</span>
+        <span class="na">android:configChanges=</span><span class="s">"keyboardHidden|orientation|screenSize"</span>
+        <span class="na">android:label=</span><span class="s">"&lt;room_list_title&gt;"</span>
+        <span class="na">android:screenOrientation=</span><span class="s">"portrait"</span> <span class="nt">/&gt;</span>
+</pre></td></tr></tbody></table>
+</div>
+
+<p>The activity can then be started just like any other activity:</p>
+<div class="highlight java"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2</pre></td><td class="code"><pre>    <span class="n">Intent</span> <span class="n">intent</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Intent</span><span class="o">(</span><span class="n">context</span><span class="o">,</span> <span class="n">RoomListActivity</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+    <span class="n">context</span><span class="o">.</span><span class="na">startActivity</span><span class="o">(</span><span class="n">intent</span><span class="o">);</span>
+</pre></td></tr></tbody></table>
+</div>
+
+<h3 id="conditionalroomlistactivity"><strong><code>ConditionalRoomListActivity</code></strong></h3>
+
+<p>If you are using the Conditional Rooms feature, you will need to use the <code>ConditionalRoomListActivity</code> class which contains everything needed to show the Room List with the Conditional Room Selector which allow users to specify the conditions (which you have set up in the Frankly Admin Console) that apply to them, and allow users to join any unlocked Rooms. To use this class, you will need to declare it in your <code>AndroidManifest.xml</code> where <code>&lt;room_list_title&gt;</code> is the title to show in the activity:</p>
+<div class="highlight xml"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5
+6</pre></td><td class="code"><pre>    <span class="nt">&lt;activity</span>
+        <span class="na">android:name=</span><span class="s">"com.frankly.franklysdk.app.ConditionalRoomListActivity"</span>
+        <span class="na">android:theme=</span><span class="s">"@style/FranklySdk.Theme"</span>
+        <span class="na">android:configChanges=</span><span class="s">"keyboardHidden|orientation|screenSize"</span>
+        <span class="na">android:label=</span><span class="s">"&lt;room_list_title&gt;"</span>
+        <span class="na">android:screenOrientation=</span><span class="s">"portrait"</span> <span class="nt">/&gt;</span>
+</pre></td></tr></tbody></table>
+</div>
+
+<p>The activity can then be started just like any other activity:</p>
+<div class="highlight java"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2</pre></td><td class="code"><pre>    <span class="n">Intent</span> <span class="n">intent</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Intent</span><span class="o">(</span><span class="n">context</span><span class="o">,</span> <span class="n">ConditionalRoomListActivity</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+    <span class="n">context</span><span class="o">.</span><span class="na">startActivity</span><span class="o">(</span><span class="n">intent</span><span class="o">);</span>
+</pre></td></tr></tbody></table>
+</div>
+
+<h2 id="setting-the-display-name-amp-profile-avatar">Setting the Display Name &amp; Profile Avatar</h2>
+
+<p>A couple things to note about these setting these properties for a user&rsquo;s Frankly profile:</p>
+
+<ul>
+<li>  The maximum length of a Frankly Display Name is 18 characters</li>
+<li>  For best results, we recommend uploaded Profile Avatars to be 250x250px compressed JPGs</li>
+<li>  <strong>Important Note</strong> The Frankly Chat Platform automatically provides default Profile Avatars for users where it has not been set for them, to provide a nicer out-of-the-box experience</li>
+</ul>
+
+<p>Developers can upload new Profile Avatars for users to the Frankly servers where the Intent contains either the data URI of the Intent, or an extra called &ldquo;data&rdquo; which stores a Bitmap (the Android Gallery app currently returns the data in this format in <code>onActivityResult()</code>) as follows:</p>
+<div class="highlight java"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2</pre></td><td class="code"><pre><span class="kd">final</span> <span class="n">UserManager</span> <span class="n">userManager</span> <span class="o">=</span> <span class="n">UserManager</span><span class="o">.</span><span class="na">getInstance</span><span class="o">(</span><span class="n">context</span><span class="o">);</span>
+<span class="kd">final</span> <span class="n">String</span> <span class="n">userAvatarUrlString</span> <span class="o">=</span> <span class="n">userManager</span><span class="o">.</span><span class="na">uploadUserAvatar</span><span class="o">(</span><span class="n">context</span><span class="o">,</span> <span class="n">intent</span><span class="o">);</span>
+</pre></td></tr></tbody></table>
+</div>
+
+<p>Note that simply uploading the image does not tie the image to any particular user. The returned URL string must be set on a User object and passed to <code>UserManager</code> for persisting as follows:</p>
+<div class="highlight java"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2</pre></td><td class="code"><pre><span class="n">user</span><span class="o">.</span><span class="na">setAvatarImageUrlString</span><span class="o">(</span><span class="n">userAvatarUrlString</span><span class="o">);</span>
+<span class="n">userManager</span><span class="o">.</span><span class="na">update</span><span class="o">(</span><span class="n">user</span><span class="o">);</span>
+</pre></td></tr></tbody></table>
+</div>
+
+<p>Similarly, to update the display name of a user, simply do the following:</p>
+<div class="highlight java"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2</pre></td><td class="code"><pre><span class="n">user</span><span class="o">.</span><span class="na">setDisplayName</span><span class="o">(</span><span class="n">displayName</span><span class="o">);</span>
+<span class="n">userManager</span><span class="o">.</span><span class="na">update</span><span class="o">(</span><span class="n">user</span><span class="o">);</span>
+</pre></td></tr></tbody></table>
+</div>
+
+<p><strong>WARNING:</strong> All <code>UserManager</code> calls must be done on a non-UI thread.</p>
+
+<h2 id="customizing-the-android-sdk"><strong>Customizing the Android SDK</strong></h2>
+
+<p>To assist with allowing apps to provide their own basic customizations to existing Frankly SDK Views, Activities, and Fragments, you can override the default styles in XML style files:</p>
+<div class="highlight xml"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11</pre></td><td class="code"><pre>    <span class="cp">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span>
+    <span class="nt">&lt;resources&gt;</span>
+        <span class="nt">&lt;color</span> <span class="na">name=</span><span class="s">"franky_sdk_attention_background"</span><span class="nt">&gt;</span>#4891F0<span class="nt">&lt;/color&gt;</span>
+        <span class="nt">&lt;color</span> <span class="na">name=</span><span class="s">"frankly_sdk_attention_foreground"</span><span class="nt">&gt;</span>#FFFFFF<span class="nt">&lt;/color&gt;</span>
+        <span class="nt">&lt;color</span> <span class="na">name=</span><span class="s">"frankly_sdk_accent_background"</span><span class="nt">&gt;</span>#FD3C1C<span class="nt">&lt;/color&gt;</span>
+        <span class="nt">&lt;color</span> <span class="na">name=</span><span class="s">"frankly_sdk_accent_foreground"</span><span class="nt">&gt;</span>#FFFFFF<span class="nt">&lt;/color&gt;</span>
+        <span class="nt">&lt;color</span> <span class="na">name=</span><span class="s">"frankly_sdk_brand_background"</span><span class="nt">&gt;</span>#252525<span class="nt">&lt;/color&gt;</span>
+        <span class="nt">&lt;color</span> <span class="na">name=</span><span class="s">"frankly_sdk_brand_foreground"</span><span class="nt">&gt;</span>#FFFFFF<span class="nt">&lt;/color&gt;</span>
+        <span class="nt">&lt;color</span> <span class="na">name=</span><span class="s">"frankly_sdk_primary_background"</span><span class="nt">&gt;</span>#151515<span class="nt">&lt;/color&gt;</span>
+        <span class="nt">&lt;color</span> <span class="na">name=</span><span class="s">"frankly_sdk_primary_foreground"</span><span class="nt">&gt;</span>#FFFFFF<span class="nt">&lt;/color&gt;</span>
+    <span class="nt">&lt;/resources&gt;</span>
+</pre></td></tr></tbody></table>
+</div>
+
+<table><thead>
+<tr>
+<th>Color Key</th>
+<th>Used for</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>frankly_sdk_attention_background</code></td>
+<td>Indicating an attention to user such as new sticker pack indicator, activity indicator base color and user badge text background color</td>
+</tr>
+<tr>
+<td><code>frankly_sdk_attention_foreground</code></td>
+<td>Foreground items color where the background has <code>frankly_sdk_attention_background</code> color such as user badge text</td>
+</tr>
+<tr>
+<td><code>frankly_sdk_accent_background</code></td>
+<td>Indicating a primed state such as send button active state, toggle checked, subscribed room, locked bar background for input message bar</td>
+</tr>
+<tr>
+<td><code>frankly_sdk_accent_foreground</code></td>
+<td>Foreground items color where the background has <code>frankly_sdk_accent_background</code> color such as locked bar foreground items</td>
+</tr>
+<tr>
+<td><code>frankly_sdk_brand_background</code></td>
+<td>Denoting who and what explicitly belongs to the brand such as sticky messages cell background</td>
+</tr>
+<tr>
+<td><code>frankly_sdk_brand_foreground</code></td>
+<td>Foreground items color where the background has <code>frankly_sdk_brand_background</code> color such as sticky messages foreground items</td>
+</tr>
+<tr>
+<td><code>frankly_sdk_primary_background</code></td>
+<td>Activity actionbar background</td>
+</tr>
+<tr>
+<td><code>frankly_sdk_primary_foreground</code></td>
+<td>Activity actionbar foreground</td>
+</tr>
+</tbody></table>
+
+                    <div style="height:20px"></div>
+                </div>
+
+            </div>
+            <div class="flex" drawer>
+                <paper-header-panel class="flex paper-header-panel layout vertical" drawer mode="seamed">
+                    <paper-toolbar>
+<a href="/">                            <img class="logo" src="/images/franklyinc_logo_color_large-044d426f.png" />
+</a>                    </paper-toolbar>
+                    <paper-input label="Search Documentation" class="search" type="search"></paper-input>
+                    <div class="side-panel">
+                        <ul class="nav-tree">
+                            <li class='child '><a href="00-quick-start.html">Quick Start</a></li><li class='child '><a href="01-getting-started.html">Getting Started</a></li><li class='child '><a href="02-authentication.html">Authentication</a></li><li class='child active'><a href="03-the-basics.html">The Basics</a></li><li class='child '><a href="04-advanced-features.html">Advanced Features</a></li><li class='child '><a href="05-troubleshooting.html">Troubleshooting</a></li><li class='child '><a href="06-downloads.html">Downloads</a></li>
+                        </ul>
+                    </div>
+                </paper-header-panel>
+            </div>
+        </paper-drawer-panel>
+    </body>
+    <script>
+    $('li:contains("The Basics")').replaceWith("<nav class='anchorific floating-toc'></nav>");
+    $('.page-content').anchorific({
+        anchorText: ''
+    });
+    </script>
+</html>

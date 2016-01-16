@@ -1,0 +1,251 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+
+        <!-- Always force latest IE rendering engine or request Chrome Frame -->
+        <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+        <link rel="icon"
+              type="image/png"
+              href="../../images/frankly_favicon_32x32_no_bg.png">
+        <!-- Use title if it's in the page YAML frontmatter -->
+        <title>The Basics
+            - Frankly Developer Portal</title>
+        <script src="/bower_components/webcomponentsjs/webcomponents-lite.min-01242ae0.js"></script>
+        <link href="/stylesheets/normalize-14170e97.css" rel="stylesheet" /><link href="/stylesheets/all-f2dad6dc.css" rel="stylesheet" />
+        <link href="/stylesheets/highlight-6793ce8e.css" rel="stylesheet" /><link href="/stylesheets/all-f2dad6dc.css" rel="stylesheet" />
+        <style is="custom-style">
+                    :root {
+                        --paper-toolbar-background: #2A2E33;
+                        --paper-input-container-focus-color: #fa3b1b;
+                        --paper-input-container-underline-focus: {
+                            display:none;
+                        };
+                    }
+                    .paper-header-panel {
+                        background-color: #2A2E33;
+                        padding-right: 20px;
+                        color: white;
+                    }
+                    .page-content {
+                        padding-left: 30px;
+                        padding-right: 30px;
+                        overflow: scroll;
+                    }
+
+                    .nav-tree li {
+                        list-style-type: none;
+                    }
+
+                    .nav-tree li a {
+                            color: white;
+                    }
+                    .logo {
+                        margin-left: 5px;
+                        margin-top: 20px;
+                        width: 180px;
+                    }
+                    .search {
+                        --paper-input-container-input-color: white;
+                        padding-left: 20px;
+                        padding-right: 20px;
+                    }
+                    .version-dropdown {
+                        width:90px;
+                        --paper-input-container-underline: {
+                            display:none;
+                        };
+                    }
+
+                    .version-dropdown a {
+                        color: black;
+                    }
+
+                    .previous {
+
+                    }
+
+                    .next {
+
+                    }
+
+                    .floating-toc {
+                        margin-left: -20px;
+                    }
+
+                    .floating-toc a {
+                        color:black;
+                    }
+
+                    .customization-table {
+                        table, th, td {
+                            border: 1px solid black;
+                            text-align: left;
+                        }
+                    }
+
+                    p {
+                        line-height: 150%;
+                    }
+                </style>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js" type="text/javascript"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/lunr.js/0.5.9/lunr.min.js" type="text/javascript"></script>
+        <script src="/javascripts/all-b1933d9a.js"></script>
+        <script src="/javascripts/anchorify-9f550341.js"></script>
+
+        <link href="/bower_components/paper-header-panel/paper-header-panel.html" rel="import">
+        <link href="/bower_components/paper-drawer-panel/paper-drawer-panel.html" rel="import">
+        <link href="/bower_components/paper-toolbar/paper-toolbar.html" rel="import">
+        <link href="/bower_components/paper-icon-button/paper-icon-button.html" rel="import">
+        <link href="/bower_components/iron-icons/iron-icons.html" rel="import">
+        <link href="/bower_components/iron-flex-layout/iron-flex-layout.html" rel="import">
+        <link href="/bower_components/paper-input/paper-input.html" rel="import">
+        <link href="/bower_components/paper-dropdown-menu/paper-dropdown-menu.html" rel="import">
+        <link href="/bower_components/paper-menu/paper-menu.html" rel="import">
+        <link href="/bower_components/paper-item/paper-item.html" rel="import">
+        <link rel="icon"
+              type="image/png"
+              href="images/frankly_favicon_32x32_no_bg.png">
+    </head>
+
+    <body class="js js_latest js_latest_doc js_latest_doc_03-the-basics">
+        <paper-drawer-panel class="flex" mode="seamed">
+            <div class="flex page-content" main>
+                <div class="horizontal layout">
+                    <paper-icon-button icon="menu" on-tap="menuAction" paper-drawer-toggle></paper-icon-button>
+                    <h1 class="flex">
+                        The Basics
+                    </h1>
+                    <span class="flex">
+                    </span>
+                    <paper-dropdown-menu noink no-animation class="version-dropdown">
+                        <paper-menu class="dropdown-content version-dropdown" selected="0">
+                                <paper-item>
+                                    <a href="/js/latest">latest</a>
+                                </paper-item>
+                        </paper-menu>
+                    </paper-dropdown-menu>
+
+                </div>
+                <div style="max-width:70%">
+                    <h4 id="setting-user-info-via-the-javascript-sdk">Setting User Info via the JavaScript SDK</h4>
+
+<p>A user can have a display name and profile image specified by using the <code>updateUser</code> function within the Frankly JavaScript SDK. Note that the profile image must first be uploaded to Frankly’s file server in order to be used as a profile avatar.</p>
+
+<p>Currently the Frankly JavaScript SDK only supports <code>http</code> or <code>https</code> connections on the backend for file uploads, as demonstrated in the following snippet. File uploads via the browser are not currently supported, however this functionality is being actively developed.</p>
+
+<p>To upload an image to be used as a profile avatar, use the <code>createFile</code> function to create a bucket that the image can be loaded into, then use the <code>updateFile</code> function to set the contents of the picture.</p>
+
+<p>Once the file has been uploaded, set the <code>displayName</code> and <code>avatarImageUrl</code> properties of the <code>options</code> parameter within the <code>updateUser</code> function:</p>
+
+<p>var frankly = require(&lsquo;frankly-js&rsquo;).Client(&#39;https&rsquo;),
+    fs = require(&#39;fs&rsquo;),
+    userDisplayName = &ldquo;Example Name&rdquo;;</p>
+
+<p>frankly
+    .createFile({
+    category: &#39;useravatar&rsquo;, type: &#39;image&rsquo;
+    })
+    .then(function (res) {
+    frankly
+    .updateFile(res.url, fs.readFileSync(&#39;images/profile<em>pic</em>123.png&rsquo;))
+        .then(function (res) {
+            frankly
+                .updateUser(userId, {
+                    displayName: userDisplayName,
+                    avatarImageUrl: res.url
+                })
+            .catch(failure)
+        })
+        .catch(failure)
+    })
+    .catch(failure);</p>
+
+<h3 id="embedding-a-room-on-web">Embedding a Room on Web</h3>
+
+<p>The Frankly Web App can be embedded directly into your web app through the use of JavaScript and iframes. This service allows your users the ability to use Frankly supported chat without having to leave your web app.</p>
+
+<p>There are two steps that need to be taken in order to embed Frankly within your web app:</p>
+
+<ul>
+<li>  Include the Frankly Widget script on the page that will contain the Frankly Web App, including a small script on the page to initialize the Frankly Web App.</li>
+<li>  Embed the Frankly Web App using the <code>&lt;iframe&gt;</code> tag.</li>
+</ul>
+
+<p>More detail on these steps below.</p>
+
+<p><img src="/images/../../../images/embed_html_1024.png" /></p>
+
+<h4 id="1-include-frankly-widget-script">1. Include Frankly Widget Script</h4>
+
+<p>Include the following line of code in the head of your HTML:</p>
+
+<p><script src="//d13r8avoofccpt.cloudfront.net/0.2.1/frankly.min.js"></script>
+    <script>
+      frankly.widgets.init({
+    onAuthenticationRequest: function(nonce){
+    console.log(nonce);
+    return new Promise(function (resolve, reject) {
+        /*
+         * TODO: generate an identity token and pass it to resolve, or call
+         * reject with an error.
+         */
+    });
+    }
+    });
+    </script></p>
+
+<p>This script sets the configuration for your page to host the Frankly Web App, allowing it to run within your web app.</p>
+
+<p>The call to <code>frankly.widgets.init</code> configures the web page to properly communicate with the embedded Frankly Widgets.</p>
+
+<p>The function set to <code>onAuthenticationRequest</code> will be called when the widget needs to authenticate as a user in order to render the view and enable chatting. It must return a javascript promise where the resolve callback must be called with the generated identity token.</p>
+
+<p><strong>Note</strong> the section of the above script that includes the <strong>TODO</strong> statement. This section must be replaced with code that generates an identity token using one of Frankly’s server SDKs. We strongly recommend that you generate this token on your server side, and call it from a script within this script block. Exposing your Frankly App key and secret within this code block may compromise the security of your Frankly Web App. For more information on generating an identity token using one of Frankly’s server SDKs, please consult the documentation on <a href="Auth.html#auth_flow">generating identity tokens</a>.</p>
+
+<h4 id="2-embed-the-frankly-web-app-in-an-iframe">2. Embed the Frankly Web App in an iframe</h4>
+
+<p>Include the following line of code in the body of your HTML, at the place that you want the Frankly Web App to appear:</p>
+
+<p><iframe src="https://app.franklychat.com/web/{app_id}/#/{room_id}"></iframe></p>
+
+<p>You will need to replace <code>{app_id}</code> with your app’s unique numeric ID, e.g. 123, and replace <code>{room_id}</code> with your room’s unique numeric ID, e.g. 9876. If you wish to display all room avatar tiles to your users, rather than embedding a specific room, then include the following code in your HTML:</p>
+
+<p><iframe src="https://app.franklychat.com/web/{app_id}"></iframe></p>
+
+<p>You can get your <code>app_id</code> by logging into the Frankly Admin Panel and selecting <em>Settings</em> in the left hand menu.</p>
+
+<figure>![](../../../images/admin-settings-f6c2154b.png)
+<figaction>_Settings option in Frankly Admin Console_</figaction></figure>
+
+<p>Scroll down the page until you reach the <em>Web App Settings</em> panel. It is here that you can find your Web App ID, as the suffix of your App URL:</p>
+
+<figure>![](../../../images/app_id-9881f4d4.png)
+<figaction>_Getting App ID from Admin Console_<figaction></figaction></figaction></figure>
+
+                    <div style="height:20px"></div>
+                </div>
+
+            </div>
+            <div class="flex" drawer>
+                <paper-header-panel class="flex paper-header-panel layout vertical" drawer mode="seamed">
+                    <paper-toolbar>
+<a href="/">                            <img class="logo" src="/images/franklyinc_logo_color_large-044d426f.png" />
+</a>                    </paper-toolbar>
+                    <paper-input label="Search Documentation" class="search" type="search"></paper-input>
+                    <div class="side-panel">
+                        <ul class="nav-tree">
+                            <li class='child '><a href="01-getting-started.html">Getting Started</a></li><li class='child '><a href="02-authentication.html">Authentication</a></li><li class='child active'><a href="03-the-basics.html">The Basics</a></li><li class='child '><a href="06-downloads.html">Downloads</a></li>
+                        </ul>
+                    </div>
+                </paper-header-panel>
+            </div>
+        </paper-drawer-panel>
+    </body>
+    <script>
+    $('li:contains("The Basics")').replaceWith("<nav class='anchorific floating-toc'></nav>");
+    $('.page-content').anchorific({
+        anchorText: ''
+    });
+    </script>
+</html>

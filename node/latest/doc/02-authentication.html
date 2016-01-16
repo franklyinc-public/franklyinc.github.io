@@ -1,0 +1,425 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+
+        <!-- Always force latest IE rendering engine or request Chrome Frame -->
+        <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+        <link rel="icon"
+              type="image/png"
+              href="../../images/frankly_favicon_32x32_no_bg.png">
+        <!-- Use title if it's in the page YAML frontmatter -->
+        <title>Authentication
+            - Frankly Developer Portal</title>
+        <script src="/bower_components/webcomponentsjs/webcomponents-lite.min-01242ae0.js"></script>
+        <link href="/stylesheets/normalize-14170e97.css" rel="stylesheet" /><link href="/stylesheets/all-f2dad6dc.css" rel="stylesheet" />
+        <link href="/stylesheets/highlight-6793ce8e.css" rel="stylesheet" /><link href="/stylesheets/all-f2dad6dc.css" rel="stylesheet" />
+        <style is="custom-style">
+                    :root {
+                        --paper-toolbar-background: #2A2E33;
+                        --paper-input-container-focus-color: #fa3b1b;
+                        --paper-input-container-underline-focus: {
+                            display:none;
+                        };
+                    }
+                    .paper-header-panel {
+                        background-color: #2A2E33;
+                        padding-right: 20px;
+                        color: white;
+                    }
+                    .page-content {
+                        padding-left: 30px;
+                        padding-right: 30px;
+                        overflow: scroll;
+                    }
+
+                    .nav-tree li {
+                        list-style-type: none;
+                    }
+
+                    .nav-tree li a {
+                            color: white;
+                    }
+                    .logo {
+                        margin-left: 5px;
+                        margin-top: 20px;
+                        width: 180px;
+                    }
+                    .search {
+                        --paper-input-container-input-color: white;
+                        padding-left: 20px;
+                        padding-right: 20px;
+                    }
+                    .version-dropdown {
+                        width:90px;
+                        --paper-input-container-underline: {
+                            display:none;
+                        };
+                    }
+
+                    .version-dropdown a {
+                        color: black;
+                    }
+
+                    .previous {
+
+                    }
+
+                    .next {
+
+                    }
+
+                    .floating-toc {
+                        margin-left: -20px;
+                    }
+
+                    .floating-toc a {
+                        color:black;
+                    }
+
+                    .customization-table {
+                        table, th, td {
+                            border: 1px solid black;
+                            text-align: left;
+                        }
+                    }
+
+                    p {
+                        line-height: 150%;
+                    }
+                </style>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js" type="text/javascript"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/lunr.js/0.5.9/lunr.min.js" type="text/javascript"></script>
+        <script src="/javascripts/all-b1933d9a.js"></script>
+        <script src="/javascripts/anchorify-9f550341.js"></script>
+
+        <link href="/bower_components/paper-header-panel/paper-header-panel.html" rel="import">
+        <link href="/bower_components/paper-drawer-panel/paper-drawer-panel.html" rel="import">
+        <link href="/bower_components/paper-toolbar/paper-toolbar.html" rel="import">
+        <link href="/bower_components/paper-icon-button/paper-icon-button.html" rel="import">
+        <link href="/bower_components/iron-icons/iron-icons.html" rel="import">
+        <link href="/bower_components/iron-flex-layout/iron-flex-layout.html" rel="import">
+        <link href="/bower_components/paper-input/paper-input.html" rel="import">
+        <link href="/bower_components/paper-dropdown-menu/paper-dropdown-menu.html" rel="import">
+        <link href="/bower_components/paper-menu/paper-menu.html" rel="import">
+        <link href="/bower_components/paper-item/paper-item.html" rel="import">
+        <link rel="icon"
+              type="image/png"
+              href="images/frankly_favicon_32x32_no_bg.png">
+    </head>
+
+    <body class="node node_latest node_latest_doc node_latest_doc_02-authentication">
+        <paper-drawer-panel class="flex" mode="seamed">
+            <div class="flex page-content" main>
+                <div class="horizontal layout">
+                    <paper-icon-button icon="menu" on-tap="menuAction" paper-drawer-toggle></paper-icon-button>
+                    <h1 class="flex">
+                        Authentication
+                    </h1>
+                    <span class="flex">
+                    </span>
+                    <paper-dropdown-menu noink no-animation class="version-dropdown">
+                        <paper-menu class="dropdown-content version-dropdown" selected="0">
+                                <paper-item>
+                                    <a href="/node/latest">latest</a>
+                                </paper-item>
+                        </paper-menu>
+                    </paper-dropdown-menu>
+
+                </div>
+                <div style="max-width:70%">
+                    <style>
+    .auth-image {
+        width: 100%;
+    }
+</style>
+
+<h2 id="overview">Overview</h2>
+
+<p>Frankly&rsquo;s authentication scheme is based on JSON Web Token (JWT), a standard for
+sharing user authentication in a secure way. A complete description of <a href="https://jwt.io">JWT</a>
+rests <a href="https://openid.net/specs/draft-jones-json-web-token-07.html">here</a>.</p>
+
+<h2 id="server-auth-flow">Server Auth Flow</h2>
+
+<p><img class="auth-image" src="/images/auth_diagram-4906f65b.png" /></p>
+
+<p>JSON Web Tokens embed a unique value called nonce which is used to protect against
+man-in-the-middle attacks by adding a random component to the token in order to
+make it impossible to predict a valid token.</p>
+
+<p>Frankly’s infrastructure provides a public HTTP endpoint that must be queried to
+generate a nonce value as a first step of the authentication flow. The response
+contains the nonce value represented as a JSON string which can be used for only
+one authentication attempt.</p>
+
+<h2 id="auth-behavior">Auth Behavior</h2>
+
+<h3 id="a-note-on-security">A Note on Security</h3>
+
+<p>In all cases, your application&rsquo;s <code>appKey</code> and <code>appSecret</code> should NOT be stored on the client and your application&rsquo;s
+backend servers should be responsible for generating identity tokens, using the <code>appSecret</code> to return it to the client to
+successfully authenticate. Storing your application&rsquo;s <code>appKey</code> and <code>appSecret</code> exposes you to unnecessary security risks
+where an attacker could obtain these values to communicate with Frankly services on your behalf. Please note that some examples do highlight
+the ability to directly authenticate with Frankly services from your application&rsquo;s client, however these are also noted as examples meant for
+checking progress of early integration steps.</p>
+
+
+##Authenticating the JavaScript SDK
+
+Here&rsquo;s how to perform authentication from a Node.js:
+
+
+&ldquo;`javascript
+var FranklyClient = require ( &lsquo;frankly-js&rsquo; ) .FranklyClient
+
+var appKey = 'appKey from Frankly Console&rsquo;
+var appSecret = 'appSecret from Frankly Console&rsquo;
+
+var client = new FranklyClient()
+client.open (appKey, appSecret)
+&rdquo;`
+
+When authenticating from a client application running in the browser the <code>appKey</code> and <code>appSecret</code> values shouldn&rsquo;t be
+exposed and the application&rsquo;s backend servers must generate the identity token using the secret and return it to the client to successfully
+authenticate.
+
+Here&rsquo;s how to perform authentication from a browser application:
+
+&ldquo;`javascript
+var client = new frankly.FranklyClient
+
+client.open(function (nonce) {
+    return new Promise(function (resolve, reject) {
+        var req = new XMLHttpRequest()
+
+        req.onreadystatechange = function () {
+            if (req.readyState === 4) {
+                if (req.status === 200) {
+                     resolve(req.responseText)
+                } else {
+                     reject('something went wrong&rsquo;)
+                }
+            }
+        }
+
+        req.open('https://partner.domain.com/identity-token?nonce=&rsquo; + nonce)
+        req.send()
+    })
+})
+&rdquo;`
+
+The client instance automatically performs reconnection and reauthentication when necessary so the method passed to
+`<a href="http://franklyinc.github.io/frankly-js/FranklyClient.html#open" target="_blank">FranklyClient#open</a>` may be called multiple times.
+
+<div class="section" id="webclient_auth">
+
+    Authenticating with the Web Client
+</h3>
+
+<p>
+    The Frankly Web App supports authenticated users by providing a way to customize the login process. You can allow your users to log in using
+    your custom interface by setting both the “Login URL” and the “Logout URL” in the <a href="https://console.franklychat.com/">Frankly Admin
+    Console</a> > Settings > Web App.
+</p>
+
+<h4>
+    Login vs Logout URL
+</h4>
+
+<ul>
+    <li>The “Login URL” is a page of your design that users will either enter their credentials for your system, or enter Guest Mode credentials,
+        in order to be authenticated by your system. This page is shown to your users within the app, as described below.</li>
+    <li>The “Logout URL” is the page where users are redirected to when they choose to log out of the system. This page is typically used to log
+        the user out of your entire system, not just the Frankly Web App. An example of this behavior is given below.</li>
+</ul>
+
+<p>
+    In order to take advantage of this feature, your backend must follow the following directions.
+</p>
+
+<h4>
+    1. Prepare Your Backend
+</h4>
+
+<p>
+    If a “Login URL” is provided in the Admin Console, the user is shown this webpage (inside of an &lt;iframe&gt;) on top of the Frankly Web App
+    when they select “LOG IN”.
+</p>
+
+<figure>
+        <img src="../../../images/webapp_auth_1-de81e51a.png" style="border:1px" width="748">
+        <figcaption><i>Figure 1: Frankly Web App Admin Console</i></figcaption>
+</figure>
+
+<figure>
+        <img src="../../../images/webapp_auth_2-65454c04.png" style="border:1px" width="300">
+        <figcaption><i>Figure 2: Example external login screen within Frankly Web App</i></figcaption>
+</figure>
+
+<p>
+    Please note the following requirements when creating your login screen for the Web App:
+</p>
+
+<ul>
+    <li>The &lt;iframe&gt; that holds the external login screen sits within a 335px × 550px container, and external login screens must render
+        correctly within this space.</li>
+    <li>The external login screen must be served over a secure protocol (that is, using HTTPS) for security purposes. Pages served over plain HTTP
+        will not be able to authenticate with the Web App.</li>
+</ul>
+
+<p>
+    The Frankly Web App appends <code>nonce</code> and <code>redirect_uri</code> query string parameters suffixed to the end of the “Login URL”
+    within the &lt;iframe&gt; displayed to the user. The &lt;iframe&gt; will display the URL in the form of:
+</p>
+
+<p><pre class="prettyprint"><code>
+{your<em>login</em>url}/?nonce={nonce<em>value}&amp;redirect</em>uri=https://app.franklychat.com/auth/redirect
+```</p>
+
+<p>
+    The nonce value is used to generate an identity token for the user’s session, which ensures that the generated identity token is only valid for
+    one-time identity validation. Note that the nonce expires <strong>5 minutes</strong> after it is generated, and therefore the Frankly Web App
+    will refresh the contents of the login window if it has been opened for more than 5 minutes without a submission. The <code>redirect_uri</code>
+    is a string for the Frankly Server endpoint which accepts the identity token. These details are described in further detail below.
+</p>
+
+<p>
+    It is important that the page located at the  “Login URL” does not return  “X-Frame-Options” in its response header.  X-Frame-Options are used
+    to specify whether or not a web page can be rendered within an iframe of another web page. You can read more about X-Frame-Options and how they
+    are configured <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/X-Frame-Options">here</a>. As the “ALLOW-FROM” option is not
+    supported across browsers, we ask that you do not return “X-Frame-Options” in your headers at all.
+</p>
+
+<h4>
+    2. Authenticate Your Users
+</h4>
+
+<p>
+    On your login page accessible via the “Login URL”, you need to allow users to sign in as “authenticated users” or “guest users” by either
+    collecting their credentials or checking the status of their current session. An example user story is outlined below.
+</p>
+
+<h5>
+    <b>User Story - Step 1</b>
+</h5>
+
+<p>
+    A user reaches the login screen by selecting the “LOG IN” button or the locked status bar at the bottom of the Web App.
+</p>
+
+<figure>
+    <img src="../../../images/webapp_auth_3-388dd0c3.png" style="border:1px" width="500">
+    <figcaption><i>Figure 3: Login points from Frankly Web App</i></figcaption>
+</figure>
+
+<h5>
+    <b>User Story - Step 2</b>
+</h5>
+
+<p>
+    The user is shown your login screen, as outlined in Section 1. This can either be a custom credential capturing screen (as seen in Figure 4) or b) a splash screen while the system authenticates from the user’s current session with other parts of your online ecosystem (as seen in Figure 5).
+</p>
+
+<figure>
+    <img src="../../../images/webapp_auth_2-65454c04.png" style="border:1px" width="300">
+    <figcaption><i>Figure 4: a) Custom Authentication Screen</i></figcaption>
+</figure>
+
+<figure>
+    <img src="../../../images/webapp_auth_4-d99b0e56.png" style="border:1px" width="300">
+    <figcaption><i>Figure 5: b) Sample screen to display while system authenticates</i></figcaption>
+</figure>
+
+<h5>
+    <b>User Story - Step 3</b>
+</h5>
+
+<p>
+    Your system captures the user’s credentials or session information, and makes a decision about whether they need to be authenticated or not. Once this has been completed, your system must confirm authentication to the Frankly Web App and redirect the page to the provided <code>redirect_uri</code>, as described in Section 3.
+</p>
+
+<h4>
+    3. Confirm Authentication with Frankly
+</h4>
+
+<p>
+    Once a user is authenticated on your backend, generate an identity token for the user using the “nonce” provided in Section 1.
+</p>
+
+<p>
+    The identity tokens used by the Frankly Web App are in the JSON Web Token (JWT) format. JWT is a compact URL-safe means of representing claims
+    to be transferred between two parties. See <a href="#identity_token">above</a> for an example of an identity token. For more information,
+    please see the <a href="#jwt">JWT section above</a>.
+</p>
+
+<p>
+    Once an identity token is generated, redirect the current request to the <code>redirect_uri</code> along with the generated identity token as
+    part of the query string with field name <code>identity_token</code>.
+</p>
+
+<p>
+    You can redirect a page by getting the web server to set the HTTP Location header (read more about HTTP Location setting
+    <a href="https://en.wikipedia.org/wiki/HTTP_location">here</a>). We recommend using the HTTP status code 302 for this redirect within the
+    header. For example, if the <code>redicrect_uri</code> that is provided is “https://app.franklychat.com/auth/redirect” then an example server
+    response would look something like:
+</p>
+
+<p><pre class="prettyprint"><code>
+HTTP/1.1 302 Found
+Location: https://app.franklychat.com/auth/redirect?identity<em>token={user’s</em>identity_token}
+```</p>
+
+<p>
+    Be sure to append the identity token to the end of the <code>redirect_uri</code>, as demonstrated in the example above.
+</p>
+
+<p>
+    Note that setting the Location header of a HTTP request is a secured mechanism, as JavaScript does not have access to the redirection and thus
+    has no way of accessing the identity token.
+</p>
+
+<p></div></p>
+
+<div class="section" id="security">
+<h3>
+    A Note on Security
+</h3>
+
+
+<p>
+    In all cases, your application's <code>appKey</code> and <code>appSecret</code> should NOT be stored on the client and your application's
+    backend servers should be responsible for generating identity tokens, using the <code>appSecret</code> to return it to the client to
+    successfully authenticate. Storing your application's <code>appKey</code> and <code>appSecret</code> exposes you to unnecessary security risks
+    where an attacker could obtain these values to communicate with Frankly services on your behalf. Please note that some examples do highlight
+    the ability to directly authenticate with Frankly services from your application's client, however these are also noted as examples meant for
+    checking progress of early integration steps.
+</p>
+</div>
+ 
+                    <div style="height:20px"></div>
+                </div>
+
+            </div>
+            <div class="flex" drawer>
+                <paper-header-panel class="flex paper-header-panel layout vertical" drawer mode="seamed">
+                    <paper-toolbar>
+<a href="/">                            <img class="logo" src="/images/franklyinc_logo_color_large-044d426f.png" />
+</a>                    </paper-toolbar>
+                    <paper-input label="Search Documentation" class="search" type="search"></paper-input>
+                    <div class="side-panel">
+                        <ul class="nav-tree">
+                            <li class='child '><a href="01-getting-started.html">Getting Started</a></li><li class='child active'><a href="02-authentication.html">Authentication</a></li><li class='child '><a href="03-the-basics.html">Using the JavaScript SDK with Meteor</a></li><li class='child '><a href="06-downloads.html">Downloads</a></li>
+                        </ul>
+                    </div>
+                </paper-header-panel>
+            </div>
+        </paper-drawer-panel>
+    </body>
+    <script>
+    $('li:contains("Authentication")').replaceWith("<nav class='anchorific floating-toc'></nav>");
+    $('.page-content').anchorific({
+        anchorText: ''
+    });
+    </script>
+</html>

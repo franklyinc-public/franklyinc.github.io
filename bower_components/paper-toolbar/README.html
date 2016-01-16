@@ -1,0 +1,117 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+
+    <!-- Always force latest IE rendering engine or request Chrome Frame -->
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+
+    <!-- Use title if it's in the page YAML frontmatter -->
+    <title> Frankly Developer Portal </title>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js" type="text/javascript"></script>
+    <script src="/bower_components/webcomponentsjs/webcomponents-lite.min-01242ae0.js"></script>
+    <link href="/stylesheets/normalize-14170e97.css" rel="stylesheet" /><link href="/stylesheets/all-f2dad6dc.css" rel="stylesheet" />
+    <style is="custom-style">
+            :root {
+                --paper-toolbar-background: #2A2E33;
+            }
+            .logo {
+                margin-left: 5px;
+                margin-top: 10px;
+                width: 150px;
+            }
+        </style>
+        <link rel="icon"
+              type="image/png"
+              href="images/frankly_favicon_32x32_no_bg.png">
+    <script src="/javascripts/all-b1933d9a.js"></script>
+
+    <link rel="import" href="/bower_components/paper-header-panel/paper-header-panel.html">
+    <link rel="import" href="/bower_components/paper-toolbar/paper-toolbar.html">
+    <link rel="import" href="/bower_components/paper-icon-button/paper-icon-button.html">
+    <link rel="import" href="/bower_components/iron-icons/iron-icons.html">
+    <link rel="import" href="/bower_components/iron-flex-layout/iron-flex-layout.html">
+    <link rel="import" href="/bower_components/iron-image/iron-image.html">
+
+</head>
+
+<body class="bower_components bower_components_paper-toolbar bower_components_paper-toolbar_README">
+    <paper-header-panel class="flex">
+        <paper-toolbar>
+<a href="/">                <img class="logo" src="/images/franklyinc_logo_color_large-044d426f.png" />
+</a>            <span class="flex"></span>
+        </paper-toolbar>
+    </paper-header-panel>
+    <h1 id="paper-toolbar">paper-toolbar</h1>
+
+<p><code>paper-toolbar</code> is a horizontal bar containing items that can be used for
+label, navigation, search and actions.  The items place inside the
+<code>paper-toolbar</code> are projected into a <code>class=&quot;horizontal center layout&quot;</code> container inside of
+<code>paper-toolbar</code>&rsquo;s Shadow DOM.  You can use flex attributes to control the items&rsquo;
+sizing.</p>
+
+<p>Example:</p>
+<div class="highlight html"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5</pre></td><td class="code"><pre><span class="nt">&lt;paper-toolbar&gt;</span>
+  <span class="nt">&lt;paper-icon-button</span> <span class="na">icon=</span><span class="s">"menu"</span> <span class="na">on-tap=</span><span class="s">"{{menuAction}}"</span><span class="nt">&gt;&lt;/paper-icon-button&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"title"</span><span class="nt">&gt;</span>Title<span class="nt">&lt;/div&gt;</span>
+  <span class="nt">&lt;paper-icon-button</span> <span class="na">icon=</span><span class="s">"more"</span> <span class="na">on-tap=</span><span class="s">"{{moreAction}}"</span><span class="nt">&gt;&lt;/paper-icon-button&gt;</span>
+<span class="nt">&lt;/paper-toolbar&gt;</span>
+</pre></td></tr></tbody></table>
+</div>
+
+<p><code>paper-toolbar</code> has a standard height, but can made be taller by setting <code>tall</code>
+class on the <code>paper-toolbar</code>.  This will make the toolbar 3x the normal height.</p>
+<div class="highlight html"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3</pre></td><td class="code"><pre><span class="nt">&lt;paper-toolbar</span> <span class="na">class=</span><span class="s">"tall"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;paper-icon-button</span> <span class="na">icon=</span><span class="s">"menu"</span><span class="nt">&gt;&lt;/paper-icon-button&gt;</span>
+<span class="nt">&lt;/paper-toolbar&gt;</span>
+</pre></td></tr></tbody></table>
+</div>
+
+<p>Apply <code>medium-tall</code> class to make the toolbar medium tall.  This will make the
+toolbar 2x the normal height.</p>
+<div class="highlight html"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3</pre></td><td class="code"><pre><span class="nt">&lt;paper-toolbar</span> <span class="na">class=</span><span class="s">"medium-tall"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;paper-icon-button</span> <span class="na">icon=</span><span class="s">"menu"</span><span class="nt">&gt;&lt;/paper-icon-button&gt;</span>
+<span class="nt">&lt;/paper-toolbar&gt;</span>
+</pre></td></tr></tbody></table>
+</div>
+
+<p>When <code>tall</code>, items can pin to either the top (default), middle or bottom.  Use
+<code>middle</code> class for middle content and <code>bottom</code> class for bottom content.</p>
+<div class="highlight html"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5</pre></td><td class="code"><pre><span class="nt">&lt;paper-toolbar</span> <span class="na">class=</span><span class="s">"tall"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;paper-icon-button</span> <span class="na">icon=</span><span class="s">"menu"</span><span class="nt">&gt;&lt;/paper-icon-button&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"title middle"</span><span class="nt">&gt;</span>Middle Title<span class="nt">&lt;/div&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"title bottom"</span><span class="nt">&gt;</span>Bottom Title<span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/paper-toolbar&gt;</span>
+</pre></td></tr></tbody></table>
+</div>
+
+<p>For <code>medium-tall</code> toolbar, the middle and bottom contents overlap and are
+pinned to the bottom.  But <code>middleJustify</code> and <code>bottomJustify</code> attributes are
+still honored separately.</p>
+
+<p>To make an element completely fit at the bottom of the toolbar, use <code>fit</code> along
+with <code>bottom</code>.</p>
+<div class="highlight html"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3</pre></td><td class="code"><pre><span class="nt">&lt;paper-toolbar</span> <span class="na">class=</span><span class="s">"tall"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"progressBar"</span> <span class="na">class=</span><span class="s">"bottom fit"</span><span class="nt">&gt;&lt;/div&gt;</span>
+<span class="nt">&lt;/paper-toolbar&gt;</span>
+</pre></td></tr></tbody></table>
+</div>
+
+</body>
+
+</html>

@@ -1,0 +1,1040 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+
+<title>class Rooms - RDoc Documentation</title>
+
+<link type="text/css" media="screen" href="rdoc-f7d1a4be.css" rel="stylesheet">
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "./";
+</script>
+
+<script type="text/javascript" charset="utf-8" src="js/jquery-7622c9ac.js"></script>
+<script type="text/javascript" charset="utf-8" src="js/navigation-35a922d6.js"></script>
+<script type="text/javascript" charset="utf-8" src="js/search_index-d30de69a.js"></script>
+<script type="text/javascript" charset="utf-8" src="js/search-4c7b4d50.js"></script>
+<script type="text/javascript" charset="utf-8" src="js/searcher-879d392b.js"></script>
+<script type="text/javascript" charset="utf-8" src="js/darkfish-72382215.js"></script>
+
+
+<body id="top" class="class">
+<nav id="metadata">
+  <nav id="home-section" class="section">
+  <h3 class="section-header">
+    <a href="./index.html">Home</a>
+    <a href="./table_of_contents.html#classes">Classes</a>
+    <a href="./table_of_contents.html#methods">Methods</a>
+  </h3>
+</nav>
+
+
+  <nav id="search-section" class="section project-section" class="initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <h3 class="section-header">
+      <input type="text" name="search" placeholder="Search" id="search-field"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </h3>
+  </form>
+
+  <ul id="search-results" class="initially-hidden"></ul>
+</nav>
+
+
+  
+
+  <div id="file-metadata">
+    <nav id="file-list-section" class="section">
+  <h3 class="section-header">Defined In</h3>
+  <ul>
+    <li>lib/frankly-ruby/rooms.rb
+  </ul>
+</nav>
+
+    
+  </div>
+
+  <div id="class-metadata">
+    
+    <nav id="parent-class-section" class="section">
+  <h3 class="section-header">Parent</h3>
+  
+  <p class="link"><a href="Object.html">Object</a>
+  
+</nav>
+
+    
+    
+    <!-- Method Quickref -->
+<nav id="method-list-section" class="section">
+  <h3 class="section-header">Methods</h3>
+
+  <ul class="link-list">
+    
+    <li ><a href="#method-c-create_room">::create_room</a>
+    
+    <li ><a href="#method-c-create_room_announcer">::create_room_announcer</a>
+    
+    <li ><a href="#method-c-create_room_member">::create_room_member</a>
+    
+    <li ><a href="#method-c-create_room_moderator">::create_room_moderator</a>
+    
+    <li ><a href="#method-c-create_room_owner">::create_room_owner</a>
+    
+    <li ><a href="#method-c-create_room_subscriber">::create_room_subscriber</a>
+    
+    <li ><a href="#method-c-delete_room">::delete_room</a>
+    
+    <li ><a href="#method-c-delete_room_announcer">::delete_room_announcer</a>
+    
+    <li ><a href="#method-c-delete_room_member">::delete_room_member</a>
+    
+    <li ><a href="#method-c-delete_room_moderator">::delete_room_moderator</a>
+    
+    <li ><a href="#method-c-delete_room_owner">::delete_room_owner</a>
+    
+    <li ><a href="#method-c-delete_room_subscriber">::delete_room_subscriber</a>
+    
+    <li ><a href="#method-c-read_room">::read_room</a>
+    
+    <li ><a href="#method-c-read_room_announcer_list">::read_room_announcer_list</a>
+    
+    <li ><a href="#method-c-read_room_count">::read_room_count</a>
+    
+    <li ><a href="#method-c-read_room_list">::read_room_list</a>
+    
+    <li ><a href="#method-c-read_room_member_list">::read_room_member_list</a>
+    
+    <li ><a href="#method-c-read_room_moderator_list">::read_room_moderator_list</a>
+    
+    <li ><a href="#method-c-read_room_owner_list">::read_room_owner_list</a>
+    
+    <li ><a href="#method-c-read_room_participant_list">::read_room_participant_list</a>
+    
+    <li ><a href="#method-c-read_room_subscriber_list">::read_room_subscriber_list</a>
+    
+    <li ><a href="#method-c-update_room">::update_room</a>
+    
+  </ul>
+</nav>
+
+  </div>
+
+  <div id="project-metadata">
+    <nav id="fileindex-section" class="section project-section">
+  <h3 class="section-header">Pages</h3>
+
+  <ul>
+  
+    <li class="file"><a href="./Gemfile.html">Gemfile</a>
+  
+    <li class="file"><a href="./LICENSE.html">LICENSE</a>
+  
+    <li class="file"><a href="./README_md.html">README</a>
+  
+    <li class="file"><a href="./Rakefile.html">Rakefile</a>
+  
+    <li class="file"><a href="./doc/created_rid.html">created.rid</a>
+  
+    <li class="file"><a href="./frankly-ruby_gemspec.html">frankly-ruby.gemspec</a>
+  
+  </ul>
+</nav>
+
+    <nav id="classindex-section" class="section project-section">
+  <h3 class="section-header">Class and Module Index</h3>
+
+  <ul class="link-list">
+  
+    <li><a href="./Announcement.html">Announcement</a>
+  
+    <li><a href="./Apps.html">Apps</a>
+  
+    <li><a href="./Auth.html">Auth</a>
+  
+    <li><a href="./Files.html">Files</a>
+  
+    <li><a href="./Frankly.html">Frankly</a>
+  
+    <li><a href="./FranklyClient.html">FranklyClient</a>
+  
+    <li><a href="./FranklyClientTest.html">FranklyClientTest</a>
+  
+    <li><a href="./Generic.html">Generic</a>
+  
+    <li><a href="./Message.html">Message</a>
+  
+    <li><a href="./Object.html">Object</a>
+  
+    <li><a href="./Rooms.html">Rooms</a>
+  
+    <li><a href="./Sessions.html">Sessions</a>
+  
+    <li><a href="./Users.html">Users</a>
+  
+    <li><a href="./Util.html">Util</a>
+  
+  </ul>
+</nav>
+
+  </div>
+</nav>
+
+<div id="documentation">
+  <h1 class="class">class Rooms</h1>
+
+  <div id="description" class="description">
+    
+<p>@!visibility private</p>
+
+  </div><!-- description -->
+
+  
+  
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+
+    
+
+    <!-- Methods -->
+    
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section section">
+      <h3 class="section-header">Public Class Methods</h3>
+
+    
+      <div id="method-c-create_room" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">create_room</span><span
+            class="method-args">(address, headers, payload)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="create_room-source">
+            <pre><span class="ruby-comment"># File lib/frankly-ruby/rooms.rb, line 27</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">create_room</span>(<span class="ruby-identifier">address</span>, <span class="ruby-identifier">headers</span>, <span class="ruby-identifier">payload</span>)
+  <span class="ruby-constant">RestClient</span><span class="ruby-operator">::</span><span class="ruby-constant">Request</span>.<span class="ruby-identifier">execute</span>(
+    <span class="ruby-identifier">method</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;post&#39;</span>,
+    <span class="ruby-identifier">url</span><span class="ruby-operator">:</span> <span class="ruby-constant">Util</span>.<span class="ruby-identifier">build_url</span>(<span class="ruby-identifier">address</span>, <span class="ruby-string">&#39;rooms&#39;</span>),
+    <span class="ruby-identifier">headers</span><span class="ruby-operator">:</span> <span class="ruby-identifier">headers</span>,
+    <span class="ruby-identifier">payload</span><span class="ruby-operator">:</span> <span class="ruby-identifier">payload</span>
+  )
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- create_room-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- create_room-method -->
+
+    
+      <div id="method-c-create_room_announcer" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">create_room_announcer</span><span
+            class="method-args">(address, headers, room_id, user_id)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="create_room_announcer-source">
+            <pre><span class="ruby-comment"># File lib/frankly-ruby/rooms.rb, line 141</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">create_room_announcer</span>(<span class="ruby-identifier">address</span>, <span class="ruby-identifier">headers</span>, <span class="ruby-identifier">room_id</span>, <span class="ruby-identifier">user_id</span>)
+  <span class="ruby-constant">RestClient</span><span class="ruby-operator">::</span><span class="ruby-constant">Request</span>.<span class="ruby-identifier">execute</span>(
+    <span class="ruby-identifier">method</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;post&#39;</span>,
+    <span class="ruby-identifier">url</span><span class="ruby-operator">:</span> <span class="ruby-constant">Util</span>.<span class="ruby-identifier">build_url</span>(<span class="ruby-identifier">address</span>, <span class="ruby-string">&#39;rooms/&#39;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">room_id</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-operator">+</span> <span class="ruby-string">&#39;/announcers/&#39;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">user_id</span>.<span class="ruby-identifier">to_s</span>),
+    <span class="ruby-identifier">headers</span><span class="ruby-operator">:</span> <span class="ruby-identifier">headers</span>
+  )
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- create_room_announcer-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- create_room_announcer-method -->
+
+    
+      <div id="method-c-create_room_member" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">create_room_member</span><span
+            class="method-args">(address, headers, room_id, user_id)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="create_room_member-source">
+            <pre><span class="ruby-comment"># File lib/frankly-ruby/rooms.rb, line 117</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">create_room_member</span>(<span class="ruby-identifier">address</span>, <span class="ruby-identifier">headers</span>, <span class="ruby-identifier">room_id</span>, <span class="ruby-identifier">user_id</span>)
+  <span class="ruby-constant">RestClient</span><span class="ruby-operator">::</span><span class="ruby-constant">Request</span>.<span class="ruby-identifier">execute</span>(
+    <span class="ruby-identifier">method</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;post&#39;</span>,
+    <span class="ruby-identifier">url</span><span class="ruby-operator">:</span> <span class="ruby-constant">Util</span>.<span class="ruby-identifier">build_url</span>(<span class="ruby-identifier">address</span>, <span class="ruby-string">&#39;rooms/&#39;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">room_id</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-operator">+</span> <span class="ruby-string">&#39;/members/&#39;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">user_id</span>.<span class="ruby-identifier">to_s</span>),
+    <span class="ruby-identifier">headers</span><span class="ruby-operator">:</span> <span class="ruby-identifier">headers</span>
+  )
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- create_room_member-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- create_room_member-method -->
+
+    
+      <div id="method-c-create_room_moderator" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">create_room_moderator</span><span
+            class="method-args">(address, headers, room_id, user_id)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="create_room_moderator-source">
+            <pre><span class="ruby-comment"># File lib/frankly-ruby/rooms.rb, line 93</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">create_room_moderator</span>(<span class="ruby-identifier">address</span>, <span class="ruby-identifier">headers</span>, <span class="ruby-identifier">room_id</span>, <span class="ruby-identifier">user_id</span>)
+  <span class="ruby-constant">RestClient</span><span class="ruby-operator">::</span><span class="ruby-constant">Request</span>.<span class="ruby-identifier">execute</span>(
+    <span class="ruby-identifier">method</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;post&#39;</span>,
+    <span class="ruby-identifier">url</span><span class="ruby-operator">:</span> <span class="ruby-constant">Util</span>.<span class="ruby-identifier">build_url</span>(<span class="ruby-identifier">address</span>, <span class="ruby-string">&#39;rooms/&#39;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">room_id</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-operator">+</span> <span class="ruby-string">&#39;/moderators/&#39;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">user_id</span>.<span class="ruby-identifier">to_s</span>),
+    <span class="ruby-identifier">headers</span><span class="ruby-operator">:</span> <span class="ruby-identifier">headers</span>
+  )
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- create_room_moderator-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- create_room_moderator-method -->
+
+    
+      <div id="method-c-create_room_owner" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">create_room_owner</span><span
+            class="method-args">(address, headers, room_id, user_id)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="create_room_owner-source">
+            <pre><span class="ruby-comment"># File lib/frankly-ruby/rooms.rb, line 69</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">create_room_owner</span>(<span class="ruby-identifier">address</span>, <span class="ruby-identifier">headers</span>, <span class="ruby-identifier">room_id</span>, <span class="ruby-identifier">user_id</span>)
+  <span class="ruby-constant">RestClient</span><span class="ruby-operator">::</span><span class="ruby-constant">Request</span>.<span class="ruby-identifier">execute</span>(
+    <span class="ruby-identifier">method</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;post&#39;</span>,
+    <span class="ruby-identifier">url</span><span class="ruby-operator">:</span> <span class="ruby-constant">Util</span>.<span class="ruby-identifier">build_url</span>(<span class="ruby-identifier">address</span>, <span class="ruby-string">&#39;rooms/&#39;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">room_id</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-operator">+</span> <span class="ruby-string">&#39;/owners/&#39;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">user_id</span>.<span class="ruby-identifier">to_s</span>),
+    <span class="ruby-identifier">headers</span><span class="ruby-operator">:</span> <span class="ruby-identifier">headers</span>
+  )
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- create_room_owner-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- create_room_owner-method -->
+
+    
+      <div id="method-c-create_room_subscriber" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">create_room_subscriber</span><span
+            class="method-args">(address, headers, room_id, user_id)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="create_room_subscriber-source">
+            <pre><span class="ruby-comment"># File lib/frankly-ruby/rooms.rb, line 165</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">create_room_subscriber</span>(<span class="ruby-identifier">address</span>, <span class="ruby-identifier">headers</span>, <span class="ruby-identifier">room_id</span>, <span class="ruby-identifier">user_id</span>)
+  <span class="ruby-constant">RestClient</span><span class="ruby-operator">::</span><span class="ruby-constant">Request</span>.<span class="ruby-identifier">execute</span>(
+    <span class="ruby-identifier">method</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;post&#39;</span>,
+    <span class="ruby-identifier">url</span><span class="ruby-operator">:</span> <span class="ruby-constant">Util</span>.<span class="ruby-identifier">build_url</span>(<span class="ruby-identifier">address</span>, <span class="ruby-string">&#39;rooms/&#39;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">room_id</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-operator">+</span> <span class="ruby-string">&#39;/subscribers/&#39;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">user_id</span>.<span class="ruby-identifier">to_s</span>),
+    <span class="ruby-identifier">headers</span><span class="ruby-operator">:</span> <span class="ruby-identifier">headers</span>
+  )
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- create_room_subscriber-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- create_room_subscriber-method -->
+
+    
+      <div id="method-c-delete_room" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">delete_room</span><span
+            class="method-args">(address, headers, room_id)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="delete_room-source">
+            <pre><span class="ruby-comment"># File lib/frankly-ruby/rooms.rb, line 61</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">delete_room</span>(<span class="ruby-identifier">address</span>, <span class="ruby-identifier">headers</span>, <span class="ruby-identifier">room_id</span>)
+  <span class="ruby-constant">RestClient</span><span class="ruby-operator">::</span><span class="ruby-constant">Request</span>.<span class="ruby-identifier">execute</span>(
+    <span class="ruby-identifier">method</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;delete&#39;</span>,
+    <span class="ruby-identifier">url</span><span class="ruby-operator">:</span> <span class="ruby-constant">Util</span>.<span class="ruby-identifier">build_url</span>(<span class="ruby-identifier">address</span>, <span class="ruby-string">&#39;rooms/&#39;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">room_id</span>.<span class="ruby-identifier">to_s</span>),
+    <span class="ruby-identifier">headers</span><span class="ruby-operator">:</span> <span class="ruby-identifier">headers</span>
+  )
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- delete_room-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- delete_room-method -->
+
+    
+      <div id="method-c-delete_room_announcer" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">delete_room_announcer</span><span
+            class="method-args">(address, headers, room_id, user_id)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="delete_room_announcer-source">
+            <pre><span class="ruby-comment"># File lib/frankly-ruby/rooms.rb, line 157</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">delete_room_announcer</span>(<span class="ruby-identifier">address</span>, <span class="ruby-identifier">headers</span>, <span class="ruby-identifier">room_id</span>, <span class="ruby-identifier">user_id</span>)
+  <span class="ruby-constant">RestClient</span><span class="ruby-operator">::</span><span class="ruby-constant">Request</span>.<span class="ruby-identifier">execute</span>(
+    <span class="ruby-identifier">method</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;delete&#39;</span>,
+    <span class="ruby-identifier">url</span><span class="ruby-operator">:</span> <span class="ruby-constant">Util</span>.<span class="ruby-identifier">build_url</span>(<span class="ruby-identifier">address</span>, <span class="ruby-string">&#39;rooms/&#39;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">room_id</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-operator">+</span> <span class="ruby-string">&#39;/announcers/&#39;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">user_id</span>.<span class="ruby-identifier">to_s</span>),
+    <span class="ruby-identifier">headers</span><span class="ruby-operator">:</span> <span class="ruby-identifier">headers</span>
+  )
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- delete_room_announcer-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- delete_room_announcer-method -->
+
+    
+      <div id="method-c-delete_room_member" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">delete_room_member</span><span
+            class="method-args">(address, headers, room_id, user_id)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="delete_room_member-source">
+            <pre><span class="ruby-comment"># File lib/frankly-ruby/rooms.rb, line 133</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">delete_room_member</span>(<span class="ruby-identifier">address</span>, <span class="ruby-identifier">headers</span>, <span class="ruby-identifier">room_id</span>, <span class="ruby-identifier">user_id</span>)
+  <span class="ruby-constant">RestClient</span><span class="ruby-operator">::</span><span class="ruby-constant">Request</span>.<span class="ruby-identifier">execute</span>(
+    <span class="ruby-identifier">method</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;delete&#39;</span>,
+    <span class="ruby-identifier">url</span><span class="ruby-operator">:</span> <span class="ruby-constant">Util</span>.<span class="ruby-identifier">build_url</span>(<span class="ruby-identifier">address</span>, <span class="ruby-string">&#39;rooms/&#39;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">room_id</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-operator">+</span> <span class="ruby-string">&#39;/members/&#39;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">user_id</span>.<span class="ruby-identifier">to_s</span>),
+    <span class="ruby-identifier">headers</span><span class="ruby-operator">:</span> <span class="ruby-identifier">headers</span>
+  )
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- delete_room_member-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- delete_room_member-method -->
+
+    
+      <div id="method-c-delete_room_moderator" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">delete_room_moderator</span><span
+            class="method-args">(address, headers, room_id, user_id)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="delete_room_moderator-source">
+            <pre><span class="ruby-comment"># File lib/frankly-ruby/rooms.rb, line 109</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">delete_room_moderator</span>(<span class="ruby-identifier">address</span>, <span class="ruby-identifier">headers</span>, <span class="ruby-identifier">room_id</span>, <span class="ruby-identifier">user_id</span>)
+  <span class="ruby-constant">RestClient</span><span class="ruby-operator">::</span><span class="ruby-constant">Request</span>.<span class="ruby-identifier">execute</span>(
+    <span class="ruby-identifier">method</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;delete&#39;</span>,
+    <span class="ruby-identifier">url</span><span class="ruby-operator">:</span> <span class="ruby-constant">Util</span>.<span class="ruby-identifier">build_url</span>(<span class="ruby-identifier">address</span>, <span class="ruby-string">&#39;rooms/&#39;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">room_id</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-operator">+</span> <span class="ruby-string">&#39;/moderators/&#39;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">user_id</span>.<span class="ruby-identifier">to_s</span>),
+    <span class="ruby-identifier">headers</span><span class="ruby-operator">:</span> <span class="ruby-identifier">headers</span>
+  )
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- delete_room_moderator-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- delete_room_moderator-method -->
+
+    
+      <div id="method-c-delete_room_owner" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">delete_room_owner</span><span
+            class="method-args">(address, headers, room_id, user_id)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="delete_room_owner-source">
+            <pre><span class="ruby-comment"># File lib/frankly-ruby/rooms.rb, line 85</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">delete_room_owner</span>(<span class="ruby-identifier">address</span>, <span class="ruby-identifier">headers</span>, <span class="ruby-identifier">room_id</span>, <span class="ruby-identifier">user_id</span>)
+  <span class="ruby-constant">RestClient</span><span class="ruby-operator">::</span><span class="ruby-constant">Request</span>.<span class="ruby-identifier">execute</span>(
+    <span class="ruby-identifier">method</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;delete&#39;</span>,
+    <span class="ruby-identifier">url</span><span class="ruby-operator">:</span> <span class="ruby-constant">Util</span>.<span class="ruby-identifier">build_url</span>(<span class="ruby-identifier">address</span>, <span class="ruby-string">&#39;rooms/&#39;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">room_id</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-operator">+</span> <span class="ruby-string">&#39;/owners/&#39;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">user_id</span>.<span class="ruby-identifier">to_s</span>),
+    <span class="ruby-identifier">headers</span><span class="ruby-operator">:</span> <span class="ruby-identifier">headers</span>
+  )
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- delete_room_owner-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- delete_room_owner-method -->
+
+    
+      <div id="method-c-delete_room_subscriber" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">delete_room_subscriber</span><span
+            class="method-args">(address, headers, room_id, user_id)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="delete_room_subscriber-source">
+            <pre><span class="ruby-comment"># File lib/frankly-ruby/rooms.rb, line 181</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">delete_room_subscriber</span>(<span class="ruby-identifier">address</span>, <span class="ruby-identifier">headers</span>, <span class="ruby-identifier">room_id</span>, <span class="ruby-identifier">user_id</span>)
+  <span class="ruby-constant">RestClient</span><span class="ruby-operator">::</span><span class="ruby-constant">Request</span>.<span class="ruby-identifier">execute</span>(
+    <span class="ruby-identifier">method</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;delete&#39;</span>,
+    <span class="ruby-identifier">url</span><span class="ruby-operator">:</span> <span class="ruby-constant">Util</span>.<span class="ruby-identifier">build_url</span>(<span class="ruby-identifier">address</span>, <span class="ruby-string">&#39;rooms/&#39;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">room_id</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-operator">+</span> <span class="ruby-string">&#39;/subscribers/&#39;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">user_id</span>.<span class="ruby-identifier">to_s</span>),
+    <span class="ruby-identifier">headers</span><span class="ruby-operator">:</span> <span class="ruby-identifier">headers</span>
+  )
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- delete_room_subscriber-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- delete_room_subscriber-method -->
+
+    
+      <div id="method-c-read_room" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">read_room</span><span
+            class="method-args">(address, headers, room_id)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="read_room-source">
+            <pre><span class="ruby-comment"># File lib/frankly-ruby/rooms.rb, line 44</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">read_room</span>(<span class="ruby-identifier">address</span>, <span class="ruby-identifier">headers</span>, <span class="ruby-identifier">room_id</span>)
+  <span class="ruby-constant">RestClient</span><span class="ruby-operator">::</span><span class="ruby-constant">Request</span>.<span class="ruby-identifier">execute</span>(
+    <span class="ruby-identifier">method</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;get&#39;</span>,
+    <span class="ruby-identifier">url</span><span class="ruby-operator">:</span> <span class="ruby-constant">Util</span>.<span class="ruby-identifier">build_url</span>(<span class="ruby-identifier">address</span>, <span class="ruby-string">&#39;rooms/&#39;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">room_id</span>.<span class="ruby-identifier">to_s</span>),
+    <span class="ruby-identifier">headers</span><span class="ruby-operator">:</span> <span class="ruby-identifier">headers</span>
+  )
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- read_room-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- read_room-method -->
+
+    
+      <div id="method-c-read_room_announcer_list" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">read_room_announcer_list</span><span
+            class="method-args">(address, headers, room_id)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="read_room_announcer_list-source">
+            <pre><span class="ruby-comment"># File lib/frankly-ruby/rooms.rb, line 149</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">read_room_announcer_list</span>(<span class="ruby-identifier">address</span>, <span class="ruby-identifier">headers</span>, <span class="ruby-identifier">room_id</span>)
+  <span class="ruby-constant">RestClient</span><span class="ruby-operator">::</span><span class="ruby-constant">Request</span>.<span class="ruby-identifier">execute</span>(
+    <span class="ruby-identifier">method</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;get&#39;</span>,
+    <span class="ruby-identifier">url</span><span class="ruby-operator">:</span> <span class="ruby-constant">Util</span>.<span class="ruby-identifier">build_url</span>(<span class="ruby-identifier">address</span>, <span class="ruby-string">&#39;rooms/&#39;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">room_id</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-operator">+</span> <span class="ruby-string">&#39;/announcers&#39;</span>),
+    <span class="ruby-identifier">headers</span><span class="ruby-operator">:</span> <span class="ruby-identifier">headers</span>
+  )
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- read_room_announcer_list-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- read_room_announcer_list-method -->
+
+    
+      <div id="method-c-read_room_count" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">read_room_count</span><span
+            class="method-args">(address, headers, room_id)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="read_room_count-source">
+            <pre><span class="ruby-comment"># File lib/frankly-ruby/rooms.rb, line 197</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">read_room_count</span>(<span class="ruby-identifier">address</span>, <span class="ruby-identifier">headers</span>, <span class="ruby-identifier">room_id</span>)
+  <span class="ruby-constant">RestClient</span><span class="ruby-operator">::</span><span class="ruby-constant">Request</span>.<span class="ruby-identifier">execute</span>(
+    <span class="ruby-identifier">method</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;get&#39;</span>,
+    <span class="ruby-identifier">url</span><span class="ruby-operator">:</span> <span class="ruby-constant">Util</span>.<span class="ruby-identifier">build_url</span>(<span class="ruby-identifier">address</span>, <span class="ruby-string">&#39;rooms/&#39;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">room_id</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-operator">+</span> <span class="ruby-string">&#39;/count&#39;</span>),
+    <span class="ruby-identifier">headers</span><span class="ruby-operator">:</span> <span class="ruby-identifier">headers</span>
+  )
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- read_room_count-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- read_room_count-method -->
+
+    
+      <div id="method-c-read_room_list" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">read_room_list</span><span
+            class="method-args">(address, headers)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="read_room_list-source">
+            <pre><span class="ruby-comment"># File lib/frankly-ruby/rooms.rb, line 36</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">read_room_list</span>(<span class="ruby-identifier">address</span>, <span class="ruby-identifier">headers</span>)
+  <span class="ruby-constant">RestClient</span><span class="ruby-operator">::</span><span class="ruby-constant">Request</span>.<span class="ruby-identifier">execute</span>(
+    <span class="ruby-identifier">method</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;get&#39;</span>,
+    <span class="ruby-identifier">url</span><span class="ruby-operator">:</span> <span class="ruby-constant">Util</span>.<span class="ruby-identifier">build_url</span>(<span class="ruby-identifier">address</span>, <span class="ruby-string">&#39;rooms&#39;</span>),
+    <span class="ruby-identifier">headers</span><span class="ruby-operator">:</span> <span class="ruby-identifier">headers</span>
+  )
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- read_room_list-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- read_room_list-method -->
+
+    
+      <div id="method-c-read_room_member_list" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">read_room_member_list</span><span
+            class="method-args">(address, headers, room_id)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="read_room_member_list-source">
+            <pre><span class="ruby-comment"># File lib/frankly-ruby/rooms.rb, line 125</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">read_room_member_list</span>(<span class="ruby-identifier">address</span>, <span class="ruby-identifier">headers</span>, <span class="ruby-identifier">room_id</span>)
+  <span class="ruby-constant">RestClient</span><span class="ruby-operator">::</span><span class="ruby-constant">Request</span>.<span class="ruby-identifier">execute</span>(
+    <span class="ruby-identifier">method</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;get&#39;</span>,
+    <span class="ruby-identifier">url</span><span class="ruby-operator">:</span> <span class="ruby-constant">Util</span>.<span class="ruby-identifier">build_url</span>(<span class="ruby-identifier">address</span>, <span class="ruby-string">&#39;rooms/&#39;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">room_id</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-operator">+</span> <span class="ruby-string">&#39;/members&#39;</span>),
+    <span class="ruby-identifier">headers</span><span class="ruby-operator">:</span> <span class="ruby-identifier">headers</span>
+  )
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- read_room_member_list-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- read_room_member_list-method -->
+
+    
+      <div id="method-c-read_room_moderator_list" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">read_room_moderator_list</span><span
+            class="method-args">(address, headers, room_id)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="read_room_moderator_list-source">
+            <pre><span class="ruby-comment"># File lib/frankly-ruby/rooms.rb, line 101</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">read_room_moderator_list</span>(<span class="ruby-identifier">address</span>, <span class="ruby-identifier">headers</span>, <span class="ruby-identifier">room_id</span>)
+  <span class="ruby-constant">RestClient</span><span class="ruby-operator">::</span><span class="ruby-constant">Request</span>.<span class="ruby-identifier">execute</span>(
+    <span class="ruby-identifier">method</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;get&#39;</span>,
+    <span class="ruby-identifier">url</span><span class="ruby-operator">:</span> <span class="ruby-constant">Util</span>.<span class="ruby-identifier">build_url</span>(<span class="ruby-identifier">address</span>, <span class="ruby-string">&#39;rooms/&#39;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">room_id</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-operator">+</span> <span class="ruby-string">&#39;/moderators&#39;</span>),
+    <span class="ruby-identifier">headers</span><span class="ruby-operator">:</span> <span class="ruby-identifier">headers</span>
+  )
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- read_room_moderator_list-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- read_room_moderator_list-method -->
+
+    
+      <div id="method-c-read_room_owner_list" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">read_room_owner_list</span><span
+            class="method-args">(address, headers, room_id)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="read_room_owner_list-source">
+            <pre><span class="ruby-comment"># File lib/frankly-ruby/rooms.rb, line 77</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">read_room_owner_list</span>(<span class="ruby-identifier">address</span>, <span class="ruby-identifier">headers</span>, <span class="ruby-identifier">room_id</span>)
+  <span class="ruby-constant">RestClient</span><span class="ruby-operator">::</span><span class="ruby-constant">Request</span>.<span class="ruby-identifier">execute</span>(
+    <span class="ruby-identifier">method</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;get&#39;</span>,
+    <span class="ruby-identifier">url</span><span class="ruby-operator">:</span> <span class="ruby-constant">Util</span>.<span class="ruby-identifier">build_url</span>(<span class="ruby-identifier">address</span>, <span class="ruby-string">&#39;rooms/&#39;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">room_id</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-operator">+</span> <span class="ruby-string">&#39;/owners&#39;</span>),
+    <span class="ruby-identifier">headers</span><span class="ruby-operator">:</span> <span class="ruby-identifier">headers</span>
+  )
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- read_room_owner_list-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- read_room_owner_list-method -->
+
+    
+      <div id="method-c-read_room_participant_list" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">read_room_participant_list</span><span
+            class="method-args">(address, headers, room_id)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="read_room_participant_list-source">
+            <pre><span class="ruby-comment"># File lib/frankly-ruby/rooms.rb, line 189</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">read_room_participant_list</span>(<span class="ruby-identifier">address</span>, <span class="ruby-identifier">headers</span>, <span class="ruby-identifier">room_id</span>)
+  <span class="ruby-constant">RestClient</span><span class="ruby-operator">::</span><span class="ruby-constant">Request</span>.<span class="ruby-identifier">execute</span>(
+    <span class="ruby-identifier">method</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;get&#39;</span>,
+    <span class="ruby-identifier">url</span><span class="ruby-operator">:</span> <span class="ruby-constant">Util</span>.<span class="ruby-identifier">build_url</span>(<span class="ruby-identifier">address</span>, <span class="ruby-string">&#39;rooms/&#39;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">room_id</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-operator">+</span> <span class="ruby-string">&#39;/participants&#39;</span>),
+    <span class="ruby-identifier">headers</span><span class="ruby-operator">:</span> <span class="ruby-identifier">headers</span>
+  )
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- read_room_participant_list-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- read_room_participant_list-method -->
+
+    
+      <div id="method-c-read_room_subscriber_list" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">read_room_subscriber_list</span><span
+            class="method-args">(address, headers, room_id)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="read_room_subscriber_list-source">
+            <pre><span class="ruby-comment"># File lib/frankly-ruby/rooms.rb, line 173</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">read_room_subscriber_list</span>(<span class="ruby-identifier">address</span>, <span class="ruby-identifier">headers</span>, <span class="ruby-identifier">room_id</span>)
+  <span class="ruby-constant">RestClient</span><span class="ruby-operator">::</span><span class="ruby-constant">Request</span>.<span class="ruby-identifier">execute</span>(
+    <span class="ruby-identifier">method</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;get&#39;</span>,
+    <span class="ruby-identifier">url</span><span class="ruby-operator">:</span> <span class="ruby-constant">Util</span>.<span class="ruby-identifier">build_url</span>(<span class="ruby-identifier">address</span>, <span class="ruby-string">&#39;rooms/&#39;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">room_id</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-operator">+</span> <span class="ruby-string">&#39;/subscribers&#39;</span>),
+    <span class="ruby-identifier">headers</span><span class="ruby-operator">:</span> <span class="ruby-identifier">headers</span>
+  )
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- read_room_subscriber_list-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- read_room_subscriber_list-method -->
+
+    
+      <div id="method-c-update_room" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">update_room</span><span
+            class="method-args">(address, headers, room_id, payload)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="update_room-source">
+            <pre><span class="ruby-comment"># File lib/frankly-ruby/rooms.rb, line 52</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">update_room</span>(<span class="ruby-identifier">address</span>, <span class="ruby-identifier">headers</span>, <span class="ruby-identifier">room_id</span>, <span class="ruby-identifier">payload</span>)
+  <span class="ruby-constant">RestClient</span><span class="ruby-operator">::</span><span class="ruby-constant">Request</span>.<span class="ruby-identifier">execute</span>(
+    <span class="ruby-identifier">method</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;put&#39;</span>,
+    <span class="ruby-identifier">url</span><span class="ruby-operator">:</span> <span class="ruby-constant">Util</span>.<span class="ruby-identifier">build_url</span>(<span class="ruby-identifier">address</span>, <span class="ruby-string">&#39;rooms/&#39;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">room_id</span>.<span class="ruby-identifier">to_s</span>),
+    <span class="ruby-identifier">headers</span><span class="ruby-operator">:</span> <span class="ruby-identifier">headers</span>,
+    <span class="ruby-identifier">payload</span><span class="ruby-operator">:</span> <span class="ruby-identifier">payload</span>
+  )
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- update_room-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- update_room-method -->
+
+    
+    </section><!-- public-class-method-details -->
+  
+  </section><!-- 5Buntitled-5D -->
+
+</div><!-- documentation -->
+
+
+<footer id="validator-badges">
+  <p><a href="http://validator.w3.org/check/referer">[Validate]</a>
+  <p>Generated by <a href="https://github.com/rdoc/rdoc">RDoc</a> 4.0.0.
+  <p>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish Rdoc Generator</a> 3.
+</footer>
+

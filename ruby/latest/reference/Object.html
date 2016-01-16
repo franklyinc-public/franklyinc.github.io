@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+
+<title>class Object - RDoc Documentation</title>
+
+<link type="text/css" media="screen" href="rdoc-f7d1a4be.css" rel="stylesheet">
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "./";
+</script>
+
+<script type="text/javascript" charset="utf-8" src="js/jquery-7622c9ac.js"></script>
+<script type="text/javascript" charset="utf-8" src="js/navigation-35a922d6.js"></script>
+<script type="text/javascript" charset="utf-8" src="js/search_index-d30de69a.js"></script>
+<script type="text/javascript" charset="utf-8" src="js/search-4c7b4d50.js"></script>
+<script type="text/javascript" charset="utf-8" src="js/searcher-879d392b.js"></script>
+<script type="text/javascript" charset="utf-8" src="js/darkfish-72382215.js"></script>
+
+
+<body id="top" class="class">
+<nav id="metadata">
+  <nav id="home-section" class="section">
+  <h3 class="section-header">
+    <a href="./index.html">Home</a>
+    <a href="./table_of_contents.html#classes">Classes</a>
+    <a href="./table_of_contents.html#methods">Methods</a>
+  </h3>
+</nav>
+
+
+  <nav id="search-section" class="section project-section" class="initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <h3 class="section-header">
+      <input type="text" name="search" placeholder="Search" id="search-field"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </h3>
+  </form>
+
+  <ul id="search-results" class="initially-hidden"></ul>
+</nav>
+
+
+  
+
+  <div id="file-metadata">
+    <nav id="file-list-section" class="section">
+  <h3 class="section-header">Defined In</h3>
+  <ul>
+    <li>lib/frankly-ruby.rb
+  </ul>
+</nav>
+
+    
+  </div>
+
+  <div id="class-metadata">
+    
+    <nav id="parent-class-section" class="section">
+  <h3 class="section-header">Parent</h3>
+  
+  <p class="link">BasicObject
+  
+</nav>
+
+    
+    
+    <!-- Method Quickref -->
+<nav id="method-list-section" class="section">
+  <h3 class="section-header">Methods</h3>
+
+  <ul class="link-list">
+    
+    <li ><a href="#method-i-generate_identity_token">#generate_identity_token</a>
+    
+  </ul>
+</nav>
+
+  </div>
+
+  <div id="project-metadata">
+    <nav id="fileindex-section" class="section project-section">
+  <h3 class="section-header">Pages</h3>
+
+  <ul>
+  
+    <li class="file"><a href="./Gemfile.html">Gemfile</a>
+  
+    <li class="file"><a href="./LICENSE.html">LICENSE</a>
+  
+    <li class="file"><a href="./README_md.html">README</a>
+  
+    <li class="file"><a href="./Rakefile.html">Rakefile</a>
+  
+    <li class="file"><a href="./doc/created_rid.html">created.rid</a>
+  
+    <li class="file"><a href="./frankly-ruby_gemspec.html">frankly-ruby.gemspec</a>
+  
+  </ul>
+</nav>
+
+    <nav id="classindex-section" class="section project-section">
+  <h3 class="section-header">Class and Module Index</h3>
+
+  <ul class="link-list">
+  
+    <li><a href="./Announcement.html">Announcement</a>
+  
+    <li><a href="./Apps.html">Apps</a>
+  
+    <li><a href="./Auth.html">Auth</a>
+  
+    <li><a href="./Files.html">Files</a>
+  
+    <li><a href="./Frankly.html">Frankly</a>
+  
+    <li><a href="./FranklyClient.html">FranklyClient</a>
+  
+    <li><a href="./FranklyClientTest.html">FranklyClientTest</a>
+  
+    <li><a href="./Generic.html">Generic</a>
+  
+    <li><a href="./Message.html">Message</a>
+  
+    <li><a href="./Object.html">Object</a>
+  
+    <li><a href="./Rooms.html">Rooms</a>
+  
+    <li><a href="./Sessions.html">Sessions</a>
+  
+    <li><a href="./Users.html">Users</a>
+  
+    <li><a href="./Util.html">Util</a>
+  
+  </ul>
+</nav>
+
+  </div>
+</nav>
+
+<div id="documentation">
+  <h1 class="class">class Object</h1>
+
+  <div id="description" class="description">
+    
+  </div><!-- description -->
+
+  
+  
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+
+    
+
+    <!-- Methods -->
+    
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section section">
+      <h3 class="section-header">Public Instance Methods</h3>
+
+    
+      <div id="method-i-generate_identity_token" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">generate_identity_token</span><span
+            class="method-args">(app_key, app_secret, nonce, user_id = nil, role = nil)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>This function generates an identity token suitable for a single
+authentication attempt of a client against the <a
+href="Frankly.html">Frankly</a> API or SDK</p>
+
+<p>@param app_key [String]</p>
+
+<pre>The key that specifies which app this client is authenticating for, this value is
+provided by the Frankly Console.</pre>
+
+<p>@param app_secret [String]</p>
+
+<pre>The secret value associated with the key that allows the client to securely authenticate
+against the Frankly API.</pre>
+
+<p>@param nonce [String]</p>
+
+<pre>The nonce value got from Frankly SDK or API whether the identity generation comes from
+an client device or app backend.</pre>
+
+<p>@param user_id [String]</p>
+
+<pre>This argument must be set to make the SDK operate on behalf of a specific user of the app.
+For backendservices willing to interact with the API directly this may be omitted.</pre>
+
+<p>@param role [String]</p>
+
+<pre>For backendservices using the Frankly API this can be set to &#39;admin&#39; to generate a token
+allowing the client to get admin priviledges and perform operations that regular users are forbidden to.</pre>
+
+<p>@return [String]</p>
+
+<pre>The function returns the generated identity token as a string.</pre>
+          
+          
+
+          
+          <div class="method-source-code" id="generate_identity_token-source">
+            <pre><span class="ruby-comment"># File lib/frankly-ruby.rb, line 278</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">generate_identity_token</span>(<span class="ruby-identifier">app_key</span>, <span class="ruby-identifier">app_secret</span>, <span class="ruby-identifier">nonce</span>, <span class="ruby-identifier">user_id</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">role</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-identifier">auth_header</span> = {
+    <span class="ruby-identifier">typ</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;JWS&#39;</span>,
+    <span class="ruby-identifier">alg</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;HS256&#39;</span>,
+    <span class="ruby-identifier">cty</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;frankly-it;v1&#39;</span>
+  }
+
+  <span class="ruby-identifier">auth_claims</span> = {
+    <span class="ruby-identifier">aak</span><span class="ruby-operator">:</span> <span class="ruby-identifier">app_key</span>,
+    <span class="ruby-identifier">iat</span><span class="ruby-operator">:</span> <span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span>.<span class="ruby-identifier">to_i</span>,
+    <span class="ruby-identifier">exp</span><span class="ruby-operator">:</span> <span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span>.<span class="ruby-identifier">to_i</span> <span class="ruby-operator">+</span> <span class="ruby-value">10</span> <span class="ruby-operator">*</span> <span class="ruby-value">24</span> <span class="ruby-operator">*</span> <span class="ruby-value">60</span> <span class="ruby-operator">*</span> <span class="ruby-value">60</span>,
+    <span class="ruby-identifier">nce</span><span class="ruby-operator">:</span> <span class="ruby-identifier">nonce</span>
+  }
+
+  <span class="ruby-identifier">auth_claims</span>[<span class="ruby-value">:uid</span>] = <span class="ruby-identifier">user_id</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">user_id</span>.<span class="ruby-identifier">nil?</span>
+  <span class="ruby-identifier">auth_claims</span>[<span class="ruby-value">:role</span>] = <span class="ruby-identifier">role</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">role</span>.<span class="ruby-identifier">nil?</span>
+
+  <span class="ruby-constant">JWT</span>.<span class="ruby-identifier">encode</span>(<span class="ruby-identifier">auth_claims</span>, <span class="ruby-identifier">app_secret</span>, <span class="ruby-string">&#39;HS256&#39;</span>, <span class="ruby-identifier">auth_header</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- generate_identity_token-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- generate_identity_token-method -->
+
+    
+    </section><!-- public-instance-method-details -->
+  
+  </section><!-- 5Buntitled-5D -->
+
+</div><!-- documentation -->
+
+
+<footer id="validator-badges">
+  <p><a href="http://validator.w3.org/check/referer">[Validate]</a>
+  <p>Generated by <a href="https://github.com/rdoc/rdoc">RDoc</a> 4.0.0.
+  <p>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish Rdoc Generator</a> 3.
+</footer>
+

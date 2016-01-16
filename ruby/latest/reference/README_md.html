@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+
+<title>README - RDoc Documentation</title>
+
+<link type="text/css" media="screen" href="rdoc-f7d1a4be.css" rel="stylesheet">
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "./";
+</script>
+
+<script type="text/javascript" charset="utf-8" src="js/jquery-7622c9ac.js"></script>
+<script type="text/javascript" charset="utf-8" src="js/navigation-35a922d6.js"></script>
+<script type="text/javascript" charset="utf-8" src="js/search_index-d30de69a.js"></script>
+<script type="text/javascript" charset="utf-8" src="js/search-4c7b4d50.js"></script>
+<script type="text/javascript" charset="utf-8" src="js/searcher-879d392b.js"></script>
+<script type="text/javascript" charset="utf-8" src="js/darkfish-72382215.js"></script>
+
+
+<body class="file">
+<nav id="metadata">
+  <nav id="home-section" class="section">
+  <h3 class="section-header">
+    <a href="./index.html">Home</a>
+    <a href="./table_of_contents.html#classes">Classes</a>
+    <a href="./table_of_contents.html#methods">Methods</a>
+  </h3>
+</nav>
+
+
+  <nav id="search-section" class="section project-section" class="initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <h3 class="section-header">
+      <input type="text" name="search" placeholder="Search" id="search-field"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </h3>
+  </form>
+
+  <ul id="search-results" class="initially-hidden"></ul>
+</nav>
+
+
+  
+<div id="table-of-contents">
+  <nav class="section">
+    <h3 class="section-header">Table of Contents</h3>
+    <ul>
+      <li><a href="#label-Frankly+Ruby+SDK">Frankly Ruby SDK</a>
+      <li><a href="#label-Installation">Installation</a>
+      <li><a href="#label-Usage">Usage</a>
+      <li><a href="#label-Documentation">Documentation</a>
+      <li><a href="#label-Making+Improvements">Making Improvements</a>
+      <li><a href="#label-Access+%26+Support">Access &amp; Support</a>
+    </ul>
+  </nav>
+</div>
+
+
+  <div id="project-metadata">
+    <nav id="fileindex-section" class="section project-section">
+  <h3 class="section-header">Pages</h3>
+
+  <ul>
+  
+    <li class="file"><a href="./Gemfile.html">Gemfile</a>
+  
+    <li class="file"><a href="./LICENSE.html">LICENSE</a>
+  
+    <li class="file"><a href="./README_md.html">README</a>
+  
+    <li class="file"><a href="./Rakefile.html">Rakefile</a>
+  
+    <li class="file"><a href="./doc/created_rid.html">created.rid</a>
+  
+    <li class="file"><a href="./frankly-ruby_gemspec.html">frankly-ruby.gemspec</a>
+  
+  </ul>
+</nav>
+
+    <nav id="classindex-section" class="section project-section">
+  <h3 class="section-header">Class and Module Index</h3>
+
+  <ul class="link-list">
+  
+    <li><a href="./Announcement.html">Announcement</a>
+  
+    <li><a href="./Apps.html">Apps</a>
+  
+    <li><a href="./Auth.html">Auth</a>
+  
+    <li><a href="./Files.html">Files</a>
+  
+    <li><a href="./Frankly.html">Frankly</a>
+  
+    <li><a href="./FranklyClient.html">FranklyClient</a>
+  
+    <li><a href="./FranklyClientTest.html">FranklyClientTest</a>
+  
+    <li><a href="./Generic.html">Generic</a>
+  
+    <li><a href="./Message.html">Message</a>
+  
+    <li><a href="./Object.html">Object</a>
+  
+    <li><a href="./Rooms.html">Rooms</a>
+  
+    <li><a href="./Sessions.html">Sessions</a>
+  
+    <li><a href="./Users.html">Users</a>
+  
+    <li><a href="./Util.html">Util</a>
+  
+  </ul>
+</nav>
+
+  </div>
+</nav>
+
+<div id="documentation" class="description">
+  
+<h1 id="label-Frankly+Ruby+SDK"><a href="Frankly.html">Frankly</a> Ruby SDK<span><a href="#label-Frankly+Ruby+SDK">&para;</a> <a href="#documentation">&uarr;</a></span></h1>
+
+<p>The Ruby gem makes it easy to create deeper <a
+href="Frankly.html">Frankly</a> chat integrations in your app by
+interacting with Frankly&#39;s server APIs for managing <a
+href="Rooms.html">Rooms</a>, Messages, and <a href="Users.html">Users</a>.</p>
+
+<h3 id="label-Installation">Installation<span><a href="#label-Installation">&para;</a> <a href="#documentation">&uarr;</a></span></h3>
+
+<p>In your <a href="Gemfile.html">Gemfile</a> include
+&lt;code&gt;
+gem
+&#39;frankly-ruby&#39;, :git =&gt;
+&#39;git://github.com/franklyinc/frankly-ruby.git&#39;
+&lt;/code&gt;
+then
+run
+&lt;code&gt;
+bundle install
+&lt;/code&gt;</p>
+
+<h3 id="label-Usage">Usage<span><a href="#label-Usage">&para;</a> <a href="#documentation">&uarr;</a></span></h3>
+
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&#39;frankly-ruby&#39;</span>
+</pre>
+
+<h3 id="label-Documentation">Documentation<span><a href="#label-Documentation">&para;</a> <a href="#documentation">&uarr;</a></span></h3>
+
+<p>Here are the resources available:
+ 1. Complete <a
+href="Frankly.html">Frankly</a> Chat Service integration guide - <a
+href="http://franklyinc.github.io">franklyinc.github.io</a>
+ 2. <a
+href="Frankly.html">Frankly</a> Ruby gem API reference - <a
+href="http://franklyinc.github.io/APIReference-Ruby.html">franklyinc.github.io/APIReference-Ruby.html/</a>
+
+3. <a href="Frankly.html">Frankly</a> Chat Service Authentication guide -
+<a
+href="http://franklyinc.github.io/Auth.html">franklyinc.github.io/Auth.html</a></p>
+
+<h3 id="label-Making+Improvements">Making Improvements<span><a href="#label-Making+Improvements">&para;</a> <a href="#documentation">&uarr;</a></span></h3>
+
+<p><a href="Frankly.html">Frankly</a> Platform provides a great way for brands
+to integrate chat in their iOS, Android, and Web apps in order to build and
+engage their communities. But of course, that&#39;s not possible without
+developers like you. Have ideas for improving the integration experience?
+Let us know by <a
+href="https://github.com/franklyinc/frankly-ruby/issues/new">creating a
+Github issue</a> in this repo!</p>
+
+<h3 id="label-Access+%26+Support">Access &amp; Support<span><a href="#label-Access+%26+Support">&para;</a> <a href="#documentation">&uarr;</a></span></h3>
+
+<p>Right now <a href="Frankly.html">Frankly</a> Platform is limited in access.
+If you&#39;d like to learn more about how to get access, please reach out
+to us by emailing <a
+href="mailto:platform-support@franklychat.com">platform-support@franklychat.com</a>.</p>
+
+</div>
+
+
+
+<footer id="validator-badges">
+  <p><a href="http://validator.w3.org/check/referer">[Validate]</a>
+  <p>Generated by <a href="https://github.com/rdoc/rdoc">RDoc</a> 4.0.0.
+  <p>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish Rdoc Generator</a> 3.
+</footer>
+

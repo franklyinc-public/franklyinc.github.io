@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+
+	<title>FRSDKRoomViewController Class Reference</title>
+
+	<link rel="stylesheet" href="../css/style-b241586a.css">
+	<meta name="viewport" content="initial-scale=1, maximum-scale=1.4">
+	<meta name="generator" content="appledoc 2.2.1 (build 1334)">
+</head>
+<body class="appledoc">
+	<header>
+		<div class="container" class="hide-in-xcode">
+			
+			<h1 id="library-title">
+				<a href="../index.html">FranklySDK </a>
+			</h1>
+
+			<p id="developer-home">
+				<a href="../index.html">Frankly</a>
+			</p>
+			
+		</div>
+	</header>
+
+	<aside>
+		<div class="container">
+			<nav>
+				<ul id="header-buttons" role="toolbar">
+					<li><a href="../index.html">Index</a></li>
+<li><a href="../hierarchy.html">Hierarchy</a></li>
+
+					<li id="on-this-page" role="navigation">
+						<label>
+							On This Page
+
+							<div class="chevron">
+								<div class="chevy chevron-left"></div>
+								<div class="chevy chevron-right"></div>
+							</div>
+
+							<select id="jump-to">
+	<option value="top">Jump To&#133;</option>
+	
+
+	
+	
+	<option value="tasks">Tasks</option>
+	
+	
+
+	
+	
+
+	
+
+	
+	<optgroup label="Instance Methods">
+		
+		<option value="//api/name/roomPropertiesChangedOnViewModel:">- roomPropertiesChangedOnViewModel:</option>
+		
+		<option value="//api/name/viewModel:didDeleteMessageAtIndex:">- viewModel:didDeleteMessageAtIndex:</option>
+		
+		<option value="//api/name/viewModel:didReceiveNewMessageAtIndex:">- viewModel:didReceiveNewMessageAtIndex:</option>
+		
+		<option value="//api/name/viewModel:didReceiveUpdatedMessageAtIndex:newIndex:">- viewModel:didReceiveUpdatedMessageAtIndex:newIndex:</option>
+		
+		<option value="//api/name/viewModelChangesDidEnd:">- viewModelChangesDidEnd:</option>
+		
+		<option value="//api/name/viewModelChangesWillBegin:">- viewModelChangesWillBegin:</option>
+		
+		<option value="//api/name/viewModelDidReceiveInitialMessageSet:">- viewModelDidReceiveInitialMessageSet:</option>
+		
+	</optgroup>
+	
+	
+</select>
+						</label>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</aside>
+
+	<article>
+		<div id="overview_contents" class="container">
+			<div id="content">
+				<main role="main">
+					<h1 class="title">FRSDKRoomViewController Class Reference</h1>
+
+					
+					<div class="section section-specification"><table cellspacing="0"><tbody>
+						<tr>
+	<th>Inherits from</th>
+	<td>FRSDKViewController : UIViewController</td>
+</tr><tr>
+	<th>Conforms to</th>
+	<td><a href="../Protocols/FRSDKRoomViewModelDelegate.html">FRSDKRoomViewModelDelegate</a><br />UITableViewDataSource<br />UITableViewDelegate</td>
+</tr><tr>
+	<th>Declared in</th>
+	<td>FRSDKRoomViewController.h<br />FRSDKRoomViewController.m</td>
+</tr>
+						</tbody></table></div>
+					
+
+                    
+
+					
+					
+					<div class="section section-tasks">
+						<a title="Tasks" name="tasks"></a>
+						
+
+						
+						
+
+						<div class="task-list">
+							<div class="section-method">
+	<a name="//api/name/viewModelDidReceiveInitialMessageSet:" title="viewModelDidReceiveInitialMessageSet:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/viewModelDidReceiveInitialMessageSet:">&ndash;&nbsp;viewModelDidReceiveInitialMessageSet:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Alerts the delegate that the viewModel has finished receiving a large set of updates</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)viewModelDidReceiveInitialMessageSet:(FRSDKRoomViewModel *)<em>viewModel</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>tell</code></th>
+						<td><p>the view model that a large set of data was received. If the change set
+is large, this call occurs instead of the standard, changesWillBegin, didRecieveMessage,
+changesDidEnd sequence. Delegates that want to be aware of changes should support both.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>Alerts the delegate that the viewModel has finished receiving a large set of updates</p><div class="warning"><p><strong>Warning:</strong> You may access data on the viewModel but DO NOT modify its data from this function</p></div><div class="warning"><p><strong>Warning:</strong> DO NOT fetchMessagesIfNecessary from within this function as it will cause deadlock!</p></div><div class="warning"><p><strong>Warning:</strong> DO NOT make any calls that will trigger the viewModel&rsquo;s dataprovider to access
+the data store, such as fetchData, from within this function as it will cause deadlock</p></div>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">FRSDKRoomViewModel.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/viewModelChangesWillBegin:" title="viewModelChangesWillBegin:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/viewModelChangesWillBegin:">&ndash;&nbsp;viewModelChangesWillBegin:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Alerts the delegate the viewModel is about to modified</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)viewModelChangesWillBegin:(FRSDKRoomViewModel *)<em>viewModel</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>viewModel</code></th>
+						<td><p>the FRSDKRoomViewModel object in its original state that will be modified</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>Alerts the delegate the viewModel is about to modified</p><div class="warning"><p><strong>Warning:</strong> You may access data on the viewModel but DO NOT modify its data from this function</p></div><div class="warning"><p><strong>Warning:</strong> DO NOT fetchMessagesIfNecessary from within this function as it will cause deadlock!</p></div><div class="warning"><p><strong>Warning:</strong> DO NOT make any calls that will trigger the viewModel&rsquo;s dataprovider to access
+the data store, such as fetchData, from within this function as it will cause deadlock</p></div>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">FRSDKRoomViewModel.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/viewModelChangesDidEnd:" title="viewModelChangesDidEnd:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/viewModelChangesDidEnd:">&ndash;&nbsp;viewModelChangesDidEnd:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Alerts the delegate that the viewModel has finished its updates</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)viewModelChangesDidEnd:(FRSDKRoomViewModel *)<em>viewModel</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>viewModel</code></th>
+						<td><p>the viewModel with its data updated</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>Alerts the delegate that the viewModel has finished its updates</p><div class="warning"><p><strong>Warning:</strong> You may access data on the viewModel but DO NOT modify its data from this function</p></div><div class="warning"><p><strong>Warning:</strong> DO NOT fetchMessagesIfNecessary from within this function as it will cause deadlock!</p></div><div class="warning"><p><strong>Warning:</strong> DO NOT make any calls that will trigger the viewModel&rsquo;s dataprovider to access
+the data store, such as fetchData, from within this function as it will cause deadlock</p></div>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">FRSDKRoomViewModel.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/viewModel:didReceiveNewMessageAtIndex:" title="viewModel:didReceiveNewMessageAtIndex:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/viewModel:didReceiveNewMessageAtIndex:">&ndash;&nbsp;viewModel:didReceiveNewMessageAtIndex:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Alerts the delegate that a new message has been inserted into the viewModel</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)viewModel:(FRSDKRoomViewModel *)<em>viewModel</em> didReceiveNewMessageAtIndex:(NSInteger)<em>index</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>viewModel</code></th>
+						<td><p>the FRSDKRoomViewModel object that has ben updated with the new message</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>index</code></th>
+						<td><p>the index of the new message</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>Alerts the delegate that a new message has been inserted into the viewModel</p><div class="warning"><p><strong>Warning:</strong> You may access data on the viewModel but DO NOT modify its data from this function</p></div><div class="warning"><p><strong>Warning:</strong> DO NOT fetchMessagesIfNecessary from within this function as it will cause deadlock!</p></div><div class="warning"><p><strong>Warning:</strong> DO NOT make any calls that will trigger the viewModel&rsquo;s dataprovider to access
+the data store, such as fetchData, from within this function as it will cause deadlock</p></div>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">FRSDKRoomViewModel.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/viewModel:didReceiveUpdatedMessageAtIndex:newIndex:" title="viewModel:didReceiveUpdatedMessageAtIndex:newIndex:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/viewModel:didReceiveUpdatedMessageAtIndex:newIndex:">&ndash;&nbsp;viewModel:didReceiveUpdatedMessageAtIndex:newIndex:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Alerts the delegate that a message in the viewModel has been updated</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)viewModel:(FRSDKRoomViewModel *)<em>viewModel</em> didReceiveUpdatedMessageAtIndex:(NSInteger)<em>index</em> newIndex:(NSInteger)<em>newIndex</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>viewModel</code></th>
+						<td><p>the FRSDKRoomViewModel object that has just been updated with the new data</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>index</code></th>
+						<td><p>the original index of the updated message</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>newIndex</code></th>
+						<td><p>the new index if the messaged changed position or NSNotFound if not</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>Alerts the delegate that a message in the viewModel has been updated</p><div class="warning"><p><strong>Warning:</strong> You may access data on the viewModel but DO NOT modify its data from this function</p></div><div class="warning"><p><strong>Warning:</strong> DO NOT fetchMessagesIfNecessary from within this function as it will cause deadlock!</p></div><div class="warning"><p><strong>Warning:</strong> DO NOT make any calls that will trigger the viewModel&rsquo;s dataprovider to access
+the data store, such as fetchData, from within this function as it will cause deadlock</p></div>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">FRSDKRoomViewModel.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/viewModel:didDeleteMessageAtIndex:" title="viewModel:didDeleteMessageAtIndex:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/viewModel:didDeleteMessageAtIndex:">&ndash;&nbsp;viewModel:didDeleteMessageAtIndex:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Alerts the delegate that one of the viewModel&rsquo;s messages was deleted</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)viewModel:(FRSDKRoomViewModel *)<em>viewModel</em> didDeleteMessageAtIndex:(NSInteger)<em>index</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>viewModel</code></th>
+						<td><p>the viewModel with the updated data</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>index</code></th>
+						<td><p>the index of the deleted message</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>Alerts the delegate that one of the viewModel&rsquo;s messages was deleted</p><div class="warning"><p><strong>Warning:</strong> You may access data on the viewModel but DO NOT modify its data from this function</p></div><div class="warning"><p><strong>Warning:</strong> DO NOT fetchMessagesIfNecessary from within this function as it will cause deadlock!</p></div><div class="warning"><p><strong>Warning:</strong> DO NOT make any calls that will trigger the viewModel&rsquo;s dataprovider to access
+the data store, such as fetchData, from within this function as it will cause deadlock</p></div>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">FRSDKRoomViewModel.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/roomPropertiesChangedOnViewModel:" title="roomPropertiesChangedOnViewModel:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/roomPropertiesChangedOnViewModel:">&ndash;&nbsp;roomPropertiesChangedOnViewModel:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>announcement to the delegate that global room properties changed</p>
+
+<pre><code>@param viewModel
+</code></pre>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)roomPropertiesChangedOnViewModel:(FRSDKRoomViewModel *)<em>viewModel</em></code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">FRSDKRoomViewModel.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div>
+						</div>
+						
+					</div>
+					
+					
+
+                    
+                    
+          
+				</main>
+
+				<footer>
+					<div class="footer-copyright">
+						
+						<p class="copyright">Copyright &copy; 2015 Frankly. All rights reserved. Updated: 2015-09-22</p>
+						
+						
+						<p class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.2.1 (build 1334)</a>.</p>
+						
+					</div>
+				</footer>
+			</div>
+		</div>
+	</article>
+
+	<script src="../js/script-de42f056.js"></script>
+</body>
+</html>

@@ -1,0 +1,406 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+
+        <!-- Always force latest IE rendering engine or request Chrome Frame -->
+        <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+        <link rel="icon"
+              type="image/png"
+              href="../../images/frankly_favicon_32x32_no_bg.png">
+        <!-- Use title if it's in the page YAML frontmatter -->
+        <title>The Basics
+            - Frankly Developer Portal</title>
+        <script src="/bower_components/webcomponentsjs/webcomponents-lite.min-01242ae0.js"></script>
+        <link href="/stylesheets/normalize-14170e97.css" rel="stylesheet" /><link href="/stylesheets/all-f2dad6dc.css" rel="stylesheet" />
+        <link href="/stylesheets/highlight-6793ce8e.css" rel="stylesheet" /><link href="/stylesheets/all-f2dad6dc.css" rel="stylesheet" />
+        <style is="custom-style">
+                    :root {
+                        --paper-toolbar-background: #2A2E33;
+                        --paper-input-container-focus-color: #fa3b1b;
+                        --paper-input-container-underline-focus: {
+                            display:none;
+                        };
+                    }
+                    .paper-header-panel {
+                        background-color: #2A2E33;
+                        padding-right: 20px;
+                        color: white;
+                    }
+                    .page-content {
+                        padding-left: 30px;
+                        padding-right: 30px;
+                        overflow: scroll;
+                    }
+
+                    .nav-tree li {
+                        list-style-type: none;
+                    }
+
+                    .nav-tree li a {
+                            color: white;
+                    }
+                    .logo {
+                        margin-left: 5px;
+                        margin-top: 20px;
+                        width: 180px;
+                    }
+                    .search {
+                        --paper-input-container-input-color: white;
+                        padding-left: 20px;
+                        padding-right: 20px;
+                    }
+                    .version-dropdown {
+                        width:90px;
+                        --paper-input-container-underline: {
+                            display:none;
+                        };
+                    }
+
+                    .version-dropdown a {
+                        color: black;
+                    }
+
+                    .previous {
+
+                    }
+
+                    .next {
+
+                    }
+
+                    .floating-toc {
+                        margin-left: -20px;
+                    }
+
+                    .floating-toc a {
+                        color:black;
+                    }
+
+                    .customization-table {
+                        table, th, td {
+                            border: 1px solid black;
+                            text-align: left;
+                        }
+                    }
+
+                    p {
+                        line-height: 150%;
+                    }
+                </style>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js" type="text/javascript"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/lunr.js/0.5.9/lunr.min.js" type="text/javascript"></script>
+        <script src="/javascripts/all-b1933d9a.js"></script>
+        <script src="/javascripts/anchorify-9f550341.js"></script>
+
+        <link href="/bower_components/paper-header-panel/paper-header-panel.html" rel="import">
+        <link href="/bower_components/paper-drawer-panel/paper-drawer-panel.html" rel="import">
+        <link href="/bower_components/paper-toolbar/paper-toolbar.html" rel="import">
+        <link href="/bower_components/paper-icon-button/paper-icon-button.html" rel="import">
+        <link href="/bower_components/iron-icons/iron-icons.html" rel="import">
+        <link href="/bower_components/iron-flex-layout/iron-flex-layout.html" rel="import">
+        <link href="/bower_components/paper-input/paper-input.html" rel="import">
+        <link href="/bower_components/paper-dropdown-menu/paper-dropdown-menu.html" rel="import">
+        <link href="/bower_components/paper-menu/paper-menu.html" rel="import">
+        <link href="/bower_components/paper-item/paper-item.html" rel="import">
+        <link rel="icon"
+              type="image/png"
+              href="images/frankly_favicon_32x32_no_bg.png">
+    </head>
+
+    <body class="ruby ruby_latest ruby_latest_doc ruby_latest_doc_03-the-basics">
+        <paper-drawer-panel class="flex" mode="seamed">
+            <div class="flex page-content" main>
+                <div class="horizontal layout">
+                    <paper-icon-button icon="menu" on-tap="menuAction" paper-drawer-toggle></paper-icon-button>
+                    <h1 class="flex">
+                        The Basics
+                    </h1>
+                    <span class="flex">
+                    </span>
+                    <paper-dropdown-menu noink no-animation class="version-dropdown">
+                        <paper-menu class="dropdown-content version-dropdown" selected="0">
+                                <paper-item>
+                                    <a href="/ruby/latest">latest</a>
+                                </paper-item>
+                        </paper-menu>
+                    </paper-dropdown-menu>
+
+                </div>
+                <div style="max-width:70%">
+                    <h2 id="rooms">Rooms</h2>
+
+<p>One of the central concepts in the <em>Frankly API</em> is the chat room. A chat room is a collection of messageswith some associated meta-data,
+like the title, description, or avatar image, that can be displayed when the end users access a mobile or web app that uses the <em>Frankly
+SDK</em>. With the <em>Frankly API</em>, you can create, update, and delete chat rooms.</p>
+
+<p>This code snippet shows how to create chat rooms:</p>
+<div class="highlight ruby"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8</pre></td><td class="code"><pre>    <span class="nb">require</span> <span class="s1">'frankly-ruby'</span>
+
+    <span class="n">room_payload</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="ss">title:       </span><span class="s1">'Hi'</span><span class="p">,</span>
+        <span class="ss">description: </span><span class="s1">'My First Chat Room'</span><span class="p">,</span>
+        <span class="ss">status:      </span><span class="s1">'active'</span>
+    <span class="p">}</span>
+    <span class="n">room</span> <span class="o">=</span> <span class="n">client</span><span class="p">.</span><span class="nf">create_room</span><span class="p">(</span><span class="n">room_payload</span><span class="p">)</span>
+</pre></td></tr></tbody></table>
+</div>
+
+<p>As we can see here, when creating the room the application must specify a <em>status</em> property which can be one of the following:</p>
+
+<ul>
+<li>  <em>unpublished</em> In this state, the room will not be shown to clients fetching the list of available rooms in the app. This is useful if
+the application needs to create rooms that shouldn&rsquo;t be available yet because they still need to be modified.</li>
+<li>  <em>active</em> In this state, the room will be fetched by clients and will be displayed in the list of available Rooms that end users can
+join to start chatting with each other.</li>
+<li>  <em>inactive</em> This last state is an intermediary state between the first two. The room will be part of fetching operations but it will
+not be displayed in the mobile or web app UI. This state is useful for testing purposes.</li>
+</ul>
+
+<p>In addition to the data available in the room object, you can also fetch data about the number of users that are in that room. The room count
+function returns a hash that lists the <em>active</em>, <em>online</em>, and <em>subscribed</em> user counts. <em>Online</em> represents the users that
+are currently in the room, <em>subscribed</em> represents the users that have subscribed to the room, and <em>active</em> is the union of the
+online and subscribed users.</p>
+
+<p>This code snippet shows how to fetch the room count:</p>
+<div class="highlight ruby"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2</pre></td><td class="code"><pre>    <span class="n">room</span> <span class="o">=</span> <span class="n">client</span><span class="p">.</span><span class="nf">create_room</span><span class="p">(</span><span class="n">room_payload</span><span class="p">)</span>
+    <span class="n">count</span> <span class="o">=</span> <span class="n">client</span><span class="p">.</span><span class="nf">read_room_count</span><span class="p">(</span><span class="n">room</span><span class="p">[</span><span class="s1">'id'</span><span class="p">])</span>
+</pre></td></tr></tbody></table>
+</div>
+
+<h2 id="messages">Messages</h2>
+
+<p>Frankly, being a chat platform, allows applications to send and receive messages. Naturally, <em>FranklyClient</em> instances can fetch messages
+and publish them to chat rooms.</p>
+
+<p>This code snippet shows how to create messages:</p>
+<div class="highlight ruby"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17</pre></td><td class="code"><pre>    <span class="nb">require</span> <span class="s1">'frankly-ruby'</span>
+
+    <span class="n">message1_payload</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="ss">contents: </span><span class="p">[{</span>
+        <span class="ss">type:  </span><span class="s1">'text/plain'</span><span class="p">,</span>
+        <span class="ss">value: </span><span class="s1">'Hello World!'</span>
+    <span class="p">}]</span>
+    <span class="p">}</span>
+    <span class="n">message1</span> <span class="o">=</span> <span class="n">client</span><span class="p">.</span><span class="nf">create_room_message</span><span class="p">(</span><span class="n">room</span><span class="p">[</span><span class="s1">'id'</span><span class="p">],</span><span class="n">create_payload</span><span class="p">)</span>
+
+    <span class="n">message2_payload</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="ss">contents: </span><span class="p">[{</span>
+         <span class="ss">type: </span><span class="s1">'image/*'</span><span class="p">,</span>
+         <span class="ss">url:  </span><span class="s1">'https://app.franklychat.com/files/...'</span>
+        <span class="p">}]</span>
+     <span class="p">}</span>
+     <span class="n">message2</span> <span class="o">=</span> <span class="n">client</span><span class="p">.</span><span class="nf">create_room_message</span><span class="p">(</span><span class="n">room</span><span class="p">[</span><span class="s1">'id'</span><span class="p">],</span><span class="n">create_payload</span><span class="p">)</span>
+</pre></td></tr></tbody></table>
+</div>
+
+<p>Let&rsquo;s explain what&rsquo;s happening here: messages published to chat rooms can contain multiple parts; they could contain a few text enries, text an
+an image, several images, etc. The contents property of the message is actually a list of objects, the fields of the <em>contents</em> objects
+are:</p>
+
+<ul>
+<li>  <em>type</em> This is the mime type of the actual content it represents, it gives the application information about how to render the
+content. This field is mandatory.</li>
+<li>  <em>value</em> This is used for inline resources directly embedded into the message. One of <em>value</em> or <em>url</em> must be
+specified.</li>
+<li>  <em>url</em> This is the inline resource that is directly imbedded into the message. One of <em>value</em> or <em>url</em> must be
+specified.</li>
+</ul>
+
+<p>Typically, text messages are inlined because they are small enough resources that they can be embedded into the message without having an
+impact on the user experience. Images, on the other hand, may take a while to download and caching mechanisms can be used to optimize rendering
+by preventing large resources from downloading too often. This is why we provide the <em>value</em> as a remote resouce (we&rsquo;ll see later in the
+<em>Files</em> section how to generate remote resource URLs).</p>
+
+<p><em>Keep in mind that when a message is created, it will be broadcasted to every client application that is currently listening for messages in
+that chat room.</em></p>
+
+<h2 id="announcements">Announcements</h2>
+
+<p>Announcements are a type of message that is only available to admin users. A client authenticated with admin priviledges can create
+Announcements in the app which can be published to one or more rooms at a later time.</p>
+
+<p>Currently, the only type of Announcement is the Sticky Message. Once the most recent Sticky Message sent reaches the top of the Chat Room UI,
+it will anchor to the top until a new Sticky Message replaces it. This provides context to the end users about what has recently happened or
+what is currently happening to make it easier for them to jump in and chat.</p>
+
+<p>Here&rsquo;s how an app using the frankly module would create and then publish announcements:</p>
+<div class="highlight ruby"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12</pre></td><td class="code"><pre>    <span class="nb">require</span> <span class="s1">'frankly-ruby'</span>
+
+    <span class="n">anno_payload</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="ss">sticky: </span><span class="kp">true</span><span class="p">,</span>
+        <span class="ss">contents: </span><span class="p">[{</span>
+            <span class="ss">type:  </span><span class="s1">'text/plain'</span><span class="p">,</span>
+            <span class="ss">value: </span><span class="s1">'Hello World!'</span>
+        <span class="p">}]</span>
+    <span class="p">}</span>
+
+    <span class="n">anno</span> <span class="o">=</span> <span class="n">client</span><span class="p">.</span><span class="nf">create_announcement</span><span class="p">(</span><span class="n">anno_payload</span><span class="p">)</span>
+    <span class="n">client</span><span class="p">.</span><span class="nf">create_room_message</span><span class="p">(</span><span class="n">room</span><span class="p">.</span><span class="nf">id</span><span class="p">,</span> <span class="p">{</span><span class="ss">announcement: </span><span class="n">anno</span><span class="p">[</span><span class="s1">'id'</span><span class="p">]})</span>
+</pre></td></tr></tbody></table>
+</div>
+
+<p>As we can see here, the Announcement is created with the same structure than a regular message. The content of the Announcement well be set as
+the message content when it is published to the Room and the contents field obeys the rules about inline and remote content that were described
+in the <i>Messages</i> section.</p>
+
+<h2 id="users">Users</h2>
+
+<p>A central concept of the <em>Frankly API</em> is the <i>User</i>. Users represent people using the chat platform within an app. They are created
+during authentication and one using in the <em>Frankly API</em> should be to a one user on the host application.</p>
+
+<h3 id="roles"><em>Roles</em></h3>
+
+<p>Users may be granted different roles which allows or denies them access to certain operations. The Frankly API currently defines four roles
+that can be assigned to users:</p>
+
+<ol>
+<li><p><em>Admin</em>
+Admin users have the highest level of permissions, they can perform all available operations on the Frankly API. Each application is
+given one default admin user when created. To authenticate as the default admin user a client must set the Role parameter to &lsquo;admin&rsquo;
+and the Partner User ID to null when generating the identity token. This is usually only done when using the Frankly API from your own
+backend as giving such power to a mobile or web client may expose your application to security issues. Among the extra operations that
+admin users can perform are managing other users&rsquo; accounts, banning and unbanning specific users, etc&hellip;</p></li>
+<li><p><em>Regular</em>
+This is the default role for users that have been authenticated with a Partner User ID when generating an identity token. Regular users
+can perform all operations required to take full advantage of the Frankly features, like creating new chat rooms, sending and receiving
+messages, modifying their Display Name and Profile Avatar, etc&hellip; Unlike Admin Users, regular users cannot affect other users&rsquo;
+accounts, they only operate on their own data.</p></li>
+<li><p><em>Guest</em>
+Guest Users can be used to remove barriers in product adoption. They have access to basic operations which let them experience chat
+without requiring a fully authenticated account. Guest Users can be converted to regular users later on if needed.</p></li>
+<li><p><em>Anonymous</em>
+This is the role offering the least amount of permissions to a user as it doesn&rsquo;t require any form of authentication (the Partner User
+ID can be set to null when generating the identity token) but is only allowed to perform read operations. Anonymous Users can view chat
+Rooms and messages sent by others but cannot send messages themselves, edit their Display Name or Profile Avatar either, etc&hellip;
+Anonymous Users can be seen simply as observers, providing an overview of the product experience before creating an account or logging
+in.</p></li>
+</ol>
+
+<h2 id="files">Files</h2>
+
+<p>Objects of the <em>Frankly API</em> can have URL properties set to reference remote resources like images. All these URLs must be within the
+<em>+https://app.franklychat.com+</em> domain, which means an application must upload these resources to Frankly servers.</p>
+
+<p>Uploading a file happens in two steps, first the application needs to request a new file URL to the <em>Frankly API</em>, then it can use that
+URL to upload a resource to Frankly servers. Lukily the frankly module abstracts this nicely in a single operation, here&rsquo;s an example of how to
+set an image for a chat Room:</p>
+<div class="highlight ruby"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9</pre></td><td class="code"><pre>    <span class="nb">require</span> <span class="s1">'frankly-ruby'</span>
+
+    <span class="n">file_payload</span> <span class="o">=</span> <span class="p">{</span>
+      <span class="ss">category:  </span><span class="s1">'useravatar'</span><span class="p">,</span>
+      <span class="ss">type: </span><span class="s1">'image'</span>
+    <span class="p">}</span>
+
+    <span class="n">file</span> <span class="o">=</span> <span class="n">client</span><span class="p">.</span><span class="nf">upload_file_from_path</span><span class="p">(</span><span class="s1">'./path/to/image.pnp'</span><span class="p">,</span><span class="n">file_payload</span><span class="p">)</span>
+    <span class="n">room</span> <span class="o">=</span> <span class="n">client</span><span class="p">.</span><span class="nf">update_room</span><span class="p">(</span><span class="n">room</span><span class="p">.</span><span class="nf">id</span><span class="p">,</span> <span class="p">{</span><span class="n">avatar_image_url</span> <span class="o">=</span> <span class="n">file</span><span class="p">[</span><span class="s1">'url'</span><span class="p">]})</span>
+</pre></td></tr></tbody></table>
+</div>
+
+<p>The object returned by a call to <em>upload<em>file</em>from_path</em> and other upload methods is created in the first step described above. The
+<em>category</em> parameter shown here is used by the <em>Frankly API</em> to determine which formatting rules should be applied to the resource.
+Since the files will be optimized for different situations based on their category, it will be easier to integrate with Frankly and this will
+create a better user experience.</p>
+
+<p>Here are the file categories currently available:</p>
+
+<ul>
+<li>  <em>chat</em>
+This is the default category and is usually applied to images sent by end users.</li>
+<li>  <em>useravatar</em>
+This category is for files that will be displayed in room lists.</li>
+<li>  <em>roomavatar</em>
+This category is for files that will be displayed in room lists.</li>
+<li>  <em>featuredavatar</em>
+This category is for files that will represent featured rooms.</li>
+<li>  <em>sticker</em>
+This category is for files that are used in sticker messages.</li>
+<li>  <em>stickerpack</em>
+This category is for files that will be the avatar of a sticker pack.</li>
+</ul>
+
+<h2 id="moderation">Moderation</h2>
+
+<h3 id="bans"><em>Bans</em></h3>
+
+<p>With the <em>Frankly API</em>, you can read the ban status of a given user. A banned user will not be able to send messages so it will be useful
+to determine programmatically if a user has been banned. Here&rsquo;s an example of how you can read the ban status of a user:</p>
+<div class="highlight ruby"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4</pre></td><td class="code"><pre><span class="nb">require</span> <span class="err">‘</span><span class="n">frankly</span><span class="o">-</span><span class="n">client</span><span class="err">’</span>
+
+<span class="n">user_id</span> <span class="o">=</span> <span class="n">some</span> <span class="n">number</span>
+<span class="n">ban</span> <span class="o">=</span> <span class="n">client</span><span class="p">.</span><span class="nf">read_user_ban</span><span class="p">(</span><span class="n">user_id</span><span class="p">)</span>
+</pre></td></tr></tbody></table>
+</div>
+
+                    <div style="height:20px"></div>
+                </div>
+
+            </div>
+            <div class="flex" drawer>
+                <paper-header-panel class="flex paper-header-panel layout vertical" drawer mode="seamed">
+                    <paper-toolbar>
+<a href="/">                            <img class="logo" src="/images/franklyinc_logo_color_large-044d426f.png" />
+</a>                    </paper-toolbar>
+                    <paper-input label="Search Documentation" class="search" type="search"></paper-input>
+                    <div class="side-panel">
+                        <ul class="nav-tree">
+                            <li class='child '><a href="01-getting-started.html">Getting Started</a></li><li class='child '><a href="02-authentication.html">Authentication</a></li><li class='child active'><a href="03-the-basics.html">The Basics</a></li><li class='child '><a href="06-downloads.html">Downloads</a></li>
+                        </ul>
+                    </div>
+                </paper-header-panel>
+            </div>
+        </paper-drawer-panel>
+    </body>
+    <script>
+    $('li:contains("The Basics")').replaceWith("<nav class='anchorific floating-toc'></nav>");
+    $('.page-content').anchorific({
+        anchorText: ''
+    });
+    </script>
+</html>

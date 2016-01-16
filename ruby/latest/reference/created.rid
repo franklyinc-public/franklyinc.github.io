@@ -1,0 +1,20 @@
+Tue, 22 Dec 2015 15:40:08 -0800
+./doc/created.rid	Tue, 22 Dec 2015 15:40:08 -0800
+./frankly-ruby.gemspec	Tue, 22 Dec 2015 15:39:31 -0800
+./Gemfile	Tue, 22 Dec 2015 15:39:31 -0800
+./lib/frankly-ruby/announcement.rb	Tue, 22 Dec 2015 15:39:31 -0800
+./lib/frankly-ruby/apps.rb	Tue, 22 Dec 2015 15:39:31 -0800
+./lib/frankly-ruby/auth.rb	Tue, 22 Dec 2015 15:39:31 -0800
+./lib/frankly-ruby/files.rb	Tue, 22 Dec 2015 15:39:31 -0800
+./lib/frankly-ruby/generic.rb	Tue, 22 Dec 2015 15:39:31 -0800
+./lib/frankly-ruby/message.rb	Tue, 22 Dec 2015 15:39:31 -0800
+./lib/frankly-ruby/rooms.rb	Tue, 22 Dec 2015 15:39:31 -0800
+./lib/frankly-ruby/sessions.rb	Tue, 22 Dec 2015 15:39:31 -0800
+./lib/frankly-ruby/users.rb	Tue, 22 Dec 2015 15:39:31 -0800
+./lib/frankly-ruby/util.rb	Tue, 22 Dec 2015 15:39:31 -0800
+./lib/frankly-ruby/version.rb	Tue, 22 Dec 2015 15:39:31 -0800
+./lib/frankly-ruby.rb	Tue, 22 Dec 2015 15:39:31 -0800
+./LICENSE	Tue, 22 Dec 2015 15:39:31 -0800
+./Rakefile	Tue, 22 Dec 2015 15:39:31 -0800
+./README.md	Tue, 22 Dec 2015 15:39:31 -0800
+./test/test_franklyclient.rb	Tue, 22 Dec 2015 15:39:31 -0800

@@ -1,0 +1,339 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+
+        <!-- Always force latest IE rendering engine or request Chrome Frame -->
+        <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+        <link rel="icon"
+              type="image/png"
+              href="../../images/frankly_favicon_32x32_no_bg.png">
+        <!-- Use title if it's in the page YAML frontmatter -->
+        <title>Quick Start
+            - Frankly Developer Portal</title>
+        <script src="/bower_components/webcomponentsjs/webcomponents-lite.min-01242ae0.js"></script>
+        <link href="/stylesheets/normalize-14170e97.css" rel="stylesheet" /><link href="/stylesheets/all-f2dad6dc.css" rel="stylesheet" />
+        <link href="/stylesheets/highlight-6793ce8e.css" rel="stylesheet" /><link href="/stylesheets/all-f2dad6dc.css" rel="stylesheet" />
+        <style is="custom-style">
+                    :root {
+                        --paper-toolbar-background: #2A2E33;
+                        --paper-input-container-focus-color: #fa3b1b;
+                        --paper-input-container-underline-focus: {
+                            display:none;
+                        };
+                    }
+                    .paper-header-panel {
+                        background-color: #2A2E33;
+                        padding-right: 20px;
+                        color: white;
+                    }
+                    .page-content {
+                        padding-left: 30px;
+                        padding-right: 30px;
+                        overflow: scroll;
+                    }
+
+                    .nav-tree li {
+                        list-style-type: none;
+                    }
+
+                    .nav-tree li a {
+                            color: white;
+                    }
+                    .logo {
+                        margin-left: 5px;
+                        margin-top: 20px;
+                        width: 180px;
+                    }
+                    .search {
+                        --paper-input-container-input-color: white;
+                        padding-left: 20px;
+                        padding-right: 20px;
+                    }
+                    .version-dropdown {
+                        width:90px;
+                        --paper-input-container-underline: {
+                            display:none;
+                        };
+                    }
+
+                    .version-dropdown a {
+                        color: black;
+                    }
+
+                    .previous {
+
+                    }
+
+                    .next {
+
+                    }
+
+                    .floating-toc {
+                        margin-left: -20px;
+                    }
+
+                    .floating-toc a {
+                        color:black;
+                    }
+
+                    .customization-table {
+                        table, th, td {
+                            border: 1px solid black;
+                            text-align: left;
+                        }
+                    }
+
+                    p {
+                        line-height: 150%;
+                    }
+                </style>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js" type="text/javascript"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/lunr.js/0.5.9/lunr.min.js" type="text/javascript"></script>
+        <script src="/javascripts/all-b1933d9a.js"></script>
+        <script src="/javascripts/anchorify-9f550341.js"></script>
+
+        <link href="/bower_components/paper-header-panel/paper-header-panel.html" rel="import">
+        <link href="/bower_components/paper-drawer-panel/paper-drawer-panel.html" rel="import">
+        <link href="/bower_components/paper-toolbar/paper-toolbar.html" rel="import">
+        <link href="/bower_components/paper-icon-button/paper-icon-button.html" rel="import">
+        <link href="/bower_components/iron-icons/iron-icons.html" rel="import">
+        <link href="/bower_components/iron-flex-layout/iron-flex-layout.html" rel="import">
+        <link href="/bower_components/paper-input/paper-input.html" rel="import">
+        <link href="/bower_components/paper-dropdown-menu/paper-dropdown-menu.html" rel="import">
+        <link href="/bower_components/paper-menu/paper-menu.html" rel="import">
+        <link href="/bower_components/paper-item/paper-item.html" rel="import">
+        <link rel="icon"
+              type="image/png"
+              href="images/frankly_favicon_32x32_no_bg.png">
+    </head>
+
+    <body class="ios ios_latest ios_latest_doc ios_latest_doc_00-quick-start">
+        <paper-drawer-panel class="flex" mode="seamed">
+            <div class="flex page-content" main>
+                <div class="horizontal layout">
+                    <paper-icon-button icon="menu" on-tap="menuAction" paper-drawer-toggle></paper-icon-button>
+                    <h1 class="flex">
+                        Quick Start
+                    </h1>
+                    <span class="flex">
+                    </span>
+                    <paper-dropdown-menu noink no-animation class="version-dropdown">
+                        <paper-menu class="dropdown-content version-dropdown" selected="0">
+                                <paper-item>
+                                    <a href="/ios/latest">latest</a>
+                                </paper-item>
+                        </paper-menu>
+                    </paper-dropdown-menu>
+
+                </div>
+                <div style="max-width:70%">
+                    <h2 id="before-implementing-the-frankly-sdk">Before Implementing the Frankly SDK</h2>
+
+<ol>
+<li>You&rsquo;ll need to obtain an <code>appKey</code> and <code>appSecret</code> before implementing the Frankly SDK. These are required for authenticating with our server. If you don&rsquo;t have these, please contact us at <a href="mailto:platform-support@franklychat.com"><a href="mailto:platform-support@franklychat.com">platform-support@franklychat.com</a></a>.</li>
+<li>Your server will need to be able to generate a JSON Web Token (JWT). To learn more about how to generate a JWT, click here.</li>
+</ol>
+
+<h2 id="download-the-sdk">Download the SDK</h2>
+
+<h2 id="basic-integration-of-the-frankly-sdk">Basic Integration of the Frankly SDK</h2>
+
+<p>In your AppDelegate, import the Frankly SDK.</p>
+<div class="highlight smalltalk"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1</pre></td><td class="code"><pre><span class="ss">#import</span> <span class="c">"FranklySDK.h"</span>
+</pre></td></tr></tbody></table>
+</div>
+
+<p>Then initialize the SDK in application:didFinishLaunchingWithOptions:</p>
+<div class="highlight smalltalk"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1</pre></td><td class="code"><pre><span class="p">[</span><span class="nc">FranklySDK</span> <span class="nf">initializeSDKWithServerType:</span> <span class="nc">FRSDKServerTypeProduction</span><span class="p">];</span>
+</pre></td></tr></tbody></table>
+</div>
+
+<p>The Frankly SDK provides a chat experience within your existing app. Users are generally presented with a list of rooms. Within the rooms is where users communicate with each other, and with your brand.</p>
+
+<p>All users require some level of authentication before being admitted into the Frankly chat experience. You will decide whether your users can enter rooms anonymously, as a guest (with a one-time username), or as a logged-in user. This designation is made via the &lsquo;role&rsquo; parameter in initiateAuthenticationWithUserID:role: (see code block below).</p>
+
+<p>Users that enter the room anonymously will have read-only access, and will be offered a way to signup or login. If they choose to signup/login, you can customize whether they see the option to enter as a guest, as a logged-in user, or whether they see options for both. This is customized via the Frankly SDK&rsquo;s loginBehavior property (see code block below).</p>
+
+<p>Specify your desired login behavior and set a delegate for the authentication callbacks. And then kick off authentication, passing in the user&rsquo;s ID and role. Note that the users ID here is NOT a Frankly ID. It is the ID that your application uses for identifying that unique user.</p>
+<div class="highlight smalltalk"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3</pre></td><td class="code"><pre>    <span class="p">[</span><span class="nc">FranklySDK</span> <span class="nf">sharedInstance</span><span class="p">].</span><span class="nv">loginBehavior</span> <span class="nf">=</span> <span class="nc">FRSDKLoginBehaviorPartner</span><span class="p">;</span>
+    <span class="p">[</span><span class="nc">FranklySDK</span> <span class="nf">sharedInstance</span><span class="p">].</span><span class="nv">authenticationDelegate</span> <span class="nf">=</span> <span class="bp">self</span><span class="p">;</span>
+    <span class="p">[[</span><span class="nc">FranklySDK</span> <span class="nf">sharedInstance</span><span class="p">]</span> <span class="nf">initiateAuthenticationWithUserID:</span><span class="err">@</span><span class="c">"MyUserID123"</span> <span class="nf">role:</span><span class="nv">FRSDKAuthenticationRoleUser</span><span class="p">];</span>
+</pre></td></tr></tbody></table>
+</div>
+
+<p>In the code above, you assigned &#39;self&rsquo; as the delegate to the authentication callbacks. Indicate that this class conforms to the FranklySDKAuthenticationDelegate.</p>
+<div class="highlight smalltalk"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1</pre></td><td class="code"><pre>    <span class="err">@</span><span class="nv">interface</span> <span class="nf">ViewController</span> <span class="err">:</span> <span class="nc">UIViewController</span> <span class="nf">&lt;</span><span class="nc">FranklySDKAuthenticationDelegate</span><span class="nf">&gt;</span>
+</pre></td></tr></tbody></table>
+</div>
+
+<p>And then implement the delegate callback methods for authentication.
+<strong>Note:</strong> this requires that your organization have an endpoint for creating a JSON Web Token.</p>
+
+<h2 id="set-up-a-room-list">Set up a Room List</h2>
+
+<p>The room list is displayed in a navigation controller. When a user selects a room, a room view controller is pushed onto the stack. You can either supply your own navigation controller, or use the one provided by the Frankly SDK, which has the Frankly navbar.</p>
+
+<p>Using your own navigation controller.</p>
+<div class="highlight smalltalk"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2</pre></td><td class="code"><pre>    <span class="nc">UIViewController</span> <span class="nf">*</span><span class="nv">viewController</span> <span class="nf">=</span> <span class="p">[[</span><span class="nc">FranklySDK</span> <span class="nf">sharedInstance</span><span class="p">]</span> <span class="nf">indexViewController</span><span class="p">];</span>
+    <span class="nf">UINavigationController</span> <span class="nf">*</span><span class="nv">navController</span> <span class="nf">=</span> <span class="p">[[</span><span class="nc">UINavigationController</span> <span class="nf">alloc</span><span class="p">]</span> <span class="nf">initWithRootViewController:</span><span class="nv">viewController</span><span class="p">];</span>
+</pre></td></tr></tbody></table>
+</div>
+
+<p>Or using Frankly&rsquo;s navigation controller, which has the Frankly navbar.</p>
+<div class="highlight smalltalk"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1</pre></td><td class="code"><pre>    <span class="nc">UINavigationController</span> <span class="nf">*</span><span class="nv">navController</span> <span class="nf">=</span> <span class="p">[[</span><span class="nc">FranklySDK</span> <span class="nf">sharedInstance</span><span class="p">]</span> <span class="nf">indexNavigationController</span><span class="p">];</span>
+</pre></td></tr></tbody></table>
+</div>
+
+<h2 id="setting-user-info">Setting User Info</h2>
+
+<p>In order to have the user&rsquo;s name and profile image associated with their chat activity, the Frankly SDK must be given this information. Otherwise, the user&rsquo;s activity will appear under the anonymous title &ldquo;User&rdquo;, which doesn&rsquo;t provide for the best experience if the user has entered chat as a logged in user.</p>
+
+<p>The user&rsquo;s name and profile image should be set in the authentication delegate&rsquo;s authenticationDidSucceedWithUserID: method.</p>
+<div class="highlight smalltalk"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4</pre></td><td class="code"><pre>    <span class="err">-</span> <span class="p">(</span><span class="nv">void</span><span class="p">)</span><span class="nf">authenticationDidSucceedWithUserID:</span><span class="p">(</span><span class="nc">NSNumber</span> <span class="nf">*</span><span class="p">)</span><span class="nf">userID</span> <span class="p">{</span>
+
+        <span class="p">[[</span><span class="nc">FranklySDK</span> <span class="nf">sharedInstance</span><span class="p">]</span> <span class="nf">setUserName:</span><span class="err">@</span><span class="c">"Ezra Hamilton"</span> <span class="nf">profileImage:</span><span class="nv">nil</span><span class="p">];</span>
+    <span class="p">}</span>
+</pre></td></tr></tbody></table>
+</div>
+
+<p>You can customize whether the user can edit their name and image within the chat experience.</p>
+<div class="highlight smalltalk"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3</pre></td><td class="code"><pre>    <span class="err">-</span> <span class="p">(</span><span class="nc">BOOL</span><span class="p">)</span><span class="nf">shouldAllowProfileEditing</span> <span class="p">{</span>
+        <span class="nv">return</span> <span class="nf">YES</span><span class="p">;</span>
+    <span class="p">}</span>
+</pre></td></tr></tbody></table>
+</div>
+
+<p>The above method requires conformance to the FranklySDKUserProfileDelegate protocol. You will also need to assign the delegate that will implement shouldAllowProfileEditing and the other delegate methods associated with the protocol.</p>
+<div class="highlight smalltalk"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8</pre></td><td class="code"><pre>    <span class="err">@</span><span class="nv">interface</span> <span class="nf">ViewController</span> <span class="err">:</span> <span class="nc">UIViewController</span> <span class="nf">&lt;</span><span class="nc">FranklySDKAuthenticationDelegate</span><span class="nf">,</span> <span class="nc">FranklySDKUserProfileDelegate</span><span class="nf">&gt;</span>
+
+    <span class="err">-</span> <span class="p">(</span><span class="nv">void</span><span class="p">)</span><span class="nf">viewDidLoad</span> <span class="p">{</span>
+        <span class="p">[</span><span class="bp">super</span> <span class="nf">viewDidLoad</span><span class="p">];</span>
+        <span class="p">[</span><span class="nc">FranklySDK</span> <span class="nf">sharedInstance</span><span class="p">].</span><span class="nv">userProfileDelegate</span> <span class="nf">=</span> <span class="bp">self</span><span class="p">;</span>
+
+        <span class="p">.</span><span class="err">..</span>
+    <span class="p">}</span>
+</pre></td></tr></tbody></table>
+</div>
+
+<p>The profile delegate will get called every time the user profile image or display
+name changes, whether it&rsquo;s set programmatically or via the user interface.</p>
+<div class="highlight smalltalk"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5
+6
+7</pre></td><td class="code"><pre>    <span class="err">-</span> <span class="p">(</span><span class="nv">void</span><span class="p">)</span><span class="nf">user:</span><span class="p">(</span><span class="nc">NSNumber</span> <span class="nf">*</span><span class="p">)</span><span class="nf">userID</span> <span class="nf">didUpdateDisplayName:</span><span class="p">(</span><span class="nc">NSString</span> <span class="nf">*</span><span class="p">)</span><span class="nf">displayName</span> <span class="p">{</span>
+        <span class="nc">NSLog</span><span class="p">(</span><span class="err">@</span><span class="c">"userID: %@, did update displayName: %@"</span><span class="err">,</span> <span class="nv">userID</span><span class="nf">,</span> <span class="nv">displayName</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="nf">-</span> <span class="p">(</span><span class="nv">void</span><span class="p">)</span><span class="nf">user:</span><span class="p">(</span><span class="nc">NSNumber</span> <span class="nf">*</span><span class="p">)</span><span class="nf">userID</span> <span class="nf">didUpdateProfileImage:</span><span class="p">(</span><span class="nc">UIImage</span> <span class="nf">*</span><span class="p">)</span><span class="nf">image</span> <span class="p">{</span>
+        <span class="nc">NSLog</span><span class="p">(</span><span class="err">@</span><span class="c">"didUpdateUserImage"</span><span class="p">);</span>
+    <span class="p">}</span>
+</pre></td></tr></tbody></table>
+</div>
+
+<h2 id="customization">Customization</h2>
+
+<p>FranklySDK on iOS allows partners to set values that affect FranklySDK&rsquo;s
+interface within the partner app. This data is passed in via a standard plist
+file. An example data file, <code>FRSDKExampleConfig.plist</code>, is included FranklySDK package.</p>
+
+<p>Partners may modify that file, or create a new one and then, any time after
+initializeSDKWithServerType: has been called,add the file to FranklySDK via the
+function <code>addCustomizationFile:(NSURL *)fileURL</code>. Multiple files may be added via
+this call, any collisions with existing keys will cause the existing value to be
+overwritten by the new value.</p>
+
+<h4 id="customization-plist">Customization Plist</h4>
+
+<p>This is a standard Apple plist file which means it’s an XML file with a single
+object named Root. FranklySDK expects this Root object to be a dictionary of
+dictionaries. Each dictionary represents a customization category that is
+populated with key value pairs.</p>
+
+<h4 id="data-types">Data Types</h4>
+
+<p>The base values stored in the dictionaries in the customization file will be of
+the following types:</p>
+
+<p>Data Types This is a string that follows a standard hex string format with alpha.
+It maybe be preceded by ‘0x’ or ‘#’ but the last 8 characters should represent
+the hex values in red, green, blue, alpha order. So the color white with full
+opacity would be represented as 0xFFFFFFFF and black, half opacity would be
+represented as 0x0000007F.</p>
+
+<h4 id="customization-categories">Customization Categories</h4>
+
+<p>the ui key contains a dictionary of key value pairs with the following keys:</p>
+
+<table><thead>
+<tr>
+<th>Color Key</th>
+<th>Use Case</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>primary-fg-color</code></td>
+<td>Takes a color value and is used throughout the app as primary foreground color.</td>
+</tr>
+<tr>
+<td><code>primary-bg-color</code></td>
+<td>Takes a color value and is used throughout the app as the primary background color.</td>
+</tr>
+<tr>
+<td><code>accent-bg-color</code></td>
+<td>Takes a color value and is used throughout the app as an accent color. Most noticeably as the background of the locked Input Bar.</td>
+</tr>
+<tr>
+<td><code>brand-bg-color</code></td>
+<td>Takes a color value. Is used as the background for Sticky Messages when they are docked at the top of a Room.</td>
+</tr>
+<tr>
+<td><code>attention-bg-color</code></td>
+<td>Takes a color value. Is used in the custom activity indicators.</td>
+</tr>
+</tbody></table>
+
+                    <div style="height:20px"></div>
+                </div>
+
+            </div>
+            <div class="flex" drawer>
+                <paper-header-panel class="flex paper-header-panel layout vertical" drawer mode="seamed">
+                    <paper-toolbar>
+<a href="/">                            <img class="logo" src="/images/franklyinc_logo_color_large-044d426f.png" />
+</a>                    </paper-toolbar>
+                    <paper-input label="Search Documentation" class="search" type="search"></paper-input>
+                    <div class="side-panel">
+                        <ul class="nav-tree">
+                            <li class='child active'><a href="00-quick-start.html">Quick Start</a></li><li class='child '><a href="01-getting-started.html">Getting Started</a></li><li class='child '><a href="02-authentication.html">Authentication</a></li><li class='child '><a href="03-the-basics.html">The Basics</a></li><li class='child '><a href="04-advanced-features.html">Advanced Features</a></li><li class='child '><a href="06-downloads.html">Downloads</a></li>
+                        </ul>
+                    </div>
+                </paper-header-panel>
+            </div>
+        </paper-drawer-panel>
+    </body>
+    <script>
+    $('li:contains("Quick Start")').replaceWith("<nav class='anchorific floating-toc'></nav>");
+    $('.page-content').anchorific({
+        anchorText: ''
+    });
+    </script>
+</html>

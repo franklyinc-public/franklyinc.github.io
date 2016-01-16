@@ -1,0 +1,99 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+
+    <!-- Always force latest IE rendering engine or request Chrome Frame -->
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+
+    <!-- Use title if it's in the page YAML frontmatter -->
+    <title> Frankly Developer Portal </title>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js" type="text/javascript"></script>
+    <script src="/bower_components/webcomponentsjs/webcomponents-lite.min-01242ae0.js"></script>
+    <link href="/stylesheets/normalize-14170e97.css" rel="stylesheet" /><link href="/stylesheets/all-f2dad6dc.css" rel="stylesheet" />
+    <style is="custom-style">
+            :root {
+                --paper-toolbar-background: #2A2E33;
+            }
+            .logo {
+                margin-left: 5px;
+                margin-top: 10px;
+                width: 150px;
+            }
+        </style>
+        <link rel="icon"
+              type="image/png"
+              href="images/frankly_favicon_32x32_no_bg.png">
+    <script src="/javascripts/all-b1933d9a.js"></script>
+
+    <link rel="import" href="/bower_components/paper-header-panel/paper-header-panel.html">
+    <link rel="import" href="/bower_components/paper-toolbar/paper-toolbar.html">
+    <link rel="import" href="/bower_components/paper-icon-button/paper-icon-button.html">
+    <link rel="import" href="/bower_components/iron-icons/iron-icons.html">
+    <link rel="import" href="/bower_components/iron-flex-layout/iron-flex-layout.html">
+    <link rel="import" href="/bower_components/iron-image/iron-image.html">
+
+</head>
+
+<body class="bower_components bower_components_paper-icon-button bower_components_paper-icon-button_README">
+    <paper-header-panel class="flex">
+        <paper-toolbar>
+<a href="/">                <img class="logo" src="/images/franklyinc_logo_color_large-044d426f.png" />
+</a>            <span class="flex"></span>
+        </paper-toolbar>
+    </paper-header-panel>
+    <h1 id="paper-icon-button">paper-icon-button</h1>
+
+<p>Material Design: <a href="http://www.google.com/design/spec/components/buttons.html">Buttons</a></p>
+
+<p><code>paper-icon-button</code> is a button with an image placed at the center. When the user touches
+the button, a ripple effect emanates from the center of the button.</p>
+
+<p><code>paper-icon-button</code> includes a default icon set.  Use <code>icon</code> to specify which icon
+from the icon set to use.</p>
+<div class="highlight html"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1</pre></td><td class="code"><pre><span class="nt">&lt;paper-icon-button</span> <span class="na">icon=</span><span class="s">"menu"</span><span class="nt">&gt;&lt;/paper-icon-button&gt;</span>
+</pre></td></tr></tbody></table>
+</div>
+
+<p>See <a href="#iron-iconset"><code>iron-iconset</code></a> for more information about
+how to use a custom icon set.</p>
+
+<p>Example:</p>
+<div class="highlight html"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4</pre></td><td class="code"><pre><span class="nt">&lt;link</span> <span class="na">href=</span><span class="s">"path/to/iron-icons/iron-icons.html"</span> <span class="na">rel=</span><span class="s">"import"</span><span class="nt">&gt;</span>
+
+<span class="nt">&lt;paper-icon-button</span> <span class="na">icon=</span><span class="s">"favorite"</span><span class="nt">&gt;&lt;/paper-icon-button&gt;</span>
+<span class="nt">&lt;paper-icon-button</span> <span class="na">src=</span><span class="s">"star.png"</span><span class="nt">&gt;&lt;/paper-icon-button&gt;</span>
+</pre></td></tr></tbody></table>
+</div>
+
+<h2 id="styling">Styling</h2>
+
+<p>Style the button with CSS as you would a normal DOM element. If you are using the icons
+provided by <code>iron-icons</code>, they will inherit the foreground color of the button.</p>
+<div class="highlight html"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2</pre></td><td class="code"><pre><span class="c">&lt;!-- make a red "favorite" button --&gt;</span>
+<span class="nt">&lt;paper-icon-button</span> <span class="na">icon=</span><span class="s">"favorite"</span> <span class="na">style=</span><span class="s">"color: red;"</span><span class="nt">&gt;&lt;/paper-icon-button&gt;</span>
+</pre></td></tr></tbody></table>
+</div>
+
+<p>By default, the ripple is the same color as the foreground at 25% opacity. You may
+customize the color using this selector:</p>
+<div class="highlight css"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4</pre></td><td class="code"><pre><span class="c">/* make #my-button use a blue ripple instead of foreground color */</span>
+<span class="nf">#my-button</span><span class="nd">::shadow</span> <span class="nf">#ripple</span> <span class="p">{</span>
+  <span class="nl">color</span><span class="p">:</span> <span class="no">blue</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table>
+</div>
+
+<p>The opacity of the ripple is not customizable via CSS.</p>
+
+</body>
+
+</html>

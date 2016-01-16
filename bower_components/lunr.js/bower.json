@@ -1,0 +1,11 @@
+{
+  "name": "lunr-32bc08ca.js",
+  "version": "0.5.12",
+  "main": "lunr-32bc08ca.js",
+  "ignore": [
+    "tests/",
+    "perf/",
+    "build/",
+    "docs/"
+  ]
+}

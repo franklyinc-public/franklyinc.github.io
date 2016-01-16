@@ -1,0 +1,294 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+
+        <!-- Always force latest IE rendering engine or request Chrome Frame -->
+        <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+        <link rel="icon"
+              type="image/png"
+              href="../../images/frankly_favicon_32x32_no_bg.png">
+        <!-- Use title if it's in the page YAML frontmatter -->
+        <title>The Basics
+            - Frankly Developer Portal</title>
+        <script src="/bower_components/webcomponentsjs/webcomponents-lite.min-01242ae0.js"></script>
+        <link href="/stylesheets/normalize-14170e97.css" rel="stylesheet" /><link href="/stylesheets/all-f2dad6dc.css" rel="stylesheet" />
+        <link href="/stylesheets/highlight-6793ce8e.css" rel="stylesheet" /><link href="/stylesheets/all-f2dad6dc.css" rel="stylesheet" />
+        <style is="custom-style">
+                    :root {
+                        --paper-toolbar-background: #2A2E33;
+                        --paper-input-container-focus-color: #fa3b1b;
+                        --paper-input-container-underline-focus: {
+                            display:none;
+                        };
+                    }
+                    .paper-header-panel {
+                        background-color: #2A2E33;
+                        padding-right: 20px;
+                        color: white;
+                    }
+                    .page-content {
+                        padding-left: 30px;
+                        padding-right: 30px;
+                        overflow: scroll;
+                    }
+
+                    .nav-tree li {
+                        list-style-type: none;
+                    }
+
+                    .nav-tree li a {
+                            color: white;
+                    }
+                    .logo {
+                        margin-left: 5px;
+                        margin-top: 20px;
+                        width: 180px;
+                    }
+                    .search {
+                        --paper-input-container-input-color: white;
+                        padding-left: 20px;
+                        padding-right: 20px;
+                    }
+                    .version-dropdown {
+                        width:90px;
+                        --paper-input-container-underline: {
+                            display:none;
+                        };
+                    }
+
+                    .version-dropdown a {
+                        color: black;
+                    }
+
+                    .previous {
+
+                    }
+
+                    .next {
+
+                    }
+
+                    .floating-toc {
+                        margin-left: -20px;
+                    }
+
+                    .floating-toc a {
+                        color:black;
+                    }
+
+                    .customization-table {
+                        table, th, td {
+                            border: 1px solid black;
+                            text-align: left;
+                        }
+                    }
+
+                    p {
+                        line-height: 150%;
+                    }
+                </style>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js" type="text/javascript"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/lunr.js/0.5.9/lunr.min.js" type="text/javascript"></script>
+        <script src="/javascripts/all-b1933d9a.js"></script>
+        <script src="/javascripts/anchorify-9f550341.js"></script>
+
+        <link href="/bower_components/paper-header-panel/paper-header-panel.html" rel="import">
+        <link href="/bower_components/paper-drawer-panel/paper-drawer-panel.html" rel="import">
+        <link href="/bower_components/paper-toolbar/paper-toolbar.html" rel="import">
+        <link href="/bower_components/paper-icon-button/paper-icon-button.html" rel="import">
+        <link href="/bower_components/iron-icons/iron-icons.html" rel="import">
+        <link href="/bower_components/iron-flex-layout/iron-flex-layout.html" rel="import">
+        <link href="/bower_components/paper-input/paper-input.html" rel="import">
+        <link href="/bower_components/paper-dropdown-menu/paper-dropdown-menu.html" rel="import">
+        <link href="/bower_components/paper-menu/paper-menu.html" rel="import">
+        <link href="/bower_components/paper-item/paper-item.html" rel="import">
+        <link rel="icon"
+              type="image/png"
+              href="images/frankly_favicon_32x32_no_bg.png">
+    </head>
+
+    <body class="ios ios_latest ios_latest_doc ios_latest_doc_03-the-basics">
+        <paper-drawer-panel class="flex" mode="seamed">
+            <div class="flex page-content" main>
+                <div class="horizontal layout">
+                    <paper-icon-button icon="menu" on-tap="menuAction" paper-drawer-toggle></paper-icon-button>
+                    <h1 class="flex">
+                        The Basics
+                    </h1>
+                    <span class="flex">
+                    </span>
+                    <paper-dropdown-menu noink no-animation class="version-dropdown">
+                        <paper-menu class="dropdown-content version-dropdown" selected="0">
+                                <paper-item>
+                                    <a href="/ios/latest">latest</a>
+                                </paper-item>
+                        </paper-menu>
+                    </paper-dropdown-menu>
+
+                </div>
+                <div style="max-width:70%">
+                    <h3 id="setting-up-your-room-list">Setting Up Your Room List</h3>
+
+<p><i>Important Note</i> Please make sure you&rsquo;ve set up at least one Room in the Admin Console before proceeding.
+If you&rsquo;re unsure of how to do this or if you don&rsquo;t have Admin Console access, please see <i><a href="http://franklyinc.github.io">Getting Started</a></i> for next steps.</p>
+
+<h4 id="calling-the-room-list-via-the-ios-sdk">Calling the Room List via the iOS SDK</h4>
+
+<p>To call the Room List, retrieve the room list controller and present it in your app or push it on your navigation controller. You have two options for room list
+controller to call, depending on your app&rsquo;s configuration:
+- <code>[FranklySDK indexViewController]</code> - Retrieves a view controller that returns only the Room List.
+- <code>[FranklySDK indexNavigationController]</code> - Retrieves a view controller that returns the Room List with the Frankly navbar.</p>
+
+<p>For partners wanting to use Conditional Rooms, calling either <code>indexViewController</code> or <code>indexNavigationController</code> will
+present the user with Conditional Rooms you have already configured in the Frankly Admin Console.</p>
+
+<p><em>Note</em> <code>[FranklySDK roomListViewController]</code> and <code>[FranklySDK roomListNavigationController]</code> are being deprecated by
+the end of September, 2015.</p>
+
+<h3 id="setting-the-display-name-amp-profile-avatar">Setting the Display Name &amp; Profile Avatar</h3>
+
+<p>A couple things to note about these setting these properties for a user&rsquo;s Frankly profile:</p>
+
+<ul>
+<li>The maximum length of a Frankly Display Name is 18 characters</li>
+<li>For best results, we recommend uploaded Profile Avatars to be 250x250px compressed JPGs</li>
+<li><em>Important Note</em> The Frankly Chat Platform automatically provides default Profile Avatars for users where it has not been set for
+them, to provide a nicer out-of-the-box experience</li>
+</ul>
+
+<h4 id="setting-user-info-via-the-ios-sdk">Setting User Info via the iOS SDK</h4>
+
+<p>Set the FranklySDK’s <code>profileDelegate</code> to an object that conforms to the <code>FranklySDKUserProfileDelegate</code> protocol. In
+our example code, we’ve made our <code>ViewController</code> also conform to this protocol:</p>
+<div class="highlight smalltalk"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2</pre></td><td class="code"><pre><span class="err">@</span><span class="nv">interface</span> <span class="nf">ViewController</span> <span class="err">:</span> <span class="nc">UIViewController</span> <span class="nf">&amp;</span><span class="nv">lt</span><span class="p">;</span><span class="nf">FranklySDKAuthenticationDelegate,</span> <span class="nc">FranklySDKUserProfileDelegate</span><span class="nf">&amp;</span><span class="nv">gt</span><span class="p">;</span>
+
+</pre></td></tr></tbody></table>
+</div>
+<div class="highlight smalltalk"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9</pre></td><td class="code"><pre><span class="err">-</span> <span class="p">(</span><span class="nv">void</span><span class="p">)</span><span class="nf">viewDidLoad</span> <span class="p">{</span>
+
+<span class="p">[</span><span class="bp">super</span> <span class="nf">viewDidLoad</span><span class="p">];</span>
+
+<span class="p">[</span><span class="nc">FranklySDK</span> <span class="nf">sharedInstance</span><span class="p">].</span><span class="nv">authenticationDelegate</span> <span class="nf">=</span> <span class="bp">self</span><span class="p">;</span>
+<span class="p">[</span><span class="nc">FranklySDK</span> <span class="nf">sharedInstance</span><span class="p">].</span><span class="nv">profileDelegate</span> <span class="nf">=</span> <span class="bp">self</span><span class="p">;</span>
+
+<span class="p">[[</span><span class="nc">FranklySDK</span> <span class="nf">sharedInstance</span><span class="p">]</span> <span class="nf">initiateAuthentication</span><span class="p">];</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table>
+</div>
+
+<p>The profile delegate will get called every time the user profile image or display name changes.  Also, you can enable or disable user
+editing of their profile data within the FranklySDK UI by allowing your delegate respond appropriately to the
+<code>-(BOOL)shouldAllowProfileEditing</code> delegate request.</p>
+
+<p>Setting the user&rsquo;s <code>UserName</code> and <code>profileImage</code> can be done via the calls through the FranklySDK object:</p>
+<div class="highlight smalltalk"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1</pre></td><td class="code"><pre><span class="err">-</span><span class="p">(</span><span class="nv">void</span><span class="p">)</span><span class="nf">setUserName:</span><span class="p">(</span><span class="nc">NSString</span> <span class="nf">*</span><span class="p">)</span><span class="nf">userName</span> <span class="nf">profileImage:</span><span class="p">(</span><span class="nc">UIImage</span> <span class="nf">*</span><span class="p">)</span><span class="nf">image</span><span class="p">];</span>
+</pre></td></tr></tbody></table>
+</div>
+
+<p>When the user&rsquo;s <code>UserName</code> and <code>profileImage</code> have been updated and synced with Frankly servers, the
+<code>profileDelegate</code> will get the callbacks <code>didUpdateDisplayName</code> and <code>didUpdateProfileImage</code>, confirming
+that these properties have been set. At the moment, the <code>profileDelegate</code> does not return a failure callback, so please handle
+accordingly. Please also keep in mind, that in the event that you want to set <code>UserName</code> or <code>profileImage</code>, you can
+pass in <code>nil</code> for whichever property you do not wish to update. Also note that the call to set these properties does nothing if
+called before receiving <code>authenticationSucceeded</code> delegate message.</p>
+
+<h3 id="customizing-ui-in-the-sdk">Customizing UI in the SDK</h3>
+
+<p>This section will describe how the Frankly SDKs allow you to customize various components of the provided UI.</p>
+
+<h4 id="customizing-the-ios-sdk"><em>Customizing the iOS SDK</em></h4>
+
+<p>FranklySDK on iOS allows partners to set values that affect FranklySDK&rsquo;s interface within the partner app. This data is passed in via a
+standard plist file.  An example data file, FRSDKExampleConfig.plist, is included FranklySDK package.</p>
+
+<p>Partners may modify that file, or create a new one and then, any time after <code>initializeSDKWithServerType:</code> has been called,add
+the file to FranklySDK via the <code>function addCustomizationFile:(NSURL *)fileURL</code>. Multiple files may be added via this call, any
+collisions with existing keys will cause the existing value to be overwritten by the new value.</p>
+
+<h5 id="customization-plist"><em>Customization Plist</em></h5>
+
+<p>This is a standard Apple plist file which means it’s an XML file with a single object named Root.  FranklySDK expects this Root object to
+be a dictionary of dictionaries.  Each dictionary represents a customization category that is populated with key value pairs.</p>
+
+<h5 id="data-types"><em>Data Types</em></h5>
+
+<p>The base values stored in the dictionaries in the customization file will be of the following types:</p>
+
+<ul>
+<li><em>Data Types</em> This is a string that follows a standard hex string format with alpha.  It maybe be preceded by ‘0x’ or ‘#’ but
+the last 8 characters should represent the hex values  in red, green, blue, alpha order.  So the color white with full opacity
+would be represented as 0xFFFFFFFF and black, haf opacity would be represented as 0x0000007F.</li>
+</ul>
+
+<h5 id="customization-categories"><em>Customization Categories</em></h5>
+
+<ul>
+<li>  <em>ui</em>
+**  the ui key contains a dictionary of key value pairs with the following keys:</li>
+</ul>
+
+<div class="panel panel-default">
+      <table class="table">
+        <tr>
+            <td><b>Color Key</b></td>
+            <td><b>Use Case</b></td>
+        </tr>
+        <tr>
+            <td>`primary-fg-color`</td>
+            <td>Takes a color value and is used throughout the app as primary foreground color.</td>
+        </tr>
+        <tr>
+            <td>`primary-bg-color`</td>
+            <td>Takes a color value and is used throughout the app as the primary background color.</td>
+        </tr>
+        <tr>
+            <td>`accent-bg-color`</td>
+            <td>Takes a color value and is used throughout the app as an accent color. Most noticeably as the background of the locked Input Bar.</td>
+        </tr>
+        <tr>
+            <td>`brand-bg-color`</td>
+            <td>Takes a color value. Is used as the background for Sticky Messages when they are docked at the top of a Room.</td>
+        </tr>
+        <tr>
+            <td>`attention-bg-color`</td>
+            <td>Takes a color value. Is used in the custom activity indicators.</td>
+        </tr>
+      </table>
+</div>
+
+                    <div style="height:20px"></div>
+                </div>
+
+            </div>
+            <div class="flex" drawer>
+                <paper-header-panel class="flex paper-header-panel layout vertical" drawer mode="seamed">
+                    <paper-toolbar>
+<a href="/">                            <img class="logo" src="/images/franklyinc_logo_color_large-044d426f.png" />
+</a>                    </paper-toolbar>
+                    <paper-input label="Search Documentation" class="search" type="search"></paper-input>
+                    <div class="side-panel">
+                        <ul class="nav-tree">
+                            <li class='child '><a href="00-quick-start.html">Quick Start</a></li><li class='child '><a href="01-getting-started.html">Getting Started</a></li><li class='child '><a href="02-authentication.html">Authentication</a></li><li class='child active'><a href="03-the-basics.html">The Basics</a></li><li class='child '><a href="04-advanced-features.html">Advanced Features</a></li><li class='child '><a href="06-downloads.html">Downloads</a></li>
+                        </ul>
+                    </div>
+                </paper-header-panel>
+            </div>
+        </paper-drawer-panel>
+    </body>
+    <script>
+    $('li:contains("The Basics")').replaceWith("<nav class='anchorific floating-toc'></nav>");
+    $('.page-content').anchorific({
+        anchorText: ''
+    });
+    </script>
+</html>

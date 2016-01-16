@@ -1,0 +1,1189 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+
+<title>class FranklyClientTest - RDoc Documentation</title>
+
+<link type="text/css" media="screen" href="rdoc-f7d1a4be.css" rel="stylesheet">
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "./";
+</script>
+
+<script type="text/javascript" charset="utf-8" src="js/jquery-7622c9ac.js"></script>
+<script type="text/javascript" charset="utf-8" src="js/navigation-35a922d6.js"></script>
+<script type="text/javascript" charset="utf-8" src="js/search_index-d30de69a.js"></script>
+<script type="text/javascript" charset="utf-8" src="js/search-4c7b4d50.js"></script>
+<script type="text/javascript" charset="utf-8" src="js/searcher-879d392b.js"></script>
+<script type="text/javascript" charset="utf-8" src="js/darkfish-72382215.js"></script>
+
+
+<body id="top" class="class">
+<nav id="metadata">
+  <nav id="home-section" class="section">
+  <h3 class="section-header">
+    <a href="./index.html">Home</a>
+    <a href="./table_of_contents.html#classes">Classes</a>
+    <a href="./table_of_contents.html#methods">Methods</a>
+  </h3>
+</nav>
+
+
+  <nav id="search-section" class="section project-section" class="initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <h3 class="section-header">
+      <input type="text" name="search" placeholder="Search" id="search-field"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </h3>
+  </form>
+
+  <ul id="search-results" class="initially-hidden"></ul>
+</nav>
+
+
+  
+
+  <div id="file-metadata">
+    <nav id="file-list-section" class="section">
+  <h3 class="section-header">Defined In</h3>
+  <ul>
+    <li>test/test_franklyclient.rb
+  </ul>
+</nav>
+
+    
+  </div>
+
+  <div id="class-metadata">
+    
+    <nav id="parent-class-section" class="section">
+  <h3 class="section-header">Parent</h3>
+  
+  <p class="link">MiniTest::Unit::TestCase
+  
+</nav>
+
+    
+    
+    <!-- Method Quickref -->
+<nav id="method-list-section" class="section">
+  <h3 class="section-header">Methods</h3>
+
+  <ul class="link-list">
+    
+    <li ><a href="#method-i-setup">#setup</a>
+    
+    <li ><a href="#method-i-t_announcement_functions">#t_announcement_functions</a>
+    
+    <li ><a href="#method-i-t_app_functions">#t_app_functions</a>
+    
+    <li ><a href="#method-i-t_file_functions">#t_file_functions</a>
+    
+    <li ><a href="#method-i-t_message_functions">#t_message_functions</a>
+    
+    <li ><a href="#method-i-t_room_functions">#t_room_functions</a>
+    
+    <li ><a href="#method-i-t_room_roles">#t_room_roles</a>
+    
+    <li ><a href="#method-i-t_session_functions">#t_session_functions</a>
+    
+    <li ><a href="#method-i-t_user_functions">#t_user_functions</a>
+    
+    <li ><a href="#method-i-test_announcement_functions">#test_announcement_functions</a>
+    
+    <li ><a href="#method-i-test_app_functions">#test_app_functions</a>
+    
+    <li ><a href="#method-i-test_file_functions">#test_file_functions</a>
+    
+    <li ><a href="#method-i-test_message_functions">#test_message_functions</a>
+    
+    <li ><a href="#method-i-test_open">#test_open</a>
+    
+    <li ><a href="#method-i-test_room_functions">#test_room_functions</a>
+    
+    <li ><a href="#method-i-test_room_roles">#test_room_roles</a>
+    
+    <li ><a href="#method-i-test_session_functions">#test_session_functions</a>
+    
+    <li ><a href="#method-i-test_user_functions">#test_user_functions</a>
+    
+  </ul>
+</nav>
+
+  </div>
+
+  <div id="project-metadata">
+    <nav id="fileindex-section" class="section project-section">
+  <h3 class="section-header">Pages</h3>
+
+  <ul>
+  
+    <li class="file"><a href="./Gemfile.html">Gemfile</a>
+  
+    <li class="file"><a href="./LICENSE.html">LICENSE</a>
+  
+    <li class="file"><a href="./README_md.html">README</a>
+  
+    <li class="file"><a href="./Rakefile.html">Rakefile</a>
+  
+    <li class="file"><a href="./doc/created_rid.html">created.rid</a>
+  
+    <li class="file"><a href="./frankly-ruby_gemspec.html">frankly-ruby.gemspec</a>
+  
+  </ul>
+</nav>
+
+    <nav id="classindex-section" class="section project-section">
+  <h3 class="section-header">Class and Module Index</h3>
+
+  <ul class="link-list">
+  
+    <li><a href="./Announcement.html">Announcement</a>
+  
+    <li><a href="./Apps.html">Apps</a>
+  
+    <li><a href="./Auth.html">Auth</a>
+  
+    <li><a href="./Files.html">Files</a>
+  
+    <li><a href="./Frankly.html">Frankly</a>
+  
+    <li><a href="./FranklyClient.html">FranklyClient</a>
+  
+    <li><a href="./FranklyClientTest.html">FranklyClientTest</a>
+  
+    <li><a href="./Generic.html">Generic</a>
+  
+    <li><a href="./Message.html">Message</a>
+  
+    <li><a href="./Object.html">Object</a>
+  
+    <li><a href="./Rooms.html">Rooms</a>
+  
+    <li><a href="./Sessions.html">Sessions</a>
+  
+    <li><a href="./Users.html">Users</a>
+  
+    <li><a href="./Util.html">Util</a>
+  
+  </ul>
+</nav>
+
+  </div>
+</nav>
+
+<div id="documentation">
+  <h1 class="class">class FranklyClientTest</h1>
+
+  <div id="description" class="description">
+    
+  </div><!-- description -->
+
+  
+  
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+
+    
+
+    <!-- Methods -->
+    
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section section">
+      <h3 class="section-header">Public Instance Methods</h3>
+
+    
+      <div id="method-i-setup" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">setup</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="setup-source">
+            <pre><span class="ruby-comment"># File test/test_franklyclient.rb, line 30</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">setup</span>
+  <span class="ruby-ivar">@app_key</span> = <span class="ruby-constant">ENV</span>[<span class="ruby-string">&#39;FRANKLY_APP_KEY&#39;</span>]
+  <span class="ruby-ivar">@app_secret</span> = <span class="ruby-constant">ENV</span>[<span class="ruby-string">&#39;FRANKLY_APP_SECRET&#39;</span>]
+  <span class="ruby-ivar">@test_url</span> = <span class="ruby-constant">Util</span>.<span class="ruby-identifier">make_base_address</span> <span class="ruby-constant">ENV</span>[<span class="ruby-string">&#39;FRANKLY_APP_HOST&#39;</span>]
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- setup-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- setup-method -->
+
+    
+      <div id="method-i-t_announcement_functions" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">t_announcement_functions</span><span
+            class="method-args">(client)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="t_announcement_functions-source">
+            <pre><span class="ruby-comment"># File test/test_franklyclient.rb, line 66</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">t_announcement_functions</span>(<span class="ruby-identifier">client</span>)
+  <span class="ruby-identifier">room_title</span> = <span class="ruby-string">&#39;test create room: &#39;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">rand</span>(<span class="ruby-value">36</span><span class="ruby-operator">**</span><span class="ruby-value">4</span>).<span class="ruby-identifier">to_s</span>(<span class="ruby-value">36</span>)
+  <span class="ruby-identifier">room_payload</span> = {
+    <span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;active&#39;</span>,
+    <span class="ruby-identifier">title</span><span class="ruby-operator">:</span> <span class="ruby-identifier">room_title</span>
+  }
+  <span class="ruby-identifier">room</span> = <span class="ruby-identifier">client</span>.<span class="ruby-identifier">create_room</span>(<span class="ruby-identifier">room_payload</span>)
+
+  <span class="ruby-identifier">announcement_payload</span> = {
+    <span class="ruby-identifier">sticky</span><span class="ruby-operator">:</span> <span class="ruby-keyword">true</span>,
+    <span class="ruby-identifier">contents</span><span class="ruby-operator">:</span> [
+      {
+        <span class="ruby-identifier">type</span><span class="ruby-operator">:</span>       <span class="ruby-string">&#39;text/plain&#39;</span>,
+        <span class="ruby-identifier">value</span><span class="ruby-operator">:</span>      <span class="ruby-string">&#39;text&#39;</span>
+      }
+    ]
+  }
+
+  <span class="ruby-identifier">announcement</span> = <span class="ruby-identifier">client</span>.<span class="ruby-identifier">create_announcement</span>(<span class="ruby-identifier">announcement_payload</span>)
+
+  <span class="ruby-identifier">assert_equal</span>([{ <span class="ruby-string">&#39;type&#39;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;text/plain&#39;</span>, <span class="ruby-string">&#39;value&#39;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;text&#39;</span> }], <span class="ruby-identifier">announcement</span>[<span class="ruby-string">&#39;contents&#39;</span>])
+  <span class="ruby-identifier">assert_equal</span>(<span class="ruby-keyword">true</span>, <span class="ruby-identifier">announcement</span>[<span class="ruby-string">&#39;sticky&#39;</span>])
+  <span class="ruby-identifier">refute_equal</span>(<span class="ruby-keyword">nil</span>, <span class="ruby-identifier">announcement</span>[<span class="ruby-string">&#39;created_on&#39;</span>])
+  <span class="ruby-identifier">refute_equal</span>(<span class="ruby-keyword">nil</span>, <span class="ruby-identifier">announcement</span>[<span class="ruby-string">&#39;id&#39;</span>])
+  <span class="ruby-identifier">refute_equal</span>(<span class="ruby-keyword">nil</span>, <span class="ruby-identifier">announcement</span>[<span class="ruby-string">&#39;updated_on&#39;</span>])
+  <span class="ruby-identifier">assert_equal</span>(<span class="ruby-value">1</span>, <span class="ruby-identifier">announcement</span>[<span class="ruby-string">&#39;version&#39;</span>])
+
+  <span class="ruby-identifier">read_announcement</span> = <span class="ruby-identifier">client</span>.<span class="ruby-identifier">read_announcement</span>(<span class="ruby-identifier">announcement</span>[<span class="ruby-string">&#39;id&#39;</span>])
+  <span class="ruby-identifier">assert_equal</span>(<span class="ruby-identifier">read_announcement</span>, <span class="ruby-identifier">announcement</span>)
+
+  <span class="ruby-identifier">announcement_list</span> = <span class="ruby-identifier">client</span>.<span class="ruby-identifier">read_announcement_list</span>
+  <span class="ruby-identifier">assert_equal</span>(<span class="ruby-keyword">true</span>, <span class="ruby-identifier">announcement_list</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">announcement</span>))
+
+  <span class="ruby-identifier">published_announcement</span> = <span class="ruby-identifier">client</span>.<span class="ruby-identifier">create_room_message</span>(<span class="ruby-identifier">room</span>[<span class="ruby-string">&#39;id&#39;</span>], <span class="ruby-identifier">announcement</span><span class="ruby-operator">:</span> <span class="ruby-identifier">announcement</span>[<span class="ruby-string">&#39;id&#39;</span>])
+
+  <span class="ruby-identifier">assert_equal</span>([{ <span class="ruby-string">&#39;type&#39;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;text/plain&#39;</span>, <span class="ruby-string">&#39;value&#39;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;text&#39;</span> }], <span class="ruby-identifier">published_announcement</span>[<span class="ruby-string">&#39;contents&#39;</span>])
+  <span class="ruby-identifier">assert_equal</span>(<span class="ruby-keyword">true</span>, <span class="ruby-identifier">published_announcement</span>[<span class="ruby-string">&#39;sticky&#39;</span>])
+  <span class="ruby-identifier">refute_equal</span>(<span class="ruby-keyword">nil</span>, <span class="ruby-identifier">published_announcement</span>[<span class="ruby-string">&#39;created_on&#39;</span>])
+  <span class="ruby-identifier">refute_equal</span>(<span class="ruby-keyword">nil</span>, <span class="ruby-identifier">published_announcement</span>[<span class="ruby-string">&#39;id&#39;</span>])
+  <span class="ruby-identifier">assert_equal</span>(<span class="ruby-identifier">room</span>[<span class="ruby-string">&#39;id&#39;</span>], <span class="ruby-identifier">published_announcement</span>[<span class="ruby-string">&#39;room_id&#39;</span>])
+  <span class="ruby-identifier">refute_equal</span>(<span class="ruby-keyword">nil</span>, <span class="ruby-identifier">published_announcement</span>[<span class="ruby-string">&#39;sent_on&#39;</span>])
+  <span class="ruby-identifier">refute_equal</span>(<span class="ruby-keyword">nil</span>, <span class="ruby-identifier">published_announcement</span>[<span class="ruby-string">&#39;updated_on&#39;</span>])
+  <span class="ruby-identifier">assert_equal</span>(<span class="ruby-value">1</span>, <span class="ruby-identifier">published_announcement</span>[<span class="ruby-string">&#39;version&#39;</span>])
+
+  <span class="ruby-identifier">announcement_room_list</span> = <span class="ruby-identifier">client</span>.<span class="ruby-identifier">read_announcement_room_list</span>(<span class="ruby-identifier">announcement</span>[<span class="ruby-string">&#39;id&#39;</span>])
+  <span class="ruby-identifier">assert_equal</span>(<span class="ruby-keyword">true</span>, <span class="ruby-identifier">announcement_room_list</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">room</span>))
+
+  <span class="ruby-identifier">client</span>.<span class="ruby-identifier">delete_announcement</span>(<span class="ruby-identifier">announcement</span>[<span class="ruby-string">&#39;id&#39;</span>])
+
+  <span class="ruby-identifier">announcement_list</span> = <span class="ruby-identifier">client</span>.<span class="ruby-identifier">read_announcement_list</span>
+  <span class="ruby-identifier">refute_equal</span>(<span class="ruby-keyword">true</span>, <span class="ruby-identifier">announcement_list</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">announcement</span>))
+
+  <span class="ruby-identifier">announcement_room_list</span> = <span class="ruby-identifier">client</span>.<span class="ruby-identifier">read_announcement_room_list</span>(<span class="ruby-identifier">announcement</span>[<span class="ruby-string">&#39;id&#39;</span>])
+  <span class="ruby-identifier">assert_equal</span>(<span class="ruby-keyword">true</span>, <span class="ruby-identifier">announcement_room_list</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">room</span>))
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- t_announcement_functions-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- t_announcement_functions-method -->
+
+    
+      <div id="method-i-t_app_functions" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">t_app_functions</span><span
+            class="method-args">(client)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="t_app_functions-source">
+            <pre><span class="ruby-comment"># File test/test_franklyclient.rb, line 475</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">t_app_functions</span>(<span class="ruby-identifier">client</span>)
+  <span class="ruby-identifier">client_session</span> = <span class="ruby-identifier">client</span>.<span class="ruby-identifier">read_session</span>
+
+  <span class="ruby-identifier">app</span> = <span class="ruby-identifier">client</span>.<span class="ruby-identifier">read_app</span>(<span class="ruby-identifier">client_session</span>[<span class="ruby-string">&#39;app&#39;</span>][<span class="ruby-string">&#39;id&#39;</span>])
+  <span class="ruby-identifier">assert_equal</span>(<span class="ruby-identifier">app</span>, <span class="ruby-identifier">client_session</span>[<span class="ruby-string">&#39;app&#39;</span>])
+  <span class="ruby-identifier">client</span>.<span class="ruby-identifier">close</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- t_app_functions-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- t_app_functions-method -->
+
+    
+      <div id="method-i-t_file_functions" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">t_file_functions</span><span
+            class="method-args">(client)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="t_file_functions-source">
+            <pre><span class="ruby-comment"># File test/test_franklyclient.rb, line 138</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">t_file_functions</span>(<span class="ruby-identifier">client</span>)
+  <span class="ruby-identifier">file_payload</span> = {
+    <span class="ruby-identifier">category</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;useravatar&#39;</span>,
+    <span class="ruby-identifier">type</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;image&#39;</span>
+  }
+  <span class="ruby-identifier">file</span> = <span class="ruby-identifier">client</span>.<span class="ruby-identifier">create_file</span>(<span class="ruby-identifier">file_payload</span>)
+
+  <span class="ruby-identifier">assert_equal</span>(<span class="ruby-string">&#39;useravatar&#39;</span>, <span class="ruby-identifier">file</span>[<span class="ruby-string">&#39;category&#39;</span>])
+  <span class="ruby-identifier">refute_equal</span>(<span class="ruby-keyword">nil</span>, <span class="ruby-identifier">file</span>[<span class="ruby-string">&#39;created_on&#39;</span>])
+  <span class="ruby-identifier">refute_equal</span>(<span class="ruby-keyword">nil</span>, <span class="ruby-identifier">file</span>[<span class="ruby-string">&#39;id&#39;</span>])
+  <span class="ruby-identifier">assert_equal</span>(<span class="ruby-string">&#39;image&#39;</span>, <span class="ruby-identifier">file</span>[<span class="ruby-string">&#39;type&#39;</span>])
+  <span class="ruby-identifier">refute_equal</span>(<span class="ruby-keyword">nil</span>, <span class="ruby-identifier">file</span>[<span class="ruby-string">&#39;updated_on&#39;</span>])
+  <span class="ruby-identifier">refute_equal</span>(<span class="ruby-keyword">nil</span>, <span class="ruby-identifier">file</span>[<span class="ruby-string">&#39;url&#39;</span>])
+  <span class="ruby-identifier">assert_equal</span>(<span class="ruby-value">1</span>, <span class="ruby-identifier">file</span>[<span class="ruby-string">&#39;version&#39;</span>])
+
+  <span class="ruby-comment"># To test file upload, replace my_file with a local file path</span>
+  <span class="ruby-comment"># my_file = &#39;/file/path.jpg&#39;</span>
+  <span class="ruby-comment"># response = client.update_file_from_path(file[&#39;url&#39;], my_file)</span>
+  <span class="ruby-comment"># assert_equal(200, response.code)</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- t_file_functions-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- t_file_functions-method -->
+
+    
+      <div id="method-i-t_message_functions" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">t_message_functions</span><span
+            class="method-args">(client)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="t_message_functions-source">
+            <pre><span class="ruby-comment"># File test/test_franklyclient.rb, line 175</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">t_message_functions</span>(<span class="ruby-identifier">client</span>)
+  <span class="ruby-identifier">room_title</span> = <span class="ruby-string">&#39;test create room: &#39;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">rand</span>(<span class="ruby-value">36</span><span class="ruby-operator">**</span><span class="ruby-value">4</span>).<span class="ruby-identifier">to_s</span>(<span class="ruby-value">36</span>)
+  <span class="ruby-identifier">room_payload</span> = {
+    <span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;active&#39;</span>,
+    <span class="ruby-identifier">title</span><span class="ruby-operator">:</span> <span class="ruby-identifier">room_title</span>
+  }
+  <span class="ruby-identifier">room</span> = <span class="ruby-identifier">client</span>.<span class="ruby-identifier">create_room</span>(<span class="ruby-identifier">room_payload</span>)
+
+  <span class="ruby-identifier">message_payload</span> = {
+    <span class="ruby-identifier">contents</span><span class="ruby-operator">:</span> [
+      {
+        <span class="ruby-identifier">type</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;text/plain&#39;</span>,
+        <span class="ruby-identifier">value</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;text&#39;</span>
+      }
+    ]
+  }
+  <span class="ruby-identifier">message</span> = <span class="ruby-identifier">client</span>.<span class="ruby-identifier">create_room_message</span>(<span class="ruby-identifier">room</span>[<span class="ruby-string">&#39;id&#39;</span>], <span class="ruby-identifier">message_payload</span>)
+
+  <span class="ruby-identifier">assert_equal</span>([{ <span class="ruby-string">&#39;type&#39;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;text/plain&#39;</span>, <span class="ruby-string">&#39;value&#39;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;text&#39;</span> }], <span class="ruby-identifier">message</span>[<span class="ruby-string">&#39;contents&#39;</span>])
+  <span class="ruby-identifier">assert_equal</span>(<span class="ruby-keyword">false</span>, <span class="ruby-identifier">message</span>[<span class="ruby-string">&#39;sticky&#39;</span>])
+  <span class="ruby-identifier">refute_equal</span>(<span class="ruby-keyword">nil</span>, <span class="ruby-identifier">message</span>[<span class="ruby-string">&#39;created_on&#39;</span>])
+  <span class="ruby-identifier">refute_equal</span>(<span class="ruby-keyword">nil</span>, <span class="ruby-identifier">message</span>[<span class="ruby-string">&#39;id&#39;</span>])
+  <span class="ruby-identifier">assert_equal</span>(<span class="ruby-identifier">room</span>[<span class="ruby-string">&#39;id&#39;</span>], <span class="ruby-identifier">message</span>[<span class="ruby-string">&#39;room_id&#39;</span>])
+  <span class="ruby-identifier">refute_equal</span>(<span class="ruby-keyword">nil</span>, <span class="ruby-identifier">message</span>[<span class="ruby-string">&#39;sent_on&#39;</span>])
+  <span class="ruby-identifier">refute_equal</span>(<span class="ruby-keyword">nil</span>, <span class="ruby-identifier">message</span>[<span class="ruby-string">&#39;updated_on&#39;</span>])
+  <span class="ruby-identifier">assert_equal</span>(<span class="ruby-value">1</span>, <span class="ruby-identifier">message</span>[<span class="ruby-string">&#39;version&#39;</span>])
+
+  <span class="ruby-identifier">read_message</span> = <span class="ruby-identifier">client</span>.<span class="ruby-identifier">read_room_message</span>(<span class="ruby-identifier">room</span>[<span class="ruby-string">&#39;id&#39;</span>], <span class="ruby-identifier">message</span>[<span class="ruby-string">&#39;id&#39;</span>])
+
+  <span class="ruby-identifier">assert_equal</span>(<span class="ruby-identifier">message</span>, <span class="ruby-identifier">read_message</span>)
+  <span class="ruby-keyword">begin</span>
+    <span class="ruby-identifier">client</span>.<span class="ruby-identifier">create_room_message_flag</span>(<span class="ruby-identifier">room</span>[<span class="ruby-string">&#39;id&#39;</span>], <span class="ruby-identifier">message</span>[<span class="ruby-string">&#39;id&#39;</span>])
+  <span class="ruby-keyword">rescue</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">e</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">assert_equal</span>(<span class="ruby-identifier">e</span>.<span class="ruby-identifier">response</span>.<span class="ruby-identifier">code</span>, <span class="ruby-value">400</span>)
+
+  <span class="ruby-identifier">client</span>.<span class="ruby-identifier">delete_room</span>(<span class="ruby-identifier">room</span>[<span class="ruby-string">&#39;id&#39;</span>])
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- t_message_functions-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- t_message_functions-method -->
+
+    
+      <div id="method-i-t_room_functions" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">t_room_functions</span><span
+            class="method-args">(client)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="t_room_functions-source">
+            <pre><span class="ruby-comment"># File test/test_franklyclient.rb, line 231</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">t_room_functions</span>(<span class="ruby-identifier">client</span>)
+  <span class="ruby-comment"># Test room creation</span>
+  <span class="ruby-identifier">create_room_title</span> = <span class="ruby-string">&#39;test create room: &#39;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">rand</span>(<span class="ruby-value">36</span><span class="ruby-operator">**</span><span class="ruby-value">4</span>).<span class="ruby-identifier">to_s</span>(<span class="ruby-value">36</span>)
+  <span class="ruby-identifier">create_payload</span> = {
+    <span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;active&#39;</span>,
+    <span class="ruby-identifier">title</span><span class="ruby-operator">:</span> <span class="ruby-identifier">create_room_title</span>
+  }
+
+  <span class="ruby-identifier">room</span> = <span class="ruby-identifier">client</span>.<span class="ruby-identifier">create_room</span>(<span class="ruby-identifier">create_payload</span>)
+  <span class="ruby-identifier">assert_equal</span>(<span class="ruby-keyword">nil</span>, <span class="ruby-identifier">room</span>[<span class="ruby-string">&#39;avatar_image_url&#39;</span>])
+  <span class="ruby-identifier">refute_equal</span>(<span class="ruby-keyword">nil</span>, <span class="ruby-identifier">room</span>[<span class="ruby-string">&#39;created_on&#39;</span>])
+  <span class="ruby-identifier">assert_equal</span>(<span class="ruby-keyword">nil</span>, <span class="ruby-identifier">room</span>[<span class="ruby-string">&#39;description&#39;</span>])
+  <span class="ruby-identifier">assert_equal</span>(<span class="ruby-keyword">false</span>, <span class="ruby-identifier">room</span>[<span class="ruby-string">&#39;featured&#39;</span>])
+  <span class="ruby-identifier">assert_equal</span>(<span class="ruby-keyword">nil</span>, <span class="ruby-identifier">room</span>[<span class="ruby-string">&#39;featured_image_url&#39;</span>])
+  <span class="ruby-identifier">refute_equal</span>(<span class="ruby-keyword">nil</span>, <span class="ruby-identifier">room</span>[<span class="ruby-string">&#39;id&#39;</span>])
+  <span class="ruby-identifier">assert_equal</span>(<span class="ruby-value">0</span>, <span class="ruby-identifier">room</span>[<span class="ruby-string">&#39;list_position&#39;</span>])
+  <span class="ruby-identifier">assert_equal</span>(<span class="ruby-string">&#39;active&#39;</span>, <span class="ruby-identifier">room</span>[<span class="ruby-string">&#39;status&#39;</span>])
+  <span class="ruby-identifier">assert_equal</span>(<span class="ruby-keyword">false</span>, <span class="ruby-identifier">room</span>[<span class="ruby-string">&#39;subscribed&#39;</span>])
+  <span class="ruby-identifier">assert_equal</span>(<span class="ruby-identifier">create_room_title</span>, <span class="ruby-identifier">room</span>[<span class="ruby-string">&#39;title&#39;</span>])
+  <span class="ruby-identifier">refute_equal</span>(<span class="ruby-keyword">nil</span>, <span class="ruby-identifier">room</span>[<span class="ruby-string">&#39;updated_on&#39;</span>])
+  <span class="ruby-identifier">assert_equal</span>(<span class="ruby-value">1</span>, <span class="ruby-identifier">room</span>[<span class="ruby-string">&#39;version&#39;</span>])
+
+  <span class="ruby-comment"># Test room read</span>
+  <span class="ruby-identifier">read_room</span> = <span class="ruby-identifier">client</span>.<span class="ruby-identifier">read_room</span>(<span class="ruby-identifier">room</span>[<span class="ruby-string">&#39;id&#39;</span>])
+  <span class="ruby-identifier">assert_equal</span>(<span class="ruby-identifier">room</span>, <span class="ruby-identifier">read_room</span>)
+
+  <span class="ruby-comment"># Test room count</span>
+  <span class="ruby-identifier">room_count</span> = <span class="ruby-identifier">client</span>.<span class="ruby-identifier">read_room_count</span>(<span class="ruby-identifier">room</span>[<span class="ruby-string">&#39;id&#39;</span>])
+  <span class="ruby-identifier">refute_equal</span>(<span class="ruby-keyword">nil</span>, <span class="ruby-identifier">room_count</span>[<span class="ruby-string">&#39;active&#39;</span>])
+  <span class="ruby-identifier">refute_equal</span>(<span class="ruby-keyword">nil</span>, <span class="ruby-identifier">room_count</span>[<span class="ruby-string">&#39;online&#39;</span>])
+  <span class="ruby-identifier">refute_equal</span>(<span class="ruby-keyword">nil</span>, <span class="ruby-identifier">room_count</span>[<span class="ruby-string">&#39;subscribed&#39;</span>])
+
+  <span class="ruby-comment"># Test room update</span>
+  <span class="ruby-identifier">update_room_title</span> = <span class="ruby-string">&#39;test update room: &#39;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">rand</span>(<span class="ruby-value">36</span><span class="ruby-operator">**</span><span class="ruby-value">4</span>).<span class="ruby-identifier">to_s</span>(<span class="ruby-value">36</span>)
+  <span class="ruby-identifier">update_payload</span> = {
+    <span class="ruby-identifier">description</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;updated description&#39;</span>,
+    <span class="ruby-identifier">title</span><span class="ruby-operator">:</span> <span class="ruby-identifier">update_room_title</span>,
+    <span class="ruby-identifier">list_position</span><span class="ruby-operator">:</span> <span class="ruby-value">1</span>
+  }
+  <span class="ruby-identifier">updated_room</span> = <span class="ruby-identifier">client</span>.<span class="ruby-identifier">update_room</span>(<span class="ruby-identifier">room</span>[<span class="ruby-string">&#39;id&#39;</span>], <span class="ruby-identifier">update_payload</span>)
+  <span class="ruby-identifier">assert_equal</span>(<span class="ruby-keyword">nil</span>, <span class="ruby-identifier">updated_room</span>[<span class="ruby-string">&#39;avatar_image_url&#39;</span>])
+  <span class="ruby-identifier">refute_equal</span>(<span class="ruby-keyword">nil</span>, <span class="ruby-identifier">updated_room</span>[<span class="ruby-string">&#39;created_on&#39;</span>])
+  <span class="ruby-identifier">assert_equal</span>(<span class="ruby-string">&#39;updated description&#39;</span>, <span class="ruby-identifier">updated_room</span>[<span class="ruby-string">&#39;description&#39;</span>])
+  <span class="ruby-identifier">assert_equal</span>(<span class="ruby-keyword">false</span>, <span class="ruby-identifier">updated_room</span>[<span class="ruby-string">&#39;featured&#39;</span>])
+  <span class="ruby-identifier">assert_equal</span>(<span class="ruby-keyword">nil</span>, <span class="ruby-identifier">updated_room</span>[<span class="ruby-string">&#39;featured_image_url&#39;</span>])
+  <span class="ruby-identifier">refute_equal</span>(<span class="ruby-keyword">nil</span>, <span class="ruby-identifier">updated_room</span>[<span class="ruby-string">&#39;id&#39;</span>])
+  <span class="ruby-identifier">assert_equal</span>(<span class="ruby-value">1</span>, <span class="ruby-identifier">updated_room</span>[<span class="ruby-string">&#39;list_position&#39;</span>])
+  <span class="ruby-identifier">assert_equal</span>(<span class="ruby-string">&#39;active&#39;</span>, <span class="ruby-identifier">updated_room</span>[<span class="ruby-string">&#39;status&#39;</span>])
+  <span class="ruby-identifier">assert_equal</span>(<span class="ruby-keyword">false</span>, <span class="ruby-identifier">updated_room</span>[<span class="ruby-string">&#39;subscribed&#39;</span>])
+  <span class="ruby-identifier">assert_equal</span>(<span class="ruby-identifier">update_room_title</span>, <span class="ruby-identifier">updated_room</span>[<span class="ruby-string">&#39;title&#39;</span>])
+  <span class="ruby-identifier">refute_equal</span>(<span class="ruby-keyword">nil</span>, <span class="ruby-identifier">updated_room</span>[<span class="ruby-string">&#39;updated_on&#39;</span>])
+  <span class="ruby-identifier">assert_equal</span>(<span class="ruby-value">2</span>, <span class="ruby-identifier">updated_room</span>[<span class="ruby-string">&#39;version&#39;</span>])
+
+  <span class="ruby-comment"># Test room list read</span>
+  <span class="ruby-identifier">room_list</span> = <span class="ruby-identifier">client</span>.<span class="ruby-identifier">read_room_list</span>
+  <span class="ruby-identifier">assert_equal</span>(<span class="ruby-keyword">true</span>, <span class="ruby-identifier">room_list</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">updated_room</span>))
+
+  <span class="ruby-comment"># Test room delete</span>
+  <span class="ruby-identifier">client</span>.<span class="ruby-identifier">delete_room</span>(<span class="ruby-identifier">room</span>[<span class="ruby-string">&#39;id&#39;</span>])
+  <span class="ruby-identifier">room_list</span> = <span class="ruby-identifier">client</span>.<span class="ruby-identifier">read_room_list</span>
+  <span class="ruby-identifier">refute_equal</span>(<span class="ruby-keyword">true</span>, <span class="ruby-identifier">room_list</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">updated_room</span>))
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- t_room_functions-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- t_room_functions-method -->
+
+    
+      <div id="method-i-t_room_roles" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">t_room_roles</span><span
+            class="method-args">(client)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="t_room_roles-source">
+            <pre><span class="ruby-comment"># File test/test_franklyclient.rb, line 408</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">t_room_roles</span>(<span class="ruby-identifier">client</span>)
+  <span class="ruby-identifier">user_payload</span> = {
+    <span class="ruby-identifier">display_name</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;test_name&#39;</span>
+  }
+  <span class="ruby-identifier">user</span> = <span class="ruby-identifier">client</span>.<span class="ruby-identifier">create_user</span>(<span class="ruby-identifier">user_payload</span>)
+
+  <span class="ruby-identifier">room_title</span> = <span class="ruby-string">&#39;test room: &#39;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">rand</span>(<span class="ruby-value">36</span><span class="ruby-operator">**</span><span class="ruby-value">4</span>).<span class="ruby-identifier">to_s</span>(<span class="ruby-value">36</span>)
+  <span class="ruby-identifier">room_payload</span> = {
+    <span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;active&#39;</span>,
+    <span class="ruby-identifier">title</span><span class="ruby-operator">:</span> <span class="ruby-identifier">room_title</span>
+  }
+  <span class="ruby-identifier">room</span> = <span class="ruby-identifier">client</span>.<span class="ruby-identifier">create_room</span>(<span class="ruby-identifier">room_payload</span>)
+
+  <span class="ruby-comment"># Test Owner Role</span>
+  <span class="ruby-identifier">client</span>.<span class="ruby-identifier">create_room_owner</span>(<span class="ruby-identifier">room</span>[<span class="ruby-string">&#39;id&#39;</span>], <span class="ruby-identifier">user</span>[<span class="ruby-string">&#39;id&#39;</span>])
+  <span class="ruby-identifier">owner_list</span> = <span class="ruby-identifier">client</span>.<span class="ruby-identifier">read_room_owner_list</span>(<span class="ruby-identifier">room</span>[<span class="ruby-string">&#39;id&#39;</span>])
+  <span class="ruby-identifier">assert_equal</span>(<span class="ruby-keyword">true</span>, <span class="ruby-identifier">owner_list</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">user</span>))
+
+  <span class="ruby-identifier">client</span>.<span class="ruby-identifier">delete_room_owner</span>(<span class="ruby-identifier">room</span>[<span class="ruby-string">&#39;id&#39;</span>], <span class="ruby-identifier">user</span>[<span class="ruby-string">&#39;id&#39;</span>])
+  <span class="ruby-identifier">owner_list</span> = <span class="ruby-identifier">client</span>.<span class="ruby-identifier">read_room_owner_list</span>(<span class="ruby-identifier">room</span>[<span class="ruby-string">&#39;id&#39;</span>])
+  <span class="ruby-identifier">refute_equal</span>(<span class="ruby-keyword">true</span>, <span class="ruby-identifier">owner_list</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">user</span>))
+
+  <span class="ruby-comment"># Test Moderator Role</span>
+  <span class="ruby-identifier">client</span>.<span class="ruby-identifier">create_room_moderator</span>(<span class="ruby-identifier">room</span>[<span class="ruby-string">&#39;id&#39;</span>], <span class="ruby-identifier">user</span>[<span class="ruby-string">&#39;id&#39;</span>])
+  <span class="ruby-identifier">moderator_list</span> = <span class="ruby-identifier">client</span>.<span class="ruby-identifier">read_room_moderator_list</span>(<span class="ruby-identifier">room</span>[<span class="ruby-string">&#39;id&#39;</span>])
+  <span class="ruby-identifier">assert_equal</span>(<span class="ruby-keyword">true</span>, <span class="ruby-identifier">moderator_list</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">user</span>))
+
+  <span class="ruby-identifier">client</span>.<span class="ruby-identifier">delete_room_moderator</span>(<span class="ruby-identifier">room</span>[<span class="ruby-string">&#39;id&#39;</span>], <span class="ruby-identifier">user</span>[<span class="ruby-string">&#39;id&#39;</span>])
+  <span class="ruby-identifier">moderator_list</span> = <span class="ruby-identifier">client</span>.<span class="ruby-identifier">read_room_moderator_list</span>(<span class="ruby-identifier">room</span>[<span class="ruby-string">&#39;id&#39;</span>])
+  <span class="ruby-identifier">refute_equal</span>(<span class="ruby-keyword">true</span>, <span class="ruby-identifier">moderator_list</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">user</span>))
+
+  <span class="ruby-comment"># Test Member Role</span>
+  <span class="ruby-identifier">client</span>.<span class="ruby-identifier">create_room_member</span>(<span class="ruby-identifier">room</span>[<span class="ruby-string">&#39;id&#39;</span>], <span class="ruby-identifier">user</span>[<span class="ruby-string">&#39;id&#39;</span>])
+  <span class="ruby-identifier">member_list</span> = <span class="ruby-identifier">client</span>.<span class="ruby-identifier">read_room_member_list</span>(<span class="ruby-identifier">room</span>[<span class="ruby-string">&#39;id&#39;</span>])
+  <span class="ruby-identifier">assert_equal</span>(<span class="ruby-keyword">true</span>, <span class="ruby-identifier">member_list</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">user</span>))
+
+  <span class="ruby-identifier">client</span>.<span class="ruby-identifier">delete_room_member</span>(<span class="ruby-identifier">room</span>[<span class="ruby-string">&#39;id&#39;</span>], <span class="ruby-identifier">user</span>[<span class="ruby-string">&#39;id&#39;</span>])
+  <span class="ruby-identifier">member_list</span> = <span class="ruby-identifier">client</span>.<span class="ruby-identifier">read_room_member_list</span>(<span class="ruby-identifier">room</span>[<span class="ruby-string">&#39;id&#39;</span>])
+  <span class="ruby-identifier">refute_equal</span>(<span class="ruby-keyword">true</span>, <span class="ruby-identifier">member_list</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">user</span>))
+
+  <span class="ruby-comment"># Test Member Role</span>
+  <span class="ruby-identifier">client</span>.<span class="ruby-identifier">create_room_announcer</span>(<span class="ruby-identifier">room</span>[<span class="ruby-string">&#39;id&#39;</span>], <span class="ruby-identifier">user</span>[<span class="ruby-string">&#39;id&#39;</span>])
+  <span class="ruby-identifier">announcer_list</span> = <span class="ruby-identifier">client</span>.<span class="ruby-identifier">read_room_announcer_list</span>(<span class="ruby-identifier">room</span>[<span class="ruby-string">&#39;id&#39;</span>])
+  <span class="ruby-identifier">assert_equal</span>(<span class="ruby-keyword">true</span>, <span class="ruby-identifier">announcer_list</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">user</span>))
+
+  <span class="ruby-identifier">client</span>.<span class="ruby-identifier">delete_room_announcer</span>(<span class="ruby-identifier">room</span>[<span class="ruby-string">&#39;id&#39;</span>], <span class="ruby-identifier">user</span>[<span class="ruby-string">&#39;id&#39;</span>])
+  <span class="ruby-identifier">announcer_list</span> = <span class="ruby-identifier">client</span>.<span class="ruby-identifier">read_room_announcer_list</span>(<span class="ruby-identifier">room</span>[<span class="ruby-string">&#39;id&#39;</span>])
+  <span class="ruby-identifier">refute_equal</span>(<span class="ruby-keyword">true</span>, <span class="ruby-identifier">announcer_list</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">user</span>))
+  <span class="ruby-identifier">client</span>.<span class="ruby-identifier">close</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- t_room_roles-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- t_room_roles-method -->
+
+    
+      <div id="method-i-t_session_functions" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">t_session_functions</span><span
+            class="method-args">(client)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="t_session_functions-source">
+            <pre><span class="ruby-comment"># File test/test_franklyclient.rb, line 373</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">t_session_functions</span>(<span class="ruby-identifier">client</span>)
+  <span class="ruby-identifier">client</span> = <span class="ruby-constant">FranklyClient</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@test_url</span>)
+  <span class="ruby-identifier">client</span>.<span class="ruby-identifier">open</span>(<span class="ruby-ivar">@app_key</span>, <span class="ruby-ivar">@app_secret</span>)
+
+  <span class="ruby-identifier">client_session</span> = <span class="ruby-identifier">client</span>.<span class="ruby-identifier">read_session</span>
+  <span class="ruby-identifier">refute_equal</span>(<span class="ruby-keyword">nil</span>, <span class="ruby-identifier">client_session</span>[<span class="ruby-string">&#39;app&#39;</span>])
+  <span class="ruby-identifier">refute_equal</span>(<span class="ruby-keyword">nil</span>, <span class="ruby-identifier">client_session</span>[<span class="ruby-string">&#39;app_id&#39;</span>])
+  <span class="ruby-identifier">refute_equal</span>(<span class="ruby-keyword">nil</span>, <span class="ruby-identifier">client_session</span>[<span class="ruby-string">&#39;app_user_id&#39;</span>])
+  <span class="ruby-identifier">refute_equal</span>(<span class="ruby-keyword">nil</span>, <span class="ruby-identifier">client_session</span>[<span class="ruby-string">&#39;created_on&#39;</span>])
+  <span class="ruby-identifier">refute_equal</span>(<span class="ruby-keyword">nil</span>, <span class="ruby-identifier">client_session</span>[<span class="ruby-string">&#39;expires_on&#39;</span>])
+  <span class="ruby-identifier">refute_equal</span>(<span class="ruby-keyword">nil</span>, <span class="ruby-identifier">client_session</span>[<span class="ruby-string">&#39;platform&#39;</span>])
+  <span class="ruby-identifier">refute_equal</span>(<span class="ruby-keyword">nil</span>, <span class="ruby-identifier">client_session</span>[<span class="ruby-string">&#39;role&#39;</span>])
+  <span class="ruby-identifier">refute_equal</span>(<span class="ruby-keyword">nil</span>, <span class="ruby-identifier">client_session</span>[<span class="ruby-string">&#39;seed&#39;</span>])
+  <span class="ruby-identifier">refute_equal</span>(<span class="ruby-keyword">nil</span>, <span class="ruby-identifier">client_session</span>[<span class="ruby-string">&#39;user&#39;</span>])
+  <span class="ruby-identifier">refute_equal</span>(<span class="ruby-keyword">nil</span>, <span class="ruby-identifier">client_session</span>[<span class="ruby-string">&#39;version&#39;</span>])
+
+  <span class="ruby-identifier">client</span>.<span class="ruby-identifier">close</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- t_session_functions-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- t_session_functions-method -->
+
+    
+      <div id="method-i-t_user_functions" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">t_user_functions</span><span
+            class="method-args">(client)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="t_user_functions-source">
+            <pre><span class="ruby-comment"># File test/test_franklyclient.rb, line 310</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">t_user_functions</span>(<span class="ruby-identifier">client</span>)
+  <span class="ruby-comment"># Test room creation</span>
+  <span class="ruby-identifier">create_payload</span> = {
+    <span class="ruby-identifier">display_name</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;test_name&#39;</span>
+  }
+  <span class="ruby-identifier">user</span> = <span class="ruby-identifier">client</span>.<span class="ruby-identifier">create_user</span>(<span class="ruby-identifier">create_payload</span>)
+
+  <span class="ruby-identifier">assert_equal</span>(<span class="ruby-keyword">nil</span>, <span class="ruby-identifier">user</span>[<span class="ruby-string">&#39;avatar_image_url&#39;</span>])
+  <span class="ruby-identifier">refute_equal</span>(<span class="ruby-keyword">nil</span>, <span class="ruby-identifier">user</span>[<span class="ruby-string">&#39;created_on&#39;</span>])
+  <span class="ruby-identifier">assert_equal</span>(<span class="ruby-string">&#39;test_name&#39;</span>, <span class="ruby-identifier">user</span>[<span class="ruby-string">&#39;display_name&#39;</span>])
+  <span class="ruby-identifier">refute_equal</span>(<span class="ruby-keyword">nil</span>, <span class="ruby-identifier">user</span>[<span class="ruby-string">&#39;id&#39;</span>])
+  <span class="ruby-identifier">refute_equal</span>(<span class="ruby-keyword">nil</span>, <span class="ruby-identifier">user</span>[<span class="ruby-string">&#39;updated_on&#39;</span>])
+  <span class="ruby-identifier">assert_equal</span>(<span class="ruby-value">1</span>, <span class="ruby-identifier">user</span>[<span class="ruby-string">&#39;version&#39;</span>])
+
+  <span class="ruby-comment"># Test user read</span>
+  <span class="ruby-identifier">read_user</span> = <span class="ruby-identifier">client</span>.<span class="ruby-identifier">read_user</span>(<span class="ruby-identifier">user</span>[<span class="ruby-string">&#39;id&#39;</span>])
+  <span class="ruby-identifier">assert_equal</span>(<span class="ruby-identifier">user</span>, <span class="ruby-identifier">read_user</span>)
+
+  <span class="ruby-comment"># Test user update</span>
+  <span class="ruby-identifier">update_payload</span> = {
+    <span class="ruby-identifier">display_name</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;updated_name&#39;</span>
+  }
+
+  <span class="ruby-identifier">update_user</span> = <span class="ruby-identifier">client</span>.<span class="ruby-identifier">update_user</span>(<span class="ruby-identifier">user</span>[<span class="ruby-string">&#39;id&#39;</span>], <span class="ruby-identifier">update_payload</span>)
+  <span class="ruby-identifier">assert_equal</span>(<span class="ruby-keyword">nil</span>, <span class="ruby-identifier">update_user</span>[<span class="ruby-string">&#39;avatar_image_url&#39;</span>])
+  <span class="ruby-identifier">refute_equal</span>(<span class="ruby-keyword">nil</span>, <span class="ruby-identifier">update_user</span>[<span class="ruby-string">&#39;created_on&#39;</span>])
+  <span class="ruby-identifier">assert_equal</span>(<span class="ruby-string">&#39;updated_name&#39;</span>, <span class="ruby-identifier">update_user</span>[<span class="ruby-string">&#39;display_name&#39;</span>])
+  <span class="ruby-identifier">refute_equal</span>(<span class="ruby-keyword">nil</span>, <span class="ruby-identifier">update_user</span>[<span class="ruby-string">&#39;id&#39;</span>])
+  <span class="ruby-identifier">refute_equal</span>(<span class="ruby-identifier">user</span>[<span class="ruby-string">&#39;updated_on&#39;</span>], <span class="ruby-identifier">update_user</span>[<span class="ruby-string">&#39;updated_on&#39;</span>])
+  <span class="ruby-identifier">assert_equal</span>(<span class="ruby-value">2</span>, <span class="ruby-identifier">update_user</span>[<span class="ruby-string">&#39;version&#39;</span>])
+
+  <span class="ruby-comment"># Test user ban</span>
+  <span class="ruby-identifier">ban</span> = <span class="ruby-identifier">client</span>.<span class="ruby-identifier">read_user_ban</span>(<span class="ruby-identifier">user</span>[<span class="ruby-string">&#39;id&#39;</span>])
+  <span class="ruby-identifier">assert_equal</span>(<span class="ruby-keyword">nil</span>, <span class="ruby-identifier">ban</span>[<span class="ruby-string">&#39;avatar_image_url&#39;</span>])
+  <span class="ruby-identifier">refute_equal</span>(<span class="ruby-keyword">nil</span>, <span class="ruby-identifier">ban</span>[<span class="ruby-string">&#39;created_on&#39;</span>])
+  <span class="ruby-identifier">refute_equal</span>(<span class="ruby-keyword">nil</span>, <span class="ruby-identifier">ban</span>[<span class="ruby-string">&#39;updated_on&#39;</span>])
+  <span class="ruby-identifier">assert_equal</span>(<span class="ruby-value">1</span>, <span class="ruby-identifier">ban</span>[<span class="ruby-string">&#39;version&#39;</span>])
+
+  <span class="ruby-comment"># Test user delete</span>
+  <span class="ruby-identifier">client</span>.<span class="ruby-identifier">delete_user</span>(<span class="ruby-identifier">user</span>[<span class="ruby-string">&#39;id&#39;</span>])
+  <span class="ruby-keyword">begin</span>
+    <span class="ruby-identifier">client</span>.<span class="ruby-identifier">read_user</span>(<span class="ruby-identifier">user</span>[<span class="ruby-string">&#39;id&#39;</span>])
+  <span class="ruby-keyword">rescue</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">e</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">assert_equal</span>(<span class="ruby-identifier">e</span>.<span class="ruby-identifier">response</span>.<span class="ruby-identifier">code</span>, <span class="ruby-value">404</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- t_user_functions-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- t_user_functions-method -->
+
+    
+      <div id="method-i-test_announcement_functions" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">test_announcement_functions</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="test_announcement_functions-source">
+            <pre><span class="ruby-comment"># File test/test_franklyclient.rb, line 50</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">test_announcement_functions</span>
+  <span class="ruby-identifier">client</span> = <span class="ruby-constant">FranklyClient</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@test_url</span>)
+
+  <span class="ruby-comment"># test with app secret and key</span>
+  <span class="ruby-identifier">client</span>.<span class="ruby-identifier">open</span>(<span class="ruby-ivar">@app_key</span>, <span class="ruby-ivar">@app_secret</span>)
+  <span class="ruby-identifier">t_announcement_functions</span>(<span class="ruby-identifier">client</span>)
+  <span class="ruby-identifier">client</span>.<span class="ruby-identifier">close</span>
+
+  <span class="ruby-comment"># test with identity_token</span>
+  <span class="ruby-identifier">nonce</span> = <span class="ruby-constant">Util</span>.<span class="ruby-identifier">parse_json_string</span> <span class="ruby-constant">Auth</span>.<span class="ruby-identifier">nonce</span>(<span class="ruby-constant">URI</span>(<span class="ruby-ivar">@test_url</span>))
+  <span class="ruby-identifier">identity_token</span> = <span class="ruby-identifier">generate_identity_token</span>(<span class="ruby-ivar">@app_key</span>, <span class="ruby-ivar">@app_secret</span>, <span class="ruby-identifier">nonce</span>, <span class="ruby-keyword">nil</span>, <span class="ruby-string">&#39;admin&#39;</span>)
+  <span class="ruby-identifier">client</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">identity_token</span>)
+  <span class="ruby-identifier">t_announcement_functions</span>(<span class="ruby-identifier">client</span>)
+  <span class="ruby-identifier">client</span>.<span class="ruby-identifier">close</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- test_announcement_functions-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- test_announcement_functions-method -->
+
+    
+      <div id="method-i-test_app_functions" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">test_app_functions</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="test_app_functions-source">
+            <pre><span class="ruby-comment"># File test/test_franklyclient.rb, line 459</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">test_app_functions</span>
+  <span class="ruby-identifier">client</span> = <span class="ruby-constant">FranklyClient</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@test_url</span>)
+
+  <span class="ruby-comment"># test with app secret and key</span>
+  <span class="ruby-identifier">client</span>.<span class="ruby-identifier">open</span>(<span class="ruby-ivar">@app_key</span>, <span class="ruby-ivar">@app_secret</span>)
+  <span class="ruby-identifier">t_app_functions</span>(<span class="ruby-identifier">client</span>)
+  <span class="ruby-identifier">client</span>.<span class="ruby-identifier">close</span>
+
+  <span class="ruby-comment"># test with identity_token</span>
+  <span class="ruby-identifier">nonce</span> = <span class="ruby-constant">Util</span>.<span class="ruby-identifier">parse_json_string</span> <span class="ruby-constant">Auth</span>.<span class="ruby-identifier">nonce</span>(<span class="ruby-constant">URI</span>(<span class="ruby-ivar">@test_url</span>))
+  <span class="ruby-identifier">identity_token</span> = <span class="ruby-identifier">generate_identity_token</span>(<span class="ruby-ivar">@app_key</span>, <span class="ruby-ivar">@app_secret</span>, <span class="ruby-identifier">nonce</span>, <span class="ruby-keyword">nil</span>, <span class="ruby-string">&#39;admin&#39;</span>)
+  <span class="ruby-identifier">client</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">identity_token</span>)
+  <span class="ruby-identifier">t_app_functions</span>(<span class="ruby-identifier">client</span>)
+  <span class="ruby-identifier">client</span>.<span class="ruby-identifier">close</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- test_app_functions-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- test_app_functions-method -->
+
+    
+      <div id="method-i-test_file_functions" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">test_file_functions</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="test_file_functions-source">
+            <pre><span class="ruby-comment"># File test/test_franklyclient.rb, line 122</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">test_file_functions</span>
+  <span class="ruby-identifier">client</span> = <span class="ruby-constant">FranklyClient</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@test_url</span>)
+
+  <span class="ruby-comment"># test with app secret and key</span>
+  <span class="ruby-identifier">client</span>.<span class="ruby-identifier">open</span>(<span class="ruby-ivar">@app_key</span>, <span class="ruby-ivar">@app_secret</span>)
+  <span class="ruby-identifier">t_file_functions</span>(<span class="ruby-identifier">client</span>)
+  <span class="ruby-identifier">client</span>.<span class="ruby-identifier">close</span>
+
+  <span class="ruby-comment"># test with identity_token</span>
+  <span class="ruby-identifier">nonce</span> = <span class="ruby-constant">Util</span>.<span class="ruby-identifier">parse_json_string</span> <span class="ruby-constant">Auth</span>.<span class="ruby-identifier">nonce</span>(<span class="ruby-constant">URI</span>(<span class="ruby-ivar">@test_url</span>))
+  <span class="ruby-identifier">identity_token</span> = <span class="ruby-identifier">generate_identity_token</span>(<span class="ruby-ivar">@app_key</span>, <span class="ruby-ivar">@app_secret</span>, <span class="ruby-identifier">nonce</span>, <span class="ruby-keyword">nil</span>, <span class="ruby-string">&#39;admin&#39;</span>)
+  <span class="ruby-identifier">client</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">identity_token</span>)
+  <span class="ruby-identifier">t_file_functions</span>(<span class="ruby-identifier">client</span>)
+  <span class="ruby-identifier">client</span>.<span class="ruby-identifier">close</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- test_file_functions-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- test_file_functions-method -->
+
+    
+      <div id="method-i-test_message_functions" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">test_message_functions</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="test_message_functions-source">
+            <pre><span class="ruby-comment"># File test/test_franklyclient.rb, line 159</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">test_message_functions</span>
+  <span class="ruby-identifier">client</span> = <span class="ruby-constant">FranklyClient</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@test_url</span>)
+
+  <span class="ruby-comment"># test with app secret and key</span>
+  <span class="ruby-identifier">client</span>.<span class="ruby-identifier">open</span>(<span class="ruby-ivar">@app_key</span>, <span class="ruby-ivar">@app_secret</span>)
+  <span class="ruby-identifier">t_message_functions</span>(<span class="ruby-identifier">client</span>)
+  <span class="ruby-identifier">client</span>.<span class="ruby-identifier">close</span>
+
+  <span class="ruby-comment"># test with identity_token</span>
+  <span class="ruby-identifier">nonce</span> = <span class="ruby-constant">Util</span>.<span class="ruby-identifier">parse_json_string</span> <span class="ruby-constant">Auth</span>.<span class="ruby-identifier">nonce</span>(<span class="ruby-constant">URI</span>(<span class="ruby-ivar">@test_url</span>))
+  <span class="ruby-identifier">identity_token</span> = <span class="ruby-identifier">generate_identity_token</span>(<span class="ruby-ivar">@app_key</span>, <span class="ruby-ivar">@app_secret</span>, <span class="ruby-identifier">nonce</span>, <span class="ruby-keyword">nil</span>, <span class="ruby-string">&#39;admin&#39;</span>)
+  <span class="ruby-identifier">client</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">identity_token</span>)
+  <span class="ruby-identifier">t_message_functions</span>(<span class="ruby-identifier">client</span>)
+  <span class="ruby-identifier">client</span>.<span class="ruby-identifier">close</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- test_message_functions-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- test_message_functions-method -->
+
+    
+      <div id="method-i-test_open" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">test_open</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="test_open-source">
+            <pre><span class="ruby-comment"># File test/test_franklyclient.rb, line 36</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">test_open</span>
+  <span class="ruby-identifier">client</span> = <span class="ruby-constant">FranklyClient</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@test_url</span>)
+
+  <span class="ruby-comment"># test with app secret and key</span>
+  <span class="ruby-identifier">client</span>.<span class="ruby-identifier">open</span>(<span class="ruby-ivar">@app_key</span>, <span class="ruby-ivar">@app_secret</span>)
+  <span class="ruby-identifier">client</span>.<span class="ruby-identifier">close</span>
+
+  <span class="ruby-comment"># test with identity_token</span>
+  <span class="ruby-identifier">nonce</span> = <span class="ruby-constant">Util</span>.<span class="ruby-identifier">parse_json_string</span> <span class="ruby-constant">Auth</span>.<span class="ruby-identifier">nonce</span>(<span class="ruby-constant">URI</span>(<span class="ruby-ivar">@test_url</span>))
+  <span class="ruby-identifier">identity_token</span> = <span class="ruby-identifier">generate_identity_token</span>(<span class="ruby-ivar">@app_key</span>, <span class="ruby-ivar">@app_secret</span>, <span class="ruby-identifier">nonce</span>, <span class="ruby-keyword">nil</span>, <span class="ruby-string">&#39;admin&#39;</span>)
+  <span class="ruby-identifier">client</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">identity_token</span>)
+  <span class="ruby-identifier">client</span>.<span class="ruby-identifier">close</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- test_open-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- test_open-method -->
+
+    
+      <div id="method-i-test_room_functions" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">test_room_functions</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="test_room_functions-source">
+            <pre><span class="ruby-comment"># File test/test_franklyclient.rb, line 215</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">test_room_functions</span>
+  <span class="ruby-identifier">client</span> = <span class="ruby-constant">FranklyClient</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@test_url</span>)
+
+  <span class="ruby-comment"># test with app secret and key</span>
+  <span class="ruby-identifier">client</span>.<span class="ruby-identifier">open</span>(<span class="ruby-ivar">@app_key</span>, <span class="ruby-ivar">@app_secret</span>)
+  <span class="ruby-identifier">t_room_functions</span>(<span class="ruby-identifier">client</span>)
+  <span class="ruby-identifier">client</span>.<span class="ruby-identifier">close</span>
+
+  <span class="ruby-comment"># test with identity_token</span>
+  <span class="ruby-identifier">nonce</span> = <span class="ruby-constant">Util</span>.<span class="ruby-identifier">parse_json_string</span> <span class="ruby-constant">Auth</span>.<span class="ruby-identifier">nonce</span>(<span class="ruby-constant">URI</span>(<span class="ruby-ivar">@test_url</span>))
+  <span class="ruby-identifier">identity_token</span> = <span class="ruby-identifier">generate_identity_token</span>(<span class="ruby-ivar">@app_key</span>, <span class="ruby-ivar">@app_secret</span>, <span class="ruby-identifier">nonce</span>, <span class="ruby-keyword">nil</span>, <span class="ruby-string">&#39;admin&#39;</span>)
+  <span class="ruby-identifier">client</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">identity_token</span>)
+  <span class="ruby-identifier">t_room_functions</span>(<span class="ruby-identifier">client</span>)
+  <span class="ruby-identifier">client</span>.<span class="ruby-identifier">close</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- test_room_functions-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- test_room_functions-method -->
+
+    
+      <div id="method-i-test_room_roles" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">test_room_roles</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="test_room_roles-source">
+            <pre><span class="ruby-comment"># File test/test_franklyclient.rb, line 392</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">test_room_roles</span>
+  <span class="ruby-identifier">client</span> = <span class="ruby-constant">FranklyClient</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@test_url</span>)
+
+  <span class="ruby-comment"># test with app secret and key</span>
+  <span class="ruby-identifier">client</span>.<span class="ruby-identifier">open</span>(<span class="ruby-ivar">@app_key</span>, <span class="ruby-ivar">@app_secret</span>)
+  <span class="ruby-identifier">t_room_roles</span>(<span class="ruby-identifier">client</span>)
+  <span class="ruby-identifier">client</span>.<span class="ruby-identifier">close</span>
+
+  <span class="ruby-comment"># test with identity_token</span>
+  <span class="ruby-identifier">nonce</span> = <span class="ruby-constant">Util</span>.<span class="ruby-identifier">parse_json_string</span> <span class="ruby-constant">Auth</span>.<span class="ruby-identifier">nonce</span>(<span class="ruby-constant">URI</span>(<span class="ruby-ivar">@test_url</span>))
+  <span class="ruby-identifier">identity_token</span> = <span class="ruby-identifier">generate_identity_token</span>(<span class="ruby-ivar">@app_key</span>, <span class="ruby-ivar">@app_secret</span>, <span class="ruby-identifier">nonce</span>, <span class="ruby-keyword">nil</span>, <span class="ruby-string">&#39;admin&#39;</span>)
+  <span class="ruby-identifier">client</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">identity_token</span>)
+  <span class="ruby-identifier">t_room_roles</span>(<span class="ruby-identifier">client</span>)
+  <span class="ruby-identifier">client</span>.<span class="ruby-identifier">close</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- test_room_roles-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- test_room_roles-method -->
+
+    
+      <div id="method-i-test_session_functions" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">test_session_functions</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="test_session_functions-source">
+            <pre><span class="ruby-comment"># File test/test_franklyclient.rb, line 357</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">test_session_functions</span>
+  <span class="ruby-identifier">client</span> = <span class="ruby-constant">FranklyClient</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@test_url</span>)
+
+  <span class="ruby-comment"># test with app secret and key</span>
+  <span class="ruby-identifier">client</span>.<span class="ruby-identifier">open</span>(<span class="ruby-ivar">@app_key</span>, <span class="ruby-ivar">@app_secret</span>)
+  <span class="ruby-identifier">t_session_functions</span>(<span class="ruby-identifier">client</span>)
+  <span class="ruby-identifier">client</span>.<span class="ruby-identifier">close</span>
+
+  <span class="ruby-comment"># test with identity_token</span>
+  <span class="ruby-identifier">nonce</span> = <span class="ruby-constant">Util</span>.<span class="ruby-identifier">parse_json_string</span> <span class="ruby-constant">Auth</span>.<span class="ruby-identifier">nonce</span>(<span class="ruby-constant">URI</span>(<span class="ruby-ivar">@test_url</span>))
+  <span class="ruby-identifier">identity_token</span> = <span class="ruby-identifier">generate_identity_token</span>(<span class="ruby-ivar">@app_key</span>, <span class="ruby-ivar">@app_secret</span>, <span class="ruby-identifier">nonce</span>, <span class="ruby-keyword">nil</span>, <span class="ruby-string">&#39;admin&#39;</span>)
+  <span class="ruby-identifier">client</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">identity_token</span>)
+  <span class="ruby-identifier">t_session_functions</span>(<span class="ruby-identifier">client</span>)
+  <span class="ruby-identifier">client</span>.<span class="ruby-identifier">close</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- test_session_functions-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- test_session_functions-method -->
+
+    
+      <div id="method-i-test_user_functions" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">test_user_functions</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="test_user_functions-source">
+            <pre><span class="ruby-comment"># File test/test_franklyclient.rb, line 294</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">test_user_functions</span>
+  <span class="ruby-identifier">client</span> = <span class="ruby-constant">FranklyClient</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@test_url</span>)
+
+  <span class="ruby-comment"># test with app secret and key</span>
+  <span class="ruby-identifier">client</span>.<span class="ruby-identifier">open</span>(<span class="ruby-ivar">@app_key</span>, <span class="ruby-ivar">@app_secret</span>)
+  <span class="ruby-identifier">t_user_functions</span>(<span class="ruby-identifier">client</span>)
+  <span class="ruby-identifier">client</span>.<span class="ruby-identifier">close</span>
+
+  <span class="ruby-comment"># test with identity_token</span>
+  <span class="ruby-identifier">nonce</span> = <span class="ruby-constant">Util</span>.<span class="ruby-identifier">parse_json_string</span> <span class="ruby-constant">Auth</span>.<span class="ruby-identifier">nonce</span>(<span class="ruby-constant">URI</span>(<span class="ruby-ivar">@test_url</span>))
+  <span class="ruby-identifier">identity_token</span> = <span class="ruby-identifier">generate_identity_token</span>(<span class="ruby-ivar">@app_key</span>, <span class="ruby-ivar">@app_secret</span>, <span class="ruby-identifier">nonce</span>, <span class="ruby-keyword">nil</span>, <span class="ruby-string">&#39;admin&#39;</span>)
+  <span class="ruby-identifier">client</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">identity_token</span>)
+  <span class="ruby-identifier">t_user_functions</span>(<span class="ruby-identifier">client</span>)
+  <span class="ruby-identifier">client</span>.<span class="ruby-identifier">close</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- test_user_functions-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- test_user_functions-method -->
+
+    
+    </section><!-- public-instance-method-details -->
+  
+  </section><!-- 5Buntitled-5D -->
+
+</div><!-- documentation -->
+
+
+<footer id="validator-badges">
+  <p><a href="http://validator.w3.org/check/referer">[Validate]</a>
+  <p>Generated by <a href="https://github.com/rdoc/rdoc">RDoc</a> 4.0.0.
+  <p>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish Rdoc Generator</a> 3.
+</footer>
+

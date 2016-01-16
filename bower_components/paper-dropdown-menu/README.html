@@ -1,0 +1,125 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+
+    <!-- Always force latest IE rendering engine or request Chrome Frame -->
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+
+    <!-- Use title if it's in the page YAML frontmatter -->
+    <title> Frankly Developer Portal </title>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js" type="text/javascript"></script>
+    <script src="/bower_components/webcomponentsjs/webcomponents-lite.min-01242ae0.js"></script>
+    <link href="/stylesheets/normalize-14170e97.css" rel="stylesheet" /><link href="/stylesheets/all-f2dad6dc.css" rel="stylesheet" />
+    <style is="custom-style">
+            :root {
+                --paper-toolbar-background: #2A2E33;
+            }
+            .logo {
+                margin-left: 5px;
+                margin-top: 10px;
+                width: 150px;
+            }
+        </style>
+        <link rel="icon"
+              type="image/png"
+              href="images/frankly_favicon_32x32_no_bg.png">
+    <script src="/javascripts/all-b1933d9a.js"></script>
+
+    <link rel="import" href="/bower_components/paper-header-panel/paper-header-panel.html">
+    <link rel="import" href="/bower_components/paper-toolbar/paper-toolbar.html">
+    <link rel="import" href="/bower_components/paper-icon-button/paper-icon-button.html">
+    <link rel="import" href="/bower_components/iron-icons/iron-icons.html">
+    <link rel="import" href="/bower_components/iron-flex-layout/iron-flex-layout.html">
+    <link rel="import" href="/bower_components/iron-image/iron-image.html">
+
+</head>
+
+<body class="bower_components bower_components_paper-dropdown-menu bower_components_paper-dropdown-menu_README">
+    <paper-header-panel class="flex">
+        <paper-toolbar>
+<a href="/">                <img class="logo" src="/images/franklyinc_logo_color_large-044d426f.png" />
+</a>            <span class="flex"></span>
+        </paper-toolbar>
+    </paper-header-panel>
+    <h1 id="paper-dropdown-menu">paper-dropdown-menu</h1>
+
+<p><code>paper-dropdown-menu</code> is similar to a native browser select element.
+<code>paper-dropdown-menu</code> works with selectable content. The currently selected
+item is displayed in the control. If no item is selected, the <code>label</code> is
+displayed instead.
+The child element with the class <code>dropdown-content</code> will be used as the dropdown
+menu. It could be a <code>paper-menu</code> or element that triggers <code>iron-activate</code> when
+selecting its children.
+Example:</p>
+<div class="highlight html"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8</pre></td><td class="code"><pre><span class="nt">&lt;paper-dropdown-menu</span> <span class="na">label=</span><span class="s">"Your favourite pastry"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;paper-menu</span> <span class="na">class=</span><span class="s">"dropdown-content"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;paper-item&gt;</span>Croissant<span class="nt">&lt;/paper-item&gt;</span>
+    <span class="nt">&lt;paper-item&gt;</span>Donut<span class="nt">&lt;/paper-item&gt;</span>
+    <span class="nt">&lt;paper-item&gt;</span>Financier<span class="nt">&lt;/paper-item&gt;</span>
+    <span class="nt">&lt;paper-item&gt;</span>Madeleine<span class="nt">&lt;/paper-item&gt;</span>
+  <span class="nt">&lt;/paper-menu&gt;</span>
+<span class="nt">&lt;/paper-dropdown-menu&gt;</span>
+</pre></td></tr></tbody></table>
+</div>
+
+<p>This example renders a dropdown menu with 4 options.</p>
+
+<h3 id="styling">Styling</h3>
+
+<p>The following custom properties and mixins are also available for styling:</p>
+
+<table><thead>
+<tr>
+<th>Custom property</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>--paper-dropdown-menu</code></td>
+<td>A mixin that is applied to the element host</td>
+<td><code>{}</code></td>
+</tr>
+<tr>
+<td><code>--paper-dropdown-menu-disabled</code></td>
+<td>A mixin that is applied to the element host when disabled</td>
+<td><code>{}</code></td>
+</tr>
+<tr>
+<td><code>--paper-dropdown-menu-ripple</code></td>
+<td>A mixin that is applied to the internal ripple</td>
+<td><code>{}</code></td>
+</tr>
+<tr>
+<td><code>--paper-dropdown-menu-button</code></td>
+<td>A mixin that is applied to the internal menu button</td>
+<td><code>{}</code></td>
+</tr>
+<tr>
+<td><code>--paper-dropdown-menu-input</code></td>
+<td>A mixin that is applied to the internal paper input</td>
+<td><code>{}</code></td>
+</tr>
+<tr>
+<td><code>--paper-dropdown-menu-icon</code></td>
+<td>A mixin that is applied to the internal icon</td>
+<td><code>{}</code></td>
+</tr>
+</tbody></table>
+
+<p>You can also use any of the <code>paper-input-container</code> and <code>paper-menu-button</code>
+style mixins and custom properties to style the internal input and menu button
+respectively.</p>
+
+</body>
+
+</html>

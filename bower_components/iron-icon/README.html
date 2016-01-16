@@ -1,0 +1,112 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+
+    <!-- Always force latest IE rendering engine or request Chrome Frame -->
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+
+    <!-- Use title if it's in the page YAML frontmatter -->
+    <title> Frankly Developer Portal </title>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js" type="text/javascript"></script>
+    <script src="/bower_components/webcomponentsjs/webcomponents-lite.min-01242ae0.js"></script>
+    <link href="/stylesheets/normalize-14170e97.css" rel="stylesheet" /><link href="/stylesheets/all-f2dad6dc.css" rel="stylesheet" />
+    <style is="custom-style">
+            :root {
+                --paper-toolbar-background: #2A2E33;
+            }
+            .logo {
+                margin-left: 5px;
+                margin-top: 10px;
+                width: 150px;
+            }
+        </style>
+        <link rel="icon"
+              type="image/png"
+              href="images/frankly_favicon_32x32_no_bg.png">
+    <script src="/javascripts/all-b1933d9a.js"></script>
+
+    <link rel="import" href="/bower_components/paper-header-panel/paper-header-panel.html">
+    <link rel="import" href="/bower_components/paper-toolbar/paper-toolbar.html">
+    <link rel="import" href="/bower_components/paper-icon-button/paper-icon-button.html">
+    <link rel="import" href="/bower_components/iron-icons/iron-icons.html">
+    <link rel="import" href="/bower_components/iron-flex-layout/iron-flex-layout.html">
+    <link rel="import" href="/bower_components/iron-image/iron-image.html">
+
+</head>
+
+<body class="bower_components bower_components_iron-icon bower_components_iron-icon_README">
+    <paper-header-panel class="flex">
+        <paper-toolbar>
+<a href="/">                <img class="logo" src="/images/franklyinc_logo_color_large-044d426f.png" />
+</a>            <span class="flex"></span>
+        </paper-toolbar>
+    </paper-header-panel>
+    <h1 id="iron-icon">iron-icon</h1>
+
+<p>The <code>iron-icon</code> element displays an icon. By default an icon renders as a 24px square.</p>
+
+<p>Example using src:</p>
+<div class="highlight html"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1</pre></td><td class="code"><pre><span class="nt">&lt;iron-icon</span> <span class="na">src=</span><span class="s">"star.png"</span><span class="nt">&gt;&lt;/iron-icon&gt;</span>
+</pre></td></tr></tbody></table>
+</div>
+
+<p>Example setting size to 32px x 32px:</p>
+<div class="highlight html"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8</pre></td><td class="code"><pre><span class="nt">&lt;iron-icon</span> <span class="na">class=</span><span class="s">"big"</span> <span class="na">src=</span><span class="s">"big_star.png"</span><span class="nt">&gt;&lt;/iron-icon&gt;</span>
+
+<span class="nt">&lt;style&gt;</span>
+  <span class="nc">.big</span> <span class="p">{</span>
+    <span class="nl">height</span><span class="p">:</span> <span class="m">32px</span><span class="p">;</span>
+    <span class="nl">width</span><span class="p">:</span> <span class="m">32px</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="nt">&lt;/style&gt;</span>
+</pre></td></tr></tbody></table>
+</div>
+
+<p>The iron elements include several sets of icons.
+To use the default set of icons, import  <code>iron-icons.html</code> and use the <code>icon</code> attribute to specify an icon:</p>
+<div class="highlight html"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4</pre></td><td class="code"><pre><span class="c">&lt;!-- import default iconset and iron-icon --&gt;</span>
+<span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"import"</span> <span class="na">href=</span><span class="s">"/components/iron-icons/iron-icons.html"</span><span class="nt">&gt;</span>
+
+<span class="nt">&lt;iron-icon</span> <span class="na">icon=</span><span class="s">"menu"</span><span class="nt">&gt;&lt;/iron-icon&gt;</span>
+</pre></td></tr></tbody></table>
+</div>
+
+<p>To use a different built-in set of icons, import  <code>iron-icons/&lt;iconset&gt;-icons.html</code>, and
+specify the icon as <code>&lt;iconset&gt;:&lt;icon&gt;</code>. For example:</p>
+<div class="highlight html"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4</pre></td><td class="code"><pre><span class="c">&lt;!-- import communication iconset and iron-icon --&gt;</span>
+<span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"import"</span> <span class="na">href=</span><span class="s">"/components/iron-icons/communication-icons.html"</span><span class="nt">&gt;</span>
+
+<span class="nt">&lt;iron-icon</span> <span class="na">icon=</span><span class="s">"communication:email"</span><span class="nt">&gt;&lt;/iron-icon&gt;</span>
+</pre></td></tr></tbody></table>
+</div>
+
+<p>You can also create custom icon sets of bitmap or SVG icons.</p>
+
+<p>Example of using an icon named <code>cherry</code> from a custom iconset with the ID <code>fruit</code>:</p>
+<div class="highlight html"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1</pre></td><td class="code"><pre><span class="nt">&lt;iron-icon</span> <span class="na">icon=</span><span class="s">"fruit:cherry"</span><span class="nt">&gt;&lt;/iron-icon&gt;</span>
+</pre></td></tr></tbody></table>
+</div>
+
+<p>See <a href="#iron-iconset">iron-iconset</a> and <a href="#iron-iconset-svg">iron-iconset-svg</a> for more information about
+how to create a custom iconset.</p>
+
+<p>See <a href="http://www.polymer-project.org/components/iron-icons/demo.html">iron-icons</a> for the default set of icons.</p>
+
+</body>
+
+</html>

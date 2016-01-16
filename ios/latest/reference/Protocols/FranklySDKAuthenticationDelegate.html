@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+
+	<title>FranklySDKAuthenticationDelegate Protocol Reference</title>
+
+	<link rel="stylesheet" href="../css/style-b241586a.css">
+	<meta name="viewport" content="initial-scale=1, maximum-scale=1.4">
+	<meta name="generator" content="appledoc 2.2.1 (build 1334)">
+</head>
+<body class="appledoc">
+	<header>
+		<div class="container" class="hide-in-xcode">
+			
+			<h1 id="library-title">
+				<a href="../index.html">FranklySDK </a>
+			</h1>
+
+			<p id="developer-home">
+				<a href="../index.html">Frankly</a>
+			</p>
+			
+		</div>
+	</header>
+
+	<aside>
+		<div class="container">
+			<nav>
+				<ul id="header-buttons" role="toolbar">
+					<li><a href="../index.html">Index</a></li>
+<li><a href="../hierarchy.html">Hierarchy</a></li>
+
+					<li id="on-this-page" role="navigation">
+						<label>
+							On This Page
+
+							<div class="chevron">
+								<div class="chevy chevron-left"></div>
+								<div class="chevy chevron-right"></div>
+							</div>
+
+							<select id="jump-to">
+	<option value="top">Jump To&#133;</option>
+	
+	<option value="overview">Overview</option>
+	
+
+	
+	
+	<option value="tasks">Tasks</option>
+	
+	
+
+	
+	
+
+	
+
+	
+	<optgroup label="Instance Methods">
+		
+		<option value="//api/name/authenticationDidFailWithError:">- authenticationDidFailWithError:</option>
+		
+		<option value="//api/name/authenticationDidSucceedWithUserID:">- authenticationDidSucceedWithUserID:</option>
+		
+		<option value="//api/name/doUserAuthentication">- doUserAuthentication</option>
+		
+		<option value="//api/name/identityTokenWithNonce:preferredRole:completion:">- identityTokenWithNonce:preferredRole:completion:</option>
+		
+	</optgroup>
+	
+	
+</select>
+						</label>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</aside>
+
+	<article>
+		<div id="overview_contents" class="container">
+			<div id="content">
+				<main role="main">
+					<h1 class="title">FranklySDKAuthenticationDelegate Protocol Reference</h1>
+
+					
+					<div class="section section-specification"><table cellspacing="0"><tbody>
+						<tr>
+	<th>Conforms to</th>
+	<td>NSObject</td>
+</tr><tr>
+	<th>Declared in</th>
+	<td>FranklySDK.h</td>
+</tr>
+						</tbody></table></div>
+					
+
+                    
+					
+					<div class="section section-overview">
+						<a title="Overview" name="overview"></a>
+						<h2 class="subtitle subtitle-overview">Overview</h2>
+						<p>FranklySDKAuthenticationDelegate Protocol</p>
+					</div>
+					
+					
+
+					
+					
+					<div class="section section-tasks">
+						<a title="Tasks" name="tasks"></a>
+						
+
+						
+						
+
+						<div class="task-list">
+							<div class="section-method">
+	<a name="//api/name/identityTokenWithNonce:preferredRole:completion:" title="identityTokenWithNonce:preferredRole:completion:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/identityTokenWithNonce:preferredRole:completion:">&ndash;&nbsp;identityTokenWithNonce:preferredRole:completion:</a></code>
+<span class="task-item-suffix">required method</span></h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Frankly SDK makes this call to request the partner retrieve a valid identifer
+from the partner&rsquo;s server based on the nonce received from Frankly&rsquo;s server</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)identityTokenWithNonce:(NSString *)<em>nonce</em> preferredRole:(FRSDKAuthenticationRole)<em>preferredRole</em> completion:(void ( ^ ) ( NSString *identityToken , NSString *userId ))<em>completion</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>nonce</code></th>
+						<td><p>the one time use string retrieved from Frankly&rsquo;s servers by the SDK</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>completion</code></th>
+						<td><p>finishes the authentication process when the partner has retrieved
+a valid identifier based on the nonce from their backend.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<div class="note"><p><strong>Note:</strong> the nonce is only good for a single authentication and it
+will also expire if not used within a short period of time.</p></div>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">FranklySDK.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/authenticationDidSucceedWithUserID:" title="authenticationDidSucceedWithUserID:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/authenticationDidSucceedWithUserID:">&ndash;&nbsp;authenticationDidSucceedWithUserID:</a></code>
+<span class="task-item-suffix">required method</span></h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Frankly SDK calls this to let the partner app know that Frankly&rsquo;s SDK is initialized and may be used</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)authenticationDidSucceedWithUserID:(NSNumber *)<em>userID</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>userID</code></th>
+						<td><p>the id <a href="../Classes/FranklySDK.html">FranklySDK</a> uses to reference this user. It will NOT be the same id submitted in the
+completion block of identityTokenWithNonce:completion:. The userID will never be null but an anonymous user
+will have a valid userID with an integer value of 0.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">FranklySDK.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/authenticationDidFailWithError:" title="authenticationDidFailWithError:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/authenticationDidFailWithError:">&ndash;&nbsp;authenticationDidFailWithError:</a></code>
+<span class="task-item-suffix">required method</span></h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Frankly SDK calls this to let the partner app know that initialization has failed</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)authenticationDidFailWithError:(NSError *)<em>error</em></code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">FranklySDK.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/doUserAuthentication" title="doUserAuthentication"></a>
+	<h3 class="method-title"><code><a href="#//api/name/doUserAuthentication">&ndash;&nbsp;doUserAuthentication</a></code>
+<span class="task-item-suffix">required method</span></h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>notifies the delegate that the user needs to sign in or sign up.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)doUserAuthentication</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>The delegate is responsible for presenting the user a way to log in, sign up,
+or authenticate either via a or login screen or via some other mechanism. The delegate
+is also responsible for validating the authentication.</p><div class="note"><p><strong>Note:</strong> After properly validating the user, call initiateAuthentication to
+begin the process of connecting to Frankly&rsquo;s chat service.</p></div>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">FranklySDK.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div>
+						</div>
+						
+					</div>
+					
+					
+
+                    
+                    
+          
+				</main>
+
+				<footer>
+					<div class="footer-copyright">
+						
+						<p class="copyright">Copyright &copy; 2015 Frankly. All rights reserved. Updated: 2015-09-22</p>
+						
+						
+						<p class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.2.1 (build 1334)</a>.</p>
+						
+					</div>
+				</footer>
+			</div>
+		</div>
+	</article>
+
+	<script src="../js/script-de42f056.js"></script>
+</body>
+</html>

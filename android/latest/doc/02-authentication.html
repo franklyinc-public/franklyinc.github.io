@@ -1,0 +1,303 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+
+        <!-- Always force latest IE rendering engine or request Chrome Frame -->
+        <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+        <link rel="icon"
+              type="image/png"
+              href="../../images/frankly_favicon_32x32_no_bg.png">
+        <!-- Use title if it's in the page YAML frontmatter -->
+        <title>Authentication
+            - Frankly Developer Portal</title>
+        <script src="/bower_components/webcomponentsjs/webcomponents-lite.min-01242ae0.js"></script>
+        <link href="/stylesheets/normalize-14170e97.css" rel="stylesheet" /><link href="/stylesheets/all-f2dad6dc.css" rel="stylesheet" />
+        <link href="/stylesheets/highlight-6793ce8e.css" rel="stylesheet" /><link href="/stylesheets/all-f2dad6dc.css" rel="stylesheet" />
+        <style is="custom-style">
+                    :root {
+                        --paper-toolbar-background: #2A2E33;
+                        --paper-input-container-focus-color: #fa3b1b;
+                        --paper-input-container-underline-focus: {
+                            display:none;
+                        };
+                    }
+                    .paper-header-panel {
+                        background-color: #2A2E33;
+                        padding-right: 20px;
+                        color: white;
+                    }
+                    .page-content {
+                        padding-left: 30px;
+                        padding-right: 30px;
+                        overflow: scroll;
+                    }
+
+                    .nav-tree li {
+                        list-style-type: none;
+                    }
+
+                    .nav-tree li a {
+                            color: white;
+                    }
+                    .logo {
+                        margin-left: 5px;
+                        margin-top: 20px;
+                        width: 180px;
+                    }
+                    .search {
+                        --paper-input-container-input-color: white;
+                        padding-left: 20px;
+                        padding-right: 20px;
+                    }
+                    .version-dropdown {
+                        width:90px;
+                        --paper-input-container-underline: {
+                            display:none;
+                        };
+                    }
+
+                    .version-dropdown a {
+                        color: black;
+                    }
+
+                    .previous {
+
+                    }
+
+                    .next {
+
+                    }
+
+                    .floating-toc {
+                        margin-left: -20px;
+                    }
+
+                    .floating-toc a {
+                        color:black;
+                    }
+
+                    .customization-table {
+                        table, th, td {
+                            border: 1px solid black;
+                            text-align: left;
+                        }
+                    }
+
+                    p {
+                        line-height: 150%;
+                    }
+                </style>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js" type="text/javascript"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/lunr.js/0.5.9/lunr.min.js" type="text/javascript"></script>
+        <script src="/javascripts/all-b1933d9a.js"></script>
+        <script src="/javascripts/anchorify-9f550341.js"></script>
+
+        <link href="/bower_components/paper-header-panel/paper-header-panel.html" rel="import">
+        <link href="/bower_components/paper-drawer-panel/paper-drawer-panel.html" rel="import">
+        <link href="/bower_components/paper-toolbar/paper-toolbar.html" rel="import">
+        <link href="/bower_components/paper-icon-button/paper-icon-button.html" rel="import">
+        <link href="/bower_components/iron-icons/iron-icons.html" rel="import">
+        <link href="/bower_components/iron-flex-layout/iron-flex-layout.html" rel="import">
+        <link href="/bower_components/paper-input/paper-input.html" rel="import">
+        <link href="/bower_components/paper-dropdown-menu/paper-dropdown-menu.html" rel="import">
+        <link href="/bower_components/paper-menu/paper-menu.html" rel="import">
+        <link href="/bower_components/paper-item/paper-item.html" rel="import">
+        <link rel="icon"
+              type="image/png"
+              href="images/frankly_favicon_32x32_no_bg.png">
+    </head>
+
+    <body class="android android_latest android_latest_doc android_latest_doc_02-authentication">
+        <paper-drawer-panel class="flex" mode="seamed">
+            <div class="flex page-content" main>
+                <div class="horizontal layout">
+                    <paper-icon-button icon="menu" on-tap="menuAction" paper-drawer-toggle></paper-icon-button>
+                    <h1 class="flex">
+                        Authentication
+                    </h1>
+                    <span class="flex">
+                    </span>
+                    <paper-dropdown-menu noink no-animation class="version-dropdown">
+                        <paper-menu class="dropdown-content version-dropdown" selected="0">
+                                <paper-item>
+                                    <a href="/android/latest">latest</a>
+                                </paper-item>
+                        </paper-menu>
+                    </paper-dropdown-menu>
+
+                </div>
+                <div style="max-width:70%">
+                    <style>
+    .auth-image {
+        width: 100%;
+    }
+</style>
+
+<h2 id="overview">Overview</h2>
+
+<p>Frankly&rsquo;s authentication scheme is based on JSON Web Token (JWT), a standard for
+sharing user authentication in a secure way. A complete description of <a href="https://jwt.io">JWT</a>
+rests <a href="https://openid.net/specs/draft-jones-json-web-token-07.html">here</a>.</p>
+
+<h2 id="server-auth-flow">Server Auth Flow</h2>
+
+<p><img class="auth-image" src="/images/auth_diagram-4906f65b.png" /></p>
+
+<p>JSON Web Tokens embed a unique value called nonce which is used to protect against
+man-in-the-middle attacks by adding a random component to the token in order to
+make it impossible to predict a valid token.</p>
+
+<p>Frankly’s infrastructure provides a public HTTP endpoint that must be queried to
+generate a nonce value as a first step of the authentication flow. The response
+contains the nonce value represented as a JSON string which can be used for only
+one authentication attempt.</p>
+
+<h2 id="auth-behavior">Auth Behavior</h2>
+
+<h3 id="a-note-on-security">A Note on Security</h3>
+
+<p>In all cases, your application&rsquo;s <code>appKey</code> and <code>appSecret</code> should NOT be stored on the client and your application&rsquo;s
+backend servers should be responsible for generating identity tokens, using the <code>appSecret</code> to return it to the client to
+successfully authenticate. Storing your application&rsquo;s <code>appKey</code> and <code>appSecret</code> exposes you to unnecessary security risks
+where an attacker could obtain these values to communicate with Frankly services on your behalf. Please note that some examples do highlight
+the ability to directly authenticate with Frankly services from your application&rsquo;s client, however these are also noted as examples meant for
+checking progress of early integration steps.</p>
+
+<h3 id="set-up-an-identitytokengenerator">Set up an IdentityTokenGenerator</h3>
+
+<p>The Frankly SDK needs a user&rsquo;s identity token for user authentication.  To do this, you need to implement an <code>IdentityTokenGenerator</code> to authenticate users.</p>
+<div class="highlight java"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25</pre></td><td class="code"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MyIdentityTokenGenerator</span> <span class="kd">extends</span> <span class="n">BaseIdentityTokenGenerator</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">User</span><span class="o">.</span><span class="na">Role</span> <span class="n">DEFAULT_ROLE</span> <span class="o">=</span> <span class="o">...</span>
+
+    <span class="kd">public</span> <span class="n">YourIdentityTokenGenerator</span><span class="o">(</span><span class="kd">final</span> <span class="n">Context</span> <span class="n">context</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kd">super</span><span class="o">(</span><span class="n">context</span><span class="o">,</span> <span class="n">DEFAULT_ROLE</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">protected</span> <span class="n">String</span> <span class="n">onGenerateIdentityToken</span><span class="o">(</span><span class="kd">final</span> <span class="n">String</span> <span class="n">nonce</span><span class="o">,</span> <span class="kd">final</span> <span class="n">Bundle</span> <span class="n">state</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">IOException</span> <span class="o">{</span>
+        <span class="kd">final</span> <span class="n">User</span><span class="o">.</span><span class="na">Role</span> <span class="n">suggestedRole</span> <span class="o">=</span> <span class="k">this</span><span class="o">.</span><span class="na">getRole</span><span class="o">();</span>
+        <span class="kd">final</span> <span class="n">String</span> <span class="n">partnerUsername</span> <span class="o">=</span> <span class="k">this</span><span class="o">.</span><span class="na">getPartnerUsername</span><span class="o">();</span>
+
+        <span class="c1">// Using the nonce, the suggested role, and the partner username (which is simply the</span>
+        <span class="c1">// username of the current user that is unique to your app), retrieve an identity token</span>
+        <span class="c1">// from your server.</span>
+        <span class="kd">final</span> <span class="n">String</span> <span class="n">identityToken</span> <span class="o">=</span> <span class="o">[</span><span class="n">Server</span> <span class="n">network</span> <span class="n">request</span><span class="o">];</span>
+
+        <span class="k">return</span> <span class="n">identityToken</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">boolean</span> <span class="n">supported</span><span class="o">(</span><span class="kd">final</span> <span class="n">User</span><span class="o">.</span><span class="na">Role</span> <span class="n">role</span><span class="o">)</span> <span class="o">{</span>
+        <span class="o">...</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></td></tr></tbody></table>
+</div>
+
+<p><strong>Note</strong>: The identity token is meant to be retrieved from your servers for security reasons, rather than being generated within the app.</p>
+
+<p>The <code>supported(User.Role role)</code> method should return <code>true</code> for all roles that are supported and <code>false</code> for all roles that are not. The available roles in the system are defined in the <code>Role</code> enum within the <code>User</code> model as follows:</p>
+<div class="highlight java"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3</pre></td><td class="code"><pre><span class="kd">public</span> <span class="kd">enum</span> <span class="n">Role</span> <span class="o">{</span>
+    <span class="n">ADMIN</span><span class="o">,</span> <span class="n">ANONYMOUS</span><span class="o">,</span> <span class="n">GUEST</span><span class="o">,</span> <span class="n">REGULAR</span>
+<span class="o">}</span>
+</pre></td></tr></tbody></table>
+</div>
+
+<p>After defining the <code>IdentityTokenGenerator</code> class, you must create an instance of the class and pass it into the Frankly SDK in your Application&rsquo;s <code>onCreate()</code> callback.</p>
+<div class="highlight java"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12</pre></td><td class="code"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">YourApplication</span> <span class="kd">extends</span> <span class="n">Application</span> <span class="o">{</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="n">onCreate</span><span class="o">()</span> <span class="o">{</span>
+        <span class="kd">super</span><span class="o">.</span><span class="na">onCreate</span><span class="o">();</span>
+
+        <span class="o">...</span>
+        <span class="n">FranklySdk</span><span class="o">.</span><span class="na">initialize</span><span class="o">(</span><span class="k">this</span><span class="o">);</span>
+        <span class="kd">final</span> <span class="n">MyIdentityTokenGenerator</span> <span class="n">myIdentityTokenGenerator</span> <span class="o">=</span> <span class="k">new</span> <span class="n">MyIdentityTokenGenerator</span><span class="o">(</span><span class="k">this</span><span class="o">);</span>
+        <span class="n">FranklySdk</span><span class="o">.</span><span class="na">setIdentityTokenGenerator</span><span class="o">(</span><span class="n">myIdentityTokenGenerator</span><span class="o">);</span>
+        <span class="o">...</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></td></tr></tbody></table>
+</div>
+
+<p>And user information should be initialized before login.
+When the <code>suggestedRole</code> or <code>partnerUsername</code> differs from what was previously passed in, the Frankly SDK immediately triggers a logout for the previous user:</p>
+<div class="highlight java"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1</pre></td><td class="code"><pre><span class="n">FranklySdk</span><span class="o">.</span><span class="na">initAuthentication</span><span class="o">(</span><span class="n">suggestedRole</span><span class="o">,</span> <span class="n">partnerUsername</span><span class="o">);</span>
+</pre></td></tr></tbody></table>
+</div>
+
+<h3 id="explicit-login-logout">Explicit Login/Logout</h3>
+
+<p>If you setup a custom <code>IdentityTokenGenerator</code> with user information, the Frankly SDK will trigger a login automatically as soon as it is needed.  However, you can also manually trigger a login at any time by calling:</p>
+<div class="highlight java"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1</pre></td><td class="code"><pre><span class="n">FranklySdk</span><span class="o">.</span><span class="na">login</span><span class="o">();</span>
+</pre></td></tr></tbody></table>
+</div>
+
+<p>Similarly, the Frankly SDK will automatically trigger a logout at appropriate times, such as when it detects a new user is attempting to log in.  However, you can also manually trigger a logout at any time by calling:</p>
+<div class="highlight java"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1</pre></td><td class="code"><pre><span class="n">FranklySdk</span><span class="o">.</span><span class="na">logout</span><span class="o">();</span>
+</pre></td></tr></tbody></table>
+</div>
+
+                    <div style="height:20px"></div>
+                </div>
+
+            </div>
+            <div class="flex" drawer>
+                <paper-header-panel class="flex paper-header-panel layout vertical" drawer mode="seamed">
+                    <paper-toolbar>
+<a href="/">                            <img class="logo" src="/images/franklyinc_logo_color_large-044d426f.png" />
+</a>                    </paper-toolbar>
+                    <paper-input label="Search Documentation" class="search" type="search"></paper-input>
+                    <div class="side-panel">
+                        <ul class="nav-tree">
+                            <li class='child '><a href="00-quick-start.html">Quick Start</a></li><li class='child '><a href="01-getting-started.html">Getting Started</a></li><li class='child active'><a href="02-authentication.html">Authentication</a></li><li class='child '><a href="03-the-basics.html">The Basics</a></li><li class='child '><a href="04-advanced-features.html">Advanced Features</a></li><li class='child '><a href="05-troubleshooting.html">Troubleshooting</a></li><li class='child '><a href="06-downloads.html">Downloads</a></li>
+                        </ul>
+                    </div>
+                </paper-header-panel>
+            </div>
+        </paper-drawer-panel>
+    </body>
+    <script>
+    $('li:contains("Authentication")').replaceWith("<nav class='anchorific floating-toc'></nav>");
+    $('.page-content').anchorific({
+        anchorText: ''
+    });
+    </script>
+</html>

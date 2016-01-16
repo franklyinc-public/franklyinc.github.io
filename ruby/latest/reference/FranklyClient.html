@@ -1,0 +1,2636 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+
+<title>class FranklyClient - RDoc Documentation</title>
+
+<link type="text/css" media="screen" href="rdoc-f7d1a4be.css" rel="stylesheet">
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "./";
+</script>
+
+<script type="text/javascript" charset="utf-8" src="js/jquery-7622c9ac.js"></script>
+<script type="text/javascript" charset="utf-8" src="js/navigation-35a922d6.js"></script>
+<script type="text/javascript" charset="utf-8" src="js/search_index-d30de69a.js"></script>
+<script type="text/javascript" charset="utf-8" src="js/search-4c7b4d50.js"></script>
+<script type="text/javascript" charset="utf-8" src="js/searcher-879d392b.js"></script>
+<script type="text/javascript" charset="utf-8" src="js/darkfish-72382215.js"></script>
+
+
+<body id="top" class="class">
+<nav id="metadata">
+  <nav id="home-section" class="section">
+  <h3 class="section-header">
+    <a href="./index.html">Home</a>
+    <a href="./table_of_contents.html#classes">Classes</a>
+    <a href="./table_of_contents.html#methods">Methods</a>
+  </h3>
+</nav>
+
+
+  <nav id="search-section" class="section project-section" class="initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <h3 class="section-header">
+      <input type="text" name="search" placeholder="Search" id="search-field"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </h3>
+  </form>
+
+  <ul id="search-results" class="initially-hidden"></ul>
+</nav>
+
+
+  
+
+  <div id="file-metadata">
+    <nav id="file-list-section" class="section">
+  <h3 class="section-header">Defined In</h3>
+  <ul>
+    <li>lib/frankly-ruby.rb
+  </ul>
+</nav>
+
+    
+  </div>
+
+  <div id="class-metadata">
+    
+    <nav id="parent-class-section" class="section">
+  <h3 class="section-header">Parent</h3>
+  
+  <p class="link"><a href="Object.html">Object</a>
+  
+</nav>
+
+    
+    
+    <!-- Method Quickref -->
+<nav id="method-list-section" class="section">
+  <h3 class="section-header">Methods</h3>
+
+  <ul class="link-list">
+    
+    <li ><a href="#method-c-new">::new</a>
+    
+    <li ><a href="#method-i-close">#close</a>
+    
+    <li ><a href="#method-i-create">#create</a>
+    
+    <li ><a href="#method-i-create_announcement">#create_announcement</a>
+    
+    <li ><a href="#method-i-create_file">#create_file</a>
+    
+    <li ><a href="#method-i-create_room">#create_room</a>
+    
+    <li ><a href="#method-i-create_room_announcer">#create_room_announcer</a>
+    
+    <li ><a href="#method-i-create_room_member">#create_room_member</a>
+    
+    <li ><a href="#method-i-create_room_message">#create_room_message</a>
+    
+    <li ><a href="#method-i-create_room_message_flag">#create_room_message_flag</a>
+    
+    <li ><a href="#method-i-create_room_moderator">#create_room_moderator</a>
+    
+    <li ><a href="#method-i-create_room_owner">#create_room_owner</a>
+    
+    <li ><a href="#method-i-create_room_subscriber">#create_room_subscriber</a>
+    
+    <li ><a href="#method-i-create_user">#create_user</a>
+    
+    <li ><a href="#method-i-delete">#delete</a>
+    
+    <li ><a href="#method-i-delete_announcement">#delete_announcement</a>
+    
+    <li ><a href="#method-i-delete_room">#delete_room</a>
+    
+    <li ><a href="#method-i-delete_room_announcer">#delete_room_announcer</a>
+    
+    <li ><a href="#method-i-delete_room_member">#delete_room_member</a>
+    
+    <li ><a href="#method-i-delete_room_moderator">#delete_room_moderator</a>
+    
+    <li ><a href="#method-i-delete_room_owner">#delete_room_owner</a>
+    
+    <li ><a href="#method-i-delete_room_subscriber">#delete_room_subscriber</a>
+    
+    <li ><a href="#method-i-delete_session">#delete_session</a>
+    
+    <li ><a href="#method-i-delete_user">#delete_user</a>
+    
+    <li ><a href="#method-i-open">#open</a>
+    
+    <li ><a href="#method-i-read">#read</a>
+    
+    <li ><a href="#method-i-read_announcement">#read_announcement</a>
+    
+    <li ><a href="#method-i-read_announcement_list">#read_announcement_list</a>
+    
+    <li ><a href="#method-i-read_announcement_room_list">#read_announcement_room_list</a>
+    
+    <li ><a href="#method-i-read_app">#read_app</a>
+    
+    <li ><a href="#method-i-read_room">#read_room</a>
+    
+    <li ><a href="#method-i-read_room_announcer_list">#read_room_announcer_list</a>
+    
+    <li ><a href="#method-i-read_room_count">#read_room_count</a>
+    
+    <li ><a href="#method-i-read_room_list">#read_room_list</a>
+    
+    <li ><a href="#method-i-read_room_member_list">#read_room_member_list</a>
+    
+    <li ><a href="#method-i-read_room_message">#read_room_message</a>
+    
+    <li ><a href="#method-i-read_room_message_list">#read_room_message_list</a>
+    
+    <li ><a href="#method-i-read_room_moderator_list">#read_room_moderator_list</a>
+    
+    <li ><a href="#method-i-read_room_owner_list">#read_room_owner_list</a>
+    
+    <li ><a href="#method-i-read_room_participant_list">#read_room_participant_list</a>
+    
+    <li ><a href="#method-i-read_room_subscriber_list">#read_room_subscriber_list</a>
+    
+    <li ><a href="#method-i-read_session">#read_session</a>
+    
+    <li ><a href="#method-i-read_user">#read_user</a>
+    
+    <li ><a href="#method-i-read_user_ban">#read_user_ban</a>
+    
+    <li ><a href="#method-i-update">#update</a>
+    
+    <li ><a href="#method-i-update_file">#update_file</a>
+    
+    <li ><a href="#method-i-update_file_from_path">#update_file_from_path</a>
+    
+    <li ><a href="#method-i-update_room">#update_room</a>
+    
+    <li ><a href="#method-i-update_user">#update_user</a>
+    
+    <li ><a href="#method-i-upload">#upload</a>
+    
+    <li ><a href="#method-i-upload_file">#upload_file</a>
+    
+    <li ><a href="#method-i-upload_file_from_path">#upload_file_from_path</a>
+    
+  </ul>
+</nav>
+
+  </div>
+
+  <div id="project-metadata">
+    <nav id="fileindex-section" class="section project-section">
+  <h3 class="section-header">Pages</h3>
+
+  <ul>
+  
+    <li class="file"><a href="./Gemfile.html">Gemfile</a>
+  
+    <li class="file"><a href="./LICENSE.html">LICENSE</a>
+  
+    <li class="file"><a href="./README_md.html">README</a>
+  
+    <li class="file"><a href="./Rakefile.html">Rakefile</a>
+  
+    <li class="file"><a href="./doc/created_rid.html">created.rid</a>
+  
+    <li class="file"><a href="./frankly-ruby_gemspec.html">frankly-ruby.gemspec</a>
+  
+  </ul>
+</nav>
+
+    <nav id="classindex-section" class="section project-section">
+  <h3 class="section-header">Class and Module Index</h3>
+
+  <ul class="link-list">
+  
+    <li><a href="./Announcement.html">Announcement</a>
+  
+    <li><a href="./Apps.html">Apps</a>
+  
+    <li><a href="./Auth.html">Auth</a>
+  
+    <li><a href="./Files.html">Files</a>
+  
+    <li><a href="./Frankly.html">Frankly</a>
+  
+    <li><a href="./FranklyClient.html">FranklyClient</a>
+  
+    <li><a href="./FranklyClientTest.html">FranklyClientTest</a>
+  
+    <li><a href="./Generic.html">Generic</a>
+  
+    <li><a href="./Message.html">Message</a>
+  
+    <li><a href="./Object.html">Object</a>
+  
+    <li><a href="./Rooms.html">Rooms</a>
+  
+    <li><a href="./Sessions.html">Sessions</a>
+  
+    <li><a href="./Users.html">Users</a>
+  
+    <li><a href="./Util.html">Util</a>
+  
+  </ul>
+</nav>
+
+  </div>
+</nav>
+
+<div id="documentation">
+  <h1 class="class">class FranklyClient</h1>
+
+  <div id="description" class="description">
+    
+<p>Instances of this class can be used to authenticate and query the <a
+href="Frankly.html">Frankly</a> REST APIs.</p>
+
+  </div><!-- description -->
+
+  
+  
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+
+    
+
+    <!-- Methods -->
+    
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section section">
+      <h3 class="section-header">Public Class Methods</h3>
+
+    
+      <div id="method-c-new" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">new</span><span
+            class="method-args">(address = 'https:')</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="new-source">
+            <pre><span class="ruby-comment"># File lib/frankly-ruby.rb, line 301</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">address</span> = <span class="ruby-string">&#39;https:&#39;</span>)
+  <span class="ruby-ivar">@base_url</span> = <span class="ruby-constant">URI</span>(<span class="ruby-constant">Util</span>.<span class="ruby-identifier">make_base_address</span>(<span class="ruby-identifier">address</span>))
+  <span class="ruby-ivar">@headers</span> = {}
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- new-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- new-method -->
+
+    
+    </section><!-- public-class-method-details -->
+  
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section section">
+      <h3 class="section-header">Public Instance Methods</h3>
+
+    
+      <div id="method-i-close" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">close</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Discards all internal state maintained by this client.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="close-source">
+            <pre><span class="ruby-comment"># File lib/frankly-ruby.rb, line 338</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">close</span>
+  <span class="ruby-ivar">@headers</span> = <span class="ruby-keyword">nil</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- close-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- close-method -->
+
+    
+      <div id="method-i-create" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">create</span><span
+            class="method-args">(path, params = {}, payload = {})</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>This method exposes a generic interface for creating objects through the <a
+href="Frankly.html">Frankly</a> API. Every create_* method is implemented
+on top of this one.</p>
+
+<p>@param path [Array]</p>
+
+<pre>An Array of strings representing the collection to create an object in.</pre>
+
+<p>@param params [Hash]</p>
+
+<pre>Parameters passed as part of the request.</pre>
+
+<p>@param payload [Hash]</p>
+
+<pre>Dict-like object representing the object to create.</pre>
+
+<p>@return [Hash/Array]</p>
+
+<pre>Either a hash, or an array of hashes representing the
+object or objects that were created.</pre>
+          
+          
+
+          
+          <div class="method-source-code" id="create-source">
+            <pre><span class="ruby-comment"># File lib/frankly-ruby.rb, line 420</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">create</span>(<span class="ruby-identifier">path</span>, <span class="ruby-identifier">params</span> = {}, <span class="ruby-identifier">payload</span> = {})
+  <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">parse</span> <span class="ruby-constant">Generic</span>.<span class="ruby-identifier">create</span>(<span class="ruby-ivar">@base_url</span>, <span class="ruby-ivar">@headers</span>, <span class="ruby-identifier">path</span>, <span class="ruby-identifier">params</span>, <span class="ruby-identifier">payload</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- create-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- create-method -->
+
+    
+      <div id="method-i-create_announcement" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">create_announcement</span><span
+            class="method-args">(payload)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Creates a new announcement object in the app. The properties of that new
+announcement are given as hash to the method.</p>
+
+<p>@param payload [Hash]</p>
+
+<pre>A hash containing the properties of the new announcement. See the Announcement
+section above to see how properly format this argument</pre>
+
+<p>@return [Hash]</p>
+
+<pre>A hash that represents the newly created announcement.</pre>
+          
+          
+
+          
+          <div class="method-source-code" id="create_announcement-source">
+            <pre><span class="ruby-comment"># File lib/frankly-ruby.rb, line 578</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">create_announcement</span>(<span class="ruby-identifier">payload</span>)
+  <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">parse</span> <span class="ruby-constant">Announcement</span>.<span class="ruby-identifier">create_announcement</span>(<span class="ruby-ivar">@base_url</span>, <span class="ruby-ivar">@headers</span>, <span class="ruby-identifier">payload</span>.<span class="ruby-identifier">to_json</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- create_announcement-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- create_announcement-method -->
+
+    
+      <div id="method-i-create_file" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">create_file</span><span
+            class="method-args">(payload)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Creates a new file object on <a href="Frankly.html">Frankly</a> servers and
+returns that object. The properties of that new file are given as a hash to
+the method.</p>
+
+<p>@param payload [Hash]</p>
+
+<pre>A hash containing the properties of the new file. See the Files
+section above to see how properly format this argument.</pre>
+
+<p>@return [Hash]</p>
+
+<pre>A hash that represents the newly created file.</pre>
+          
+          
+
+          
+          <div class="method-source-code" id="create_file-source">
+            <pre><span class="ruby-comment"># File lib/frankly-ruby.rb, line 682</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">create_file</span>(<span class="ruby-identifier">payload</span>)
+  <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">parse</span> <span class="ruby-constant">Files</span>.<span class="ruby-identifier">create_file</span>(<span class="ruby-ivar">@base_url</span>, <span class="ruby-ivar">@headers</span>, <span class="ruby-identifier">payload</span>.<span class="ruby-identifier">to_json</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- create_file-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- create_file-method -->
+
+    
+      <div id="method-i-create_room" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">create_room</span><span
+            class="method-args">(payload)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Creates a new room object in the app. The properties of that new room are
+given as hash to the method.</p>
+
+<p>@param payload [Hash]</p>
+
+<pre>A hash containing the properties of the new room. See the Rooms
+section above to see how properly format this argument</pre>
+
+<p>@return [Hash]</p>
+
+<pre>A hash that represents the newly created room.</pre>
+          
+          
+
+          
+          <div class="method-source-code" id="create_room-source">
+            <pre><span class="ruby-comment"># File lib/frankly-ruby.rb, line 351</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">create_room</span>(<span class="ruby-identifier">payload</span>)
+  <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">parse</span> <span class="ruby-constant">Rooms</span>.<span class="ruby-identifier">create_room</span>(<span class="ruby-ivar">@base_url</span>, <span class="ruby-ivar">@headers</span>, <span class="ruby-identifier">payload</span>.<span class="ruby-identifier">to_json</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- create_room-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- create_room-method -->
+
+    
+      <div id="method-i-create_room_announcer" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">create_room_announcer</span><span
+            class="method-args">(room_id, user_id)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>This method gives the user with id user_id the role of announcer in the
+room with id room_id</p>
+
+<p>@param room_id [Int]</p>
+
+<pre>The identifier of the room in which the user will have the role of announcer.</pre>
+
+<p>@param user_id [Int]</p>
+
+<pre>The identifier of the user that will have the role of announcer.</pre>
+
+<p>@return [nil]</p>
+
+<pre>This method does not return anything and throws an exception on failure</pre>
+          
+          
+
+          
+          <div class="method-source-code" id="create_room_announcer-source">
+            <pre><span class="ruby-comment"># File lib/frankly-ruby.rb, line 917</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">create_room_announcer</span>(<span class="ruby-identifier">room_id</span>, <span class="ruby-identifier">user_id</span>)
+  <span class="ruby-constant">Rooms</span>.<span class="ruby-identifier">create_room_announcer</span>(<span class="ruby-ivar">@base_url</span>, <span class="ruby-ivar">@headers</span>, <span class="ruby-identifier">room_id</span>, <span class="ruby-identifier">user_id</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- create_room_announcer-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- create_room_announcer-method -->
+
+    
+      <div id="method-i-create_room_member" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">create_room_member</span><span
+            class="method-args">(room_id, user_id)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>This method gives the user with id user_id the role of member in the room
+with id room_id</p>
+
+<p>@param room_id [Int]</p>
+
+<pre>The identifier of the room in which the user will have the role of member.</pre>
+
+<p>@param user_id [Int]</p>
+
+<pre>The identifier of the user that will have the role of member.</pre>
+
+<p>@return [nil]</p>
+
+<pre>This method does not return anything and throws an exception on failure</pre>
+          
+          
+
+          
+          <div class="method-source-code" id="create_room_member-source">
+            <pre><span class="ruby-comment"># File lib/frankly-ruby.rb, line 877</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">create_room_member</span>(<span class="ruby-identifier">room_id</span>, <span class="ruby-identifier">user_id</span>)
+  <span class="ruby-constant">Rooms</span>.<span class="ruby-identifier">create_room_member</span>(<span class="ruby-ivar">@base_url</span>, <span class="ruby-ivar">@headers</span>, <span class="ruby-identifier">room_id</span>, <span class="ruby-identifier">user_id</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- create_room_member-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- create_room_member-method -->
+
+    
+      <div id="method-i-create_room_message" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">create_room_message</span><span
+            class="method-args">(room_id, payload)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Creates a new message object in the room with the id specified in the first
+argument. The properties of that new message are given as hash to the
+method.</p>
+
+<p>@param room_id [Int]</p>
+
+<pre>The identifier of the room to create the message in.</pre>
+
+<p>@param payload [Hash]</p>
+
+<pre>A hash containing the properties of the new message. See the Messages
+section above to see how properly format this argument</pre>
+
+<p>@return [Hash]</p>
+
+<pre>A hash that represents the newly created message.</pre>
+          
+          
+
+          
+          <div class="method-source-code" id="create_room_message-source">
+            <pre><span class="ruby-comment"># File lib/frankly-ruby.rb, line 639</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">create_room_message</span>(<span class="ruby-identifier">room_id</span>, <span class="ruby-identifier">payload</span>)
+  <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">parse</span> <span class="ruby-constant">Message</span>.<span class="ruby-identifier">create_room_message</span>(<span class="ruby-ivar">@base_url</span>, <span class="ruby-ivar">@headers</span>, <span class="ruby-identifier">room_id</span>, <span class="ruby-identifier">payload</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- create_room_message-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- create_room_message-method -->
+
+    
+      <div id="method-i-create_room_message_flag" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">create_room_message_flag</span><span
+            class="method-args">(room_id, message_id)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>This method flags the message with id message_id in the room with id
+room_id.</p>
+
+<p>@param room_id [Int]</p>
+
+<pre>The identifier of the room that contains the messsage to be flagged.</pre>
+
+<p>@param message_id [Int]</p>
+
+<pre>The identifier of the messsage being flagged.</pre>
+
+<p>@return [nil]</p>
+
+<pre>The method doesn&#39;t return anything and throws an exception on failure.</pre>
+          
+          
+
+          
+          <div class="method-source-code" id="create_room_message_flag-source">
+            <pre><span class="ruby-comment"># File lib/frankly-ruby.rb, line 1032</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">create_room_message_flag</span>(<span class="ruby-identifier">room_id</span>, <span class="ruby-identifier">message_id</span>)
+  <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">parse</span> <span class="ruby-constant">Message</span>.<span class="ruby-identifier">create_room_message_flag</span>(<span class="ruby-ivar">@base_url</span>, <span class="ruby-ivar">@headers</span>, <span class="ruby-identifier">room_id</span>, <span class="ruby-identifier">message_id</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- create_room_message_flag-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- create_room_message_flag-method -->
+
+    
+      <div id="method-i-create_room_moderator" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">create_room_moderator</span><span
+            class="method-args">(room_id, user_id)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>This method gives the user with id user_id the role of moderator in the
+room with id room_id</p>
+
+<p>@param room_id [Int]</p>
+
+<pre>The identifier of the room in which the user will have the role of moderator.</pre>
+
+<p>@param user_id [Int]</p>
+
+<pre>The identifier of the user that will have the role of moderator.</pre>
+
+<p>@return [nil]</p>
+
+<pre>This method does not return anything and throws an exception on failure</pre>
+          
+          
+
+          
+          <div class="method-source-code" id="create_room_moderator-source">
+            <pre><span class="ruby-comment"># File lib/frankly-ruby.rb, line 837</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">create_room_moderator</span>(<span class="ruby-identifier">room_id</span>, <span class="ruby-identifier">user_id</span>)
+  <span class="ruby-constant">Rooms</span>.<span class="ruby-identifier">create_room_moderator</span>(<span class="ruby-ivar">@base_url</span>, <span class="ruby-ivar">@headers</span>, <span class="ruby-identifier">room_id</span>, <span class="ruby-identifier">user_id</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- create_room_moderator-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- create_room_moderator-method -->
+
+    
+      <div id="method-i-create_room_owner" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">create_room_owner</span><span
+            class="method-args">(room_id, user_id)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>This method gives the user with id user_id the role of owner in the room
+with id room_id.</p>
+
+<p>@param room_id [Int]</p>
+
+<pre>The identifier of the room in which the user will have the role of owner.</pre>
+
+<p>@param user_id [Int]</p>
+
+<pre>The identifier of the user that will have the role of owner.</pre>
+
+<p>@return [nil]</p>
+
+<pre>This method does not return anything and throws an exception on failure.</pre>
+          
+          
+
+          
+          <div class="method-source-code" id="create_room_owner-source">
+            <pre><span class="ruby-comment"># File lib/frankly-ruby.rb, line 797</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">create_room_owner</span>(<span class="ruby-identifier">room_id</span>, <span class="ruby-identifier">user_id</span>)
+  <span class="ruby-constant">Rooms</span>.<span class="ruby-identifier">create_room_owner</span>(<span class="ruby-ivar">@base_url</span>, <span class="ruby-ivar">@headers</span>, <span class="ruby-identifier">room_id</span>, <span class="ruby-identifier">user_id</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- create_room_owner-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- create_room_owner-method -->
+
+    
+      <div id="method-i-create_room_subscriber" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">create_room_subscriber</span><span
+            class="method-args">(room_id, user_id)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>This method gives the user with id user_id the role of subscriber in the
+room with id room_id</p>
+
+<p>@param room_id [Int]</p>
+
+<pre>The identifier of the room in which the user will have the role of subscriber.</pre>
+
+<p>@param user_id [Int]</p>
+
+<pre>The identifier of the user that will have the role of subscriber.</pre>
+
+<p>@return [nil]</p>
+
+<pre>This method does not return anything and throws an exception on failure</pre>
+          
+          
+
+          
+          <div class="method-source-code" id="create_room_subscriber-source">
+            <pre><span class="ruby-comment"># File lib/frankly-ruby.rb, line 957</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">create_room_subscriber</span>(<span class="ruby-identifier">room_id</span>, <span class="ruby-identifier">user_id</span>)
+  <span class="ruby-constant">Rooms</span>.<span class="ruby-identifier">create_room_subscriber</span>(<span class="ruby-ivar">@base_url</span>, <span class="ruby-ivar">@headers</span>, <span class="ruby-identifier">room_id</span>, <span class="ruby-identifier">user_id</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- create_room_subscriber-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- create_room_subscriber-method -->
+
+    
+      <div id="method-i-create_user" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">create_user</span><span
+            class="method-args">(payload)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Creates a new user in the app. The properties of that new user are given as
+hash to the method.</p>
+
+<p>@param payload [Hash]</p>
+
+<pre>A hash containing the properties of the new user. See the Users
+section above to see how properly format this argument</pre>
+
+<p>@return [Hash]</p>
+
+<pre>A hash that represents the newly created user.</pre>
+          
+          
+
+          
+          <div class="method-source-code" id="create_user-source">
+            <pre><span class="ruby-comment"># File lib/frankly-ruby.rb, line 516</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">create_user</span>(<span class="ruby-identifier">payload</span>)
+  <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">parse</span> <span class="ruby-constant">Users</span>.<span class="ruby-identifier">create_user</span>(<span class="ruby-ivar">@base_url</span>, <span class="ruby-ivar">@headers</span>, <span class="ruby-identifier">payload</span>.<span class="ruby-identifier">to_json</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- create_user-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- create_user-method -->
+
+    
+      <div id="method-i-delete" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">delete</span><span
+            class="method-args">(path, params = {}, payload = {})</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>This method exposes a generic interface for deleting objects through the <a
+href="Frankly.html">Frankly</a> API. Every delete_* method is implemented
+on top of this one.</p>
+
+<p>@param path [Array]</p>
+
+<pre>An Array of strings representing the collection to delete an object in.</pre>
+
+<p>@param params [Hash]</p>
+
+<pre>Parameters passed as part of the request.</pre>
+
+<p>@param payload [Hash]</p>
+
+<pre>A hash representing the body of the request.</pre>
+
+<p>@return [nil]</p>
+
+<pre>The method doesn&#39;t return anything on success and throws
+an exception on failure.</pre>
+          
+          
+
+          
+          <div class="method-source-code" id="delete-source">
+            <pre><span class="ruby-comment"># File lib/frankly-ruby.rb, line 475</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">delete</span>(<span class="ruby-identifier">path</span>, <span class="ruby-identifier">params</span> = {}, <span class="ruby-identifier">payload</span> = {})
+  <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">parse</span> <span class="ruby-constant">Generic</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-ivar">@base_url</span>, <span class="ruby-ivar">@headers</span>, <span class="ruby-identifier">path</span>, <span class="ruby-identifier">params</span>, <span class="ruby-identifier">payload</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- delete-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- delete-method -->
+
+    
+      <div id="method-i-delete_announcement" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">delete_announcement</span><span
+            class="method-args">(announcement_id)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Deletes the announcement object with the id sepecified in the first
+argument. Note that deleting an announcement doesn&#39;t remove messages
+from rooms it has already been published to. This operation cannot be
+undone!</p>
+
+<p>@param announcement_id [Int]</p>
+
+<pre>The identifier of the announcement to delete.</pre>
+
+<p>@return [nil]</p>
+
+<pre>The method doesn&#39;t return anything on success and throws an exception on failure.</pre>
+          
+          
+
+          
+          <div class="method-source-code" id="delete_announcement-source">
+            <pre><span class="ruby-comment"># File lib/frankly-ruby.rb, line 602</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">delete_announcement</span>(<span class="ruby-identifier">announcement_id</span>)
+  <span class="ruby-constant">Announcement</span>.<span class="ruby-identifier">delete_announcement</span>(<span class="ruby-ivar">@base_url</span>, <span class="ruby-ivar">@headers</span>, <span class="ruby-identifier">announcement_id</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- delete_announcement-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- delete_announcement-method -->
+
+    
+      <div id="method-i-delete_room" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">delete_room</span><span
+            class="method-args">(room_id)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Deletes the room object with the id sepecified in the first argument. Note
+that this will cause all messages sent to this room to be deleted as well,
+a safer approach could be to change the room status to
+&#39;unpublished&#39; to hide it without erasing data. This operation
+cannot be undone!</p>
+
+<p>@param room_id [Int]</p>
+
+<pre>The identifier of the room to delete.</pre>
+
+<p>@return [nil]</p>
+
+<pre>The method doesn&#39;t return anything on success and throws an exception on failure.</pre>
+          
+          
+
+          
+          <div class="method-source-code" id="delete_room-source">
+            <pre><span class="ruby-comment"># File lib/frankly-ruby.rb, line 401</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">delete_room</span>(<span class="ruby-identifier">room_id</span>)
+  <span class="ruby-constant">Rooms</span>.<span class="ruby-identifier">delete_room</span>(<span class="ruby-ivar">@base_url</span>, <span class="ruby-ivar">@headers</span>, <span class="ruby-identifier">room_id</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- delete_room-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- delete_room-method -->
+
+    
+      <div id="method-i-delete_room_announcer" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">delete_room_announcer</span><span
+            class="method-args">(room_id, user_id)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>This method removes the role of announcer from the user with id user_id in
+the room with id room_id</p>
+
+<p>@param room_id [Int]</p>
+
+<pre>The identifier of the room in which the user will have the role of announcer removed.</pre>
+
+<p>@return [nil]</p>
+
+<pre>This method does not return anything and throws an exception on failure</pre>
+          
+          
+
+          
+          <div class="method-source-code" id="delete_room_announcer-source">
+            <pre><span class="ruby-comment"># File lib/frankly-ruby.rb, line 942</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">delete_room_announcer</span>(<span class="ruby-identifier">room_id</span>, <span class="ruby-identifier">user_id</span>)
+  <span class="ruby-constant">Rooms</span>.<span class="ruby-identifier">delete_room_announcer</span>(<span class="ruby-ivar">@base_url</span>, <span class="ruby-ivar">@headers</span>, <span class="ruby-identifier">room_id</span>, <span class="ruby-identifier">user_id</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- delete_room_announcer-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- delete_room_announcer-method -->
+
+    
+      <div id="method-i-delete_room_member" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">delete_room_member</span><span
+            class="method-args">(room_id, user_id)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>This method removes the role of member from the user with id user_id in the
+room with id room_id</p>
+
+<p>@param room_id [Int]</p>
+
+<pre>The identifier of the room in which the user will have the role of member removed.</pre>
+
+<p>@return [nil]</p>
+
+<pre>This method does not return anything and throws an exception on failure</pre>
+          
+          
+
+          
+          <div class="method-source-code" id="delete_room_member-source">
+            <pre><span class="ruby-comment"># File lib/frankly-ruby.rb, line 902</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">delete_room_member</span>(<span class="ruby-identifier">room_id</span>, <span class="ruby-identifier">user_id</span>)
+  <span class="ruby-constant">Rooms</span>.<span class="ruby-identifier">delete_room_member</span>(<span class="ruby-ivar">@base_url</span>, <span class="ruby-ivar">@headers</span>, <span class="ruby-identifier">room_id</span>, <span class="ruby-identifier">user_id</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- delete_room_member-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- delete_room_member-method -->
+
+    
+      <div id="method-i-delete_room_moderator" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">delete_room_moderator</span><span
+            class="method-args">(room_id, user_id)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>This method removes the role of moderator from the user with id user_id in
+the room with id room_id</p>
+
+<p>@param room_id [Int]</p>
+
+<pre>The identifier of the room in which the user will have the role of moderator removed.</pre>
+
+<p>@return [nil]</p>
+
+<pre>This method does not return anything and throws an exception on failure</pre>
+          
+          
+
+          
+          <div class="method-source-code" id="delete_room_moderator-source">
+            <pre><span class="ruby-comment"># File lib/frankly-ruby.rb, line 862</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">delete_room_moderator</span>(<span class="ruby-identifier">room_id</span>, <span class="ruby-identifier">user_id</span>)
+  <span class="ruby-constant">Rooms</span>.<span class="ruby-identifier">delete_room_moderator</span>(<span class="ruby-ivar">@base_url</span>, <span class="ruby-ivar">@headers</span>, <span class="ruby-identifier">room_id</span>, <span class="ruby-identifier">user_id</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- delete_room_moderator-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- delete_room_moderator-method -->
+
+    
+      <div id="method-i-delete_room_owner" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">delete_room_owner</span><span
+            class="method-args">(room_id, user_id)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>This method removes the role of owner from the user with id user_id in the
+room with id room_id</p>
+
+<p>@param room_id [Int]</p>
+
+<pre>The identifier of the room in which the user will have the role of owner removed.</pre>
+
+<p>@return [nil]</p>
+
+<pre>This method does not return anything and throws an exception on failure.</pre>
+          
+          
+
+          
+          <div class="method-source-code" id="delete_room_owner-source">
+            <pre><span class="ruby-comment"># File lib/frankly-ruby.rb, line 822</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">delete_room_owner</span>(<span class="ruby-identifier">room_id</span>, <span class="ruby-identifier">user_id</span>)
+  <span class="ruby-constant">Rooms</span>.<span class="ruby-identifier">delete_room_owner</span>(<span class="ruby-ivar">@base_url</span>, <span class="ruby-ivar">@headers</span>, <span class="ruby-identifier">room_id</span>, <span class="ruby-identifier">user_id</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- delete_room_owner-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- delete_room_owner-method -->
+
+    
+      <div id="method-i-delete_room_subscriber" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">delete_room_subscriber</span><span
+            class="method-args">(room_id, user_id)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>This method removes the subscriber role from the user with id user_id in
+the room with id room_id</p>
+
+<p>@param room_id [Int]</p>
+
+<pre>The identifier of the room in which the user will have the role of subscriber removed.</pre>
+
+<p>@return [nil]</p>
+
+<pre>This method does not return anything and throws an exception on failure</pre>
+          
+          
+
+          
+          <div class="method-source-code" id="delete_room_subscriber-source">
+            <pre><span class="ruby-comment"># File lib/frankly-ruby.rb, line 982</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">delete_room_subscriber</span>(<span class="ruby-identifier">room_id</span>, <span class="ruby-identifier">user_id</span>)
+  <span class="ruby-constant">Rooms</span>.<span class="ruby-identifier">delete_room_subscriber</span>(<span class="ruby-ivar">@base_url</span>, <span class="ruby-ivar">@headers</span>, <span class="ruby-identifier">room_id</span>, <span class="ruby-identifier">user_id</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- delete_room_subscriber-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- delete_room_subscriber-method -->
+
+    
+      <div id="method-i-delete_session" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">delete_session</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>This method deletes the current session. After this function is called, the
+other functions will return exceptions until open is called again.</p>
+
+<p>@return [nil]</p>
+
+<pre>The method does not return anything and throws an exception on failure</pre>
+          
+          
+
+          
+          <div class="method-source-code" id="delete_session-source">
+            <pre><span class="ruby-comment"># File lib/frankly-ruby.rb, line 782</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">delete_session</span>
+  <span class="ruby-constant">Sessions</span>.<span class="ruby-identifier">delete_session</span>(<span class="ruby-ivar">@base_url</span>, <span class="ruby-ivar">@headers</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- delete_session-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- delete_session-method -->
+
+    
+      <div id="method-i-delete_user" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">delete_user</span><span
+            class="method-args">(user_id)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Deletes the user object with the id sepecified in the first argument.</p>
+
+<p>@param room_id [Int]</p>
+
+<pre>The identifier of the user to delete.</pre>
+
+<p>@return [nil]</p>
+
+<pre>The method doesn&#39;t return anything on success and throws an exception on failure.</pre>
+          
+          
+
+          
+          <div class="method-source-code" id="delete_user-source">
+            <pre><span class="ruby-comment"># File lib/frankly-ruby.rb, line 554</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">delete_user</span>(<span class="ruby-identifier">user_id</span>)
+  <span class="ruby-constant">Users</span>.<span class="ruby-identifier">delete_user</span>(<span class="ruby-ivar">@base_url</span>, <span class="ruby-ivar">@headers</span>, <span class="ruby-identifier">user_id</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- delete_user-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- delete_user-method -->
+
+    
+      <div id="method-i-open" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">open</span><span
+            class="method-args">(*args)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>This should be the first method called on an instance of <a
+href="FranklyClient.html">FranklyClient</a>, after succesfully returning
+the client can be used to interact with the <a
+href="Frankly.html">Frankly</a> API.</p>
+
+<p>@param app_key [String]</p>
+
+<pre>The key that specifies which app this client is authenticating for, this value is
+provided by the Frankly Console.</pre>
+
+<p>@param app_secret [String]</p>
+
+<pre>The secret value associated the the key allowing the client to securely authenticate
+against the Frankly API.</pre>
+
+<p>@return [nil]</p>
+
+<pre>The method doesn&#39;t return anything, it modified the internal
+state of the object it is called on.</pre>
+          
+          
+
+          
+          <div class="method-source-code" id="open-source">
+            <pre><span class="ruby-comment"># File lib/frankly-ruby.rb, line 321</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">open</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">args</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">==</span> <span class="ruby-value">2</span>
+    <span class="ruby-identifier">app_key</span> = <span class="ruby-identifier">args</span>[<span class="ruby-value">0</span>]
+    <span class="ruby-identifier">app_secret</span> = <span class="ruby-identifier">args</span>[<span class="ruby-value">1</span>]
+    <span class="ruby-ivar">@headers</span> = <span class="ruby-constant">Util</span>.<span class="ruby-identifier">build_headers</span>(<span class="ruby-ivar">@base_url</span>, <span class="ruby-identifier">app_key</span>, <span class="ruby-identifier">app_secret</span>)
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">args</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">==</span> <span class="ruby-value">1</span>
+      <span class="ruby-identifier">identity_token</span> = <span class="ruby-identifier">args</span>[<span class="ruby-value">0</span>]
+      <span class="ruby-identifier">response</span> = <span class="ruby-constant">Auth</span>.<span class="ruby-identifier">open</span>(<span class="ruby-ivar">@base_url</span>, <span class="ruby-identifier">identity_token</span>)
+      <span class="ruby-ivar">@headers</span> = <span class="ruby-constant">Util</span>.<span class="ruby-identifier">build_headers</span>(<span class="ruby-ivar">@base_url</span>, <span class="ruby-identifier">response</span>.<span class="ruby-identifier">cookies</span>)
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">fail</span> <span class="ruby-string">&#39;Incorrect number of arguments&#39;</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- open-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- open-method -->
+
+    
+      <div id="method-i-read" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">read</span><span
+            class="method-args">(path, params = {}, payload = {})</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>This method exposes a generic interface for reading objects through the <a
+href="Frankly.html">Frankly</a> API. Every read_* method is implemented on
+top of this one.</p>
+
+<p>@param path [Array]</p>
+
+<pre>An Array of strings representing the collection to read an object in.</pre>
+
+<p>@param params [Hash]</p>
+
+<pre>Parameters passed as part of the request.</pre>
+
+<p>@param payload [Hash]</p>
+
+<pre>Dict-like object representing the object to create.</pre>
+
+<p>@return [Hash/Array]</p>
+
+<pre>The object read from the API at the specified path.</pre>
+          
+          
+
+          
+          <div class="method-source-code" id="read-source">
+            <pre><span class="ruby-comment"># File lib/frankly-ruby.rb, line 438</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">read</span>(<span class="ruby-identifier">path</span>, <span class="ruby-identifier">params</span> = {}, <span class="ruby-identifier">payload</span> = {})
+  <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">parse</span> <span class="ruby-constant">Generic</span>.<span class="ruby-identifier">read</span>(<span class="ruby-ivar">@base_url</span>, <span class="ruby-ivar">@headers</span>, <span class="ruby-identifier">path</span>, <span class="ruby-identifier">params</span>, <span class="ruby-identifier">payload</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- read-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- read-method -->
+
+    
+      <div id="method-i-read_announcement" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">read_announcement</span><span
+            class="method-args">(announcement_id)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Retrieves the announcement object with the id sepecified in the first
+argument.</p>
+
+<p>@param announcement_id [Int]</p>
+
+<pre>The identifier of the announcement to fetch.</pre>
+
+<p>@return [Hash]</p>
+
+<pre>A hash representing the announcement with the specified id.</pre>
+          
+          
+
+          
+          <div class="method-source-code" id="read_announcement-source">
+            <pre><span class="ruby-comment"># File lib/frankly-ruby.rb, line 589</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">read_announcement</span>(<span class="ruby-identifier">announcement_id</span>)
+  <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">parse</span> <span class="ruby-constant">Announcement</span>.<span class="ruby-identifier">read_announcement</span>(<span class="ruby-ivar">@base_url</span>, <span class="ruby-ivar">@headers</span>, <span class="ruby-identifier">announcement_id</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- read_announcement-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- read_announcement-method -->
+
+    
+      <div id="method-i-read_announcement_list" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">read_announcement_list</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Retrieves the list of announcements that are available in the app.</p>
+
+<p>@return [Array]</p>
+
+<pre>An array of annoucement hashes ordered by id, which may be empty if
+there are no announcements in the app.</pre>
+          
+          
+
+          
+          <div class="method-source-code" id="read_announcement_list-source">
+            <pre><span class="ruby-comment"># File lib/frankly-ruby.rb, line 611</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">read_announcement_list</span>
+  <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">parse</span> <span class="ruby-constant">Announcement</span>.<span class="ruby-identifier">read_announcement_list</span>(<span class="ruby-ivar">@base_url</span>, <span class="ruby-ivar">@headers</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- read_announcement_list-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- read_announcement_list-method -->
+
+    
+      <div id="method-i-read_announcement_room_list" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">read_announcement_room_list</span><span
+            class="method-args">(announcement_id)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Retrieves the list of rooms that an annoucement has been published to.</p>
+
+<p>@param announcement_id [Int]</p>
+
+<pre>The identifier of the announcement used to generate the room list.</pre>
+
+<p>@return [Array]</p>
+
+<pre>A list of room objects ordered by id, which may be empty
+if the announcement haven&#39;t been published yet.</pre>
+          
+          
+
+          
+          <div class="method-source-code" id="read_announcement_room_list-source">
+            <pre><span class="ruby-comment"># File lib/frankly-ruby.rb, line 623</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">read_announcement_room_list</span>(<span class="ruby-identifier">announcement_id</span>)
+  <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">parse</span> <span class="ruby-constant">Announcement</span>.<span class="ruby-identifier">read_announcement_room_list</span>(<span class="ruby-ivar">@base_url</span>, <span class="ruby-ivar">@headers</span>, <span class="ruby-identifier">announcement_id</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- read_announcement_room_list-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- read_announcement_room_list-method -->
+
+    
+      <div id="method-i-read_app" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">read_app</span><span
+            class="method-args">(app_id)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>This method returns a hash that contains all of the properties of the
+application with it app_id. See the Application section above for more
+information.</p>
+
+<p>@param app_id [Int]</p>
+
+<pre>The identifier of the application.</pre>
+
+<p>@return [Hash]</p>
+
+<pre>A hash that contains the properties of the app.</pre>
+          
+          
+
+          
+          <div class="method-source-code" id="read_app-source">
+            <pre><span class="ruby-comment"># File lib/frankly-ruby.rb, line 1018</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">read_app</span>(<span class="ruby-identifier">app_id</span>)
+  <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">parse</span> <span class="ruby-constant">Apps</span>.<span class="ruby-identifier">read_app</span>(<span class="ruby-ivar">@base_url</span>, <span class="ruby-ivar">@headers</span>, <span class="ruby-identifier">app_id</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- read_app-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- read_app-method -->
+
+    
+      <div id="method-i-read_room" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">read_room</span><span
+            class="method-args">(room_id)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Retrieves the room object with the id specified in the first argument.</p>
+
+<p>@param room_id [Int]</p>
+
+<pre>The identifier of the room to fetch.</pre>
+
+<p>@return [Hash]</p>
+
+<pre>A hash that represents the fetched room.</pre>
+          
+          
+
+          
+          <div class="method-source-code" id="read_room-source">
+            <pre><span class="ruby-comment"># File lib/frankly-ruby.rb, line 371</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">read_room</span>(<span class="ruby-identifier">room_id</span>)
+  <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">parse</span> <span class="ruby-constant">Rooms</span>.<span class="ruby-identifier">read_room</span>(<span class="ruby-ivar">@base_url</span>, <span class="ruby-ivar">@headers</span>, <span class="ruby-identifier">room_id</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- read_room-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- read_room-method -->
+
+    
+      <div id="method-i-read_room_announcer_list" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">read_room_announcer_list</span><span
+            class="method-args">(room_id)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>The method returns a hash that contains a list of all of the users in the
+room with the role of announcer</p>
+
+<p>@param room_id [Int]</p>
+
+<pre>The identifier of the room that contains the users with the announcer role.</pre>
+
+<p>@return [Array]</p>
+
+<pre>An array of hashes that represent the users in the room with the
+announcer role</pre>
+          
+          
+
+          
+          <div class="method-source-code" id="read_room_announcer_list-source">
+            <pre><span class="ruby-comment"># File lib/frankly-ruby.rb, line 930</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">read_room_announcer_list</span>(<span class="ruby-identifier">room_id</span>)
+  <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">parse</span> <span class="ruby-constant">Rooms</span>.<span class="ruby-identifier">read_room_announcer_list</span>(<span class="ruby-ivar">@base_url</span>, <span class="ruby-ivar">@headers</span>, <span class="ruby-identifier">room_id</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- read_room_announcer_list-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- read_room_announcer_list-method -->
+
+    
+      <div id="method-i-read_room_count" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">read_room_count</span><span
+            class="method-args">(room_id)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>The method returns a hash that contains the number of active, subscribed,
+and online users in the room with id room_id.</p>
+
+<p>@param room_id [Int]</p>
+
+<pre>The identifier of the room that contains the users.</pre>
+
+<p>@return [Hash]</p>
+
+<pre>A hash that contains the active, subscribed, and online user counts.</pre>
+          
+          
+
+          
+          <div class="method-source-code" id="read_room_count-source">
+            <pre><span class="ruby-comment"># File lib/frankly-ruby.rb, line 1006</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">read_room_count</span>(<span class="ruby-identifier">room_id</span>)
+  <span class="ruby-constant">Rooms</span>.<span class="ruby-identifier">read_room_count</span>(<span class="ruby-ivar">@base_url</span>, <span class="ruby-ivar">@headers</span>, <span class="ruby-identifier">room_id</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- read_room_count-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- read_room_count-method -->
+
+    
+      <div id="method-i-read_room_list" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">read_room_list</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Retrieves the list of all available rooms in the app.</p>
+
+<p>@return [Array]</p>
+
+<pre>A list of hashes ordered by id, which may be empty if there are no
+rooms in the app.</pre>
+          
+          
+
+          
+          <div class="method-source-code" id="read_room_list-source">
+            <pre><span class="ruby-comment"># File lib/frankly-ruby.rb, line 360</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">read_room_list</span>
+  <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">parse</span> <span class="ruby-constant">Rooms</span>.<span class="ruby-identifier">read_room_list</span>(<span class="ruby-ivar">@base_url</span>, <span class="ruby-ivar">@headers</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- read_room_list-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- read_room_list-method -->
+
+    
+      <div id="method-i-read_room_member_list" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">read_room_member_list</span><span
+            class="method-args">(room_id)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>The method returns a hash that contains a list of all of the users in the
+room with the role of member</p>
+
+<p>@param room_id [Int]</p>
+
+<pre>The identifier of the room that contains the users with the member role.</pre>
+
+<p>@return [Array]</p>
+
+<pre>An array of hashes that represent the users in the room with the
+member role</pre>
+          
+          
+
+          
+          <div class="method-source-code" id="read_room_member_list-source">
+            <pre><span class="ruby-comment"># File lib/frankly-ruby.rb, line 890</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">read_room_member_list</span>(<span class="ruby-identifier">room_id</span>)
+  <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">parse</span> <span class="ruby-constant">Rooms</span>.<span class="ruby-identifier">read_room_member_list</span>(<span class="ruby-ivar">@base_url</span>, <span class="ruby-ivar">@headers</span>, <span class="ruby-identifier">room_id</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- read_room_member_list-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- read_room_member_list-method -->
+
+    
+      <div id="method-i-read_room_message" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">read_room_message</span><span
+            class="method-args">(room_id, message_id)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Retrieves the message object with the id sepecified in first argument from
+the room with the id specified in the second argument.</p>
+
+<p>@param room_id [Int]</p>
+
+<pre>The identifier of the room to create the message in.</pre>
+
+<p>@param message_id [Int]</p>
+
+<pre>The identifier of the message to fetch.</pre>
+
+<p>@return [Hash]</p>
+
+<pre>A hash representing the message with the specified id.</pre>
+          
+          
+
+          
+          <div class="method-source-code" id="read_room_message-source">
+            <pre><span class="ruby-comment"># File lib/frankly-ruby.rb, line 669</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">read_room_message</span>(<span class="ruby-identifier">room_id</span>, <span class="ruby-identifier">message_id</span>)
+  <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">parse</span> <span class="ruby-constant">Message</span>.<span class="ruby-identifier">read_room_message</span>(<span class="ruby-ivar">@base_url</span>, <span class="ruby-ivar">@headers</span>, <span class="ruby-identifier">room_id</span>, <span class="ruby-identifier">message_id</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- read_room_message-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- read_room_message-method -->
+
+    
+      <div id="method-i-read_room_message_list" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">read_room_message_list</span><span
+            class="method-args">(room_id, params)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Fetches a list of messages from the room with the id specified in the first
+argument.</p>
+
+<p>@param room_id [Int]</p>
+
+<pre>The identifier of the room whose messages are being fetched.</pre>
+
+<p>@param params [Hash]</p>
+
+<pre>A hash that defines the range of the messages that are fetched. See the Messages
+section above to see how properly format this argument.</pre>
+
+<p>@return [Array]</p>
+
+<pre>An array of room hashes which may be empty if no messages satisfy the query.</pre>
+          
+          
+
+          
+          <div class="method-source-code" id="read_room_message_list-source">
+            <pre><span class="ruby-comment"># File lib/frankly-ruby.rb, line 654</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">read_room_message_list</span>(<span class="ruby-identifier">room_id</span>, <span class="ruby-identifier">params</span>)
+  <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">parse</span> <span class="ruby-constant">Message</span>.<span class="ruby-identifier">read_room_message_list</span>(<span class="ruby-ivar">@base_url</span>, <span class="ruby-ivar">@headers</span>, <span class="ruby-identifier">room_id</span>, <span class="ruby-identifier">params</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- read_room_message_list-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- read_room_message_list-method -->
+
+    
+      <div id="method-i-read_room_moderator_list" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">read_room_moderator_list</span><span
+            class="method-args">(room_id)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>The method returns a hash that contains a list of all of the users in the
+room with the role of moderator</p>
+
+<p>@param room_id [Int]</p>
+
+<pre>The identifier of the room that contains the users with the moderator role.</pre>
+
+<p>@return [Array]</p>
+
+<pre>An array of hashes that represent the users in the room with the
+moderator role</pre>
+          
+          
+
+          
+          <div class="method-source-code" id="read_room_moderator_list-source">
+            <pre><span class="ruby-comment"># File lib/frankly-ruby.rb, line 850</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">read_room_moderator_list</span>(<span class="ruby-identifier">room_id</span>)
+  <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">parse</span> <span class="ruby-constant">Rooms</span>.<span class="ruby-identifier">read_room_moderator_list</span>(<span class="ruby-ivar">@base_url</span>, <span class="ruby-ivar">@headers</span>, <span class="ruby-identifier">room_id</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- read_room_moderator_list-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- read_room_moderator_list-method -->
+
+    
+      <div id="method-i-read_room_owner_list" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">read_room_owner_list</span><span
+            class="method-args">(room_id)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>The method returns a hash that contains a list of all of the users in the
+room with the role of owner.</p>
+
+<p>@param room_id [Int]</p>
+
+<pre>The identifier of the room that contains the users with the owner role.</pre>
+
+<p>@return [Array]</p>
+
+<pre>An array of hashes that represent the users in the room with the
+owner role.</pre>
+          
+          
+
+          
+          <div class="method-source-code" id="read_room_owner_list-source">
+            <pre><span class="ruby-comment"># File lib/frankly-ruby.rb, line 810</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">read_room_owner_list</span>(<span class="ruby-identifier">room_id</span>)
+  <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">parse</span> <span class="ruby-constant">Rooms</span>.<span class="ruby-identifier">read_room_owner_list</span>(<span class="ruby-ivar">@base_url</span>, <span class="ruby-ivar">@headers</span>, <span class="ruby-identifier">room_id</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- read_room_owner_list-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- read_room_owner_list-method -->
+
+    
+      <div id="method-i-read_room_participant_list" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">read_room_participant_list</span><span
+            class="method-args">(room_id)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>The method returns a hash that contains a list of all of the users in the
+room.</p>
+
+<p>@param room_id [Int]</p>
+
+<pre>The identifier of the room that contains the users.</pre>
+
+<p>@return [Array]</p>
+
+<pre>An array of hashes that represent the users in the room with the
+participant role</pre>
+          
+          
+
+          
+          <div class="method-source-code" id="read_room_participant_list-source">
+            <pre><span class="ruby-comment"># File lib/frankly-ruby.rb, line 994</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">read_room_participant_list</span>(<span class="ruby-identifier">room_id</span>)
+  <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">parse</span> <span class="ruby-constant">Rooms</span>.<span class="ruby-identifier">read_room_participant_list</span>(<span class="ruby-ivar">@base_url</span>, <span class="ruby-ivar">@headers</span>, <span class="ruby-identifier">room_id</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- read_room_participant_list-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- read_room_participant_list-method -->
+
+    
+      <div id="method-i-read_room_subscriber_list" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">read_room_subscriber_list</span><span
+            class="method-args">(room_id)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>The method returns a hash that contains a list of all of the users in the
+room with the role of subscriber</p>
+
+<p>@param room_id [Int]</p>
+
+<pre>The identifier of the room that contains the users with the subscriber role.</pre>
+
+<p>@return [Array]</p>
+
+<pre>An array of hashes that represent the users in the room with the
+subscriber role</pre>
+          
+          
+
+          
+          <div class="method-source-code" id="read_room_subscriber_list-source">
+            <pre><span class="ruby-comment"># File lib/frankly-ruby.rb, line 970</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">read_room_subscriber_list</span>(<span class="ruby-identifier">room_id</span>)
+  <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">parse</span> <span class="ruby-constant">Rooms</span>.<span class="ruby-identifier">read_room_subscriber_list</span>(<span class="ruby-ivar">@base_url</span>, <span class="ruby-ivar">@headers</span>, <span class="ruby-identifier">room_id</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- read_room_subscriber_list-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- read_room_subscriber_list-method -->
+
+    
+      <div id="method-i-read_session" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">read_session</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>This method returns an object representing the current user&#39;s session
+See the <a href="Sessions.html">Sessions</a> section above for a
+description of the contents of the user session.</p>
+
+<p>@return [Hash]</p>
+
+<pre>A hash that represents the current session.</pre>
+          
+          
+
+          
+          <div class="method-source-code" id="read_session-source">
+            <pre><span class="ruby-comment"># File lib/frankly-ruby.rb, line 773</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">read_session</span>
+  <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">parse</span> <span class="ruby-constant">Sessions</span>.<span class="ruby-identifier">read_session</span>(<span class="ruby-ivar">@base_url</span>, <span class="ruby-ivar">@headers</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- read_session-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- read_session-method -->
+
+    
+      <div id="method-i-read_user" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">read_user</span><span
+            class="method-args">(user_id)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Retrieves the user object with the id specified in the first argument.</p>
+
+<p>@param user_id [Int]</p>
+
+<pre>The identifier of the room to fetch.</pre>
+
+<p>@return [Hash]</p>
+
+<pre>A hash that represents the fetched user.</pre>
+          
+          
+
+          
+          <div class="method-source-code" id="read_user-source">
+            <pre><span class="ruby-comment"># File lib/frankly-ruby.rb, line 527</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">read_user</span>(<span class="ruby-identifier">user_id</span>)
+  <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">parse</span> <span class="ruby-constant">Users</span>.<span class="ruby-identifier">read_user</span>(<span class="ruby-ivar">@base_url</span>, <span class="ruby-ivar">@headers</span>, <span class="ruby-identifier">user_id</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- read_user-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- read_user-method -->
+
+    
+      <div id="method-i-read_user_ban" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">read_user_ban</span><span
+            class="method-args">(user_id)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Retrieves the ban status of the user with the id specified in the first
+argument.</p>
+
+<p>@param user_id [Int]</p>
+
+<pre>The identifier of the user whose ban status is fetched.</pre>
+
+<p>@return [Hash]</p>
+
+<pre>A hash that represents the ban status of the user.</pre>
+          
+          
+
+          
+          <div class="method-source-code" id="read_user_ban-source">
+            <pre><span class="ruby-comment"># File lib/frankly-ruby.rb, line 565</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">read_user_ban</span>(<span class="ruby-identifier">user_id</span>)
+  <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">parse</span> <span class="ruby-constant">Users</span>.<span class="ruby-identifier">read_user_ban</span>(<span class="ruby-ivar">@base_url</span>, <span class="ruby-ivar">@headers</span>, <span class="ruby-identifier">user_id</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- read_user_ban-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- read_user_ban-method -->
+
+    
+      <div id="method-i-update" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">update</span><span
+            class="method-args">(path, params = {}, payload = {})</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>This method exposes a generic interface for updating objects through the <a
+href="Frankly.html">Frankly</a> API. Every read_* method is implemented on
+top of this one.</p>
+
+<p>@param path [Array]</p>
+
+<pre>An Array of strings representing the collection to read an object in.</pre>
+
+<p>@param params [Hash]</p>
+
+<pre>Parameters passed as part of the request.</pre>
+
+<p>@param payload [Hash]</p>
+
+<pre>Dict-like object representing the object to create.</pre>
+
+<p>@return [Hash/Array]</p>
+
+<pre>The object updated on the API at the specified path.</pre>
+          
+          
+
+          
+          <div class="method-source-code" id="update-source">
+            <pre><span class="ruby-comment"># File lib/frankly-ruby.rb, line 456</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">update</span>(<span class="ruby-identifier">path</span>, <span class="ruby-identifier">params</span> = {}, <span class="ruby-identifier">payload</span> = {})
+  <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">parse</span> <span class="ruby-constant">Generic</span>.<span class="ruby-identifier">update</span>(<span class="ruby-ivar">@base_url</span>, <span class="ruby-ivar">@headers</span>, <span class="ruby-identifier">path</span>, <span class="ruby-identifier">params</span>, <span class="ruby-identifier">payload</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- update-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- update-method -->
+
+    
+      <div id="method-i-update_file" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">update_file</span><span
+            class="method-args">(destination_url, file_obj, file_size, mime_type, encoding = nil)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Creates a new file object on <a href="Frankly.html">Frankly</a> servers and
+returns that object. The properties of that new file are given as a hash to
+the method.</p>
+
+<p>@param destination_url [String]</p>
+
+<pre>The URL at which the file is hosted on Frankly servers. This can be obtained
+from the url field of an object returned by create_file for example.</pre>
+
+<p>@param file_obj [File]</p>
+
+<pre>A file-like object (as returned by File.open(..., &#39;rb&#39;) for example) providing
+the new content of the file.</pre>
+
+<p>@param file_size [Int]</p>
+
+<pre>The size of the new file content (in bytes).</pre>
+
+<p>@param mime_type [String]</p>
+
+<pre>The mime type of the new file content.</pre>
+
+<p>@param encoding [String]</p>
+
+<pre>The encoding of the new file content (&#39;gzip&#39; for example).</pre>
+
+<p>@return [nil]</p>
+
+<pre>The method doesn&#39;t return anything on success and throws an exception on failure.</pre>
+          
+          
+
+          
+          <div class="method-source-code" id="update_file-source">
+            <pre><span class="ruby-comment"># File lib/frankly-ruby.rb, line 708</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">update_file</span>(<span class="ruby-identifier">destination_url</span>, <span class="ruby-identifier">file_obj</span>, <span class="ruby-identifier">file_size</span>, <span class="ruby-identifier">mime_type</span>, <span class="ruby-identifier">encoding</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-constant">Files</span>.<span class="ruby-identifier">upload_file</span>(<span class="ruby-ivar">@base_url</span>, <span class="ruby-ivar">@headers</span>, <span class="ruby-identifier">destination_url</span>, <span class="ruby-identifier">file_obj</span>, <span class="ruby-identifier">file_size</span>, <span class="ruby-identifier">mime_type</span>, <span class="ruby-identifier">encoding</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- update_file-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- update_file-method -->
+
+    
+      <div id="method-i-update_file_from_path" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">update_file_from_path</span><span
+            class="method-args">(destination_url, file_path)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Creates a new file object on <a href="Frankly.html">Frankly</a> servers and
+returns that object. The properties of that new file are given as a hash to
+the method.</p>
+
+<p>@param destination_url [String]</p>
+
+<pre>The URL at which the file is hosted on Frankly servers. This can be obtained
+from the url field of an object returned by create_file for example.</pre>
+
+<p>@param file_path [String]</p>
+
+<pre>A path to a local providing the new file content</pre>
+
+<p>@return [nil]</p>
+
+<pre>The method doesn&#39;t return anything on success and throws an exception on failure.</pre>
+          
+          
+
+          
+          <div class="method-source-code" id="update_file_from_path-source">
+            <pre><span class="ruby-comment"># File lib/frankly-ruby.rb, line 724</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">update_file_from_path</span>(<span class="ruby-identifier">destination_url</span>, <span class="ruby-identifier">file_path</span>)
+  <span class="ruby-constant">Files</span>.<span class="ruby-identifier">update_file_from_path</span>(<span class="ruby-ivar">@base_url</span>, <span class="ruby-ivar">@headers</span>, <span class="ruby-identifier">destination_url</span>, <span class="ruby-identifier">file_path</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- update_file_from_path-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- update_file_from_path-method -->
+
+    
+      <div id="method-i-update_room" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">update_room</span><span
+            class="method-args">(room_id, payload)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Updates the existing room object with the id specified in the first
+argument and returns that object. The properties to update are given to the
+method as a hash.</p>
+
+<p>@param room_id [Integer]</p>
+
+<pre>The identifier of the room to update.</pre>
+
+<p>@param payload [Hash]</p>
+
+<pre>A hash containing the properties of the new room. See the Rooms
+section above to see how properly format this argument</pre>
+
+<p>@return [Hash]</p>
+
+<pre>A hash that represents the newly updated room.</pre>
+          
+          
+
+          
+          <div class="method-source-code" id="update_room-source">
+            <pre><span class="ruby-comment"># File lib/frankly-ruby.rb, line 387</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">update_room</span>(<span class="ruby-identifier">room_id</span>, <span class="ruby-identifier">payload</span>)
+  <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">parse</span> <span class="ruby-constant">Rooms</span>.<span class="ruby-identifier">update_room</span>(<span class="ruby-ivar">@base_url</span>, <span class="ruby-ivar">@headers</span>, <span class="ruby-identifier">room_id</span>, <span class="ruby-identifier">payload</span>.<span class="ruby-identifier">to_json</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- update_room-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- update_room-method -->
+
+    
+      <div id="method-i-update_user" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">update_user</span><span
+            class="method-args">(user_id, payload)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Updates an existing user object in the app and returns that object. The
+properties of that new user are given as a hash to the method.</p>
+
+<p>@param user_id [Integer]</p>
+
+<pre>The identifier of the room to update.</pre>
+
+<p>@param payload [Hash]</p>
+
+<pre>A hash containing the properties of the new room. See the Users
+section above to see how properly format this argument</pre>
+
+<p>@return [Hash]</p>
+
+<pre>A hash that represents the newly updated user.</pre>
+          
+          
+
+          
+          <div class="method-source-code" id="update_user-source">
+            <pre><span class="ruby-comment"># File lib/frankly-ruby.rb, line 543</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">update_user</span>(<span class="ruby-identifier">user_id</span>, <span class="ruby-identifier">payload</span>)
+  <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">parse</span> <span class="ruby-constant">Users</span>.<span class="ruby-identifier">update_user</span>(<span class="ruby-ivar">@base_url</span>, <span class="ruby-ivar">@headers</span>, <span class="ruby-identifier">user_id</span>, <span class="ruby-identifier">payload</span>.<span class="ruby-identifier">to_json</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- update_user-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- update_user-method -->
+
+    
+      <div id="method-i-upload" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">upload</span><span
+            class="method-args">(url, params, payload, content_length, content_type, content_encoding)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>This method exposes a generic interface for uploading file contents through
+the <a href="Frankly.html">Frankly</a> API. Every upload_* method is
+implemented on top of this one.</p>
+
+<p>@param url [String]</p>
+
+<pre>The URL at which the file is hosted on Frankly servers. This can be obtained
+from the url field of an object returned by create_file for example.</pre>
+
+<p>@param params [Hash]</p>
+
+<pre>Parameters passed as part of the request.</pre>
+
+<p>@param payload [Hash]</p>
+
+<pre>A hash representing the body of the request.</pre>
+
+<p>@param content_length [Int]</p>
+
+<pre>The size of the new file content (in bytes).</pre>
+
+<p>@param content_type [String]</p>
+
+<pre>The mime type of the new file content.</pre>
+
+<p>@param content_encoding [String]</p>
+
+<pre>The encoding of the new file content (&#39;gzip&#39; for example).</pre>
+
+<p>@return [nil]</p>
+
+<pre>The method doesn&#39;t return anything on success and throws an exception on failure.</pre>
+          
+          
+
+          
+          <div class="method-source-code" id="upload-source">
+            <pre><span class="ruby-comment"># File lib/frankly-ruby.rb, line 503</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">upload</span>(<span class="ruby-identifier">url</span>, <span class="ruby-identifier">params</span>, <span class="ruby-identifier">payload</span>, <span class="ruby-identifier">content_length</span>, <span class="ruby-identifier">content_type</span>, <span class="ruby-identifier">content_encoding</span>)
+  <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">parse</span> <span class="ruby-constant">Generic</span>.<span class="ruby-identifier">upload</span>(<span class="ruby-ivar">@headers</span>, <span class="ruby-identifier">url</span>, <span class="ruby-identifier">params</span>, <span class="ruby-identifier">payload</span>, <span class="ruby-identifier">content_length</span>, <span class="ruby-identifier">content_type</span>, <span class="ruby-identifier">content_encoding</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- upload-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- upload-method -->
+
+    
+      <div id="method-i-upload_file" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">upload_file</span><span
+            class="method-args">(file_obj, file_size, mime_type, encoding = nil, params)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>This method is convenience wrapper for creating a new file object on the <a
+href="Frankly.html">Frankly</a> API and setting its content.</p>
+
+<p>@param file_obj [File]</p>
+
+<pre>A file-like object (as returned by File.open(..., &#39;rb&#39;) for example) providing
+the new content of the file.</pre>
+
+<p>@param file_size [Int]</p>
+
+<pre>The size of the new file content (in bytes).</pre>
+
+<p>@param mime_type [String]</p>
+
+<pre>The mime type of the new file content.</pre>
+
+<p>@param encoding [String]</p>
+
+<pre>The encoding of the new file content (&#39;gzip&#39; for example).</pre>
+
+<p>@param params [Hash]</p>
+
+<pre>A hash containing the properties of the new file. See the Files
+section above to see how properly format this argument.</pre>
+
+<p>@return [Hash]</p>
+
+<pre>A hash that represents the newly created file.</pre>
+          
+          
+
+          
+          <div class="method-source-code" id="upload_file-source">
+            <pre><span class="ruby-comment"># File lib/frankly-ruby.rb, line 749</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">upload_file</span>(<span class="ruby-identifier">file_obj</span>, <span class="ruby-identifier">file_size</span>, <span class="ruby-identifier">mime_type</span>, <span class="ruby-identifier">encoding</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">params</span>)
+  <span class="ruby-constant">Files</span>.<span class="ruby-identifier">upload_file</span>(<span class="ruby-ivar">@base_url</span>, <span class="ruby-ivar">@headers</span>, <span class="ruby-identifier">destination_url</span>, <span class="ruby-identifier">file_obj</span>, <span class="ruby-identifier">file_size</span>, <span class="ruby-identifier">mime_type</span>, <span class="ruby-identifier">encoding</span>, <span class="ruby-identifier">params</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- upload_file-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- upload_file-method -->
+
+    
+      <div id="method-i-upload_file_from_path" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">upload_file_from_path</span><span
+            class="method-args">(file_path, params)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>This method is convenience wrapper for creating a new file object on the <a
+href="Frankly.html">Frankly</a> API and setting its content.</p>
+
+<p>@param file_path [String]</p>
+
+<pre>A path to a local providing the new file content</pre>
+
+<p>@param params [Hash]</p>
+
+<pre>A hash containing the properties of the new file. See the Files
+section above to see how properly format this argument.</pre>
+
+<p>@return [Hash]</p>
+
+<pre>A hash that represents the newly created file.</pre>
+          
+          
+
+          
+          <div class="method-source-code" id="upload_file_from_path-source">
+            <pre><span class="ruby-comment"># File lib/frankly-ruby.rb, line 764</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">upload_file_from_path</span>(<span class="ruby-identifier">file_path</span>, <span class="ruby-identifier">params</span>)
+  <span class="ruby-constant">Files</span>.<span class="ruby-identifier">upload_file_from_path</span>(<span class="ruby-ivar">@base_url</span>, <span class="ruby-ivar">@headers</span>, <span class="ruby-identifier">file_path</span>, <span class="ruby-identifier">params</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- upload_file_from_path-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- upload_file_from_path-method -->
+
+    
+    </section><!-- public-instance-method-details -->
+  
+  </section><!-- 5Buntitled-5D -->
+
+</div><!-- documentation -->
+
+
+<footer id="validator-badges">
+  <p><a href="http://validator.w3.org/check/referer">[Validate]</a>
+  <p>Generated by <a href="https://github.com/rdoc/rdoc">RDoc</a> 4.0.0.
+  <p>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish Rdoc Generator</a> 3.
+</footer>
+

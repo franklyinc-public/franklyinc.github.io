@@ -1,0 +1,294 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+
+        <!-- Always force latest IE rendering engine or request Chrome Frame -->
+        <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+        <link rel="icon"
+              type="image/png"
+              href="../../images/frankly_favicon_32x32_no_bg.png">
+        <!-- Use title if it's in the page YAML frontmatter -->
+        <title>Authentication
+            - Frankly Developer Portal</title>
+        <script src="/bower_components/webcomponentsjs/webcomponents-lite.min-01242ae0.js"></script>
+        <link href="/stylesheets/normalize-14170e97.css" rel="stylesheet" /><link href="/stylesheets/all-f2dad6dc.css" rel="stylesheet" />
+        <link href="/stylesheets/highlight-6793ce8e.css" rel="stylesheet" /><link href="/stylesheets/all-f2dad6dc.css" rel="stylesheet" />
+        <style is="custom-style">
+                    :root {
+                        --paper-toolbar-background: #2A2E33;
+                        --paper-input-container-focus-color: #fa3b1b;
+                        --paper-input-container-underline-focus: {
+                            display:none;
+                        };
+                    }
+                    .paper-header-panel {
+                        background-color: #2A2E33;
+                        padding-right: 20px;
+                        color: white;
+                    }
+                    .page-content {
+                        padding-left: 30px;
+                        padding-right: 30px;
+                        overflow: scroll;
+                    }
+
+                    .nav-tree li {
+                        list-style-type: none;
+                    }
+
+                    .nav-tree li a {
+                            color: white;
+                    }
+                    .logo {
+                        margin-left: 5px;
+                        margin-top: 20px;
+                        width: 180px;
+                    }
+                    .search {
+                        --paper-input-container-input-color: white;
+                        padding-left: 20px;
+                        padding-right: 20px;
+                    }
+                    .version-dropdown {
+                        width:90px;
+                        --paper-input-container-underline: {
+                            display:none;
+                        };
+                    }
+
+                    .version-dropdown a {
+                        color: black;
+                    }
+
+                    .previous {
+
+                    }
+
+                    .next {
+
+                    }
+
+                    .floating-toc {
+                        margin-left: -20px;
+                    }
+
+                    .floating-toc a {
+                        color:black;
+                    }
+
+                    .customization-table {
+                        table, th, td {
+                            border: 1px solid black;
+                            text-align: left;
+                        }
+                    }
+
+                    p {
+                        line-height: 150%;
+                    }
+                </style>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js" type="text/javascript"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/lunr.js/0.5.9/lunr.min.js" type="text/javascript"></script>
+        <script src="/javascripts/all-b1933d9a.js"></script>
+        <script src="/javascripts/anchorify-9f550341.js"></script>
+
+        <link href="/bower_components/paper-header-panel/paper-header-panel.html" rel="import">
+        <link href="/bower_components/paper-drawer-panel/paper-drawer-panel.html" rel="import">
+        <link href="/bower_components/paper-toolbar/paper-toolbar.html" rel="import">
+        <link href="/bower_components/paper-icon-button/paper-icon-button.html" rel="import">
+        <link href="/bower_components/iron-icons/iron-icons.html" rel="import">
+        <link href="/bower_components/iron-flex-layout/iron-flex-layout.html" rel="import">
+        <link href="/bower_components/paper-input/paper-input.html" rel="import">
+        <link href="/bower_components/paper-dropdown-menu/paper-dropdown-menu.html" rel="import">
+        <link href="/bower_components/paper-menu/paper-menu.html" rel="import">
+        <link href="/bower_components/paper-item/paper-item.html" rel="import">
+        <link rel="icon"
+              type="image/png"
+              href="images/frankly_favicon_32x32_no_bg.png">
+    </head>
+
+    <body class="ios ios_latest ios_latest_doc ios_latest_doc_02-authentication">
+        <paper-drawer-panel class="flex" mode="seamed">
+            <div class="flex page-content" main>
+                <div class="horizontal layout">
+                    <paper-icon-button icon="menu" on-tap="menuAction" paper-drawer-toggle></paper-icon-button>
+                    <h1 class="flex">
+                        Authentication
+                    </h1>
+                    <span class="flex">
+                    </span>
+                    <paper-dropdown-menu noink no-animation class="version-dropdown">
+                        <paper-menu class="dropdown-content version-dropdown" selected="0">
+                                <paper-item>
+                                    <a href="/ios/latest">latest</a>
+                                </paper-item>
+                        </paper-menu>
+                    </paper-dropdown-menu>
+
+                </div>
+                <div style="max-width:70%">
+                    <style>
+    .auth-image {
+        width: 100%;
+    }
+</style>
+
+<h2 id="overview">Overview</h2>
+
+<p>Frankly&rsquo;s authentication scheme is based on JSON Web Token (JWT), a standard for
+sharing user authentication in a secure way. A complete description of <a href="https://jwt.io">JWT</a>
+rests <a href="https://openid.net/specs/draft-jones-json-web-token-07.html">here</a>.</p>
+
+<h2 id="server-auth-flow">Server Auth Flow</h2>
+
+<p><img class="auth-image" src="/images/auth_diagram-4906f65b.png" /></p>
+
+<p>JSON Web Tokens embed a unique value called nonce which is used to protect against
+man-in-the-middle attacks by adding a random component to the token in order to
+make it impossible to predict a valid token.</p>
+
+<p>Frankly’s infrastructure provides a public HTTP endpoint that must be queried to
+generate a nonce value as a first step of the authentication flow. The response
+contains the nonce value represented as a JSON string which can be used for only
+one authentication attempt.</p>
+
+<h2 id="auth-behavior">Auth Behavior</h2>
+
+<h3 id="a-note-on-security">A Note on Security</h3>
+
+<p>In all cases, your application&rsquo;s <code>appKey</code> and <code>appSecret</code> should NOT be stored on the client and your application&rsquo;s
+backend servers should be responsible for generating identity tokens, using the <code>appSecret</code> to return it to the client to
+successfully authenticate. Storing your application&rsquo;s <code>appKey</code> and <code>appSecret</code> exposes you to unnecessary security risks
+where an attacker could obtain these values to communicate with Frankly services on your behalf. Please note that some examples do highlight
+the ability to directly authenticate with Frankly services from your application&rsquo;s client, however these are also noted as examples meant for
+checking progress of early integration steps.</p>
+
+<h2 id="authenticating-the-ios-sdk">Authenticating the iOS SDK</h2>
+
+<p>Set the FranklySDK’s <code>authenticationDelegate</code> to an object that conforms to the <code>FranklySDKAuthenticationDelegate</code> protocol. Then call <code>initiateAuthenticationWithUserID:(NSString *)userID role:</code>. Passing in YES will cause the SDK to go through the full authentication flow including a request for <code>identifierWithNonce:preferredRole:completion:</code>. Passing in NO will attempt to use an existing session, that was stored from a previous authentication. If that session exists, you will not recieve a request for <code>identifierWithNonce:preferredRole:completion:</code> but will still receive the <code>authenticationDidSucceedWithUserID:</code> or <code>authenticationDidFailWithError:</code> callback.</p>
+
+<p>In our example code, we’ve made our <code>ViewController</code> conform to the protocol:</p>
+<div class="highlight smalltalk"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1</pre></td><td class="code"><pre><span class="err">@</span><span class="nv">interface</span> <span class="nf">ViewController</span> <span class="err">:</span> <span class="nc">UIViewController</span> <span class="nf">FranklySDKAuthenticationDelegate</span><span class="p">;</span>
+</pre></td></tr></tbody></table>
+</div>
+
+<p>Set the Frankly SDK <code>authenticationDelegate</code> and initiate authentication as follows:</p>
+<div class="highlight smalltalk"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11</pre></td><td class="code"><pre><span class="err">-</span> <span class="p">(</span><span class="nv">void</span><span class="p">)</span><span class="nf">viewDidLoad</span> <span class="p">{</span>
+    <span class="p">[</span><span class="bp">super</span> <span class="nf">viewDidLoad</span><span class="p">];</span>
+    <span class="p">[</span><span class="nc">FranklySDK</span> <span class="nf">sharedInstance</span><span class="p">].</span><span class="nv">authenticationDelegate</span> <span class="nf">=</span> <span class="bp">self</span><span class="p">;</span>
+
+    <span class="nf">//</span> <span class="nv">set</span> <span class="nf">the</span> <span class="nf">log</span> <span class="nf">in</span> <span class="nf">behavior</span> <span class="nf">here</span> <span class="nf">-</span> <span class="nv">see</span> <span class="nf">above</span> <span class="nf">for</span> <span class="nf">more</span> <span class="nf">information</span>
+    <span class="p">[</span><span class="nc">FranklySDK</span> <span class="nf">sharedInstance</span><span class="p">].</span><span class="nv">loginBehavior</span> <span class="nf">=</span> <span class="nc">FRSDKLoginBehaviorPartner</span>
+
+    <span class="nf">//</span> <span class="nv">passing</span> <span class="nf">YES</span> <span class="nf">is</span> <span class="nf">necessary</span> <span class="nf">for</span> <span class="nf">a</span> <span class="nf">role</span> <span class="nf">upgrade</span> <span class="nf">but,</span> <span class="nv">for</span> <span class="nf">an</span> <span class="nf">existing</span> <span class="nf">user,</span> <span class="nv">who</span> <span class="nf">has</span> <span class="nf">already</span>
+    <span class="nf">//</span> <span class="nv">authenticated</span><span class="nf">,</span> <span class="nv">passing</span> <span class="nf">NO</span> <span class="nf">will</span> <span class="nf">authenticate</span> <span class="nf">more</span> <span class="nf">quickly</span> <span class="nf">using</span> <span class="nf">the</span> <span class="nf">existing</span> <span class="nf">session</span>
+    <span class="p">[[</span><span class="nc">FranklySDK</span> <span class="nf">sharedInstance</span><span class="p">]</span> <span class="nf">initiateAuthenticationWithUserID:</span> <span class="nv">partner</span> <span class="nf">user</span> <span class="nf">id</span> <span class="nf">role:</span><span class="nc">FRSDKAuthenticationRoleUser</span><span class="p">];</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table>
+</div>
+
+<p><em>Note</em>: Roles determine which features the user can access, based on the authentication behavior your app supports.</p>
+<div class="highlight smalltalk"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14</pre></td><td class="code"><pre><span class="err">-</span> <span class="p">(</span><span class="nv">void</span><span class="p">)</span><span class="nf">identifierWithNonce:</span><span class="p">(</span><span class="nc">NSString</span> <span class="nf">*</span><span class="p">)</span><span class="nf">nonce</span> <span class="nf">preferredRole:</span><span class="p">(</span><span class="nc">FRSDKAuthenticationRole</span><span class="p">)</span><span class="nf">preferredRole</span> <span class="nf">completion:</span><span class="p">(</span><span class="nv">void</span> <span class="p">(</span><span class="o">^</span><span class="p">)(</span><span class="nc">NSString</span> <span class="nf">*</span><span class="nv">identifier</span><span class="p">))</span><span class="nf">completion</span><span class="p">;</span>
+    <span class="nf">FranklySDK</span> <span class="nf">*</span><span class="nv">franklySDK</span> <span class="nf">=</span> <span class="p">[</span><span class="nc">FranklySDK</span> <span class="nf">sharedInstance</span><span class="p">];</span>
+
+    <span class="nf">//</span> <span class="nc">ONLY</span> <span class="nf">FOR</span> <span class="nf">TESTING</span> <span class="nf">-</span> <span class="nc">REQUEST</span> <span class="nf">IDENTIFIER</span> <span class="nf">FROM</span> <span class="nf">YOUR</span> <span class="nf">SERVER</span>
+    <span class="p">[</span><span class="nv">franklySDK</span> <span class="nf">retrieveIdentityTokenWithUserID:</span><span class="bp">self</span><span class="p">.</span><span class="nv">userId</span>
+                                 <span class="nf">Nonce:</span><span class="nv">nonce</span>
+                               <span class="nf">authKey:</span><span class="bp">self</span><span class="p">.</span><span class="nv">authKey</span>
+                            <span class="nf">authSecret:</span><span class="bp">self</span><span class="p">.</span><span class="nv">authSecret</span>
+                                  <span class="nf">role:</span><span class="nc">FRSDKAuthenticationRoleUser</span>
+                       <span class="nf">completionBlock:</span><span class="o">^</span><span class="p">(</span><span class="nc">NSString</span> <span class="nf">*</span><span class="nv">identifier</span><span class="nf">,</span> <span class="nc">NSError</span> <span class="nf">*</span><span class="nv">error</span><span class="p">)</span> <span class="p">{</span>
+                           <span class="nv">if</span> <span class="p">(</span><span class="nv">identifier</span> <span class="nf">!=</span> <span class="bp">nil</span><span class="p">)</span> <span class="p">{</span>
+                               <span class="nv">completion</span><span class="p">(</span><span class="nv">identifier</span><span class="nf">,</span> <span class="bp">nil</span><span class="p">);</span>
+                           <span class="p">}}];</span>
+    <span class="p">}</span>
+</pre></td></tr></tbody></table>
+</div>
+
+<ul>
+<li><code>authenticationDidSucceedWithUserID:(NSNumber*)</code> - After this message is received, you may use the SDK.</li>
+</ul>
+<div class="highlight smalltalk"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3</pre></td><td class="code"><pre><span class="err">-</span> <span class="p">(</span><span class="nv">void</span><span class="p">)</span><span class="nf">authenticationDidSucceedWithUserID:</span><span class="p">(</span><span class="nc">NSNumber</span> <span class="nf">*</span><span class="p">)</span><span class="nf">userID</span> <span class="p">{</span>
+    <span class="nc">NSLog</span><span class="p">(</span><span class="err">@</span><span class="c">"authentication did succeed"</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table>
+</div>
+
+<ul>
+<li><code>authenticationDidFailWithError:(NSError*)</code> - If this message is received, you need to start authentication process
+                over before you may use the SDK.</li>
+</ul>
+<div class="highlight smalltalk"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3</pre></td><td class="code"><pre><span class="err">-</span> <span class="p">(</span><span class="nv">void</span><span class="p">)</span><span class="nf">authenticationDidFailWithError:</span><span class="p">(</span><span class="nc">NSError</span> <span class="nf">*</span><span class="p">)</span><span class="nf">error</span> <span class="p">{</span>
+    <span class="nc">NSLog</span><span class="p">(</span><span class="err">@</span><span class="c">"authentication did fail"</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table>
+</div>
+
+<p>Once you&rsquo;re done setting up those pieces, try running the build.</p>
+
+<p>If your delegate receives the <code>doUserAuthentication</code> callback then you should present a login screen.
+When the user has completed logging in, you should restart the authentication process by calling
+<code>initiateAuthenticationWithUserID:(NSString * )userID role:(FRSDKAuthenticationRole)role</code> to create a new session.</p>
+
+<h5 id="logging-out"><em>Logging Out</em></h5>
+
+<p>The Frankly SDK will automatically trigger a logout at appropriate times, such as when it detects a new user is attempting to log in.
+However, you can also manually trigger a logout at any time by calling:</p>
+<div class="highlight smalltalk"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1</pre></td><td class="code"><pre><span class="err">-</span> <span class="p">(</span><span class="nv">void</span><span class="p">)</span><span class="nf">logOut</span><span class="p">;</span>
+</pre></td></tr></tbody></table>
+</div>
+
+                    <div style="height:20px"></div>
+                </div>
+
+            </div>
+            <div class="flex" drawer>
+                <paper-header-panel class="flex paper-header-panel layout vertical" drawer mode="seamed">
+                    <paper-toolbar>
+<a href="/">                            <img class="logo" src="/images/franklyinc_logo_color_large-044d426f.png" />
+</a>                    </paper-toolbar>
+                    <paper-input label="Search Documentation" class="search" type="search"></paper-input>
+                    <div class="side-panel">
+                        <ul class="nav-tree">
+                            <li class='child '><a href="00-quick-start.html">Quick Start</a></li><li class='child '><a href="01-getting-started.html">Getting Started</a></li><li class='child active'><a href="02-authentication.html">Authentication</a></li><li class='child '><a href="03-the-basics.html">The Basics</a></li><li class='child '><a href="04-advanced-features.html">Advanced Features</a></li><li class='child '><a href="06-downloads.html">Downloads</a></li>
+                        </ul>
+                    </div>
+                </paper-header-panel>
+            </div>
+        </paper-drawer-panel>
+    </body>
+    <script>
+    $('li:contains("Authentication")').replaceWith("<nav class='anchorific floating-toc'></nav>");
+    $('.page-content').anchorific({
+        anchorText: ''
+    });
+    </script>
+</html>
